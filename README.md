@@ -14,6 +14,9 @@ This repository is for placing homework in NKUST.
     - [Introduction to VS Code](./s1/basic-programming/01-vsc-intro/main.py)
     - [Variable and Data Types](./s1/basic-programming/02-var-and-type/main.py)
     - [Outputting and Escape Characters](./s1/basic-programming/03-output/main.py)
+    - Practice – Outputting
+      - [Practice 1](./s1/basic-programming/04-output-practice/main.py)
+      - [Practice 2](./s1/basic-programming/04-output-practice/main-2.py)
 
 ## License
 
