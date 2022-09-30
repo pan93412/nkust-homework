@@ -17,6 +17,7 @@ This repository is for placing homework in NKUST.
     - Practice – Outputting
       - [Practice 1](./s1/basic-programming/04-output-practice/main.py)
       - [Practice 2](./s1/basic-programming/04-output-practice/main-2.py)
+    - [Input](./s1/basic-programming/05-input/main.py)
 
 ## License
 
