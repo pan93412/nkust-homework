@@ -21,6 +21,7 @@ This repository is for placing homework in NKUST.
     - Practice – Inputting
       - [Practice 1](./s1/basic-programming/06-input-practice/main.py)
       - [Practice 2](./s1/basic-programming/06-input-practice/main-2.py)
+    - [Operator](./s1/basic-programming/07-operator/main.py)
 
 ## License
 
