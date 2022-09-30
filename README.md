@@ -11,9 +11,9 @@ This repository is for placing homework in NKUST.
     - [2022/09/29 – Practice 1](./s1/web-development/practice-1)
     - [2022/09/29 – Practice 2](./s1/web-development/practice-2)
   - [Basic Programming / 程式設計](./s1/basic-programming/)
-    - [1. Introduction to VS Code](./s1/basic-programming/01-vsc-intro/main.py)
-    - [2. Variable and Data Types](./s1/basic-programming/02-var-and-type/main.py)
-    - [3. Outputting and Escape Characters](./s1/basic-programming/03-output/main.py)
+    - [Introduction to VS Code](./s1/basic-programming/01-vsc-intro/main.py)
+    - [Variable and Data Types](./s1/basic-programming/02-var-and-type/main.py)
+    - [Outputting and Escape Characters](./s1/basic-programming/03-output/main.py)
 
 ## License
 
