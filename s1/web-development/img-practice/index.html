@@ -7,26 +7,40 @@
     <title>Image Map Practice</title>
 </head>
 <body>
+    <p>You are hovering: <span id="hover-at">Nowhere</span></p>
     <img src="./dog.jpeg" alt="Dog" usemap="#dog-part">
 
     <map name="dog-part" id="dog-inject">
-        <area shape="rect" coords="249,263,319,318" alt="Eye" target="_blank" rel="noopener">
-        <area shape="rect" coords="461,254,531,309" alt="Eye" target="_blank" rel="noopener">
-        <area shape="rect" coords="355,276,425,331" alt="Nose" target="_blank" rel="noopener">
-        <area shape="rect" coords="334,343,449,424" alt="Mouth" target="_blank" rel="noopener">
-        <area shape="poly" coords="289,145,188,190,160,229,180,295,180,330,194,337,220,315,208,286,289,145" alt="Ear" target="_blank" rel="noopener">
-        <area shape="poly" coords="461,129,592,306,602,201,570,159,514,145,483,126,461,129" alt="Ear" target="_blank" rel="noopener">
+        <area coords="249,263,319,318" alt="Eye">
+        <area coords="461,254,531,309" alt="Eye">
+        <area coords="355,276,425,331" alt="Nose">
+        <area coords="334,343,449,424" alt="Mouth">
+        <area coords="289,145,188,190,160,229,180,295,180,330,194,337,220,315,208,286,289,145" alt="Ear">
+        <area coords="461,129,592,306,602,201,570,159,514,145,483,126,461,129" alt="Ear">
     </map>
 
     <script defer>
+        const hoverAt = document.getElementById("hover-at");
+
         document.querySelectorAll("#dog-inject > area")
             .forEach((element) => {
-                const alt = element.getAttribute("alt").toLowerCase();
-                const searchQuery = `dog+${alt}`;
+                const coords = element.getAttribute("coords")?.split(",") ?? [];
+                const alt = element.getAttribute("alt");
+                const searchQuery = `dog+${alt.toLowerCase()}`;
 
                 element.setAttribute("href", `https://www.google.com/search?q=${searchQuery}`);
-            });
+                element.setAttribute("shape", coords.length === 4 ? "rect" : "poly");
+                element.setAttribute("target", "_blank");
+                element.setAttribute("rel", "noopener");
 
+                element.addEventListener("mouseover", () => {
+                    hoverAt.innerText = alt;
+                });
+
+                element.addEventListener("mouseout", () => {
+                    hoverAt.innerText = "Nowhere";
+                });
+            });
     </script>
 </body>
 </html>
