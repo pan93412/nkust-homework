@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress & Meter example</title>
+
+    <style>
+        body {
+            font-family: "Unifont";
+        }
+
+        .c-windows {
+            border: 2px solid #000;
+            box-shadow: #000 3px 3px 0px 1px;
+
+            max-width: 400px;
+        }
+
+        .c-windows__main {
+            padding: 6px;
+        }
+
+        .c-window-control {
+            display: flex;
+            gap: 6px;
+
+            line-height: 0%;
+        }
+
+        .c-window-control div {
+            width: max-content;
+            height: max-content;
+
+            font-size: 12px;
+            padding: 8px 4px;
+            background-color: rgb(233, 230, 212);
+            color: black;
+            box-shadow: #000 3px 3px 0px 1px;
+        }
+
+        .l-title-bar {
+            padding: 0 6px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            background-color: rgb(2, 2, 79);
+
+            color: white;
+        }
+
+        h1, h2 {
+            font-size: 16px;
+            line-height: 0%;
+        }
+
+        .o-network-icon {
+            mix-blend-mode: lighten;
+        }
+
+        .l-download-layout {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .l-download-layout .l-download-layout--desc {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+    </style>
+</head>
+<body>
+    <section class="c-windows">
+        <header class="l-title-bar">
+            <h1>Loading…</h1>
+            <div class="c-window-control">
+                <div>_</div>
+                <!-- <div>☐</div> -->
+                <div>X</div>
+            </div>
+        </header>
+
+        <main class="c-windows__main">
+            <div class="l-download-layout">
+                <div class="l-download-layout--icon">
+                    <img class="o-network-icon" width="60px" alt="network" src="https://ih1.redbubble.net/image.1067190233.9286/st,small,507x507-pad,600x600,f8f8f8.jpg">
+                </div>
+                <div class="l-download-layout--desc">
+                    <h2>Downloading "favicon.ico"…</h2>
+                    <progress id="o-download-progress"></progress>
+                </div>
+            </div>
+        </main>
+    </section>
+
+    <script defer>
+        const progress = document.getElementById("o-download-progress");
+
+        setTimeout(() => {
+            progress.max = 100;
+            setInterval(() => {
+                progress.value = (progress.value || 1) * 1.01;
+            }, 30);
+        }, 1000);
+    </script>
+</body>
+</html>

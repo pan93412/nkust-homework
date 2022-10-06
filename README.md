@@ -11,6 +11,7 @@ This repository is for placing homework in NKUST.
     - [2022/09/29 – Practice 1](./s1/web-development/practice-1)
     - [2022/09/29 – Practice 2](./s1/web-development/practice-2)
     - [2022/10/06 – Image “Map” practice](./s1/web-development/img-practice)
+    - [2022/10/06 – Progress & Meter example](./s1/web-development/progress-meter-example)
   - [Basic Programming / 程式設計](./s1/basic-programming/)
     - [Introduction to VS Code](./s1/basic-programming/01-vsc-intro/main.py)
     - [Variable and Data Types](./s1/basic-programming/02-var-and-type/main.py)
