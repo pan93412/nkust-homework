@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Map Practice</title>
+</head>
+<body>
+    <img src="./dog.jpeg" alt="Dog" usemap="#dog-part">
+
+    <map name="dog-part" id="dog-inject">
+        <area shape="rect" coords="249,263,319,318" alt="Eye" target="_blank" rel="noopener">
+        <area shape="rect" coords="461,254,531,309" alt="Eye" target="_blank" rel="noopener">
+        <area shape="rect" coords="355,276,425,331" alt="Nose" target="_blank" rel="noopener">
+        <area shape="rect" coords="334,343,449,424" alt="Mouth" target="_blank" rel="noopener">
+        <area shape="poly" coords="289,145,188,190,160,229,180,295,180,330,194,337,220,315,208,286,289,145" alt="Ear" target="_blank" rel="noopener">
+        <area shape="poly" coords="461,129,592,306,602,201,570,159,514,145,483,126,461,129" alt="Ear" target="_blank" rel="noopener">
+    </map>
+
+    <script defer>
+        document.querySelectorAll("#dog-inject > area")
+            .forEach((element) => {
+                const alt = element.getAttribute("alt").toLowerCase();
+                const searchQuery = `dog+${alt}`;
+
+                element.setAttribute("href", `https://www.google.com/search?q=${searchQuery}`);
+            });
+
+    </script>
+</body>
+</html>
