@@ -24,6 +24,8 @@ This repository is for placing homework in NKUST.
       - [Practice 1](./s1/basic-programming/06-input-practice/main.py)
       - [Practice 2](./s1/basic-programming/06-input-practice/main-2.py)
     - [Operator](./s1/basic-programming/07-operator/main.py)
+    - [Logical Operators](./s1/basic-programming/08-logical-operators/main.ipynb)
+      - [Practice](./s1/basic-programming/08-logical-operators/example.ipynb)
 
 ## License
 
