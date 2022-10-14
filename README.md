@@ -26,6 +26,9 @@ This repository is for placing homework in NKUST.
     - [Operator](./semester-1/basic-programming/07-operator/main.py)
     - [Logical Operators](./semester-1/basic-programming/08-logical-operators/main.ipynb)
       - [Practice](./semester-1/basic-programming/08-logical-operators/example.ipynb)
+    - [Condition (I)](./semester-1/basic-programming/09-condition/main.ipynb)
+    - [Condition (II)](./semester-1/basic-programming/10-condition-ii/main.ipynb)
+      - [Practices](./semester-1/basic-programming/10-condition-ii/practices.ipynb)
 
 ## License
 
