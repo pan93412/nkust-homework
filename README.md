@@ -18,9 +18,7 @@ This repository is for placing homework in NKUST.
     - [Outputting and Escape Characters](./semester-1/basic-programming/03-output/main.py)
     - [Practice – Outputting](./semester-1/basic-programming/04-output-practice/practice.ipynb)
     - [Input](./semester-1/basic-programming/05-input/main.py)
-    - Practice – Inputting
-      - [Practice 1](./semester-1/basic-programming/06-input-practice/main.py)
-      - [Practice 2](./semester-1/basic-programming/06-input-practice/main-2.py)
+    - [Practice – Inputting](./semester-1/basic-programming/06-input-practice/practice.ipynb)
     - [Operator](./semester-1/basic-programming/07-operator/main.py)
     - [Logical Operators](./semester-1/basic-programming/08-logical-operators/main.ipynb)
       - [Practice](./semester-1/basic-programming/08-logical-operators/example.ipynb)
