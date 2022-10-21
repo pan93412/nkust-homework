@@ -29,6 +29,7 @@ This repository is for placing homework in NKUST.
     - [Condition (I)](./semester-1/basic-programming/09-condition/main.ipynb)
     - [Condition (II)](./semester-1/basic-programming/10-condition-ii/main.ipynb)
       - [Practices](./semester-1/basic-programming/10-condition-ii/practices.ipynb)
+    - [Practice before Examination (I)](./semester-1/basic-programming/11-practice-before-examination-i/practice.ipynb)
 
 ## License
 
