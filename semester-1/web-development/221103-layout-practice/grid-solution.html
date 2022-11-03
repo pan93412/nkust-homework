@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout Practice</title>
+
+    <style>
+        body {
+            display: grid;
+
+            grid-template:
+                "header header header"
+                "nav nav nav"
+                "article article aside" 2fr
+                "section section aside"
+                "footer footer footer" / 1fr;
+        }
+
+        body > * {
+            width: 100%;
+            padding: 36px 24px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        header {
+            grid-area: header;
+            background-color: #FFFFE0;
+        }
+
+        nav {
+            grid-area: nav;
+            background-color: #03FFFF;
+        }
+
+        article {
+            grid-area: article;
+            background-color: #ADFF2E;
+        }
+
+        section {
+            grid-area: section;
+            background-color: #cdc0ff;
+        }
+
+        aside {
+            grid-area: aside;
+            background-color: #FFC1CB;
+        }
+
+        footer {
+            grid-area: footer;
+            background-color: #FFFF00;
+        }
+    </style>
+</head>
+<body>
+    <header></header>
+    <nav></nav>
+    <article></article>
+    <section></section>
+    <aside></aside>
+    <footer></footer>
+</body>
+<script>
+    document.querySelectorAll("body > *")
+        .forEach((e) => {
+            e.innerText = e.tagName.toLowerCase();
+        });
+</script>
+</html>
