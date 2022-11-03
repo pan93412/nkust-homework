@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout Practice</title>
+
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+        }
+
+        body > *:not(main), main > *:not(div), div > * {
+            padding: 36px 24px;
+            text-align: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        main {
+            display: flex;
+            width: 100%;
+        }
+
+        .left {
+            flex-grow: 2;
+        }
+
+        header {
+            background-color: #FFFFE0;
+        }
+
+        nav {
+            background-color: #03FFFF;
+        }
+
+        article {
+            background-color: #ADFF2E;
+        }
+
+        section {
+            background-color: #cdc0ff;
+        }
+
+        .right {
+            flex-grow: 1;
+        }
+
+        aside {
+            height: 100%;
+            background-color: #FFC1CB;
+        }
+
+        footer {
+            background-color: #FFFF00;
+        }
+    </style>
+</head>
+<body>
+    <header>header</header>
+    <nav>nav</nav>
+    <main>
+        <div class="left">
+            <article>article</article>
+            <section>section</section>
+        </div>
+        <div class="right">
+            <aside>aside</aside>
+        </div>
+    </main>
+    <footer>footer</footer>
+</body>
+</html>
