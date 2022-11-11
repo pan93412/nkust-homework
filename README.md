@@ -29,8 +29,7 @@ This repository is for placing homework in NKUST.
     - [Practice before Examination (I)](./semester-1/basic-programming/11-practice-before-examination-i/practice.ipynb)
     - [Loop](./semester-1/basic-programming/12-loop/main.ipynb)
       - [Practices](./semester-1/basic-programming/12-loop/example.ipynb)
-    - 期中考詳解
-      - [累進費率](./semester-1/basic-programming/13-middleexam/progression.ipynb)
+    - [期中考參考答案](./semester-1/basic-programming/13-middleexam/references/)
 
 ## License
 
