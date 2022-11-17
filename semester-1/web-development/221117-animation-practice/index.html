@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animated Block</title>
+
+    <style>
+        :root {
+            --begin-top: 24px;
+            --begin-left: 24px;
+
+            --move-x-range: 400px;
+            --move-y-range: 400px;
+        }
+
+        @keyframes move-and-color-change-block {
+            0% {
+                background-color: lightcoral;
+                left: var(--begin-left);
+                top: var(--begin-top);
+            }
+
+            25% {
+                background-color: lightblue;
+                left: calc(var(--begin-left) + var(--move-x-range));
+                top: var(--begin-top);
+            }
+
+            50% {
+                background-color: lightyellow;
+                left: calc(var(--begin-left) + var(--move-x-range));
+                top: calc(var(--begin-top) + var(--move-y-range));
+            }
+
+            75% {
+                background-color: lightgreen;
+                left: var(--begin-left);
+                top: calc(var(--begin-top) + var(--move-y-range));
+            }
+        }
+
+        .animated-block {
+            position: absolute;
+            animation: move-and-color-change-block 2s ease 0.3ms infinite;
+
+            background-color: lightcoral;
+
+            width: 200px;
+            height: 200px;
+
+            left: var(--begin-left);
+            top: var(--begin-top);
+
+            padding: 24px 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-block">
+        It moves.
+    </div>
+</body>
+</html>
