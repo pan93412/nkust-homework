@@ -30,6 +30,9 @@ This repository is for placing homework in NKUST.
     - [Loop](./semester-1/basic-programming/12-loop/main.ipynb)
       - [Practices](./semester-1/basic-programming/12-loop/example.ipynb)
     - [期中考參考答案](./semester-1/basic-programming/13-middleexam/references/)
+    - [Loop II](./semester-1/basic-programming/14-loop/main.ipynb)
+      - [The loop practices, but with teacher's answer](./semester-1/basic-programming/14-loop/12-example-teacher.ipynb)
+      - [Practices](./semester-1/basic-programming/14-loop/example.ipynb)
 
 ## License
 
