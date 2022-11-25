@@ -37,7 +37,8 @@ def separate(price: int, ranges: List[int]) -> List[int]:
 
     for idx, higher_bound in enumerate(ranges):
         lower_bound = ranges[idx - 1] if idx > 0 else 0
-        if price is not None and price > higher_bound:
+        # 2022-11-25: Corrected the logics.
+        if higher_bound is not None and price > higher_bound:
             answer[idx] = higher_bound - lower_bound
         else:
             answer[idx] = price - lower_bound
