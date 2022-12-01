@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Insert Approach I</title>
+
+    <script>
+        var total = 0;
+        let i = 0;
+
+        do {
+            [total, i] = [total+i, i+1];
+            if (i === 50) break;
+        } while (i <= 100)
+
+    </script>
+</head>
+<body>
+    <script>
+        document.body.innerText += total;
+    </script>
+</body>
+</html>
