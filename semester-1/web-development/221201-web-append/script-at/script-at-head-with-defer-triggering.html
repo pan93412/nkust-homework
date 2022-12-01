@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Script @ body</title>
+
+    <script>
+        function calculateTotal() {
+            let total = 0;
+            let i = 0;
+
+            do {
+                [total, i] = [total+i, i+1];
+                if (i === 50) break;
+            } while (i <= 100)
+
+            return total;
+        }
+
+        function writeToPage() {
+            const t = calculateTotal();
+            const textNode = document.createTextNode(t);
+            document.body.appendChild(textNode);
+        }
+    </script>
+</head>
+<body>
+    <button type="button" onClick="writeToPage()">Click me!</button>
+</body>
+</html>

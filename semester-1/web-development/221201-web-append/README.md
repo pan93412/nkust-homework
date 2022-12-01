@@ -12,10 +12,11 @@
 
 - [`do-while` until fifty](./for-practice/do-while-way-until-50.html)
 
-## Part 3: 3 ways to add scripts to HTML code
+## Part 3: 4 ways to add scripts to HTML code
 
 - [Add at `<head>`](./script-at/script-at-head.html)
 - [Add at `<body>`](./script-at/script-at-body.html)
+- [Add at `<head>`, deferred triggering](./script-at/script-at-head-with-defer-triggering.html)
 - [Import from external scripts](./script-at/script-at-link.html)
 
 ## Part 4: 4 ways to append text to DOM tree
