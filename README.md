@@ -39,6 +39,9 @@ This repository is for placing homework in NKUST.
       - [Practices](./semester-1/basic-programming/15-loop-iii/practice.ipynb)
       - [Answers from Teacher](./semester-1/basic-programming/15-loop-iii/practice.teacher.ipynb)
     - [Extra (N): Unit Test](./semester-1/basic-programming/15N-unittest/)
+    - [Loop IV](./semester-1/basic-programming/16-loop-iv/main.ipynb)
+    - [Container](./semester-1/basic-programming/16-container/main.ipynb)
+      - [Practices](./semester-1/basic-programming/16-container/practice.ipynb)
 
 ## License
 
