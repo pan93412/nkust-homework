@@ -42,6 +42,7 @@ This repository is for placing homework in NKUST.
     - [Loop IV](./semester-1/basic-programming/16-loop-iv/main.ipynb)
     - [Container](./semester-1/basic-programming/16-container/main.ipynb)
       - [Practices](./semester-1/basic-programming/16-container/practice.ipynb)
+    - [Container II](./semester-1/basic-programming/17-container-ii/main.ipynb)
 
 ## License
 
