@@ -13,6 +13,8 @@
   - [advanced](./Q1/advanced.py)
 - [Q2](./Q2/basic.py)
   - [advanced](./Q2/advanced.py)
+- [Q3](./Q3/basic.py)
+  - [exlotto.py](./Q3/exlotto.py)
 
 ## License
 

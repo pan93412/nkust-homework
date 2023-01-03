@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-'''Question 1'''
+"""Question 1"""
 
 from textui import TextUi
 
+
 class Q1TextUi(TextUi):
     loop = True
+
     input_until_condition = lambda v: v == "end"
 
     def main(self):
@@ -32,14 +34,15 @@ class Q1TextUi(TextUi):
         print(
             "取代後字串為:",
             input_string.replace(
-                character_to_detect,    # 檢測字元
-                character_to_replace,   # 取代字元
-                replacement_count       # 取代次數
+                character_to_detect,  # 檢測字元
+                character_to_replace,  # 取代字元
+                replacement_count  # 取代次數
             )
         )
 
     def on_exit(self):
         print("檢測結束")
+
 
 if __name__ == "__main__":
     Q1TextUi()()

@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-'''Question 1'''
+"""Question 1"""
 
 # 寫一個無窮迴圈，不停接收資料。
 while True:
     input_string = input("檢測的字串 (end 結束)：")
 
     # 如果使用者輸入 end，則停止迴圈。
-    if input_string == "end": break
+    if input_string == "end":
+        break
 
     character_to_detect = input("檢測的單一字元：")
 
@@ -37,12 +38,11 @@ while True:
     print(
         "取代後字串為:",
         input_string.replace(
-            character_to_detect,    # 檢測字元
-            character_to_replace,   # 取代字元
-            replacement_count       # 取代次數
+            character_to_detect,  # 檢測字元
+            character_to_replace,  # 取代字元
+            replacement_count  # 取代次數
         )
     )
-
 
 # 停止迴圈之後，顯示「檢測結束」。
 # 然後程式就會到達結尾，結束執行。

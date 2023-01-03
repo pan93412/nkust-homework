@@ -11,11 +11,12 @@ from textui import TextUi
 class Approach(ABC):
     """一個處理方式的抽象類別"""
 
-    def _parse_input(self, data: str) -> tuple[str, int]:
+    @classmethod
+    def _parse_input(cls, data: str) -> tuple[str, int]:
         [award, amount] = data.split(" ")
         amount = int(amount)
 
-        return (award, amount)
+        return award, amount
 
     @abstractmethod
     def input(self, input_method: Callable[[str], str]) -> None:

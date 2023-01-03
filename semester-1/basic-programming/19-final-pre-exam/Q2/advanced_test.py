@@ -39,6 +39,7 @@ class TestDictApproach:
             "優牌得到 7 面"
         )
 
+
 class TestListApproach:
     fake_input: Mock
 
@@ -70,6 +71,7 @@ class TestListApproach:
             "優牌得到 7 面"
         )
 
+
 class TestApproachDistributor:
     def test_register(self):
         distributor = ApproachDistributor()
@@ -93,5 +95,5 @@ class TestApproachDistributor:
         distributor = ApproachDistributor()
         approach_name = "1"
 
-        with pytest.raises(ValueError, match = "找不到做法"):
+        with pytest.raises(ValueError, match="找不到做法"):
             distributor(approach_name)

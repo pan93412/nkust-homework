@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
-'''Question 2'''
+"""Question 2"""
 
 # 在開始之前，我們先釐清問題是什麼。
 #
@@ -31,6 +31,7 @@
 # 第二項串列的順序，顯示用。
 award_display_names = ["金", "銀", "銅", "優"]
 
+
 # 將輸入內容變成字典。這裡使用到自訂函數 (def)。
 def read_to_dict():
     # 定義一個 dict，用來放獎牌及其個數。
@@ -48,6 +49,7 @@ def read_to_dict():
         award_table[award] = amount
 
     return award_table
+
 
 # 將輸入內容變成串列。這裡使用到自訂函數 (def)。
 def read_to_list():
