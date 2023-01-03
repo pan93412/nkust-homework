@@ -66,7 +66,8 @@ class TextUi(ABC):
 
     def __call__(self) -> None:
         try:
-            self.main()
+            while self.loop:
+                self.main()
         except (SystemExit):
             self.on_exit()
         finally:
