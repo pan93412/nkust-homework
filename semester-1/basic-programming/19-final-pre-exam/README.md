@@ -15,6 +15,9 @@
   - [advanced](./Q2/advanced.py)
 - [Q3](./Q3/basic.py)
   - [exlotto.py](./Q3/exlotto.py)
+- [Q5](./Q5/basic.py)
+  - ⚠️ 這題本來就難，所以也就沒有刻意追求簡單的寫法。
+  - [數學解釋](./Q5/README.md)
 
 ## License
 
