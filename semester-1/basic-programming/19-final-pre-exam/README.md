@@ -7,6 +7,10 @@
 
 有些沒有 `advanced.py` 的程式碼是因為沒有必要，或者是空缺。
 
+## 原始題目
+
+
+
 ## 答案
 
 - [Q1](./Q1/basic.py)
@@ -15,8 +19,8 @@
   - [advanced](./Q2/advanced.py)
 - [Q3](./Q3/basic.py)
   - [exlotto.py](./Q3/exlotto.py)
-- [Q4 (advanced)](./Q4/advanced.py)
-  - basic 待補
+- [Q4](./Q4/basic.py)
+  - [advanced](./Q4/advanced.py)
 - [Q5](./Q5/basic.py)
   - ⚠️ 這題本來就難，所以也就沒有刻意追求簡單的寫法。
   - [數學解釋](./Q5/README.md)
