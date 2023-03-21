@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <input type="number" id="left-number" value="3">
+    +
+    <input type="number" id="right-number" value="3">
+    =
+    <span id="answer"></span>
+
+    <script>
+        const leftNumberInput = document.getElementById("left-number");
+        const rightNumberInput = document.getElementById("right-number");
+
+        const answer = document.getElementById("answer");
+
+        function updateCalculation() {
+            const left = +leftNumberInput.value;
+            const right = +rightNumberInput.value;
+
+            answer.innerText = left + right + "";
+        }
+
+        [leftNumberInput, rightNumberInput].forEach((element) => {
+            element.oninput = updateCalculation;
+        })
+
+        window.onload = updateCalculation;
+    </script>
+</body>
+</html>
