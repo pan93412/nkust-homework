@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        .container {
+            margin-bottom: 1em;
+        }
+    </style>
+</head>
+<body>
+<section class="number container">
+    <input type="number" id="left-number" value="3">
+    +
+    <input type="number" id="right-number" value="5">
+    =
+    <span id="number-answer"></span>
+</section>
+
+<section class="string container">
+    <input type="text" id="left-string" value="Hello, ">
+    +
+    <input type="text" id="right-string" value="World">
+    =
+    <span id="string-answer"></span>
+</section>
+<script type="module">
+    import initNumber from "./number.js";
+    import initString from "./string.js";
+
+    initNumber();
+    initString();
+</script>
+</body>
+</html>
