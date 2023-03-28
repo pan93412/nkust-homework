@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-hant-tw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <form id="score-table">
+        <div>
+            <label>國文</label>
+            <input type="number" name="chinese">
+        </div>
+
+        <div>
+            <label>英文</label>
+            <input type="number" name="english">
+        </div>
+
+        <div>
+            <label>數學</label>
+            <input type="number" name="math">
+        </div>
+
+        <div>
+            <label>平均</label>
+            <input type="number" name="avg" id="average-field" readonly>
+        </div>
+
+        <button type="submit">計算</button>
+    </form>
+
+    <script>
+        const $average = document.getElementById("average-field");
+
+        document.getElementById("score-table").onsubmit = function (event) {
+            event.preventDefault(); // 不要真的 submit
+
+            const formData = new FormData(this);
+
+            let total = 0;
+            let entries = 0;
+
+            for (const [key, value] of formData.entries()) {
+                // 不要把平均也算進去。
+                if (key === "avg") continue;
+
+                total += Number(value);  // 總分
+                entries += 1;   // 科目數
+            }
+
+            const average = total / entries;
+            $average.value = average;
+
+            if (average >= 60) {
+                $average.style.backgroundColor = "#aded93";
+            } else {
+                $average.style.backgroundColor = "#f7a8a8";
+            }
+        }
+    </script>
+</body>
+</html>
