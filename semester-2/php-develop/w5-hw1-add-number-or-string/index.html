@@ -8,6 +8,9 @@
     <title>Document</title>
 
     <style>
+        body {
+            font-family: "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+        }
         .container {
             margin-bottom: 1em;
         }
@@ -15,6 +18,8 @@
 </head>
 <body>
 <section class="number container">
+    <h2>數字的加總 Sum of Number</h2>
+
     <input type="number" id="left-number" value="3">
     +
     <input type="number" id="right-number" value="5">
@@ -23,9 +28,11 @@
 </section>
 
 <section class="string container">
-    <input type="text" id="left-string" value="Hello, ">
+    <h2>字串的合併 Concatenation of String</h2>
+
+    <input type="text" id="left-string" value="114514">
     +
-    <input type="text" id="right-string" value="World">
+    <input type="text" id="right-string" value="1919810">
     =
     <span id="string-answer"></span>
 </section>

@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-hant-tw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            gap: 1.25em;
+
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+
+            margin: 2em;
+        }
+
+        #calculate-button {
+            width: 40%;
+        }
+    </style>
+    <script>
+        /**
+         * Get the sum of two numbers and show the answer in the answer input.
+         *
+         * @param {HTMLInputElement} left
+         * @param {HTMLInputElement} right
+         * @param {HTMLInputElement} answer
+         */
+        function sum(left, right, answer) {
+            // `+(string) -> number`
+            const leftNum = +left.value;
+            const rightNum = +right.value;
+
+            // `number + '' -> string`
+            answer.value = leftNum + rightNum + "";
+        }
+
+        window.onload = function () {
+            const leftNumber = document.getElementById("left-number");
+            const rightNumber = document.getElementById("right-number");
+            const answer = document.getElementById("answer");
+
+            document.getElementById("calculate-button").onclick =
+                () => sum(leftNumber, rightNumber, answer);
+        }
+    </script>
+</head>
+<body>
+<section class="container">
+        <div>
+            <input type="number" id="left-number" value="6">
+            +
+            <input type="number" id="right-number" value="3">
+            =
+            <input type="number" id="answer" value="9">
+        </div>
+
+        <button id="calculate-button">計算 Calculate</button>
+    </section>
+</body>
+</html>
