@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        body {
+            font-size: 1.5rem;
+        }
+
+        input {
+            font-size: 1.5rem;
+
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <section>
+            <input type="number" value="1" id="start">
+            + ⋯ +
+            <input type="number" value="100" id="end">
+            =
+            <input type="number" value="0" id="result" readonly>
+        </section>
+    </main>
+
+    <script>
+        const $start = document.querySelector('#start');
+        const $end = document.querySelector('#end');
+        const $result = document.querySelector('#result');
+
+        function getSum() {
+            const start = +$start.value;
+            const end = +$end.value;
+            let result = 0;
+
+            for (let i = start; i <= end; i++) {
+                result += i;
+            }
+
+            $result.value = result;
+        }
+
+        [$start, $end].forEach(($element) => {
+            $element.addEventListener("input", getSum);
+        })
+
+        window.onload = getSum;
+    </script>
+</body>
+</html>
