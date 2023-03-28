@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="zh-hant-tw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <style>
+        .container {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            gap: 1.25em;
+
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+
+            margin: 2em;
+        }
+
+        #calculate-button {
+            width: 40%;
+        }
+    </style>
+    <script>
+        /**
+         * Operate with the value of the DOM elements, and write answer to `answer`.
+         *
+         * @param {HTMLInputElement} left
+         * @param {HTMLSelectElement} op
+         * @param {HTMLInputElement} right
+         * @param {HTMLInputElement} answer
+         * @returns {void}
+         */
+        function domOp(left, op, right, answer) {
+            answer.value = eval(left.value + op.value + right.value);
+        }
+
+        window.onload = function () {
+            const leftNumber = document.getElementById("left-number");
+            const op = document.getElementById("op");
+            const rightNumber = document.getElementById("right-number");
+            const answer = document.getElementById("answer");
+
+            document.getElementById("calculate-button").onclick =
+                () => domOp(leftNumber, op, rightNumber, answer);
+        }
+    </script>
+</head>
+<body>
+<section class="container">
+        <div>
+            <input type="number" id="left-number" value="6">
+            <select id="op">
+                <option value="+" selected>+</option>
+                <option value="-">-</option>
+                <option value="*">×</option>
+                <option value="/">÷</option>
+            </select>
+            <input type="number" id="right-number" value="3">
+            =
+            <input type="number" id="answer" value="9" readonly>
+        </div>
+
+        <button id="calculate-button">計算 Calculate</button>
+    </section>
+</body>
+</html>
