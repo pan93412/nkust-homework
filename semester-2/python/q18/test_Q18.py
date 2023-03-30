@@ -1,5 +1,5 @@
 from unittest.mock import NonCallableMock, call, patch
-from Q18 import Trunk
+from q18 import Trunk
 
 
 class TestTrunk:
