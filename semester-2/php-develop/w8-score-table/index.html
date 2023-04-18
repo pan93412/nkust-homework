@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>計算全班成績</title>
+
+    <style>
+      form {
+        width: max-content;
+      }
+
+      input.short-input {
+        width: 5em;
+      }
+
+      #average-calculator > button {
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="average-calculator">
+      <table id="average-table">
+        <thead>
+          <tr>
+            <th>編號</th>
+            <th>國文</th>
+            <th>英文</th>
+            <th>數學</th>
+            <th>計概</th>
+            <th>總分</th>
+            <th>平均</th>
+          </tr>
+        </thead>
+
+        <tfoot>
+          <tr id="average">
+            <td>平均</td>
+            <td><input type="number" class="short-input" name="score" readonly="readonly"></td>
+            <td><input type="number" class="short-input" name="score" readonly="readonly"></td>
+            <td><input type="number" class="short-input" name="score" readonly="readonly"></td>
+            <td><input type="number" class="short-input" name="score" readonly="readonly"></td>
+            <td><input type="number" class="short-input" name="score" readonly="readonly"></td>
+            <td><input type="number" class="short-input" name="score" readonly="readonly"></td>
+          </tr>
+        </tbody>
+      </table>
+      <button type="submit">計算</button>
+    </form>
+
+    <script>
+      //@ts-check
+
+      const subjects = ["國文", "英文", "數學", "計概"];
+
+      const $averageForm = /**
+       * @type {HTMLFormElement}
+       */ (document.getElementById("average-calculator"));
+      const $averageTable = /**
+       * @type {HTMLTableElement}
+       */ (document.getElementById("average-table"));
+
+      const $averageTableBody = $averageTable.createTBody();
+
+      function calculateAverage() {
+        // 先拉出所有的 tr
+        const $trs = $averageTableBody.querySelectorAll("tr");
+
+        // 準備一個 object，用來存放每個科目的分數（用來計算平均）
+        const allSubjectTotal = /** @type {number[][]} */(new Array(subjects.length).fill(null).map(() => new Array($trs.length).fill(null).map(() => 0)));
+
+        // 以及兩個變數，用來存放所有列的總分和平均
+        let allTotal = new Array($trs.length).fill(0);
+        let allAverage = new Array($trs.length).fill(0);
+
+        // 逐一計算每個人的成績
+        for (const [trIndex, $tr] of $trs.entries()) {
+          // 拉出 name 真的是科目的部分
+          const $subjects = /** @type {NodeListOf<HTMLInputElement>} */(
+            $tr.querySelectorAll("input[name]:not([name='total']):not([name='average']"));
+
+          // 根據順序放入對應的 column
+          const scores = new Array(subjects.length).fill(0);
+
+          for (const [subjectIndex, $subject] of $subjects.entries()) {
+            const score = parseInt($subject.value);
+
+            // 放入這個 tr 專屬的分數 column
+            scores[subjectIndex] = score;
+
+            // 將分數放入總分裡面
+            allSubjectTotal[subjectIndex][trIndex] += score;
+          }
+
+          // 計算這一列的總分
+          const total = Number(scores.reduce((acc, score) => acc + score, 0));
+          // 以及平均
+          const average = total / scores.length;
+
+          // 將總分寫入這一個 column total (DOM)
+          /** @type {HTMLInputElement} */($tr.querySelector("input[name=total]"))
+            .value = total.toString();
+          /** @type {HTMLInputElement} */($tr.querySelector("input[name=average]"))
+            .value = average.toString();
+
+          // 將總分寫入全域變數
+          allTotal[trIndex] += total;
+          allAverage[trIndex] += average;
+        }
+
+        // 將總分寫入平均列
+        const $avgCol = /** @type {NodeListOf<HTMLInputElement>} */($averageTable.querySelectorAll("tr#average > td > input"));
+        const summaryOffset = subjects.length;
+
+        // 這裡預計只有前半段
+        for (const [id, value] of Object.entries(allSubjectTotal)) {
+          const subjectTotal = value.reduce((acc, value) => acc + value, 0);
+          const subjectAvg = subjectTotal / value.length;
+          $avgCol[id].value = subjectAvg.toString()
+        }
+
+        // 這裡預計只有後半段
+        const total = Number(allTotal.reduce((acc, value) => acc + value, 0));
+        $avgCol[summaryOffset].value = total.toString();
+        $avgCol[summaryOffset + 1].value = (total / allAverage.length).toString();
+      }
+
+      // 初始化 tbody
+      for (let i = 1; i <= 50; i++) {
+        const $tr = document.createElement("tr");
+
+        // 編號
+        const $number = document.createElement("td");
+        $number.textContent = i.toString();
+        $tr.appendChild($number);
+
+        // 四個科目
+        for (const name of ["國文", "英文", "數學", "計概"]) {
+          const $subject = document.createElement("td");
+          const $input = document.createElement("input");
+
+          $input.name = name;
+          $input.type = "number";
+          $input.value = "50";
+          $input.classList.add("short-input");
+
+          $subject.appendChild($input);
+          $tr.appendChild($subject);
+        }
+
+        // 總分和平均分 (placeholder)
+        for (const name of ["total", "average"]) {
+          const $subject = document.createElement("td");
+          const $input = document.createElement("input");
+
+          $input.name = name;
+          $input.type = "number";
+          $input.readOnly = true;
+          $input.classList.add("short-input");
+
+          $subject.appendChild($input);
+          $tr.appendChild($subject);
+        }
+
+        $averageTableBody.appendChild($tr);
+      }
+
+      $averageForm.onsubmit = function (e) {
+        e.preventDefault();
+
+        calculateAverage();
+      };
+    </script>
+  </body>
+</html>

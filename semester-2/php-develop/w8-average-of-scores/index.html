@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-tw">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"
+    />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>計算全班成績</title>
+
+  </head>
+  <body>
+      <section>
+        <label for="count">人數：</label>
+        <input type="number" value="10" id="count" />
+      </section>
+
+      <form id="average-calculator">
+        <table id="average-table">
+          <thead>
+            <tr>
+              <th>編號</th>
+              <th>總分</th>
+            </tr>
+          </thead>
+        </table>
+        <button type="submit">計算</button>
+        <div>總分：<span id="total-score"></span></div>
+        <div>平均分：<span id="average-score"></span></div>
+      </form>
+    </form>
+
+    <script>
+      //@ts-check
+
+      const $count = /**
+       * @type {HTMLInputElement}
+       */(document.getElementById("count"));
+      const $averageForm = /**
+       * @type {HTMLFormElement}
+       */(document.getElementById("average-calculator"))
+      const $averageTable = /**
+       * @type {HTMLTableElement}
+       */(document.getElementById("average-table"));
+
+      const $averageTableBody = $averageTable.createTBody();
+
+      $count.addEventListener("change", function () {
+        // 先數出目前有多少個 `tr` 元素
+        const trs = $averageTableBody.getElementsByTagName("tr");
+        const count = Number(this.value);
+
+        if (trs.length > count) {
+          // 如果現在的人數比原本的少，就把多餘的 `tr` 元素刪除
+          for (let i = trs.length; i > count; i--) {
+            trs[i - 1].remove();
+          }
+        } else {
+          // 如果現在的人數比原本的多，就建立新的 `tr` 元素
+          for (let i = trs.length + 1; i <= count; i++) {
+            const $tr = createRow(i);
+            $averageTableBody.appendChild($tr);
+          }
+        }
+      })
+
+      $averageForm.onsubmit = function (event) {
+        event.preventDefault();
+
+        const $total = /**
+          * @type {HTMLSpanElement}
+        */(document.getElementById("total-score"));
+        const $average = /**
+          * @type {HTMLSpanElement}
+        */(document.getElementById("average-score"));
+
+        // get all scores
+        const formData = new FormData(this);
+        const scores = formData.getAll("score");
+
+        const total = scores.map(Number).reduce((sum, score) => sum + score, 0);
+        const average = total / scores.length;
+
+        $total.textContent = total.toString();
+        $average.textContent = average.toString();
+      }
+
+      /**
+       * 建立一個 `tr` 元素
+       *
+       * @param {number} index 座號
+       */
+      function createRow(index) {
+        const $tr = document.createElement("tr");
+        const $td1 = document.createElement("td");
+        const $td2 = document.createElement("td");
+        const $input = document.createElement("input");
+
+        $td1.textContent = `${index}`;
+        $input.name = "score";
+        $input.type = "number";
+        $input.value = "0";
+
+        $td2.appendChild($input);
+        $tr.appendChild($td1);
+        $tr.appendChild($td2);
+
+        return $tr;
+      }
+
+      // 預先建立 `tr` 元素
+      for (let i = 1; i <= Number($count.value); i++) {
+        const $tr = createRow(i);
+        $averageTableBody.appendChild($tr);
+      }
+    </script>
+  </body>
+</html>
