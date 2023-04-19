@@ -50,8 +50,9 @@
       columns: (1fr,) * calc.min(3, authors.len()),
       gutter: 1em,
       ..authors.map(author => align(center)[
+        #text(author.grade, weight: "light")
         *#author.name* \
-        #author.email
+        #author.id
       ]),
     ),
   )
