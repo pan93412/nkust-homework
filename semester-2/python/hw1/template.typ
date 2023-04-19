@@ -86,10 +86,10 @@
 
   grid(
     columns: (2fr,1fr),
-    block(width: 90%)[
+    column-gutter: 2em,
+    [
       #grid(
         columns: (1fr,1fr),
-        column-gutter: 0.5em,
 
         align(start)[*#filename*],
         align(end, link(filename)[原始碼])
@@ -97,7 +97,7 @@
       #line(length: 100%)
       #source_code
     ],
-    block(width: 90%)[
+    [
       *執行結果*
       #line(length: 100%)
       #run_result

@@ -16,4 +16,3 @@ class Trapezoid:
 # and print the area
 w0 = Trapezoid(top=1, bottom=2, height=3)
 print(w0.getArea())
-
