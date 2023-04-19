@@ -14,6 +14,8 @@
 
 每一個題目都會分成兩個部分：老師一開始出的題目（以及附上我的思路補充）、程式碼以及執行結果。程式碼會寫上對應的 Step。
 
+所有程式碼和其輸出均是透過中間編譯指令稿 (`build.py`) 自動嵌入。
+
 = 第一題
 
 假設 `Windows` 類別如下：
@@ -21,9 +23,9 @@
 #code(margin: true)[
   ```py3
   class Windows:
-    def __init__(self, w=10, h=5):
-      self.width = w
-      self.height = h
+      def __init__(self, w=10, h=5):
+          self.width = w
+          self.height = h
   ```
 ]
 
@@ -89,3 +91,27 @@ Step 4 的 `__eq__()` 魔法方法，對應到 Step 5 的 `==`。而我們 Step 
 相對的，Aggregation 就沒有「沒有父實體就沒有子實體」的限制。子實體可以和父實體共同存在，而且子實體是可以獨立使用的（_Has-A_ 關係）。因此我不在建立 `Notebook` 的階段建立 `Mouse` 等等的類別，而是之後再 construct 之後傳入。
 
 `connect`, `insert` 和 `link` 實際上就是跟連結、插入有關的單字，這部份沒有特別的挑選理由。另外這份 Code 大量使用 Python 的 Type Hint。
+
+= 第三題
+
+假設 `Car` 的類別定義如下：
+
+#code[
+  ```py3
+  class Car:
+      def __init__(self, color):
+          self.color = color
+      def show(self):
+          print(f'color={self.color}')
+  ```
+]
+1: class Car:
+2: 3: 4: 5:
+def __init__(self, color):
+    self.color=color
+def show(self):
+    print(f'color={self.color}')
+• (1) 請在 car 當中，新增一個屬性 oil，並加入兩個 abstract method，setOil() 和 getOil()，
+• (2)定義一個Truck類別，繼承自Car類別。Truck的__init()__函數可以接收dr、ow、co和oil 四個參數，分別用來設定 door、owner、color和 oil 四個屬性，其中，color 屬性的設定必須 呼叫父類別的 __init__()函數。
+• (3)試在Truck類別中，加入一個show()函數，用來設定door、owner、color和oil四個屬性 的值。
+• (4)建立物件myTruck，並設定屬性分別為，door=2、owner=Me、color=blue和oil=95，並 印出 show() 的結果。

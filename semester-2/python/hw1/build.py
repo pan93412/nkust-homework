@@ -1,8 +1,11 @@
 import os
+import sys
 
 
 EMBED_CMD = "//embed: "
 RUN_CMD = "//run: "
+OUT_FILENAME = "main_embed.typ"
+COMPILE_CMD = f"typst compile {OUT_FILENAME}"
 
 new_typ = []
 
@@ -28,7 +31,10 @@ with open("main.typ") as f:
         else:
             new_typ.append(line)
 
-with open("main_embed.typ", "w") as f:
+with open(OUT_FILENAME, "w") as f:
     f.write("".join(new_typ))
 
-print("run `typst compile main_embed.typ`!")
+if len(sys.argv) > 1 and sys.argv[1] == "--compile":
+    os.system(COMPILE_CMD)
+else:
+    print(f"run `{COMPILE_CMD}`!")
