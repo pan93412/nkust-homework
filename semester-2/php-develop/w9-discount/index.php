@@ -63,7 +63,7 @@ $discount = 0.8;
     <button type="submit">計算</button>
 
     <label><input type="radio" name="member" <?= $_POST["member"] === "on" ? "checked" : "" ?>>會員</label>
-    <label><input type="radio" name="member" <?= $_POST["member"] === "on" ? "checked" : "" ?>>非會員</label>
+    <label><input type="radio" name="member" value="off" <?= $_POST["member"] === "on" ? "" : "checked" ?>>非會員</label>
 </form>
 
 <?php if (count($_POST) > 0) { ?>

@@ -21,7 +21,7 @@ def generate_random_number(mode: int) -> int:
 
 
 def generate_get_cases(mode=POSITIVE):
-    for _ in range(0, 100):
+    for _ in range(0, 10**3):
         v = [
             generate_random_number(mode),
             generate_random_number(mode),
@@ -32,12 +32,12 @@ def generate_get_cases(mode=POSITIVE):
 
 
 def generate_set_positive_case():
-    for _ in range(0, 100):
+    for _ in range(0, 10**3):
         yield pytest.param(generate_random_number(POSITIVE), id="value")
 
 
 def generate_set_negative_case():
-    for _ in range(0, 100):
+    for _ in range(0, 10**3):
         yield pytest.param(generate_random_number(NEGATIVE), id="value")
 
 

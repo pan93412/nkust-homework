@@ -24,7 +24,7 @@ class TestAccount:
             pytest.param(
                 random.randint(0, 10**4), random.choice(name), id="money,name"
             )
-            for _ in range(100)
+            for _ in range(10**3)
         ],
     )
     def test_construction(self, money: int, owner: str):
@@ -39,7 +39,7 @@ class TestAccount:
                 random.randint(0, 10**6),
                 id="money,cash1,cash2",
             )
-            for _ in range(100)
+            for _ in range(10**3)
         ],
     )
     def test_income(self, money: int, cash1: int, cash2: int):
@@ -61,7 +61,7 @@ class TestAccount:
                 random.randint(10**5, 10**6),
                 id="money,cash1,cash2",
             )
-            for _ in range(100)
+            for _ in range(10**3)
         ],
     )
     def test_outcome_success(self, money: int, cash1: int, cash2: int):
@@ -82,7 +82,7 @@ class TestAccount:
                 random.randint(10**11, 10**12),
                 id="money,cash",
             )
-            for _ in range(100)
+            for _ in range(10**3)
         ],
     )
     def test_outcome_balance_not_enough(self, money: int, cash: int):

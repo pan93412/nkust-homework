@@ -17,7 +17,7 @@ possible_genders = [
 
 
 def generate_construct_example():
-    for _ in range(0, 100):
+    for _ in range(0, 10**3):
         p = [
             random.randint(0, 200),
             random.choice(["Student", "Accountant"]),
@@ -28,7 +28,7 @@ def generate_construct_example():
 
 
 def generate_construct_child_example():
-    for _ in range(0, 100):
+    for _ in range(0, 10**3):
         p = [
             random.randint(0, 200),
             random.choice(possible_genders),
