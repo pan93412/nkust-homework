@@ -1,0 +1,20 @@
+# Homework list
+
+This is a list of homeworks and practices for the courses I placed
+in this repository. It is generated automatically.
+
+<% for (const [semester, coursesMap] of it.meta) { %>
+## Semester <%= semester %>
+
+
+<% for (const [course, meta] of coursesMap) { %>
+### <%= course %>
+
+
+<% for (const {title, homeworkPath} of meta) { %>
+- [<%= title %>](<%= homeworkPath %>)
+<% } %>
+
+<% } %>
+
+<% } %>

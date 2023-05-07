@@ -1,0 +1,8 @@
+{
+  "compilerOptions": {
+    "exactOptionalPropertyTypes": true
+  },
+  "tasks": {
+    "run": "deno run --allow-read --allow-write main.ts"
+  }
+}
