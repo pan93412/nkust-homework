@@ -10,20 +10,19 @@ in this repository. It is generated automatically.
 - [C7: Account class practice](/semester-2/python/c7_account)
 - [Homework 1: Describe the Code](/semester-2/python/hw1)
 - [Midexam answer](/semester-2/python/midexam-answer)
+- [練習六 Q6.py](/semester-2/python/q6)
+- [練習七 Q7.py](/semester-2/python/q7)
+- [練習八 Q8.py](/semester-2/python/q8)
+- [練習九 Q9.py](/semester-2/python/q9)
 - [練習11 Q11.py](/semester-2/python/q11)
 - [練習16 Q16.py](/semester-2/python/q16)
 - [練習17 Q17.py](/semester-2/python/q17)
 - [練習一下Q18.py](/semester-2/python/q18)
 - [練習一下Q19.py](/semester-2/python/q19)
 - [練習一下 Q20.py](/semester-2/python/q20)
-- [練習六 Q6.py](/semester-2/python/q6)
-- [練習七 Q7.py](/semester-2/python/q7)
-- [練習八 Q8.py](/semester-2/python/q8)
-- [練習九 Q9.py](/semester-2/python/q9)
 
 ### PHP Server-side Programming
 
-- [Lesson 10: Turn BMI Calculator to ES Module](/semester-2/php-develop/w10-bmi-calculator-in-module)
 - [Lesson 4: Boy &amp; Girl](/semester-2/php-develop/w4-boy-and-girl)
 - [Lesson 5: Press me!](/semester-2/php-develop/w5-01-pressme)
 - [Lesson 5: 3 plus 5](/semester-2/php-develop/w5-02-add-calc)
@@ -38,6 +37,7 @@ in this repository. It is generated automatically.
 - [Lesson 8: 大量分數統計](/semester-2/php-develop/w8-score-table)
 - [Lesson 9: BMI Calculator](/semester-2/php-develop/w9-bmi-calculator)
 - [Lesson 9: Discount Calculator](/semester-2/php-develop/w9-discount)
+- [Lesson 10: Turn BMI Calculator to ES Module](/semester-2/php-develop/w10-bmi-calculator-in-module)
 
 ### Linux Administration
 
