@@ -86,7 +86,12 @@ export async function groupMeta(dir: string): Promise<GroupedMeta> {
   // sort every entries
   for (const [_, courseMap] of table) {
     for (const [_, entries] of courseMap) {
-      entries.sort((a, b) => a.homeworkPath.localeCompare(b.homeworkPath));
+      entries.sort((a, b) =>
+        a.homeworkPath.localeCompare(b.homeworkPath, "en-US", {
+          numeric: true,
+          sensitivity: "base",
+        })
+      );
     }
   }
 
