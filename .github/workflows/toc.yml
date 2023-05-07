@@ -1,0 +1,37 @@
+name: Generate TOC
+
+on:
+  push:
+    branches:
+      - main
+      - ci/*
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: "toc"
+  cancel-in-progress: true
+
+jobs:
+  toc-generate-and-push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - uses: denoland/setup-deno@v1
+        with:
+          deno-version: v1.x
+      - name: Set up authors
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+      - name: Generate TOC
+        run: bash generate-toc.sh
+      - name: Commit TOC
+        run: |
+          git add TOC.md
+          git commit -m "toc: Update to $GITHUB_SHA"
+      - name: Push TOC
+        run: git push
