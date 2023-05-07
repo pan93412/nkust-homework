@@ -1,5 +1,5 @@
 ---
-title: "Lesson 6: 練習加法計算機"
+title: "Lesson 8: 平均分"
 course: "S2 - PHP Server-side Programming"
 ---
 

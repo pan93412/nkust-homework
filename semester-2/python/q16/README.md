@@ -1,4 +1,7 @@
-# 練習16 Q16.py
+---
+title: "練習16 Q16.py"
+course: "S2 - Intermediate Python Programming"
+---
 
 - 現在有一部筆電，包含有
   - CPU

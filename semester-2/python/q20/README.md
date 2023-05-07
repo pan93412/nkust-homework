@@ -1,4 +1,7 @@
-# 練習一下 Q20.py
+---
+title: "練習一下 Q20.py"
+course: "S2 - Intermediate Python Programming"
+---
 
 假設 `Animal` 是一個父類別，他有 `sound()` 和 `food()` 兩個方法，另外有 `Dog` 和 `Cat` 兩個子類別，這兩個子類別繼承了父類別的方法。
 

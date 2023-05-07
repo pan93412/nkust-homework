@@ -1,6 +1,6 @@
 ---
-title: "Lesson 5: Press me!"
+title: "Lesson 7: GCD"
 course: "S2 - PHP Server-side Programming"
 ---
 
-![](question.webp)
+![Question](question.svg)

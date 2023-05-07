@@ -1,4 +1,7 @@
-# 練習九 Q9.py
+---
+title: "練習九 Q9.py"
+course: "S2 - Intermediate Python Programming"
+---
 
 假設有銀行帳戶 class `Account`
 

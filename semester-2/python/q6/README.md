@@ -1,4 +1,7 @@
-# 練習六 Q6.py
+---
+title: "練習六 Q6.py"
+course: "S2 - Intermediate Python Programming"
+---
 
 已知求體積為 $\frac{4}{3} \pi r^3$，表面積為 $4\pi r^2$。
 

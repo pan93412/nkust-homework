@@ -1,4 +1,7 @@
-# 練習11 Q11.py
+---
+title: "練習11 Q11.py"
+course: "S2 - Intermediate Python Programming"
+---
 
 Create a class named Pizza that stores information about a single pizza. It should contain the
 following:

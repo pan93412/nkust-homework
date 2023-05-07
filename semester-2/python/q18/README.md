@@ -1,4 +1,7 @@
-# 練習一下Q18.py
+---
+title: "練習一下Q18.py"
+course: "S2 - Intermediate Python Programming"
+---
 
 假設 car 的類別定義如下:
 

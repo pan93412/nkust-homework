@@ -1,4 +1,7 @@
-# Homework 1
+---
+title: "Homework 1: Describe the Code"
+course: "S2 - Intermediate Python Programming"
+---
 
 ## Prerequisites
 

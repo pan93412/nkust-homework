@@ -1,4 +1,8 @@
-# 練習七 Q7.py
+---
+title: "練習七 Q7.py"
+course: "S2 - Intermediate Python Programming"
+---
+
 請使用陣列寫一個 BoundedStack 類別。
 
 1. 在宣告時便需要指定一個 BoundedStack 堆疊的大小。

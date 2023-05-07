@@ -1,4 +1,7 @@
-# 練習一下Q19.py
+---
+title: "練習一下Q19.py"
+course: "S2 - Intermediate Python Programming"
+---
 
 設Person類別的定義如下:
 

@@ -1,5 +1,5 @@
 ---
-title: "Lesson 6: 練習加法計算機"
+title: "Lesson 10: Turn BMI Calculator to ES Module"
 course: "S2 - PHP Server-side Programming"
 ---
 

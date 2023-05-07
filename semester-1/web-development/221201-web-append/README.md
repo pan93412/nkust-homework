@@ -1,3 +1,8 @@
+---
+title: "2022/12/01 – For loop, break, script appending practices"
+course: "S1 - Web Development"
+---
+
 # Homework 2022-12-01
 
 ![Question…](question.png)

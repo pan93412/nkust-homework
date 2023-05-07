@@ -1,3 +1,8 @@
+---
+title: "Reference Answer of Final Exam"
+course: "S1 - Basic Programming"
+---
+
 # 19 – 期末考前「程式設計」小考參考答案
 
 ## 答案架構

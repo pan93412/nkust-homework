@@ -1,4 +1,7 @@
-# Week 6, 練習：學生成績
+---
+title: "Lesson 6: 練習學生成績"
+course: "S2 - PHP Server-side Programming"
+---
 
 ![Question](question.svg)
 

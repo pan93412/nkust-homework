@@ -1,4 +1,7 @@
-# 練習八 Q8.py
+---
+title: "練習八 Q8.py"
+course: "S2 - Intermediate Python Programming"
+---
 
 - 編寫西遊記人物類別
   - 屬性有
