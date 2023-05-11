@@ -1,0 +1,10 @@
+{
+  "main.ts": {
+    "file": "main.js",
+    "css": "main.css"
+  },
+  "app.vue": {
+    "file": "startPage.js",
+    "css": "startPage.css"
+  }
+}

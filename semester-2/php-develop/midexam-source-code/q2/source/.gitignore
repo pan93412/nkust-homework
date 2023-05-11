@@ -1,0 +1,10 @@
+node_modules/
+/test-results/
+/playwright-report/
+/playwright/.cache/
+coverage/
+.DS_Store
+answers/
+/test-results/
+/playwright-report/
+/playwright/.cache/
