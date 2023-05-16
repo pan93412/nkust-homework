@@ -1,0 +1,18 @@
+{
+    "name": "pan93412/s2-php-w11-ajax",
+    "type": "project",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Pan93412\\S2PhpW11Ajax\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "pan93412",
+            "email": "pan93412@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
