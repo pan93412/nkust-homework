@@ -32,6 +32,7 @@ in this repository. It is generated automatically.
 
 ### PHP Server-side Programming
 
+- [Midexam Source Code](/semester-2/php-develop/midexam-source-code)
 - [Lesson 4: Boy &amp; Girl](/semester-2/php-develop/w4-boy-and-girl)
 - [Lesson 5: Press me!](/semester-2/php-develop/w5-01-pressme)
 - [Lesson 5: 3 plus 5](/semester-2/php-develop/w5-02-add-calc)
