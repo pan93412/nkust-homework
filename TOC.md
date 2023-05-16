@@ -47,6 +47,7 @@ in this repository. It is generated automatically.
 - [Lesson 9: BMI Calculator](/semester-2/php-develop/w9-bmi-calculator)
 - [Lesson 9: Discount Calculator](/semester-2/php-develop/w9-discount)
 - [Lesson 10: Turn BMI Calculator to ES Module](/semester-2/php-develop/w10-bmi-calculator-in-module)
+- [Lesson 11: AJAX application](/semester-2/php-develop/w11-ajax)
 
 ## Semester 1
 
