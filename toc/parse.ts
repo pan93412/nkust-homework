@@ -84,16 +84,37 @@ export async function groupMeta(dir: string): Promise<GroupedMeta> {
   }
 
   // sort every entries
-  for (const [_, courseMap] of table) {
-    for (const [_, entries] of courseMap) {
-      entries.sort((a, b) =>
-        a.homeworkPath.localeCompare(b.homeworkPath, "en-US", {
-          numeric: true,
-          sensitivity: "base",
-        })
-      );
-    }
-  }
+  const localCompareOptions = {
+    numeric: true,
+    sensitivity: "base",
+  };
 
-  return table;
+  const newTable = new Map(
+    [...table.entries()]
+      .sort(([s1], [s2]) => s2 - s1)
+      .map(([s, m]) => {
+        return [
+          s,
+          new Map(
+            [...m.entries()]
+              .sort(([c1], [c2]) =>
+                c1.localeCompare(c2, "en-US", localCompareOptions)
+              )
+              .map(([subject, entries]) => {
+                entries.sort((a, b) => {
+                  return a.homeworkPath.localeCompare(
+                    b.homeworkPath,
+                    "en-US",
+                    localCompareOptions
+                  );
+                });
+
+                return [subject, entries];
+              })
+          ),
+        ];
+      })
+  );
+
+  return newTable;
 }
