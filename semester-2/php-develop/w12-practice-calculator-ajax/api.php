@@ -11,7 +11,7 @@ $input = file_get_contents('php://input');
 $data = json_decode($input);
 
 $result = 0;
-eval("\$result = {$data->left} {$data->op} {$data->right};"); // hacky!
+eval("\$result = $data->left $data->op $data->right;"); // hacky!
 
 echo json_encode([
     "ok" => true,
