@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="zh-hant-tw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>學生成績</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <form id="score-table">
+        <div>
+            <label for="chinese">國文</label>
+            <input id="chinese" name="score">
+        </div>
+        <div>
+            <label for="english">英文</label>
+            <input id="english" name="score">
+        </div>
+        <div>
+            <label for="math">數學</label>
+            <input id="math" name="score">
+        </div>
+
+        <div>
+            <label for="average">平均</label>
+            <input id="average" name="average" readonly>
+        </div>
+
+        <div>
+            <button type="submit">計算</button>
+        </div>
+    </form>
+
+    <script src="script.js" type="module"></script>
+</body>
+</html>
