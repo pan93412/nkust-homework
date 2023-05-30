@@ -15,6 +15,13 @@ $scoreTable.addEventListener("submit", async (e) => {
         },
     });
     const json = await response.json();
+    const average = json.average;
 
-    $average.value = json.average;
+    $average.value = average;
+    $average.classList.remove("passed", "failed");
+    if (average >= 60) {
+        $average.classList.add("passed");
+    } else {
+        $average.classList.add("failed");
+    }
 })
