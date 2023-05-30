@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="zh-hant-tw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+</head>
+<body>
+    <form id="calculator">
+        <input type="text" name="left">
+        <select name="op" id="">
+            <option value="+">+</option>
+            <option value="-">-</option>
+            <option value="*">*</option>
+            <option value="/">/</option>
+        </select>
+        <input type="text" name="right">
+        =
+        <input type="text" id="result" readonly>
+
+        <button type="submit">計算</button>
+    </form>
+
+    <script type="module" src="main.js"></script>
+</body>
+</html>
