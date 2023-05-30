@@ -24,6 +24,8 @@ in this repository. It is generated automatically.
 - [Raise 拋出例外](/semester-2/python/q22b_raise)
 - [Q23](/semester-2/python/q23)
 - [Q24](/semester-2/python/q24)
+- [Q25](/semester-2/python/q25)
+- [練習一下 Q26](/semester-2/python/q26)
 
 ### Linux Administration
 
