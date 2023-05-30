@@ -9,6 +9,7 @@ in this repository. It is generated automatically.
 
 - [C7: Account class practice](/semester-2/python/c7_account)
 - [Homework 1: Describe the Code](/semester-2/python/hw1)
+- [Homework 2: Forward to OOP](/semester-2/python/hw2)
 - [Midexam answer](/semester-2/python/midexam-answer)
 - [練習六 Q6.py](/semester-2/python/q6)
 - [練習七 Q7.py](/semester-2/python/q7)
