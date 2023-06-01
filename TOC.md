@@ -11,6 +11,7 @@ in this repository. It is generated automatically.
 - [Homework 1: Describe the Code](/semester-2/python/hw1)
 - [Homework 2: Forward to OOP](/semester-2/python/hw2)
 - [Midexam answer](/semester-2/python/midexam-answer)
+- [(2023/05/26 – 06/01) NumPy](/semester-2/python/numpy-example)
 - [練習六 Q6.py](/semester-2/python/q6)
 - [練習七 Q7.py](/semester-2/python/q7)
 - [練習八 Q8.py](/semester-2/python/q8)
