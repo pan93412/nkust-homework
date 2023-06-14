@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="zh-hant-tw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>個資筆記本</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <table id="information-table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>學號</th>
+                <th>姓名</th>
+                <th>生日</th>
+                <th>地址</th>
+            </tr>
+        </thead>
+    </table>
+
+    <div id="operation">
+        <button disabled id="add">新增</button>
+        <button disabled id="edit">修改</button>
+        <button disabled id="delete">刪除</button>
+    </div>
+
+    <script type="module">
+        import {tbodyRender} from "./column-render.js";
+        import {retrieveData} from "./retrieve-data.js";
+
+        const $operation = document.getElementById("operation");
+
+        const data = await retrieveData();
+        if (!data) return;
+
+        const $tbody = tbodyRender(json.data, (id) => {
+            console.log("You selected: %d", id);
+
+            // remove the disabled status
+            if ()
+            $operation.querySelectorAll("button").forEach($button => {
+                $button.disabled = false;
+            });
+            // currentIdSelection = id;
+        });
+
+        document.getElementById("information-table").appendChild($tbody);
+    </script>
+</body>
+</html>
