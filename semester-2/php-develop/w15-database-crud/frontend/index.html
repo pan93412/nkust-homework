@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-hant-tw">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>個資筆記本</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <table id="information-table">
+        <thead>
+            <tr>
+                <th></th>
+                <th>學號</th>
+                <th>姓名</th>
+                <th>生日</th>
+                <th>地址</th>
+            </tr>
+        </thead>
+    </table>
+
+    <div id="operation">
+        <button id="add">新增</button>
+        <button disabled id="edit">修改</button>
+        <button disabled id="delete">刪除</button>
+    </div>
+
+    <script type="module">
+        import {tbodyRender} from "./column-render.js";
+        import {retrieveData} from "./retrieve-data.js";
+        import {addInsertionLine} from "./add-data.js";
+
+        const $operation = document.getElementById("operation");
+
+        const renderTbody = async () => {
+            const data = await retrieveData();
+            if (!data) throw new Error("Failed to retrieve data");
+
+            return tbodyRender(data, (id) => {
+                console.log("You selected: %s", id);
+
+                // remove the disabled status
+                $operation.querySelectorAll("button").forEach($button => {
+                    $button.disabled = false;
+                });
+            });
+        };
+
+        let $currentTbody = document.getElementById("information-table").appendChild(await renderTbody());
+
+        const $operationAdd = document.getElementById("add");
+        $operationAdd.onclick = function () {
+            addInsertionLine(async () => {
+                document.getElementById("information-table").removeChild($currentTbody);
+                $currentTbody = document.getElementById("information-table").appendChild(await renderTbody());
+            });
+        }
+    </script>
+</body>
+</html>
