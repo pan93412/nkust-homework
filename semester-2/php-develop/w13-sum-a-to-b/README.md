@@ -1,5 +1,5 @@
 ---
-title: AJAX, Sum for A to B
+title: "Lesson 13: AJAX, Sum for A to B"
 course: "S2 - PHP Server-side Programming"
 ---
 

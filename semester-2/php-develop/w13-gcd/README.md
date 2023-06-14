@@ -1,5 +1,5 @@
 ---
-title: AJAX, GCD(A, B)
+title: "Lesson 13: AJAX, GCD(A, B)"
 course: "S2 - PHP Server-side Programming"
 ---
 
