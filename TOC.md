@@ -12,6 +12,7 @@ in this repository. It is generated automatically.
 - [Homework 2: Forward to OOP](/semester-2/python/hw2)
 - [Midexam answer](/semester-2/python/midexam-answer)
 - [(2023/05/26 – 06/01) NumPy](/semester-2/python/numpy-example)
+- [(2023/06/07) Pillow](/semester-2/python/pillow-example)
 - [練習六 Q6.py](/semester-2/python/q6)
 - [練習七 Q7.py](/semester-2/python/q7)
 - [練習八 Q8.py](/semester-2/python/q8)
@@ -54,9 +55,11 @@ in this repository. It is generated automatically.
 - [Lesson 10: Turn BMI Calculator to ES Module](/semester-2/php-develop/w10-bmi-calculator-in-module)
 - [Lesson 11: AJAX application](/semester-2/php-develop/w11-ajax)
 - [Lesson 12: AJAX Calculator Practice](/semester-2/php-develop/w12-practice-calculator-ajax)
-- [AJAX, GCD(A, B)](/semester-2/php-develop/w13-gcd)
+- [Lesson 13: AJAX, GCD(A, B)](/semester-2/php-develop/w13-gcd)
 - [Lesson 13: AJAX Score Average Practice](/semester-2/php-develop/w13-score)
-- [AJAX, Sum for A to B](/semester-2/php-develop/w13-sum-a-to-b)
+- [Lesson 13: AJAX, Sum for A to B](/semester-2/php-develop/w13-sum-a-to-b)
+- [Lesson 14: Database Basic (Retrieve)](/semester-2/php-develop/w14-database)
+- [Lesson 15: Database Basic (Create)](/semester-2/php-develop/w15-database-crud)
 
 ## Semester 1
 
