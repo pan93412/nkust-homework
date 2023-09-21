@@ -29,7 +29,7 @@ def consumer():
         with wq as entry:
             with semaphore as _:
                 print(
-                    "{:06d}".format((entry**2 + entry * 8 + entry % 4) % 10**5),
+                    "{:<6d}".format((entry**2 + entry * 8 + entry % 4) % 10**5),
                     queue.qsize(),
                     sep="\t",
                 )
