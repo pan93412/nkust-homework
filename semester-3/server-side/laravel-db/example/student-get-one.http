@@ -1,0 +1,2 @@
+GET https://laravel-db.ddev.site/api/students/1
+Content-Type: application/json

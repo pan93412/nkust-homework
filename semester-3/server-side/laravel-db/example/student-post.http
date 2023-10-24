@@ -1,0 +1,8 @@
+POST https://laravel-db.ddev.site/api/students
+Content-Type: application/json
+
+{
+    "name": "潘奕濬",
+    "addr": "高雄市三民區",
+    "birth": "2004-04-12"
+}

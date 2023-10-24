@@ -3,6 +3,7 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\JsonResponse;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -26,5 +27,17 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $e): JsonResponse
+    {
+        $statusCode = $e instanceof HttpError
+            ? $e->getStatusCode()
+            : 500;
+
+        return response()->json([
+            'message' => $e->getMessage(),
+            'line' => "{$e->getFile()}:{$e->getLine()}",
+        ], $statusCode);
     }
 }
