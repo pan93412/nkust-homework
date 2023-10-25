@@ -14,6 +14,7 @@
     size: 14pt,
   )
   set heading(numbering: "1.1")
+  set math.equation(numbering: "(i)")
 
   show heading: it => [
     #pad(it, bottom: 0.5em)
@@ -41,7 +42,7 @@
   box(inset: 0.5em, baseline: 25%, fill: fill, radius: 6pt, it)
 }
 
-#let question(id, tags, name, it) = [
+#let question(id, label, tags, name, it) = block(width: 100%)[
   #show: pad.with(top: 1em)
 
   #badge(luma(64), id)
@@ -49,9 +50,15 @@
     #badge(blue.darken(50%), tag)
   ]
 
-  #block(above: 12pt)[
-    *#name*
+  #block(above: 12pt, width: 100%)[
+    *#name* #label
   ]
 
   #pad(x: 1.75em, it)
 ]
+
+#let formula(it, questions: ()) = block(width: 100%, fill: luma(245), radius: 8pt, pad(x: 1.6em, y: 1.4em)[
+  #it
+
+  #questions.enumerate().map(it => link(it.at(1), text(fill: luma(100), [習題 #{it.at(0) + 1}]))).join("｜")
+])
