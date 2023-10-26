@@ -15,10 +15,10 @@
   )
   set heading(numbering: "1.1")
   set math.equation(numbering: "(i)")
+  show link: underline
 
-  show heading: it => [
-    #pad(it, bottom: 0.5em)
-  ]
+  show heading: it => pad(it, bottom: 0.5em)
+
   // Title row.
   align(center)[
     #block(text(weight: 700, 1.75em, title))
