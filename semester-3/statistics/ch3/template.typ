@@ -27,7 +27,7 @@
   // Main body.
   set par(justify: true, leading: 0.8em)
 
-  show regex("\=\=.+\=\="): it => {
+  show regex("\=\=.+?\=\="): it => {
     show "==": ""
     highlight(it)
   }
