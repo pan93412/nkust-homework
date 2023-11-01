@@ -5,6 +5,7 @@ import csv
 import json
 import mimetypes
 import re
+from pathlib import Path
 
 import requests
 
@@ -13,10 +14,12 @@ urls = [
     "https://ic.nkust.edu.tw/",
 ]
 
-invalid_characters = re.compile(r"[^a-zA-Z0-9_]")
-unexpected_underscore = re.compile(r"_+")
+output_directory = Path("output")
+output_directory.mkdir(exist_ok=True)
 
-csv_target = open("homework1.csv", "w")
+invalid_characters = re.compile(r"[^a-zA-Z0-9_]")
+
+csv_target = open(output_directory / "homework1.csv", "w")
 csv_writer = csv.DictWriter(
     csv_target, fieldnames=["URL", "MIME Type", "Filename", "Raw Response Filename", "Content"]
 )
@@ -35,18 +38,17 @@ for url in urls:
     )
     resp.raise_for_status()
 
-    content_type = resp.headers["Content-Type"] + ";"
-    mime = resp.headers["Content-Type"][0 : content_type.find(";")]
+    mime = resp.headers["Content-Type"].split(";")[0]
     extension = mimetypes.guess_extension(mime)
 
     # content (.html typically)
-    blob_filename = f"{filename}.{extension}"
-    with open(blob_filename, "wb") as fp:
+    blob_filename = f"{filename}{extension}"
+    with open(output_directory / blob_filename, "wb") as fp:
         fp.write(resp.content)
 
     # json
     json_filename = f"{filename}.json"
-    with open(json_filename, "w", encoding="utf-8") as fp:
+    with open(output_directory / json_filename, "w", encoding="utf-8") as fp:
         json.dump(
             {
                 "method": resp.request.method,
@@ -54,7 +56,7 @@ for url in urls:
                 "status_code": resp.status_code,
                 "encoding": resp.encoding,
                 "request_url": resp.request.url,
-                "final_url": resp.url,
+                "response_from": resp.url,
                 "content": resp.text
             },
             fp,
