@@ -1,0 +1,1 @@
+select count(*) as 供應商數目 from sp;

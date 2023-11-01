@@ -1,0 +1,1 @@
+SELECT p.*, s.* FROM p, s;

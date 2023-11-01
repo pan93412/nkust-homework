@@ -1,0 +1,8 @@
+CREATE INDEX idx_sp_s_no ON sp(s_no);
+CREATE INDEX idx_sp_p_no ON sp(p_no);
+
+ALTER TABLE s ADD PRIMARY KEY (s_no);
+ALTER TABLE p ADD PRIMARY KEY (p_no);
+
+ALTER TABLE sp ADD CONSTRAINT fk_sp_s_no FOREIGN KEY (s_no) REFERENCES s(s_no);
+ALTER TABLE sp ADD CONSTRAINT fk_sp_p_no FOREIGN KEY (p_no) REFERENCES p(p_no);
