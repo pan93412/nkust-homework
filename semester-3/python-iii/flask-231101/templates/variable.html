@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello, World!</title>
+</head>
+<body>
+    <h1>{{ text }}</h1>
+
+    <h2>個人介紹</h2>
+    {% if info != undefined %}
+        <ul>
+        {% for key, value in (info | items) %}
+            <li>{{ key }}：{{ value }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
+
+    <h2>五大洲代表國家</h2>
+    <table border="1">
+        {% for key, value in (countries | items) %}
+            <tr>
+                <th>{{ key }}</th>
+                <td>{{ value | join('、') }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+</body>
+</html>
