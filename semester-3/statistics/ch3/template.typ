@@ -34,7 +34,7 @@
   body
 }
 
-#let comment(it) = text(fill: luma(140), size: 8pt, it)
+#let comment(it) = text(fill: luma(140), size: 10pt, it)
 
 #let badge(fill, it) = {
   set text(weight: "bold",  size: 11pt, fill: white.darken(1%))
