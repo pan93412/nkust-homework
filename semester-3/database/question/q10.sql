@@ -3,8 +3,8 @@
 
 select
     month(OrderDate) as '交易月',
-    sum(Qty * UnitPrice * (1 - Discount)) as '利潤總額',
-    sum(Qty * UnitPrice) as '營業總額'
+    sum(Qty * (UnitPrice * Discount - Cost)) as '利潤總額',
+    sum(Qty * UnitPrice * Discount) as '營業總額'
 from
     product join orderdetail using (ProdID)
             join salesorder using (OrderID)
