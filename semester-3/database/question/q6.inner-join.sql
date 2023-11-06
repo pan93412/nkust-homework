@@ -1,4 +1,4 @@
-EXPLAIN SELECT
+SELECT
     EmpName AS 姓名,
     employee.JobTitle AS 現任職稱,
     DeptName AS 部門名稱,
