@@ -27,7 +27,7 @@
 
     考慮有限母體的母體資料，母體大小為 $N$，所有母體觀察值分別為 $x_1, x_2, dots, x_N$，則母體平均數為：
     $
-    mu = sum_{i=1}^N x_i / N
+    mu = sum_(i=1)^N x_i / N
     $
   ]
 
@@ -37,7 +37,7 @@
     考慮從母體中抽取的樣本資料，樣本大小為 $n$，所有樣本觀察值分別為 $x_1, x_2, dots, x_n$，則樣本平均數為：
 
     $
-    overline(X) = sum_{i=1}^n x_i / n
+    overline(X) = sum_(i=1)^n x_i / n
     $
   ]
 + 計算
@@ -49,7 +49,7 @@
     令 $x_1, x_2, dots, x_n$ 為一組樣本的 $n$ 個觀察值，$overline(x)$ 為樣本平均數：
 
     $
-    overline(X) = sum_{i=1}^n x_i / n
+    overline(X) = sum_(i=1)^n x_i / n
     $
   ]
 
@@ -63,7 +63,7 @@
     - $n = sum_(i=1)^k f_i$ 為總次數
 
     $
-    overline(X) = sum_{i=1}^k (f_i x_i) / n
+    overline(X) = sum_(i=1)^k (f_i x_i) / n
     $ <已分組資料的樣本平均數>
   ]
 
@@ -74,26 +74,26 @@
     - $w_i$: $x_i$ 之權重
 
     $
-    overline(X) = sum_{i=1}^k (w_i x_i) / (sum_{i=1}^k w_i)
+    overline(X) = sum_(i=1)^k (w_i x_i) / (sum_(i=1)^k w_i)
     $ <加權平均數>
   ]
 + 特性
   - 觀察值之總和等於平均數的 $n$ 倍：
     $
-    sum_{i=1}^n x_i = n overline(x)
+    sum_(i=1)^n x_i = n overline(x)
     $
   - 任一組資料中，==各觀察值== 與 ==平均數差== 之總和等於 $0$。
     - 換句話說，平均數是資料分配的平衡點或槓桿的支點：
       $
-      sum_{i=1}^n (x_i - overline(x)) = 0
+      sum_(i=1)^n (x_i - overline(x)) = 0
       $
     - 因為：
       $
-      sum_{i=1}^n (x_i - overline(x)) = sum_{i=1}^n x_i - n overline(x) = n overline(x) - n overline(x) = 0
+      sum_(i=1)^n (x_i - overline(x)) = sum_(i=1)^n x_i - n overline(x) = n overline(x) - n overline(x) = 0
       $
   - 任一組資料中，各觀察值與平均數差之平方和最小：（原因參照課本）
     $
-    sum_{i=1}^n (x_i - overline(x))^2 <= sum_{i=1}^n (x_i - T)^2
+    sum_(i=1)^n (x_i - overline(x))^2 <= sum_(i=1)^n (x_i - T)^2
     $
   - 優點
     - 常被用於敘述統計和統計推論的計算公式。
@@ -269,7 +269,7 @@
   + 若資料分散均勻，則中位數可以輕鬆根據中心點劃分資料為兩等份，並且說明左等分都偏低；右等分都偏高。惟若資料點集中，則這個解釋就不妥當。
   + 中位數 $M_e$ 距離各觀測值 $x_i$ 與的絕對值總和必定為最小值。令 $T$ 為任一常數：
      $
-      sum_{i=1}^n |x_i - M_e| <= sum_{i=1}^n |x_i - T|
+      sum_(i=1)^n |x_i - M_e| <= sum_(i=1)^n |x_i - T|
      $
   + 優點
     + 不受極端值影響。
@@ -546,7 +546,7 @@
   *未分組資料的平均絕對離差*
 
   $
-  "MAD" = sum_{i=1}^n abs(x_i - overline(x)) / n
+  "MAD" = sum_(i=1)^n abs(x_i - overline(x)) / n
   $
 
   $x_i$ 為第 $i$ 個資料點，$overline(x)$ 為平均數，$n$ 為總數。
@@ -556,14 +556,14 @@
   *已分組資料的平均絕對離差*
 
   $
-  "MAD" = sum_{i=1}^n (f_i abs(x_i-overline(x))) / N
+  "MAD" = sum_(i=1)^n (f_i abs(x_i-overline(x))) / N
   $
 
   - $x_i$: 組中點
   - $f_i$: 組次數
   - $n$: 組數
   - $overline(x)$: 平均數
-  - $N = sum_{i=1}^n f_i$ 為總次數。
+  - $N = sum_(i=1)^n f_i$ 為總次數。
 ]
 
 - 特性
@@ -648,18 +648,18 @@
   *母體變異數* ($sigma^2$)
 
   $
-  sigma^2 &= (sum_{i=1}^N (x_i-mu)^2)/(N) \
+  sigma^2 &= (sum_(i=1)^N (x_i-mu)^2)/(N) \
   sigma &= sqrt(sigma^2)
-  $
+  $ <母體變異數>
 ]
 
 #formula(questions: (<ex3.17>,))[
   *樣本變異數* ($s^2$)
 
   $
-  s^2 &= (sum_{i=1}^n (x_i-overline(x))^2)/(n - 1) \
+  s^2 &= (sum_(i=1)^n (x_i-overline(x))^2)/(n - 1) \
   s &= sqrt(s^2)
-  $
+  $ <樣本變異數>
 
   - $n-1$ 和自由度相關。簡單來說，透過比較和經驗，$s^2$ with $n$ 較不接近 $sigma^2$, while $s^2$ with $n-1$ 更為接近。
 ]
@@ -668,8 +668,8 @@
   *樣本變異數*（快速解法）
 
   $
-  s^2 &= (sum_{i=1}^n (x_i-overline(x))^2)/(n-1) \
-      &= (sum_{i=1}^n x_i^2 - (2 dot x_i dot overline(x)) +overline(x)^2)/(n-1) \
+  s^2 &= (sum_(i=1)^n (x_i-overline(x))^2)/(n-1) \
+      &= (sum_(i=1)^n x_i^2 - (2 dot x_i dot overline(x)) +overline(x)^2)/(n-1) \
       &= ((sum x_i^2 - (sum x_i)^2) \/ n)/(n-1) \
       &= (("平方和"-"和的平方") \/ n) / (n-1)
   $
@@ -693,11 +693,11 @@
   $
 
   $
-    sigma_A^2 &= 1/N sum_{i=1}^6 (x_i-mu)^2 \
+    sigma_A^2 &= 1/N sum_(i=1)^6 (x_i-mu)^2 \
       &= ((-9)^2+3^2+(-1)^2+1^2+9^2+(-3)^2)/6 \
       &= 30.33 \
     \
-    sigma_B^2 &= 1/N sum_{i=1}^6 (x_i-mu)^2 \
+    sigma_B^2 &= 1/N sum_(i=1)^6 (x_i-mu)^2 \
       &= (11^2+(-5)^2+(-1)^2+11^2+(-1)^2+(-15)^2)/6 \
       &= 82.33
   $
@@ -1002,3 +1002,98 @@
   + 峰度係數 < 3，表示分佈呈現低闊峰
 
 #comment[若用統計軟體運算 (SAS, SPSS…) 內部公式，為了和 *偏態一致性*，因此 $-3$。]
+
+= 兩變數線性關係之測量數/值
+
+- 目的
+  - 雙變數（身高、體重）資料，在進行研究調查時，常需探究變數間的 ==關聯性==。
+  - 故使用量化指標，來表示兩組數據間 #highlight[*線性* 關係] 的 #highlight[*強弱*] 與 #highlight[*方向*]。
+
+== 共變異數
+
+/ 共: 兩個變數
+
+#formula[
+  *母體共變異數*
+
+  Based on 母體變異數 (@母體變異數).
+
+  $
+  "COV"(x, y) = sigma_(X Y) = (sum_(i=1)^N (x_i-mu_x)(y_i-mu_y))/N
+  $ <母體共變異數>
+]
+
+#formula[
+  *樣本共變異數*
+
+  Based on 樣本變異數 (@樣本變異數).
+
+  $
+  "COV"(x, y) = s_(X Y) &= (sum_(i=1)^N (x_i-overline(x))(y_i-overline(y)))/(n-1) \
+  &= bold(sum x y - (sum x sum y)/n)/(n-1)
+  $ <樣本共變異數>
+
+  推導過程：
+
+  $
+  "COV"(x, y) &= (sum_(i=1)^N (x_i-overline(x))(y_i-overline(y)))/(n-1) \
+      &= (sum_(i=1)^N (x_i y_i - x_i overline(y) - overline(x) y_i + overline(x) overline(y)))/(n-1) \
+      &=^"展開" (sum x y - overline(y) sum x - overline(x) sum y + n overline(x) overline(y))/(n-1)
+  $
+
+  已知：
+  $
+  (x_1+x_2+dots+x_n)/n = overline(x) \
+  => sum_(i=1)^n x_i = n overline(x)
+  $
+
+  $
+  (y_1+y_2+dots+y_n)/n = overline(y) \
+  => sum_(i=1)^n y_i = n overline(y)
+  $
+
+  故：
+
+  $
+  "COV"(x, y) &= 1/(n-1) [sum(x y) - n overline(x) overline(y) - n overline(x) overline(y) + n overline(x) overline(y)] \
+      &= 1/(n-1) [sum(x y) - n overline(x) overline(y)] \
+      &= 1/(n-1) [sum(x y) - n (sum x)/n (sum y)/n ] \
+      &= sum(x y) - (sum x sum y)/n
+  $
+]
+
+其正負數可以用來表示「兩個數字之間，是否一致性地同方向變動，或以相反方向變動。」
+
+- $"COV"(x, y) > 0$ $=>$ 正相關。
+- $"COV"(x, y) < 0$ $=>$ 負相關。
+- $"COV"(x, y) = 0$ $=>$ 無線性相關或由線相關。
+
+#question("Example 3.31", <ex3.31>, ("樣本共變異數",))[
+  wip
+][
+  採用公式：@樣本共變異數
+
+  $
+  "COV"(x, y) = bold(sum x y - (sum x sum y)/n)/(n-1)
+  $
+
+  #table(
+    columns: (1fr, 1fr, 1fr, 1fr),
+    [*月份*], [*$x_i$*], [*$y_i$*], [*$x_i y_i$*],
+    [1], [4], [40], [160],
+    [2], [4], [50], [200],
+    [3], [6], [50], [300],
+    [4], [5], [60], [300],
+    [5], [3], [40], [120],
+    [6], [6], [60], [360],
+    [7], [2], [40], [80],
+    [8], [3], [30], [90],
+    [*sum*], [*33*], [*370*], [*1610*]
+  )
+
+  Therefore,
+
+  $
+  "COV"(x, y) = 1/(8-1)[1610 - (33 times 370)/8] approx 11.964
+  $
+]
