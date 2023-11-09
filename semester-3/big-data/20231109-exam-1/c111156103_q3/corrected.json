@@ -1,0 +1,13 @@
+[
+  {
+    "name": "lin",
+    "organize": ["nkust", "IC", "MEIA"],
+    "skills": ["python", "web", "mobile"]
+  },
+  {
+    "name": "chen",
+    "school": "ncku",
+    "100": "cce",
+    "skills": ["nosql", "probability", "git"]
+  }
+]

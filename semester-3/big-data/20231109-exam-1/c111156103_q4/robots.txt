@@ -1,0 +1,11 @@
+# For all crawlers, files with .pdf extension are disallowed.
+User-agent: *
+Disallow: /*.pdf$
+
+# For all crawlers, the directory "private" is disallowed.
+User-agent: *
+Disallow: /private/
+
+# For "grapeshot" crawler, the directory "/private/read" is allowed.
+User-agent: grapeshot
+Allow: /private/read/
