@@ -105,3 +105,27 @@ dist
 
 # macOS
 .DS_Store
+semester-3/big-data/20231030-homework-1/.python-version
+semester-3/big-data/20231030-homework-1/pyproject.toml
+semester-3/big-data/20231030-homework-1/README.md
+semester-3/big-data/20231030-homework-1/requirements-dev.lock
+semester-3/big-data/20231030-homework-1/requirements.lock
+semester-3/big-data/20231030-homework-1/.idea/.gitignore
+semester-3/big-data/20231030-homework-1/.idea/20231030-homework-1.iml
+semester-3/big-data/20231030-homework-1/.idea/misc.xml
+semester-3/big-data/20231030-homework-1/.idea/modules.xml
+semester-3/big-data/20231030-homework-1/.idea/vcs.xml
+semester-3/big-data/20231030-homework-1/.idea/inspectionProfiles/profiles_settings.xml
+semester-3/big-data/20231030-homework-1/src/homework1/__init__.py
+semester-3/big-data/20231030-homework-1/src/homework1/config.py
+semester-3/big-data/20231030-homework-1/src/homework1/fetcher.py
+semester-3/big-data/20231030-homework-1/src/homework1/formats.py
+semester-3/big-data/20231030-homework-1/src/homework1/normalize.py
+semester-3/big-data/20231030-homework-1/src/homework1/__pycache__/__init__.cpython-312.pyc
+semester-3/big-data/20231030-homework-1/src/homework1/__pycache__/formats.cpython-312.pyc
+semester-3/big-data/20231030-homework-1/src/homework1/__pycache__/normalize.cpython-312.pyc
+semester-3/big-data/20231030-homework-1/src/homework1/formats/csv.py
+semester-3/big-data/20231030-homework-1/src/homework1/tests/formats_test.py
+semester-3/big-data/20231030-homework-1/src/homework1/tests/normalize_test.py
+semester-3/big-data/20231030-homework-1/src/homework1/tests/__pycache__/formats_test.cpython-312.pyc
+semester-3/big-data/20231030-homework-1/src/homework1/tests/__pycache__/normalize_test.cpython-312.pyc
