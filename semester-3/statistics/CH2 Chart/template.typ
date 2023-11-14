@@ -7,7 +7,7 @@
   // Set the document's basic properties.
   set document(author: authors, title: title)
   set page(numbering: "1", number-align: center)
-  set text(font: "Noto Serif CJK TC", lang: "zh", region: "TW", size: 14pt)
+  set text(font: "Noto Serif TC", lang: "zh", region: "TW", size: 14pt)
   set heading(numbering: "1.1")
 
   show heading: it => [
@@ -42,7 +42,7 @@
     inset: 12pt,
   )[
     #set text(font: "Fira Sans", fill: luma(30))
-    
+
     #block(
       fill: luma(210),
       inset: 16pt,
