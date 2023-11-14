@@ -19,7 +19,7 @@
                     break;
                 case 'Expertise':
                     $el.addEventListener("click", () => {
-                        updatePromptText("coding, l10n, design, ???")
+                        alert("coding, l10n, design, ???")
                     });
                     break;
                 case 'Click me':

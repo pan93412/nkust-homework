@@ -48,6 +48,30 @@ def redirect_example():
     )
 
 
+@app.route("/redirect/1")
+def redirect_simple_example_01():
+    time.sleep(1)
+    return redirect("/redirect/2")
+
+
+@app.route("/redirect/2")
+def redirect_simple_example_02():
+    time.sleep(1)
+    return redirect("/redirect/3")
+
+
+@app.route("/redirect/3")
+def redirect_simple_example_03():
+    time.sleep(1)
+    return redirect("/redirect/4")
+
+
+@app.route("/redirect/4")
+def redirect_simple_example_04():
+    time.sleep(1)
+    return redirect("https://google.com")
+
+
 @app.route("/example")
 def example():
     return render_template('static.html')
