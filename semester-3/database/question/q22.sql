@@ -6,7 +6,7 @@ select
     employee.EmpName as 姓名,
     sum(orderdetail.Qty * orderdetail.Discount * product.UnitPrice) as 業績總額
 from dept 	join (employee) using (DeptId)
-			join (salesorder) using (EmpId)
+            join (salesorder) using (EmpId)
             join (orderdetail) using (OrderId)
             join (product) using (ProdID)
 where employee.MonthSalary between 30000 and 50000
