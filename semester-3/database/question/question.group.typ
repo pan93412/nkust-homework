@@ -17,7 +17,7 @@
 #let get_question(id: str) = [
   *Input*
 
-  #raw(lower(read(id+".sql")), block: true, lang: "sql")
+  #raw(lower(read(id+".sql")).replace("    ", "\t"), block: true, lang: "sql")
 
   *Output*
 
