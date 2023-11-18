@@ -1,30 +1,25 @@
 import datetime
-from typing import Iterable
-
-from .news import News, NewsList
+from typing import Any
 
 
 class Response:
     """
-    The response of the news crawler.
+    The response wrapper.
 
     Attributes:
         date: The date when this crawl is executed.
-        news: The news list.
+        other: The other dict that will be flatten.
     """
 
     date: datetime.date
-    news: list[News]
+    other: dict[str, Any]
 
-    def __init__(self):
+    def __init__(self, other: dict[str, Any]):
         self.date = datetime.date.today()
-        self.news = []
+        self.other = other
 
-    def add_from_iterator(self, iterator: Iterable[News]) -> None:
-        """
-        Add news from an iterator.
-
-        Args:
-            iterator: An iterator with news entries.
-        """
-        self.news.extend(iterator)
+    def to_dict(self):
+        return {
+            "date": self.date.strftime("%Y/%m/%d"),
+            **self.other,
+        }

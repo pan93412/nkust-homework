@@ -2,13 +2,12 @@ from typing import TypeVar, Callable, Type
 
 import httpx
 
-from hw2.executor.decl import ExecutorDecl
 from hw2.extractor.extractor import Extractor
 
 R = TypeVar("R")
 
 
-class Executor(ExecutorDecl):
+class Executor:
     def __init__(self, extractor: Type[Extractor]):
         self.client = httpx.Client()
         self.extractor_class = extractor

@@ -1,11 +1,14 @@
 import cgi
 from abc import ABC, abstractmethod
+from typing import TYPE_CHECKING
 
 import httpx
-import parsel
+from selectolax.lexbor import LexborNode, LexborHTMLParser
 
-from hw2.executor.decl import ExecutorDecl
 from hw2.structures import NewsList
+
+if TYPE_CHECKING:
+    from hw2.executor import Executor
 
 
 class Extractor(ABC):
@@ -18,11 +21,11 @@ class Extractor(ABC):
 
     content: bytes
     headers: httpx.Headers
-    executor: ExecutorDecl
+    executor: "Executor"
 
     def __init__(
         self,
-        executor: ExecutorDecl,
+        executor: "Executor",
         content: bytes,
         headers: httpx.Headers | None = None,
     ):
@@ -33,7 +36,7 @@ class Extractor(ABC):
         self.headers = headers
         self.executor = executor
 
-    def _selector(self) -> parsel.Selector:
+    def _selector(self) -> LexborNode:
         content_type, options = cgi.parse_header(self.headers["content-type"])
         encoding = options.get("charset", "utf-8")
 
@@ -41,12 +44,16 @@ class Extractor(ABC):
             raise Exception(f"unsupported content type: {content_type}")
 
         content = self.content.decode(encoding)
-        return parsel.Selector(content)
+        return LexborHTMLParser(content).root or LexborNode()
 
     @classmethod
     def description(cls) -> str:
-        pass
+        return ""
 
     @abstractmethod
     def extract_news(self) -> NewsList:
+        pass
+
+    @abstractmethod
+    def extract_news_content(self) -> str:
         pass

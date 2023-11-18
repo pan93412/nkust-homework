@@ -10,7 +10,7 @@ class News:
     seq: int
     title: str
     content: str
-    date: datetime.date
+    date: datetime
 
 
 class NewsList:
@@ -21,7 +21,7 @@ class NewsList:
         self._counter = counter_class()
         self._news = []
 
-    def add(self, title: str, content: str, date: datetime.date):
+    def add(self, title: str, content: str, date: datetime):
         self._news.append(News(self._counter.next(), title, content, date))
 
     def __iter__(self):
