@@ -1,3 +1,4 @@
+import asyncio
 from datetime import datetime
 from typing import Awaitable
 
@@ -28,6 +29,10 @@ class EpageNewsExtractor(Extractor):
         # News is stored in `mbox`.
         mbox = selector.css(NEWS_BOX_SELECTOR)
 
+        title_text_queue: list[str] = [] * len(mbox)
+        date_queue: list[datetime] = [] * len(mbox)
+        content_queue: list[Awaitable[str]] = [] * len(mbox)
+
         for news in mbox:
             title = news.css_first(NEWS_TITLE_SELECTOR)
             date = news.css_first(NEWS_DATE_SELECTOR)
@@ -40,16 +45,19 @@ class EpageNewsExtractor(Extractor):
             if title_url is None:
                 continue
 
-            content = await self.executor.execute(
-                httpx.Request(method="GET", url=title_url),
-                FnDescriber[[Extractor], Awaitable[str]](lambda extractor: extractor.extract_news_content(), "Extract news content"),
+            title_text_queue.append(title_text)
+            date_queue.append(plain_date_to_datetime_date(date.text()))
+            content_queue.append(
+                self.executor.execute(
+                    httpx.Request(method="GET", url=title_url),
+                    FnDescriber[[Extractor], Awaitable[str]](lambda extractor: extractor.extract_news_content(), "Extract news content"),
+                )
             )
 
-            nl.add(
-                title_text,
-                content,
-                plain_date_to_datetime_date(date.text()),
-            )
+        # gather the response
+        response = await asyncio.gather(*content_queue)
+        for title_text, date, content in zip(title_text_queue, date_queue, response):
+            nl.add(title_text, content, date)
 
         return nl
 
