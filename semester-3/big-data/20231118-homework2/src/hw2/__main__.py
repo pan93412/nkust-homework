@@ -28,7 +28,7 @@ def new_parser():
 def visualize_news_list(news_list: NewsList) -> None:
     for news in news_list:
         print(f"\x1b[1m#{news.seq} | \x1b[33m{news.title}\x1b[0m")
-        print(f"{news.date}")
+        print(f"{news.date.date().isoformat()}")
         print("\n".join(map(lambda line: "\t" + line, news.content.split("\n"))))
         print("\n\n")
 

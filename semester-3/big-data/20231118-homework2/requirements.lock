@@ -15,6 +15,7 @@ httpcore==1.0.2
 httpx==0.25.1
 idna==3.4
 jmespath==1.0.1
+loguru==0.7.2
 lxml==4.9.3
 packaging==23.2
 parsel==1.8.1

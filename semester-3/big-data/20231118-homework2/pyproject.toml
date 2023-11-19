@@ -9,6 +9,7 @@ dependencies = [
     "httpx>=0.25.1",
     "parsel>=1.8.1",
     "selectolax>=0.3.17",
+    "loguru>=0.7.2",
 ]
 readme = "README.md"
 requires-python = ">= 3.8"

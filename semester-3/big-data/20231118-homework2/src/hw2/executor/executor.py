@@ -1,6 +1,7 @@
 from typing import TypeVar, Callable, Type
 
 import httpx
+from loguru import logger
 
 from hw2.extractor.extractor import Extractor
 
@@ -22,6 +23,7 @@ class Executor:
         return response
 
     def execute(self, request: httpx.Request, command: Callable[[Extractor], R]) -> R:
+        logger.debug("Execute (using command '{}'): -> [{}] {}", command, request.method, request.url)
         response = self.get_response(request)
         extractor = self.new_extractor(response.content, response.headers)
 
