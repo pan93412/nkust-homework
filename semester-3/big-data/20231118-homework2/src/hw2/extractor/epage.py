@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from utils.describefn import FnDescriber1
+from utils import FnDescriber
 
 from .extractor import Extractor
 from hw2.structures import NewsList, IncrementalCounter
@@ -41,7 +41,7 @@ class EpageNewsExtractor(Extractor):
 
             content = self.executor.execute(
                 httpx.Request(method="GET", url=title_url),
-                FnDescriber1[Extractor, str](lambda extractor: extractor.extract_news_content(), "Extract news content"),
+                FnDescriber[[Extractor], str](lambda extractor: extractor.extract_news_content(), "Extract news content"),
             )
 
             nl.add(

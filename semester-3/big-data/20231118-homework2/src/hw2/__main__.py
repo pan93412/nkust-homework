@@ -1,5 +1,4 @@
 import argparse
-from typing import Callable
 
 import httpx
 from crawler import Flow
@@ -7,6 +6,7 @@ from extractor import extractors
 from extractor.extractor import Extractor
 from serializer import serializers
 from structures.news import NewsList
+from utils import FnDescriber
 from wrapper.news_list import NewsListWrapper
 
 
@@ -43,9 +43,7 @@ def main():
 
     match args.method:
         case "news":
-            method: Callable[
-                [Extractor], NewsList
-            ] = lambda extractor: extractor.extract_news()
+            method = FnDescriber[[Extractor], NewsList](lambda extractor: extractor.extract_news(), "Extract news")
 
             flow = (
                 # todo: dynamic type
