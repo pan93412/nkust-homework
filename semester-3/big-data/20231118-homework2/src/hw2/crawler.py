@@ -1,10 +1,11 @@
-from typing import Callable, Generic, Type, TypeVar
+from typing import Awaitable, Callable, Generic, Type, TypeVar
 
 import httpx
 from executor import Executor
 from extractor import Extractor
 from serializer.serializer import Serializer
 from structures.response import Response
+from utils.fn_describer import FnDescriber
 from wrapper.wrapper import Wrapper
 
 V = TypeVar("V")
@@ -16,7 +17,7 @@ class Flow(Generic[V, O]):
 
     _executor: Executor | None
     _request: httpx.Request | None
-    _execute_fn: Callable[[Extractor], Response] | None
+    _execute_fn: Callable[[Extractor], Awaitable[Response]] | None
     _display: list[Callable[[V], None]]
 
     def __init__(self) -> None:
@@ -34,20 +35,20 @@ class Flow(Generic[V, O]):
         return self
 
     def command(
-        self, command: Callable[[Extractor], V], wrapper_class: Type[Wrapper[V]]
+        self, command: Callable[[Extractor], Awaitable[V]], wrapper_class: Type[Wrapper[V]]
     ) -> "Flow[V, O]":
         wrapper = wrapper_class()
 
-        def wrapped_execute_fn(extractor: Extractor) -> Response:
+        async def wrapped_execute_fn(extractor: Extractor) -> Response:
             assert self._request
-            response = command(extractor)
+            response = await command(extractor)
 
             for fn in self._display:
                 fn(response)
 
             return wrapper.wrap(response)
 
-        self._execute_fn = wrapped_execute_fn
+        self._execute_fn = FnDescriber(wrapped_execute_fn, "Execute command in flow")
         return self
 
     def display(self, fn: Callable[[V], None]) -> "Flow[V, O]":
@@ -58,11 +59,11 @@ class Flow(Generic[V, O]):
         self._serializer = serializer()
         return self
 
-    def execute(self) -> O:
+    async def execute(self) -> O:
         assert self._request is not None
         assert self._executor is not None
         assert self._execute_fn is not None
         assert self._serializer is not None
 
-        response = self._executor.execute(self._request, self._execute_fn)
+        response = await self._executor.execute(self._request, self._execute_fn)
         return self._serializer.serialize_response(response)

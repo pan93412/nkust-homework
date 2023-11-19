@@ -1,4 +1,6 @@
 import argparse
+import asyncio
+from typing import Awaitable
 
 import httpx
 from crawler import Flow
@@ -33,7 +35,7 @@ def visualize_news_list(news_list: NewsList) -> None:
         print("\n\n")
 
 
-def main():
+async def main():
     parser = new_parser()
     args = parser.parse_args()
 
@@ -43,7 +45,7 @@ def main():
 
     match args.method:
         case "news":
-            method = FnDescriber[[Extractor], NewsList](lambda extractor: extractor.extract_news(), "Extract news")
+            method = FnDescriber[[Extractor], Awaitable[NewsList]](lambda extractor: extractor.extract_news(), "Extract news")
 
             flow = (
                 # todo: dynamic type
@@ -59,9 +61,9 @@ def main():
             raise Exception(f"Unknown method: {args.method}")
 
     with open("output." + serializers[args.format].extension(), "w") as f:
-        result = flow.execute()
+        result = await flow.execute()
         f.write(result)
 
 
 if __name__ == "__main__":
-    main()
+    asyncio.run(main())

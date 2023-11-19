@@ -1,4 +1,5 @@
 from datetime import datetime
+from typing import Awaitable
 
 from utils import FnDescriber
 
@@ -19,7 +20,7 @@ class EpageNewsExtractor(Extractor):
     def description(cls) -> str:
         return "Extracts news content from epage."
 
-    def extract_news(self) -> NewsList:
+    async def extract_news(self) -> NewsList:
         nl = NewsList(IncrementalCounter)
 
         selector = self._selector()
@@ -39,9 +40,9 @@ class EpageNewsExtractor(Extractor):
             if title_url is None:
                 continue
 
-            content = self.executor.execute(
+            content = await self.executor.execute(
                 httpx.Request(method="GET", url=title_url),
-                FnDescriber[[Extractor], str](lambda extractor: extractor.extract_news_content(), "Extract news content"),
+                FnDescriber[[Extractor], Awaitable[str]](lambda extractor: extractor.extract_news_content(), "Extract news content"),
             )
 
             nl.add(
@@ -52,7 +53,7 @@ class EpageNewsExtractor(Extractor):
 
         return nl
 
-    def extract_news_content(self) -> str:
+    async def extract_news_content(self) -> str:
         selector = self._selector()
         content = selector.css_first(NEWS_CONTENT_SELECTOR)
 

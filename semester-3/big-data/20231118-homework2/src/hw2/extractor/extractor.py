@@ -51,9 +51,9 @@ class Extractor(ABC):
         return ""
 
     @abstractmethod
-    def extract_news(self) -> NewsList:
+    async def extract_news(self) -> NewsList:
         pass
 
     @abstractmethod
-    def extract_news_content(self) -> str:
+    async def extract_news_content(self) -> str:
         pass
