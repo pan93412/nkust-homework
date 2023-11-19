@@ -10,3 +10,7 @@ class Serializer(Generic[O], ABC):
     @abstractmethod
     def serialize_response(self, response: Response) -> O:
         pass
+
+    @classmethod
+    def extension(cls) -> str:
+        return "dat"

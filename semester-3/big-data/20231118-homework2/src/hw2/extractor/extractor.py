@@ -10,7 +10,6 @@ from hw2.structures import NewsList
 if TYPE_CHECKING:
     from hw2.executor import Executor
 
-
 class Extractor(ABC):
     """
     A multifunction extractor.

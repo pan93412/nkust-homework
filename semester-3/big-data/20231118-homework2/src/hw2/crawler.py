@@ -10,31 +10,50 @@ from wrapper.wrapper import Wrapper
 V = TypeVar("V")
 O = TypeVar("O")
 
-
-class Flow(Generic[O]):
+class Flow(Generic[V, O]):
     """A flow for crawling."""
 
     _executor: Executor | None
     _request: httpx.Request | None
     _execute_fn: Callable[[Extractor], Response] | None
-    _serializer: Serializer[O] | None
+    _display: list[Callable[[V], None]]
 
-    def request(self, request: httpx.Request) -> "Flow[O]":
+    def __init__(self) -> None:
+        self._executor = None
+        self._request = None
+        self._execute_fn = None
+        self._display = []
+
+    def request(self, request: httpx.Request) -> "Flow[V, O]":
         self._request = request
         return self
 
-    def extract_with(self, extractor: Type[Extractor]) -> "Flow[O]":
+    def extract_with(self, extractor: Type[Extractor]) -> "Flow[V, O]":
         self._executor = Executor(extractor)
         return self
 
     def command(
         self, command: Callable[[Extractor], V], wrapper_class: Type[Wrapper[V]]
-    ) -> "Flow[O]":
+    ) -> "Flow[V, O]":
         wrapper = wrapper_class()
-        self._execute_fn = lambda extractor: wrapper.wrap(command(extractor))
+
+        def wrapped_execute_fn(extractor: Extractor) -> Response:
+            assert self._request
+            response = command(extractor)
+
+            for fn in self._display:
+                fn(response)
+
+            return wrapper.wrap(response)
+
+        self._execute_fn = wrapped_execute_fn
         return self
 
-    def serializer(self, serializer: Type[Serializer[O]]) -> "Flow[O]":
+    def display(self, fn: Callable[[V], None]) -> "Flow[V, O]":
+        self._display.append(fn)
+        return self
+
+    def serializer(self, serializer: Type[Serializer[O]]) -> "Flow[V, O]":
         self._serializer = serializer()
         return self
 
