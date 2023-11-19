@@ -50,7 +50,10 @@ class EpageNewsExtractor(Extractor):
             content_queue.append(
                 self.executor.execute(
                     httpx.Request(method="GET", url=title_url),
-                    FnDescriber[[Extractor], Awaitable[str]](lambda extractor: extractor.extract_news_content(), "Extract news content"),
+                    FnDescriber[[Extractor], Awaitable[str]](
+                        lambda extractor: extractor.extract_news_content(),
+                        "Extract news content",
+                    ),
                 )
             )
 

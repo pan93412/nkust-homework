@@ -45,7 +45,9 @@ async def main():
 
     match args.method:
         case "news":
-            method = FnDescriber[[Extractor], Awaitable[NewsList]](lambda extractor: extractor.extract_news(), "Extract news")
+            method = FnDescriber[[Extractor], Awaitable[NewsList]](
+                lambda extractor: extractor.extract_news(), "Extract news"
+            )
 
             flow = (
                 # todo: dynamic type
@@ -60,7 +62,7 @@ async def main():
         case _:
             raise Exception(f"Unknown method: {args.method}")
 
-    with open("output." + serializers[args.format].extension(), "w") as f:
+    with open("output." + serializer.extension(), "w") as f:
         result = await flow.execute()
         f.write(result)
 

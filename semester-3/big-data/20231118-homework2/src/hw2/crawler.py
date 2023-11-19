@@ -35,7 +35,9 @@ class Flow(Generic[V, O]):
         return self
 
     def command(
-        self, command: Callable[[Extractor], Awaitable[V]], wrapper_class: Type[Wrapper[V]]
+        self,
+        command: Callable[[Extractor], Awaitable[V]],
+        wrapper_class: Type[Wrapper[V]],
     ) -> "Flow[V, O]":
         wrapper = wrapper_class()
 

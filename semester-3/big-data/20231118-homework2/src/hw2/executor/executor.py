@@ -25,8 +25,15 @@ class Executor:
 
         return response
 
-    async def execute(self, request: httpx.Request, command: Callable[[Extractor], Awaitable[R]]) -> R:
-        logger.debug("Execute (using command '{}'): -> [{}] {}", command, request.method, request.url)
+    async def execute(
+        self, request: httpx.Request, command: Callable[[Extractor], Awaitable[R]]
+    ) -> R:
+        logger.debug(
+            "Execute (using command '{}'): -> [{}] {}",
+            command,
+            request.method,
+            request.url,
+        )
         response = await self.get_response(request)
         extractor = self.new_extractor(response.content, response.headers)
 
@@ -43,9 +50,7 @@ class Executor:
 
         return self
 
-    async def __aexit__(
-        self, *args: Any, **kwargs: Any
-    ) -> bool | None:
+    async def __aexit__(self, *args: Any, **kwargs: Any) -> bool | None:
         client = self._get_client()
 
         await client.aclose()
