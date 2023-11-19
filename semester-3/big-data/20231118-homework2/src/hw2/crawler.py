@@ -65,5 +65,6 @@ class Flow(Generic[V, O]):
         assert self._execute_fn is not None
         assert self._serializer is not None
 
-        response = await self._executor.execute(self._request, self._execute_fn)
-        return self._serializer.serialize_response(response)
+        async with self._executor as e:
+            response = await e.execute(self._request, self._execute_fn)
+            return self._serializer.serialize_response(response)
