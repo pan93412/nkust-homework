@@ -37,16 +37,15 @@ def main():
     parser = new_parser()
     args = parser.parse_args()
 
-
     request = httpx.Request(method="GET", url=args.url)
     extractor = extractors[args.type]
     serializer = serializers[args.format]
 
     match args.method:
         case "news":
-            method: Callable[[Extractor], NewsList] = (
-                lambda extractor: extractor.extract_news()
-            )
+            method: Callable[
+                [Extractor], NewsList
+            ] = lambda extractor: extractor.extract_news()
 
             flow = (
                 # todo: dynamic type
@@ -60,7 +59,6 @@ def main():
 
         case _:
             raise Exception(f"Unknown method: {args.method}")
-
 
     with open("output." + serializers[args.format].extension(), "w") as f:
         result = flow.execute()

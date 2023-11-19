@@ -10,6 +10,7 @@ from wrapper.wrapper import Wrapper
 V = TypeVar("V")
 O = TypeVar("O")
 
+
 class Flow(Generic[V, O]):
     """A flow for crawling."""
 
