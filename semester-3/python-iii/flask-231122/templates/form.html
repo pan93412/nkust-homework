@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Form - Submit</title>
+</head>
+<body>
+<h2>POST</h2>
+<form action="/submit" method="post">
+    <div>
+        <label for="id--get">學號:</label>
+        <input type="text" name="id" id="id--get">
+        <label for="name--get">姓名:</label>
+        <input type="text" name="name" id="name--get">
+        <input type="submit">
+    </div>
+</form>
+
+<h2>GET</h2>
+<form action="/submit" method="get">
+    <div>
+        <label for="id--post">學號:</label>
+        <input type="text" name="id" id="id--post">
+        <label for="name--post">姓名:</label>
+        <input type="text" name="name" id="id--post">
+        <input type="submit">
+    </div>
+</form>
+</body>
+</html>

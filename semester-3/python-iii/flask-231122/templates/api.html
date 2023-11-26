@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>API</title>
+
+    <!-- 核心：Tocas UI -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocas/4.2.5/tocas.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tocas/4.2.5/tocas.min.js"></script>
+
+    <!-- 字體：Noto Sans TC -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&display=swap" rel="stylesheet"/>
+</head>
+<body>
+<main class="ts-container">
+    <section class="ts-content">
+        <h2>Api:Get – appInfo</h2>
+        <button class="ts-button" id="get-btn">GET</button>
+    </section>
+
+    <section class="ts-content">
+        <h2>Api:Post – appInfo</h2>
+        <form id="app-data-form">
+            <div class="ts-wrap">
+                {% for key in data %}
+                    <div class="ts-input is-start-labeled">
+                        <label class="label" style="min-width: 72px" for="message-{{ key }}">{{ key | capitalize }}</label>
+                        <input type="text" name="{{ key }}" id="message-{{ key }}">
+                    </div>
+                {% endfor %}
+                <div class="ts-input">
+                    <button disabled class="ts-button is-disabled" type="submit">POST</button>
+                </div>
+            </div>
+        </form>
+    </section>
+</main>
+
+<script>
+    const appInfoEndpoint = '/api/app-info';
+
+    const $getBtn = document.getElementById('get-btn');
+    const $appDataForm = document.getElementById('app-data-form');
+    const $submitBtn = $appDataForm.querySelector('button[type="submit"]');
+
+    function renderData(data) {
+        for (const [key, value] of Object.entries(data)) {
+            document.getElementById(`message-${key}`).value = value;
+        }
+    }
+
+    $getBtn.onclick = async () => {
+        const response = await fetch(appInfoEndpoint)
+            .then(response => response.json());
+
+        renderData(response);
+    }
+
+    // if any value changed, we enable the 'submit' button
+    $appDataForm.querySelectorAll('input').forEach($input => {
+        $input.oninput = () => {
+            $submitBtn.disabled = false;
+            $submitBtn.classList.remove('is-disabled');
+        }
+    });
+
+    $appDataForm.onsubmit = async (event) => {
+        event.preventDefault();
+
+        const formData = new FormData($appDataForm);
+        const response = await fetch(appInfoEndpoint, {
+            method: 'POST',
+            body: formData
+        }).then(response => response.json());
+
+        $submitBtn.disabled = true;
+        $submitBtn.classList.add('is-disabled');
+        renderData(response);
+    }
+</script>
+</body>
+</html>
