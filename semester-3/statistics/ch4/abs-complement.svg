@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 11.0, SVG Export Plug-In  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN"    "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd" [
+	<!ENTITY ns_flows "http://ns.adobe.com/Flows/1.0/">
+	<!ENTITY ns_svg "http://www.w3.org/2000/svg">
+	<!ENTITY ns_xlink "http://www.w3.org/1999/xlink">
+]>
+<svg  xmlns="&ns_svg;" xmlns:xlink="&ns_xlink;" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+	 width="270" height="193" viewBox="4.917 4.146 270 193" xml:space="preserve">
+	<defs>
+	</defs>
+	<g>
+		<rect x="5.705" y="5.374" fill="#D4D4D4" stroke="#000000" width="268.538" height="190.546"/> 
+		<circle fill="#FBAEFF" stroke="#000000" cx="92.558" cy="100.646" r="77.105"/> 
+		<text transform="matrix(1 0 0 1 44.7007 66.9688)"><tspan x="0" y="0" font-family="'Verdana'" font-size="23">A</tspan></text>
+		<text transform="matrix(1 0 0 1 244.5518 35.7275)"><tspan x="0" y="0" font-family="'Verdana'" font-size="23">U</tspan></text>
+		<g>
+			<g>
+				<text transform="matrix(1 0 0 1 217.5215 173.0986)" font-family="'Verdana'" font-size="23">A</text>
+				<text transform="matrix(0.583 0 0 0.583 233.8789 165.1299)" font-family="'Verdana'" font-size="23">C</text>
+			</g>
+		</g>
+		<rect fill="none" width="279.948" height="201.293"/> 
+	</g>
+</svg>
