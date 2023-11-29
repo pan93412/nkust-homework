@@ -55,7 +55,7 @@ $ rye sync
 
 若沒有 `rye`，則得自行根據 `pyproject.toml` 的定義安裝套件和 Python 3.12。
 
-其執行檔位於 `src/hw2`，故命令使用 `rye run python3 src/hw2` 開頭。下述命令可以抓取高科大官網「焦點新聞-頭條」的新聞標題、內容、發布時間。
+其執行檔位於 `src/hw2`，故命令使用 `rye run python3 src/hw2` 開頭。下述命令可以抓取高科大官網「焦點新聞-頭條」的新聞標題、內容、發布時間，並分別呈現於終端機和儲存至 `output.json`（可用引數修改）。
 
 ```shell-unix-generic
 $ rye run python3 src/hw2 epage "https://www.nkust.edu.tw/p/403-1000-1363-1.php?Lang=zh-tw"
@@ -65,9 +65,7 @@ $ rye run python3 src/hw2 epage "https://www.nkust.edu.tw/p/403-1000-1363-1.php?
 
 = Tech stack
 
-本專案使用 Python 3.12 開發，並使用 `httpx`（`requests` 的改良版本，支援非同步 `asyncio` 函式）下載網頁，使用 `selectolax`（`beautifulsoup` 的極高效能頂替）作為擷取網頁內容的工具，另使用 `loguru` 輸出美化過的日誌。
-
-程式碼風格部分，是使用 `black` 格式化程式碼。
+本專案使用 Python 3.12 開發，並使用 `httpx`（`requests` 的改良版本，支援非同步 `asyncio` 函式）下載網頁，使用 `selectolax`（`beautifulsoup` 的極高效能頂替）作為擷取網頁內容的工具，另使用 `loguru` 輸出美化過的日誌。程式碼風格部分，是使用 `black` 格式化程式碼。
 
 = Architecture
 
@@ -84,9 +82,7 @@ Executor、Extractor、Serializer 和 Wrapper 均由一個 Abstract Class 和一
 
 另外本專案附帶一個以 `argparse` 為基礎的 CLI 工具，將 `Flow` 以命令列的方式呈現，如 #link(<usage>)[Usage] 所示。
 
-= Features
-
-== Performance
+= Performance
 
 得益於 `httpx` 提供的 `async` client，以及 `selectolax` 以 C++ 語言為基礎的 CSS 選擇器，本專案的效能非常優異。
 
@@ -97,6 +93,8 @@ Executor、Extractor、Serializer 和 Wrapper 均由一個 Abstract Class 和一
 ]
 
 可發現其效率較原本快約 4.83 倍。原始回傳結果請參考 @raw-data-perf。
+
+= Features
 
 == Type-safe structure
 
@@ -177,6 +175,16 @@ Executor、Extractor、Serializer 和 Wrapper 均由一個 Abstract Class 和一
 考慮到 Metadata 的固定性，因此可以將固定的部分做成一個 `Response` 類別，並將 `data` 作為參數傳入，並使用 `to_dict()` 製造 Response，實作可參考 `structures/response.py`。
 
 另外 `seq` 是使用 per-session 的  `InccrementalCounter` 類別產生的。每當呼叫 `next()` 時，會回傳一個新的遞增數字。
+
+= Conclusion & Opinion
+
+上一次的作業用了直覺的方式來寫爬蟲，這次嘗試造了一個爬蟲「框架」，並且試驗了更前衛或更適合多網頁爬取的技術，如 `asyncio`、`selectolax`、`rye` 等等。
+
+這次寫得這麼複雜，確實很浪費時間 XD 不過試著學習像是 `scrapy` 這種框架的實作，對於自身了解基礎技術的能力有很大的幫助。另外，這次的作業也讓我更加熟悉 `asyncio` 的使用，以及深化對於 CSS Selector 的知識。
+
+除此之外，試驗上課較少涉及的技術（如 `httpx` 的 Asynchronous Client）也是很有趣的事情，雖然對於爬單張網頁沒有太大的差異，但就如本例爬新聞內文，Async 使得爬取可以並行完成，進而提高效率（4.83x 的速度提升！）
+
+下次的作業也不確定會嘗試什麼樣的撰寫風格，但希望都能像這份作業一樣可以學到新東西。
 
 = Appendix
 
