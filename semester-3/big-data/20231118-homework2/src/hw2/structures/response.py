@@ -20,6 +20,6 @@ class Response:
 
     def to_dict(self):
         return {
-            "date": self.date.strftime("%Y/%m/%d"),
+            "date": self.date.strftime("%Y.%m.%d"),
             **self.other,
         }
