@@ -14,15 +14,33 @@ from wrapper.news_list import NewsListWrapper
 
 def new_parser():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--method", type=str, choices=["news"], default="news")
+    parser.add_argument(
+        "--method",
+        type=str,
+        choices=["news"],
+        default="news",
+        help="the extract method of this page",
+    )
     parser.add_argument(
         "--format",
         type=str,
         choices=[key for key in serializers.keys()],
+        help="the output format of the result",
         default="json",
     )
-    parser.add_argument("type", type=str, choices=[key for key in extractors.keys()])
-    parser.add_argument("url", type=str)
+    parser.add_argument(
+        "--out-prefix",
+        type=str,
+        default="output",
+        help="the prefix of output file"
+    )
+    parser.add_argument(
+        "type",
+        type=str,
+        choices=[key for key in extractors.keys()],
+        help="the generator type of this page"
+    )
+    parser.add_argument("url", type=str, help='the page url to crawl')
 
     return parser
 
@@ -62,7 +80,7 @@ async def main():
         case _:
             raise Exception(f"Unknown method: {args.method}")
 
-    with open("output." + serializer.extension(), "w") as f:
+    with open(args.out_prefix + "." + serializer.extension(), "w") as f:
         result = await flow.execute()
         f.write(result)
 
