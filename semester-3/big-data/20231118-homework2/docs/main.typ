@@ -100,7 +100,7 @@ Executor、Extractor、Serializer 和 Wrapper 均由一個 Abstract Class 和一
 
 這個專案大量使用 Python 的靜態類型標示，防止錯誤參數的傳入或錯誤的回傳值，並取得更好的 IDE 和靜態分析支援。
 
-由於使用到進階靜態類型，因此需要比較新的 Python 版本（目前只在 3.12 測試）方能執行。就以`src/hw2/utils/fn_describer.py` 中的 `FnDescriber` 來說，使用新的 `ParamSpec` 泛型標記，可以的程式碼，可以做到 `__call__` 函式簽名與 `fn` 相同，同時還能加上自己的 `description`：
+由於使用到進階靜態類型，因此需要比較新的 Python 版本（目前只在 3.12 測試）方能執行。就以`src/hw2/utils/fn_describer.py` 中的 `FnDescriber` 來說，使用新的 `ParamSpec` 泛型標記，可以做到呼叫 ( `__call__`) 的函式簽名與傳入的 `fn` 函式相同，同時還能加上自己的 `description`：
 
 #figure(caption: "Usage of FnDescriber")[
   ```py
@@ -140,9 +140,9 @@ Executor、Extractor、Serializer 和 Wrapper 均由一個 Abstract Class 和一
   #image("cli-output.png")
 ]
 
-實作如下。其中 `x1b[1m` 為轉粗體；`\x1b[33m` 為轉黃色；`\x1b[0m` 為重置樣式狀態。
+實作如下。其中 `\x1b[1m` 為轉粗體；`\x1b[33m` 為轉黃色；`\x1b[0m` 為重置樣式狀態。
 
-#figure(caption: "Implementation of `visualize_news_list`")[
+#figure(caption: [Implementation of `visualize_news_list`])[
   ```py
   def visualize_news_list(news_list: NewsList) -> None:
       for news in news_list:
