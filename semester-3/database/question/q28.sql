@@ -1,9 +1,15 @@
--- 統計 2018 年各業務部門的年度業績目標。
--- 其中部門業績目標為該部門業務員的業績目標 (Quota) 中，
--- 業績目標 85) 總和。查詢結果依部門名稱排序
+-- 列出 2018 年客戶中，列出與公司交易金額為排名前十五名的客戶
+-- 列出客戶寶號 交易額 業務姓名，查詢結果以交易金額遞減排序
 
-select DeptName as 部門名稱, sum(Quota2018) as '業績目標'
-from dept   join (employee) using (DeptId)
-            join (quota) using (EmpId)
-group by DeptName
-order by DeptName;
+select
+    CustName as 客戶寶號,
+    sum(Qty * Discount * UnitPrice) as 交易額,
+    EmpName as 業務姓名
+from customer   join (salesorder) using (CustId)
+                join (employee) using (EmpId)
+                join (orderdetail) using (OrderId)
+                join (product) using (ProdId)
+where salesorder.OrderDate between '2018-01-01' and '2018-12-31'
+group by CustName, EmpName
+order by 交易額 desc
+limit 15;

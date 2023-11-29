@@ -1,14 +1,10 @@
--- 中 列出 2018 年業務部門請假最多的員工
--- 列出其部門名稱 姓名 現任職稱 目前月薪資 請假天數
+-- 列出與總經理住在同一縣市的員工姓名與職稱
+-- 不可直接寫縣市 台北市，依姓名遞增排序
 
-SELECT
-    DeptName AS 部門名稱,
-    EmpName AS 姓名,
-    JobTitle AS 現任職稱,
-    MonthSalary AS 目前月薪資,
-    SUM(leav.Days) AS 請假天數
-FROM employee JOIN (dept, leav)
-ON employee.DeptID = dept.DeptID AND employee.EmpID = leav.EmpID
-WHERE Year = 2018 AND DeptName LIKE '業務%'
-GROUP BY DeptName, EmpName, JobTitle, MonthSalary
-LIMIT 3;
+select employee.EmpName as 員工姓名, employee.JobTitle as 職稱
+from employee, employee as boss
+where boss.JobTitle = '總經理'
+    and employee.City = boss.City
+order by 員工姓名;
+
+
