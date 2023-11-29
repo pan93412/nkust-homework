@@ -47,7 +47,7 @@ o = subprocess.run(cmd_to_execute, capture_output=True)
 
 with open("output.json", "r") as output_json:
     renderred = templates.format(
-            command=cmd_to_execute,
+            command=" ".join(cmd_to_execute),
             stderr=escape_ansi(o.stderr.decode()).strip(),
             stdout=escape_ansi(o.stdout.decode()).strip(),
             json=output_json.read(),
