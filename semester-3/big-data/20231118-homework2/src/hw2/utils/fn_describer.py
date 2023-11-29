@@ -5,6 +5,11 @@ P = ParamSpec("P")
 O = TypeVar("O")
 
 
+def describe_fn(description: str) -> Callable[[Callable[P, O]], "FnDescriber[P, O]"]:
+    """The decorator of FnDescriber."""
+    return lambda fn: FnDescriber(fn, description)
+
+
 class FnDescriber(Generic[P, O]):
     def __init__(self, fn: Callable[P, O], description: str):
         self.fn = fn

@@ -5,7 +5,7 @@ from executor import Executor
 from extractor import Extractor
 from serializer.serializer import Serializer
 from structures.response import Response
-from utils.fn_describer import FnDescriber
+from utils.fn_describer import FnDescriber, describe_fn
 from wrapper.wrapper import Wrapper
 
 V = TypeVar("V")
@@ -41,6 +41,7 @@ class Flow(Generic[V, O]):
     ) -> "Flow[V, O]":
         wrapper = wrapper_class()
 
+        @describe_fn("Execute command in flow")
         async def wrapped_execute_fn(extractor: Extractor) -> Response:
             assert self._request
             response = await command(extractor)
@@ -50,7 +51,7 @@ class Flow(Generic[V, O]):
 
             return wrapper.wrap(response)
 
-        self._execute_fn = FnDescriber(wrapped_execute_fn, "Execute command in flow")
+        self._execute_fn = wrapped_execute_fn
         return self
 
     def display(self, fn: Callable[[V], None]) -> "Flow[V, O]":
