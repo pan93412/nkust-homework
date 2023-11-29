@@ -39,7 +39,7 @@
   本程式嘗試利用物件導向理念，開發流程分明、易擴充、靜態類型的 Python 爬蟲，且以 Epage（高科大官網的基礎）作為本爬蟲的首個支援站台。
 ])
 
-#outline()
+#outline(indent: auto)
 
 #v(1em)
 
@@ -78,15 +78,19 @@ $ rye run python3 src/hw2 epage "https://www.nkust.edu.tw/p/403-1000-1363-1.php?
 + Wrapper：將 `Extractor` 回傳的結構化資料，進一步轉換成通用的 `Response`，以便傳入任意 `Serializer`。
 + `Serializer`：將任意 `Response` 轉換成指定格式，如 JSON、XML、CSV 等。
 
+Executor、Extractor、Serializer 和 Wrapper 均由一個 Abstract Class 和一個 Implementation 組成——如 `EpageExtractor` 是 `Executor` 的實作。這樣方便日後加入其他類似的實作（如 YahooExtractor）同時不破壞現有的函式呼叫約定。您亦可在 `__init__.py` 註冊你的自訂實作，這樣便能在 CLI 使用。
+
 `Flow` 另外也有 `display()` 特性，本質是封裝 `Command` 並插入如 Logging 的擴充函式。
 
 另外本專案附帶一個以 `argparse` 為基礎的 CLI 工具，將 `Flow` 以命令列的方式呈現，如 #link(<usage>)[Usage] 所示。
 
-= Performance
+= Features
 
-得利於 `httpx` 提供的 `async` client，以及 `selectolax` 以 C++ 語言為基礎的 CSS 選擇器，本專案的效能非常優異。
+== Performance
 
-以下展示了使用 `async` client (commit `98239dbeb`) 前後的效能表現，使用 `hyperfine` 統計：
+得益於 `httpx` 提供的 `async` client，以及 `selectolax` 以 C++ 語言為基礎的 CSS 選擇器，本專案的效能非常優異。
+
+目前沒有 `requests` + `BeautifulSoup` 的對照組，但網頁規模偏小，HTML 解析器的改進預期不會有太過明顯的差異，不過使用 `asyncio` 函式較使用同步函式有相當大的差異。以下展示了使用 `async` client (commit `98239dbeb`) 前後的效能表現，使用 `hyperfine` 統計：
 
 #figure(caption: "Performance comparsion betwen async and old sync crawl program based on httpx.")[
   #image("comparsion.png")
@@ -94,7 +98,7 @@ $ rye run python3 src/hw2 epage "https://www.nkust.edu.tw/p/403-1000-1363-1.php?
 
 可發現其效率較原本快約 4.83 倍。原始回傳結果請參考 @raw-data-perf。
 
-= Type-safe structure
+== Type-safe structure
 
 這個專案大量使用 Python 的靜態類型標示，防止錯誤參數的傳入或錯誤的回傳值，並取得更好的 IDE 和靜態分析支援。
 
@@ -110,7 +114,6 @@ $ rye run python3 src/hw2 epage "https://www.nkust.edu.tw/p/403-1000-1363-1.php?
   # Output: Add the length of b to a.
   ```
 ]
-
 
 #figure(caption: [Type-safe `FnDescriber`])[
   ```py
@@ -130,6 +133,50 @@ $ rye run python3 src/hw2 epage "https://www.nkust.edu.tw/p/403-1000-1363-1.php?
           return self.fn(*args, **kwargs)
   ```
 ]
+
+== Beautiful CLI output
+
+本專案在「新聞資料顯示在螢幕上」上使用 ANSI 跳脫字元，將終端機輸出的新聞概覽美化，如下圖所示：
+
+#figure(caption: "Beautiful CLI output")[
+  #image("cli-output.png")
+]
+
+實作如下。其中 `x1b[1m` 為轉粗體；`\x1b[33m` 為轉黃色；`\x1b[0m` 為重置樣式狀態。
+
+#figure(caption: "Implementation of `visualize_news_list`")[
+  ```py
+  def visualize_news_list(news_list: NewsList) -> None:
+      for news in news_list:
+          print(f"\x1b[1m#{news.seq} | \x1b[33m{news.title}\x1b[0m")
+          print(f"{news.date.date().isoformat()}")
+          print("\n".join(map(lambda line: "\t" + line, news.content.split("\n"))))
+          print("\n\n")
+  ```
+]
+
+== `Response` wrapper
+
+老師預期的 JSON format 如下：
+
+#figure(caption: "Expected JSON format")[
+  #image("json-format.png")
+]
+
+可簡單將這個格式抽象成兩個部分： "Metadata" 和 "Data"。其中 "Metadata" 包含如 `date` 的屬性；而 "Data" 則是任意結構化字典。
+
+#figure(caption: "Abstracted JSON format")[
+  ```json
+  {
+    "date": "YYYY.MM.DD",
+    "<key>": "<value>",
+  }
+  ```
+]
+
+考慮到 Metadata 的固定性，因此可以將固定的部分做成一個 `Response` 類別，並將 `data` 作為參數傳入，並使用 `to_dict()` 製造 Response，實作可參考 `structures/response.py`。
+
+另外 `seq` 是使用 per-session 的  `InccrementalCounter` 類別產生的。每當呼叫 `next()` 時，會回傳一個新的遞增數字。
 
 = Appendix
 
