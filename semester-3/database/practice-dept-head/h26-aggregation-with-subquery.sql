@@ -2,4 +2,4 @@
 
 select s_no
 from s
-where status < (select avg(status) from s)
+where status > (select avg(status) from s)
