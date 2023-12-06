@@ -48,7 +48,7 @@ def calculate_bmi(weight: int, height: int) -> tuple[str, float]:
     }
 
     # weight in kg, height in cm
-    height /= 100
+    height //= 100
 
     for category, (lower, upper) in table.items():
         if lower <= weight / (height ** 2) < upper:
