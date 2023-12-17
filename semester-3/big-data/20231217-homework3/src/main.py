@@ -8,6 +8,7 @@ from selectolax.lexbor import LexborHTMLParser
 from hw3 import extract_news, migrate
 
 url = "https://www.nkust.edu.tw/p/403-1000-1363-1.php?Lang=zh-tw"
+db_filename = "nkust.db"
 
 sqlite3.register_adapter(datetime.date, lambda date: date.isoformat())
 sqlite3.register_adapter(datetime.datetime, lambda date: date.isoformat())
@@ -26,8 +27,8 @@ def main() -> None:
     logger.info("Extract news…")
     news_list = extract_news(tree)
 
-    logger.info("Putting to news.db…")
-    with sqlite3.connect("news.db") as conn:
+    logger.info("Putting to {}…", db_filename)
+    with sqlite3.connect(db_filename) as conn:
         migrate(conn)
 
         for news in news_list:
