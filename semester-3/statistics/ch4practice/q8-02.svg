@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xl="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" viewBox="884.5 511.5 533 227" width="533" height="227">
+  <defs/>
+  <metadata> Produced by OmniGraffle 7.22.4\n2023-12-14 03:25:38 +0000</metadata>
+  <g id="Canvas_1" fill="none" stroke="none" stroke-dasharray="none" stroke-opacity="1" fill-opacity="1">
+    <title>Canvas 1</title>
+    <g id="Canvas_1_Layer_1">
+      <title>Layer 1</title>
+      <g id="Graphic_44">
+        <rect x="885" y="512" width="532" height="226" fill="#ffffc0"/>
+        <rect x="885" y="512" width="532" height="226" stroke="gray" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_45">
+        <text transform="translate(1386 704)" fill="black">
+          <tspan font-family="Helvetica Neue" font-size="16" fill="black" x="0" y="15">S</tspan>
+        </text>
+      </g>
+      <g id="Graphic_46">
+        <circle cx="1077" cy="635" r="87.000139017465" fill="white"/>
+        <circle cx="1077" cy="635" r="87.000139017465" stroke="gray" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(1012.4 625.776)" fill="black">
+          <tspan font-family="Helvetica Neue" font-size="16" fill="black" x="59.416" y="15">A</tspan>
+        </text>
+      </g>
+      <g id="Graphic_47">
+        <circle cx="1197" cy="635" r="87.000139017465" fill="#ffffc0"/>
+        <circle cx="1197" cy="635" r="87.000139017465" stroke="gray" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(1132.4 625.776)" fill="black">
+          <tspan font-family="Helvetica Neue" font-size="16" fill="black" x="59.12" y="15">B</tspan>
+        </text>
+      </g>
+      <g id="Graphic_48">
+        <path d="M 1137.13 572.1294 C 1136.6194 572.61614 1136.1133 573.11026 1135.6118 573.6118 C 1101.636 607.5874 1101.636 662.6726 1135.6118 696.6482 C 1136.1133 697.14974 1136.6194 697.6439 1137.13 698.1306 C 1137.6406 697.6439 1138.1467 697.14974 1138.6482 696.6482 C 1172.624 662.6726 1172.624 607.5874 1138.6482 573.6118 C 1138.1467 573.11026 1137.6406 572.61614 1137.13 572.1294 Z" fill="white"/>
+        <path d="M 1137.13 572.1294 C 1136.6194 572.61614 1136.1133 573.11026 1135.6118 573.6118 C 1101.636 607.5874 1101.636 662.6726 1135.6118 696.6482 C 1136.1133 697.14974 1136.6194 697.6439 1137.13 698.1306 C 1137.6406 697.6439 1138.1467 697.14974 1138.6482 696.6482 C 1172.624 662.6726 1172.624 607.5874 1138.6482 573.6118 C 1138.1467 573.11026 1137.6406 572.61614 1137.13 572.1294 Z" stroke="gray" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(1120.53 616.682)" fill="black">
+          <tspan font-family="Helvetica Neue" font-size="16" fill="black" x="3.4160347" y="15">A </tspan>
+          <tspan font-family="Helvetica Neue" font-style="italic" font-size="16" fill="black" y="15">U</tspan>
+          <tspan font-family="Helvetica Neue" font-size="16" fill="black" y="15"> </tspan>
+          <tspan font-family="Helvetica Neue" font-size="16" fill="black" x="11.120035" y="33.448">B</tspan>
+        </text>
+      </g>
+    </g>
+  </g>
+</svg>

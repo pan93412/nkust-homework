@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xl="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" viewBox="257.5 -215.5 360.532 255" width="360.532" height="255">
+  <defs/>
+  <metadata> Produced by OmniGraffle 7.22.4\n2023-12-14 04:35:56 +0000</metadata>
+  <g id="Canvas_1" fill="none" stroke="none" stroke-dasharray="none" stroke-opacity="1" fill-opacity="1">
+    <title>Canvas 1</title>
+    <g id="Canvas_1_Layer_1">
+      <title>Layer 1</title>
+      <g id="Line_103">
+        <line x1="267.6849" y1="-86.2496" x2="304" y2="-72.68132" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_104">
+        <line x1="267.6849" y1="-89.7504" x2="304" y2="-103.31868" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_105">
+        <line x1="404" y1="-29" x2="440" y2="-11" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_106">
+        <line x1="404" y1="-54" x2="440" y2="-54" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_107">
+        <line x1="404" y1="-147" x2="440" y2="-165" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_108">
+        <line x1="404" y1="-122" x2="440" y2="-122" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_109">
+        <circle cx="263" cy="-88" r="5.00000798950949" fill="#ffffc0"/>
+        <circle cx="263" cy="-88" r="5.00000798950949" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_110">
+        <rect x="304" y="-147" width="100" height="50" fill="#ffffc0"/>
+        <rect x="304" y="-147" width="100" height="50" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(320.5 -143.5)" fill="black">
+          <tspan font-family="PingFang TC" font-size="16" fill="black" x="16.5" y="17">女生</tspan>
+          <tspan font-family="PingFang TC" font-size="16" fill="black" x="15.988" y="39">0.45</tspan>
+        </text>
+      </g>
+      <g id="Graphic_111">
+        <rect x="304" y="-79" width="100" height="50" fill="#ffffc0"/>
+        <rect x="304" y="-79" width="100" height="50" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(320.5 -75.5)" fill="black">
+          <tspan font-family="PingFang TC" font-size="16" fill="black" x="16.5" y="17">男生</tspan>
+          <tspan font-family="PingFang TC" font-size="16" fill="black" x="15.988" y="39">0.55</tspan>
+        </text>
+      </g>
+      <g id="Graphic_112">
+        <rect x="440" y="-79" width="100" height="50" fill="#ffffc0"/>
+        <rect x="440" y="-79" width="100" height="50" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(456.5 -75.5)" fill="black">
+          <tspan font-family="PingFang TC" font-size="16" fill="black" x="8.5" y="17">有吸菸</tspan>
+          <tspan font-family="PingFang TC" font-size="16" fill="black" x="15.988" y="39">0.45</tspan>
+        </text>
+      </g>
+      <g id="Graphic_113">
+        <rect x="440" y="-11" width="100" height="50" fill="#ffffc0"/>
+        <rect x="440" y="-11" width="100" height="50" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(456.5 3.5)" fill="black">
+          <tspan font-family="PingFang TC" font-size="16" fill="black" x="8.5" y="17">沒吸菸</tspan>
+        </text>
+      </g>
+      <g id="Graphic_114">
+        <rect x="440" y="-215" width="100" height="50" fill="#ffffc0"/>
+        <rect x="440" y="-215" width="100" height="50" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(456.5 -211.5)" fill="black">
+          <tspan font-family="PingFang TC" font-size="16" fill="black" x="8.5" y="17">有吸菸</tspan>
+          <tspan font-family="PingFang TC" font-size="16" fill="black" x="15.988" y="39">0.25</tspan>
+        </text>
+      </g>
+      <g id="Graphic_115">
+        <rect x="440" y="-147" width="100" height="50" fill="#ffffc0"/>
+        <rect x="440" y="-147" width="100" height="50" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(456.5 -132.5)" fill="black">
+          <tspan font-family="PingFang TC" font-size="16" fill="black" x="8.5" y="17">沒吸菸</tspan>
+        </text>
+      </g>
+      <g id="Graphic_122">
+        <text transform="translate(564.104 -199.224)" fill="black">
+          <tspan font-family="Helvetica Neue" font-size="16" fill="black" x="0" y="15">0.1125</tspan>
+        </text>
+      </g>
+      <g id="Graphic_123">
+        <text transform="translate(564.104 -63.224)" fill="black">
+          <tspan font-family="Helvetica Neue" font-size="16" fill="black" x="0" y="15">0.2475</tspan>
+        </text>
+      </g>
+    </g>
+  </g>
+</svg>

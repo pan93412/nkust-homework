@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xl="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" viewBox="87.5 793.5 679 227" width="679" height="227">
+  <defs/>
+  <metadata> Produced by OmniGraffle 7.22.4\n2023-12-14 03:34:44 +0000</metadata>
+  <g id="Canvas_1" fill="none" stroke="none" stroke-dasharray="none" stroke-opacity="1" fill-opacity="1">
+    <title>Canvas 1</title>
+    <g id="Canvas_1_Layer_1">
+      <title>Layer 1</title>
+      <g id="Graphic_60">
+        <rect x="88" y="794" width="678" height="226" fill="#ffffc0"/>
+        <rect x="88" y="794" width="678" height="226" stroke="gray" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_61">
+        <text transform="translate(693 986)" fill="black">
+          <tspan font-family="Helvetica Neue" font-size="16" fill="black" x="0" y="15">S</tspan>
+        </text>
+      </g>
+      <g id="Graphic_62">
+        <circle cx="201" cy="907" r="113.000180562914" fill="white"/>
+        <circle cx="201" cy="907" r="113.000180562914" stroke="gray" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(115.6 897.776)" fill="black">
+          <tspan font-family="Helvetica Neue" font-size="16" fill="black" x="80.216" y="15">A</tspan>
+        </text>
+      </g>
+      <g id="Graphic_63">
+        <circle cx="427" cy="907" r="113.000180562914" fill="#ffffc0"/>
+        <circle cx="427" cy="907" r="113.000180562914" stroke="gray" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(341.6 897.776)" fill="black">
+          <tspan font-family="Helvetica Neue" font-size="16" fill="black" x="79.92" y="15">B</tspan>
+        </text>
+      </g>
+      <g id="Graphic_65">
+        <circle cx="653" cy="907" r="113.000180562914" fill="#ffffc0"/>
+        <circle cx="653" cy="907" r="113.000180562914" stroke="gray" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        <text transform="translate(567.6 897.776)" fill="black">
+          <tspan font-family="Helvetica Neue" font-size="16" fill="black" x="79.624" y="15">C</tspan>
+        </text>
+      </g>
+    </g>
+  </g>
+</svg>
