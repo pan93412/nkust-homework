@@ -1,0 +1,26 @@
+[project]
+name = "flask1213"
+version = "0.1.0"
+description = "Add your description here"
+authors = [
+    { name = "pan93412", email = "pan93412@gmail.com" }
+]
+dependencies = [
+    "fastapi>=0.105.0",
+    "pymongo>=4.6.1",
+]
+readme = "README.md"
+requires-python = ">= 3.8"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = [
+    "black>=23.12.0",
+]
+
+[tool.hatch.metadata]
+allow-direct-references = true
