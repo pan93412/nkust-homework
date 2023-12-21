@@ -129,3 +129,7 @@ semester-3/big-data/20231030-homework-1/src/homework1/tests/formats_test.py
 semester-3/big-data/20231030-homework-1/src/homework1/tests/normalize_test.py
 semester-3/big-data/20231030-homework-1/src/homework1/tests/__pycache__/formats_test.cpython-312.pyc
 semester-3/big-data/20231030-homework-1/src/homework1/tests/__pycache__/normalize_test.cpython-312.pyc
+
+__pycache__/
+*.cache
+*.pdf
