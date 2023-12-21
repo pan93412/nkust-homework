@@ -1,0 +1,13 @@
+-- 對於所有部門主管，計算2018年加班與請假統計，列出其部門名稱、姓名、
+-- 加班時數合計與請假天數合計(無請假或加班者請以空白顯示)。結果請依部門名稱排序
+
+select DeptName                  as 部門名稱,
+       EmpName                   as 姓名,
+       ifnull(sum(OverHours), 0) as 加班時數總計,
+       ifnull(sum(leav.Days), 0) as 請假天數合計
+from dept
+         join (employee e) on (dept.ManagerEmpId = e.EmpId)
+         left join (overtime ot) on (e.EmpId = ot.EmpId and ot.OverDate between '2018-01-01' and '2018-12-31')
+         left join (leav) on (e.EmpId = leav.EmpID and leav.Year = 2018)
+group by DeptName, EmpName
+order by 部門名稱
