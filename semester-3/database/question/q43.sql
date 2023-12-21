@@ -11,6 +11,7 @@ from dept
          join (salesorder) using (EmpId)
          join (orderdetail) using (OrderId)
          join (product) using (ProdId)
+where JobTitle like '%業務%'
 group by DeptName, EmpName, JobTitle
 having count(EmpId) >= 3
 order by 利潤總額 desc;
