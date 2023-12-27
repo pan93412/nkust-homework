@@ -17,7 +17,7 @@ download_folder = Path("downloads")
 
 async def download_and_save(url: str, filepath: Path) -> None:
     async with httpx.AsyncClient() as client:
-        logger.info("正在下載：{}", url)
+        logger.debug("正在下載：{}", url)
         response = await client.get(url)
 
     async with aiofiles.open(filepath, "wb") as f:
