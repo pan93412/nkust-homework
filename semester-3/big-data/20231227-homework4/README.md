@@ -1,4 +1,19 @@
+---
+CJKmainfont: Songti TC
+CJKoptions: AutoFakeBold
+header-includes:
+    - |
+      ```{=latex}
+      \usepackage{fvextra}
+      \DefineVerbatimEnvironment{Highlighting}{Verbatim}{
+      commandchars=\\\{\},
+      breaklines,breaknonspaceingroup,breakanywhere}
+      ```
+---
+
 # 作業4
+
+C111156103, 潘奕濬
 
 ## 使用說明
 
