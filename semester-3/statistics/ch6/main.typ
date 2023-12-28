@@ -129,3 +129,95 @@
 
 == 連續型隨機變數的累積分配函數
 
+(wip, 下週)
+
+= 期望值（平均數）及變異數
+
+#blk[
+  *複習：離散型隨機變數的期望值*
+
+  $
+  E[Y] = mu = sum y p(y)
+  $
+]
+
+#blk[
+  *複習：離散型隨機變數的變異數*
+
+  $
+  V[Y] = sigma^2 = sum (y-mu)^2 p(y) = E[Y^2] - (E[Y])^2
+  $
+]
+
+== 期望值
+
+#blk[
+  *連續型隨機變數的期望值* (def 6.2.1)
+
+  $
+  E[Y] = mu = integral^oo_(-oo) y f(y) dif y
+  $
+]
+
+#blk[
+  若 $g(y)$ 為連續型隨機變數 #highlight[函數]，則其期望值為： (Theorem 6.2.1)
+
+  $
+  E[g(Y)] = integral^oo_(-oo) g(y) f(y) d y
+  $
+]
+
+== 變異數
+
+根據定理 6.1，可知變異數定義如下：
+
+#blk[
+  *連續型隨機變數的變異數* (def. 6.2.2)
+
+  $
+  V[Y] = sigma^2 &= E[(Y-mu)^2] = integral^oo_(-oo) (y-mu)^2 f(y) dif y
+                 &=
+  $
+
+  其正平方根 $sigma = sqrt(sigma^2) = "SD"(Y)$ 稱為隨機變數 $Y$ 的標準差。
+]
+
+#question("ex6.4")[
+  $Y$ 為一個連續型隨機變數，其機率密度函數：
+
+  $
+  f(y) = cases(
+    2y "if" 0<=y<=1,
+    0 "otherwise"
+  )
+  $
+
+  試求 $Y$ 的期望值/平均值 $E[Y]$ 及變異數 $V(Y)$。
+][
+  根據題幹，可列出：
+
+  *期望值*
+
+  $
+  E[Y] &= integral^oo_(-oo) y dot f(y) d y \
+       &= integral^1_0 y dot 2y dif y \
+       &= integral^1_0 2 dot y^2 dif y \
+       &= 2 dot 1/3 y^3 |_0^1 \
+       &= 2/3 y^3 |_0^1 & "(帶入 0, 1)"\
+       &= 2/3 (1^3 - 0^3) = 2/3
+  $
+
+  *變異數*
+
+  $
+  sigma^2 = V(Y) &= integral^oo_(-oo) (y-mu)^2 f(y) dif y \
+                 &= integral^1_0 (y-2/3)^2 2y dif y \
+                 &= integral^1_0 2y (y^2 - 4/3 y + 4/9) dif y \
+                 &= integral^1_0 2y^3 - 8/3 y^2 + 8/9 y dif y \
+                 &= 2 dot 1/4 dot y^4 - 8/3 dot 1/3 y^3 + 8/9 dot 1/2 y^2 |_0^1 \
+                 &= 1/2 y^4 - 8/9 y^3 + 8/18 y^2 |_0^1 & "(帶入 0, 1)"\
+                 &= 1/2 - 8/9 + 8/18 = 1/18
+
+  $
+]
+
