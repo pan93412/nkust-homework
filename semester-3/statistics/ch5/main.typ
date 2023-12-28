@@ -1182,4 +1182,8 @@ $
   $
 ]
 
-== 綜合判斷 (wip: next week)
+== 綜合判斷
+
+#figure[
+  #image("conclude.svg")
+]

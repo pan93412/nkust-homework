@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xl="http://www.w3.org/1999/xlink" viewBox="564.096 235.5 427.604 314.24563" width="427.604" height="314.24563">
+  <defs>
+    <marker orient="auto" overflow="visible" markerUnits="strokeWidth" id="FilledArrow_Marker" stroke-linejoin="miter" stroke-miterlimit="10" viewBox="-1 -4 10 8" markerWidth="10" markerHeight="8" color="black">
+      <g>
+        <path d="M 8 0 L 0 -3 L 0 3 Z" fill="currentColor" stroke="currentColor" stroke-width="1"/>
+      </g>
+    </marker>
+  </defs>
+  <metadata> Produced by OmniGraffle 7.22.4\n2023-12-28 05:49:49 +0000</metadata>
+  <g id="Canvas_1" stroke-opacity="1" fill="none" stroke-dasharray="none" fill-opacity="1" stroke="none">
+    <title>Canvas 1</title>
+    <g id="Canvas_1_Layer_1">
+      <title>Layer 1</title>
+      <g id="Graphic_14">
+        <text transform="translate(610.184 240.5)" fill="black">
+          <tspan font-family="PingFang TC" font-size="16" fill="black" x="0" y="17">卜瓦松分配：</tspan>
+          <tspan font-family="Helvetica Neue" font-size="16" fill="black" x="11.784" y="37">P(y; ƛ=np)</tspan>
+        </text>
+      </g>
+      <g id="Graphic_15">
+        <text transform="translate(615.752 346.948)" fill="black">
+          <tspan font-family="PingFang TC" font-size="16" fill="black" x="2.432" y="17">二項分配：</tspan>
+          <tspan font-family="Helvetica Neue" font-size="16" fill="black" x="6963319e-19" y="37">b(y;n,p=r/N)</tspan>
+        </text>
+      </g>
+      <g id="Graphic_16">
+        <text transform="translate(611.2 502.5098)" fill="black">
+          <tspan font-family="PingFang TC" font-size="16" fill="black" x="0" y="17">負二項分配：</tspan>
+          <tspan font-family="Helvetica Neue" font-size="16" fill="black" x="17.32" y="37">nb(y;r, p)</tspan>
+        </text>
+      </g>
+      <g id="Graphic_17">
+        <text transform="translate(582 458.5)" fill="black">
+          <tspan font-family="PingFang TC" font-size="16" fill="black" x="7247536e-19" y="17">超幾何分配 H(y;N,n,r)</tspan>
+        </text>
+      </g>
+      <g id="Graphic_18">
+        <text transform="translate(914.7 514.948)" fill="black">
+          <tspan font-family="PingFang TC" font-size="16" fill="black" x="0" y="17">幾何分配</tspan>
+        </text>
+      </g>
+      <g id="Graphic_19">
+        <text transform="translate(906.7 356.172)" fill="black">
+          <tspan font-family="PingFang TC" font-size="16" fill="black" x="0" y="17">伯努力分配</tspan>
+        </text>
+      </g>
+      <g id="Line_20">
+        <line x1="705.616" y1="367.172" x2="891.8" y2="367.172" marker-end="url(#FilledArrow_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_23">
+        <line x1="659.0411" y1="453.5" x2="658.5327" y2="402.2955" marker-end="url(#FilledArrow_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_24">
+        <line x1="658.184" y1="341.948" x2="658.184" y2="295.848" marker-end="url(#FilledArrow_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_26">
+        <rect x="764.5108" y="341.948" width="96.24" height="50.448" fill="white"/>
+        <text transform="translate(769.5108 346.948)" fill="black">
+          <tspan font-family="Helvetica Neue" font-size="16" fill="black" x="24.976" y="15">n = 1</tspan>
+          <tspan font-family="PingFang TC" font-size="16" fill="black" x="2.224" y="35.448">第</tspan>
+          <tspan font-family="Helvetica Neue" font-size="16" fill="black" y="35.448"> n </tspan>
+          <tspan font-family="PingFang TC" font-size="16" fill="black" y="35.448">次成功</tspan>
+          <tspan font-family="Helvetica Neue" font-size="16" fill="black" y="35.448"> </tspan>
+        </text>
+      </g>
+      <g id="Graphic_27">
+        <rect x="611.9327" y="413.0422" width="93.696" height="28.447998" fill="white"/>
+        <text transform="translate(616.9327 418.0422)" fill="black">
+          <tspan font-family="Helvetica Neue" font-size="16" fill="black" x="0" y="15">(n/N) &lt; 0.05</tspan>
+        </text>
+      </g>
+      <g id="Graphic_28">
+        <rect x="564.096" y="300.83023" width="188.176" height="28.447998" fill="white"/>
+        <text transform="translate(569.096 305.83023)" fill="black">
+          <tspan font-family="Helvetica Neue" font-size="16" fill="black" x="0" y="15">np &lt; 7, n&gt;=100, p&lt;=0.01</tspan>
+        </text>
+      </g>
+      <g id="Line_29">
+        <line x1="712.2" y1="523.32634" x2="899.8006" y2="525.4237" marker-end="url(#FilledArrow_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_30">
+        <rect x="759.0033" y="499.2976" width="120.224" height="50.448" fill="white"/>
+        <text transform="translate(764.0033 504.2976)" fill="black">
+          <tspan font-family="Helvetica Neue" font-size="16" fill="black" x="38.752" y="15">r = 1</tspan>
+          <tspan font-family="PingFang TC" font-size="16" fill="black" x="0" y="35.448">第</tspan>
+          <tspan font-family="Helvetica Neue" font-size="16" fill="black" y="35.448"> r </tspan>
+          <tspan font-family="PingFang TC" font-size="16" fill="black" y="35.448">次成功出現</tspan>
+        </text>
+      </g>
+    </g>
+  </g>
+</svg>
