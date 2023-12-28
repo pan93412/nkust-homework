@@ -46,7 +46,7 @@
 + 隨機變數所有可能值的機率總和為 $1$，即：
   $
   integral^oo_(-oo) f(y) dif y = integral^b_a f(y) dif y = 1
-  $
+  $ <機率總和為1>
 + 要求隨機變數 $Y$ 落在密度曲線下方與區間 $[c,d]$ 上方的面積，則：
   $
   P(c underline(<=) Y underline(<=) d) = integral^d_c f(y) dif y
@@ -221,3 +221,35 @@
   $
 ]
 
+== 基本定理
+
+#blk[
+  *定理 6.2：*若 $Y$ 是一個連續型，$a, b$ 為兩常數，$g_1(Y), g_2(Y), ..., g_k(Y)$ 為隨機變數 $Y$ 之 $k$ 個函數，則
+
+  + $E[a Y + b] = a E[Y] + b$
+  + $V(a Y + b) = a^2 V(Y)$
+  + $E[g_1(Y) + g_2(Y) + ... + g_k(Y)] = E[g_1(Y)] + E[g_2(Y)] + ... + E[g_k(Y)]$ (線性組合)
+]
+
+#blk[
+  *定理 6.3*: 若一個連續型隨機變數 $Y$，期望值或平均數 $E[Y] = mu$，則變異數
+
+  $
+  V[Y] = sigma^2 = E[Y^2] - (E[Y])^2 = E[Y^2] - mu^2
+  $
+]
+#question("ex6.5")[
+  若 $Y$ 為一個連續型隨機變數，證明 $E[a Y+b]=a E[Y] + b$.
+][
+  $
+  E[a Y + b] &= integral^oo_(-oo) (a y + b) f(y) dif y \
+             &= integral^oo_(-oo) a y f(y) dif y + integral^oo_(-oo) b f(y) dif y \
+             &= a integral^oo_(-oo) y f(y) dif y + b integral^oo_(-oo) f(y) dif y \
+             &= a E[Y] + b & "(" E[Y] = integral^oo_(-oo) y f(y) dif y  ")" \
+             && "(" 1 = integral^oo_(-oo) f(y) dif y  ")"
+  $
+
+  + $1 = integral^oo_(-oo) f(y) dif y$ 參考 @機率總和為1
+]
+
+#question("ex6.6")[wip-回家練習][]
