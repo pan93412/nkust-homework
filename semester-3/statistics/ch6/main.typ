@@ -253,3 +253,17 @@
 ]
 
 #question("ex6.6")[wip-回家練習][]
+
+/*
+
+// wip - not categorized
+
+= 常態分配求解
+
++ 計算機率
++ 找落點
++ 方法：畫圖+查表
+
+// wip: organize the photos
+
+❶ 表示 ❶.
