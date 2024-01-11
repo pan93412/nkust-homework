@@ -4,5 +4,5 @@ select DeptName as 部門名稱, EmpName as 姓名, sum(Days) as 請假天數的
 from dept   join (employee) using (DeptId)
             join (leav) using (EmpId)
 where DeptName like '業務%' and leav.Year = 2019
-group by 姓名
+group by 部門名稱, 姓名
 order by 請假天數的總和 desc, 姓名;

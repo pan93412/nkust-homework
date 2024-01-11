@@ -6,5 +6,5 @@ from dept
          join (employee e) on (dept.ManagerEmpId = e.EmpId)
          left join (overtime ot) on (e.EmpId = ot.EmpId and ot.OverDate between '2018-01-01' and '2018-12-31')
          left join (leav) on (e.EmpId = leav.EmpID and leav.Year = 2018)
-group by e.EmpId, DeptName, EmpName
+group by DeptName, EmpName
 order by 部門名稱
