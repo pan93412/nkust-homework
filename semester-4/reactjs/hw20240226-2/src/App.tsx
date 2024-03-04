@@ -16,9 +16,17 @@ function App() {
 function Counter({ n, onChange }: { n: number, onChange: (to: number) => void }) {
   return (
     <div className="container" style={{minWidth: 200}}>
-      <button className="chevron chevron-up" onClick={() => onChange(n+1)} />
+      {
+        n != 9
+          ? <button className="chevron chevron-up" onClick={() => onChange(n+1)} />
+          : <div className="chevron" />
+      }
       <div className="number">{n}</div>
-      <button className="chevron chevron-down" onClick={() => onChange(n-1)}/>
+      {
+        n != 0
+          ? <button className="chevron chevron-down" onClick={() => onChange(n-1)} />
+          : <div className="chevron" />
+      }
     </div>
   )
 }
