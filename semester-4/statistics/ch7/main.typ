@@ -106,7 +106,7 @@
 
   *For $n=1$:* (wip)
 
-  *Discussion*
+  *Discussion* ⭐
 
   #table(
     columns: (1fr,)*5,
@@ -127,4 +127,27 @@
 
     We define the sample with $n>=30$ as a large sample.
   ]
+]
+
+#question("ex7.6")[
+  WIP
+][
+  題意可知 $N=3000, mu=1630, sigma=400$，測試抽出 $n=100$，欲求 $P(abs(overline(x) < mu) < 60)$ 為 $X$。
+
+  $
+  &P(abs(overline(x) - mu) < 60) \
+  =& P(-60 < overline(x) - mu < 60)
+  $
+
+  其中 $overline(x)$ 是變數，$mu$ 為 $1630$。
+
+  + 是大樣本嗎？因為 $100 div 3000 = 0.03 < 0.5$，故可以省略校正因子。
+  + $sigma^2_(overline(x)) = sigma^2 div n = 400^2 div 10^2 = 40^2$
+  + $overline(X) ~ N(mu, sigma^2)$
+    + $
+      &P(a < x < b) \
+      =& P((a-mu)/sigma < (x-mu)/sigma < (b-mu)/sigma) \
+      =& P((a-mu)/sigma < Z < (b-mu)/sigma) \
+      =& P(-1.5 < Z < 1.5) = 0.8664
+      $
 ]
