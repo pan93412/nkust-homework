@@ -3,7 +3,7 @@
   set document(author: authors, title: title)
   set page(numbering: "1", number-align: center)
   set text(
-    font: ("Lantinghei TC"),
+    font: ("Helvetica Neue", "PingFang TC"),
     lang: "zh",
     region: "TW",
     size: 14pt,
@@ -34,7 +34,7 @@
 #let comment(it) = text(fill: luma(96), size: 10pt, it)
 
 #let badge(fill, it) = {
-  set text(weight: "bold",  size: 11pt, fill: white.darken(1%))
+  set text(weight: "bold", size: 11pt, fill: white.darken(1%))
 
   box(inset: 0.5em, baseline: 25%, fill: fill, radius: 6pt, it)
 }
@@ -51,4 +51,4 @@
   #pad(x: 1.75em, it)
 ]
 
-#let blk(it) = block(width: 100%, fill: luma(245), radius: 8pt, pad(x: 1.6em, y: 1.4em, body: it))
+#let blk(it) = block(width: 100%, fill: luma(245), radius: 8pt, pad(x: 1.6em, y: 1.4em)[#it])
