@@ -4,10 +4,9 @@ export interface CouponProps {
 	name: string;
 	children: JSX.Element;
 	onSelected: (couponName: string) => void;
-	selected: boolean;
 }
 
-export default function Coupon({ name, children, onSelected, selected }: CouponProps) {
+export default function Coupon({ name, children, onSelected }: CouponProps) {
 	return (
 		<div class="flex flex-col">
 			<button
@@ -26,17 +25,10 @@ export default function Coupon({ name, children, onSelected, selected }: CouponP
 					<h2 class="text-neutral-800 text-xl font-bold">{name}</h2>
 					<div class={"text-neutral-900"}>{children}</div>
 				</div>
-				<div class={"transition transition-200 transform group-hover:translate-y-0 translate-y-10"}>
+				<div class={"transition transition-200 transform group-hover:translate-y-0 translate-y-20"}>
 					<div class="text-neutral-400 text-sm mt-4">Click to enable this coupon →</div>
 				</div>
 			</button>
-
-			<div classList={{
-				"self-end z-5 -mt-7 mr-3": true,
-				invisible: !selected,
-			}}>
-				✅
-			</div>
 		</div>
 	);
 }

@@ -1,5 +1,5 @@
 import Coupon from "~/components/Coupon";
-import {createMemo, createSignal, For} from "solid-js";
+import {createSignal, For} from "solid-js";
 
 const coupons = [
 	{
@@ -36,9 +36,7 @@ export default function Home() {
 			<section class="grid grid-cols-3 gap-8">
 				<For each={coupons}>
 					{(coupon) => {
-						const selected = createMemo(() => selectedCoupon() === coupon.name);
-
-						return <Coupon name={coupon.name} onSelected={setSelectedCoupon} selected={selected()}>
+						return <Coupon name={coupon.name} onSelected={setSelectedCoupon}>
 							<p>{coupon.description}</p>
 						</Coupon>;
 					}}
