@@ -16,5 +16,9 @@
   },
   "engines": {
     "node": ">=18"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^1.6.0",
+    "solid-devtools": "^0.29.3"
   }
 }

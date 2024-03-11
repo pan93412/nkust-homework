@@ -12,8 +12,9 @@
 		"strict": true,
 		"types": ["vinxi/client", "vite/client"],
 		"isolatedModules": true,
+		"verbatimModuleSyntax": true,
 		"paths": {
-      "~/*": ["./src/*"]
-    }
+		  "~/*": ["./src/*"]
+		}
 	}
 }
