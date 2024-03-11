@@ -1,3 +1,5 @@
+#import "typst-sympy-calculator.typ": *
+
 #let project(title: "", authors: (), body) = {
   // Set the document's basic properties.
   set document(author: authors, title: title)
