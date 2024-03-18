@@ -1,3 +1,4 @@
+import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 
 export const IntroCard = styled.div`
@@ -18,18 +19,21 @@ export const Title = styled.h1`
   margin: 0.5em;
 `;
 
-export const Button = styled("button")`
+export const ButtonStyle = () => css`
   background-color: transparent;
   color: darkgray;
   border: 1px solid darkgray;
   border-radius: 0.25em;
 `;
 
+export const Button = styled.button`
+  ${ButtonStyle}
+`;
+
 export const PositiveButton = styled(Button)`
   color: darkblue;
 `;
 
-export const NegativeButton = styled.button`
-  ${Button}
+export const NegativeButton = styled(Button)`
   color: darkred;
 `;
