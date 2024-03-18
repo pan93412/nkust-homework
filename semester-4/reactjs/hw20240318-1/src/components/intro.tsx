@@ -12,3 +12,9 @@ export const Avatar = styled.img`
     height: 150px;
     border-radius: 50%;
 `;
+
+export const Title = styled.h1<{
+  color: string;
+}>`
+  color: ${props => props.color};
+`;
