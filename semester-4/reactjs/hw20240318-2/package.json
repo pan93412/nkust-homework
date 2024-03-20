@@ -9,11 +9,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@emotion/styled": "^11.11.0",
     "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.0",
     "@preact/signals": "^1.2.2",
     "normalize.css": "^8.0.1",
-    "preact": "^10.19.6"
+    "preact": "^10.19.6",
+    "react-icons": "^5.0.1"
   },
   "devDependencies": {
     "@emotion/babel-plugin": "^11.11.0",
