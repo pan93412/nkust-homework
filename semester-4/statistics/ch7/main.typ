@@ -147,7 +147,7 @@
 
   + 是大樣本嗎？因為 $100 div 3000 = 0.03 < 0.5$，故可以省略校正因子。
   + $sigma^2_(overline(x)) = sigma^2 div n = 400^2 div 10^2 = 1600$
-  + $overline(X) ~ N(mu, sigma^2)$
+  + $overline(X) tilde N(mu, sigma^2)$
     + $
       &P(a < x < b) \
       =& P((a-mu)/sigma < (x-mu)/sigma < (b-mu)/sigma) \
@@ -168,7 +168,7 @@
   根據題意，可以知道（$N$ 表示常態分配，$X$ 為母體）：
 
   $
-  X~N(mu=173, sigma^2=4.8^2)
+  X tilde N(mu=173, sigma^2=4.8^2)
   $
 
   *Question 1*
@@ -206,9 +206,63 @@
   #image("fig7-1.png")
 ]
 
+= 樣本比例 $hat(p)$ 的抽樣分配
+
+== 定義
+
+樣本比例 $hat(p) = Y/n$ 用來估計母體比例 $p$，其中 $Y$ 表示從具有不良品、成功或某種特性的比例或機率是 $p$ 的母體中隨機抽取樣本大小為 $n$ 的隨機樣本中，不良品、成功或某種特性的個數。
+
+$Y$ 的機率分配是具有參數 $n$ 與 $p$ 的二項分配。
+
+== 分配結論
+
+抽取放回：
+
+$
+E[hat(p)] &= p \
+V(hat(p)) &= (p(1-p))/n
+$
+
+當 $n p>=10$ 且 $n(1-p) >= 10$（另一種說法是 $n p>5$ 且 $n(1-p) > 5$）時：
+
+$
+hat(p) approx N(P, P(1-P)/n)
+$
+
+抽取不放回之 $V(hat(p))$ 應補上有限母體校正因子 $(N-n)/(n-1)$，$n/N<0.05$ 時則可省略。
+
+#question("ex7.8")[
+  wip
+][
+  *$hat(p)$ 的抽樣分配*
+
+  $
+  hat(p) approx N(P, P(1-P)/n) \
+  E[X]=P=0.1 \
+  V(X)=P(1-P)/n=0.0009 \
+  sigma_(hat(p))=sqrt(V(X))=0.03
+  $
+
+  *Calculate $P(-0.05 <= hat(p) - p <= 0.05)$*
+
+  #image("2024-03-20-10-40-48.png")
+
+  $
+  &P(-0.05 <= hat(p) - p <= 0.05) \
+  =& P(-0.05/0.03 <= (hat(p) - p)/0.03 <= 0.05/0.03) \
+  =& P(-1.67 <= Z <= 1.67) \
+  =& P(Z<=1.67) - P(Z<=-1.67) \
+  =& 1 - 2 times 0.0475 = 0.905 \
+  $
+]
+
 = $t$ 分配
 
-常態母體 $X~N(mu, sigma^2)$，搭配固定抽樣 $n$，可以轉為 $(overline(x) - mu)/(s/sqrt(n)) ~ t(n-1)$，其中 $sigma^2$ 可由 $s$ 估計而來。
+$
+X tilde N(mu, sigma^2) =>^n (overline(x) - mu)/(s/sqrt(n)) tilde t(n-1)
+$
+
+常態母體 $X tilde N(mu, sigma^2)$，搭配固定抽樣 $n$，可以轉為 $(overline(x) - mu)/(s/sqrt(n)) tilde t(n-1)$，其中 $sigma^2$ 可由 $s$ 估計而來。
 
 == 圖形
 
@@ -225,7 +279,7 @@
 
 == 查表
 
-- $T~t(r)$
+- $T tilde t(r)$
 - $"df"$ 是 degree of freedom 的意思
 - $t(k)$ 是右尾機率
 - $"df"$ 和 $t(k)$ 的交叉點是臨界值
@@ -257,11 +311,11 @@
 == 應用
 
 #question("ex7.13")[
-  假設 $X$ 是某國中之男生的體重，已知其分配為平均數 $u=63$，標準差 $sigma$ 未知的常態分配，也就是 $X~N(63, sigma^2)$。倘若今天從這個班級中，隨機抽出 $n=16$ 位男學生作為樣本，其樣本標準差 $s=3.5$，則這 16 位男同學之平均體重 $overline(X)$ 在某一個數值 $k$ 以下的機率為 $0.975$，請問這個 $k$ 值是多少？
+  假設 $X$ 是某國中之男生的體重，已知其分配為平均數 $u=63$，標準差 $sigma$ 未知的常態分配，也就是 $X tilde N(63, sigma^2)$。倘若今天從這個班級中，隨機抽出 $n=16$ 位男學生作為樣本，其樣本標準差 $s=3.5$，則這 16 位男同學之平均體重 $overline(X)$ 在某一個數值 $k$ 以下的機率為 $0.975$，請問這個 $k$ 值是多少？
 ][
   *脈絡*
 
-  可以知道題幹 *母體* 是 $X~N(63, sigma^2 = ?)$。
+  可以知道題幹 *母體* 是 $X tilde N(63, sigma^2 = ?)$。
 
   另外，根據題幹也可以列出：
 
@@ -274,8 +328,8 @@
   由於樣本是小樣本，且母體的標準差 $sigma$ 未知，其樣本標準差 $s=3.5$，故統計量：
 
   $
-  T=(overline(x) - mu)/(s/(sqrt(n))) ~ t(n-1) \
-  => T=(overline(X)-63)/(3.5/sqrt(16)) ~ t(15)
+  T=(overline(x) - mu)/(s/(sqrt(n))) tilde t(n-1) \
+  => T=(overline(X)-63)/(3.5/sqrt(16)) tilde t(15)
   $
 
   轉換為 $t$ 分配形式，可求得：
@@ -290,27 +344,99 @@
   $
 ]
 
-= 樣本比例 $hat(p)$ 的抽樣分配
+= 卡方分配
 
-== $hat(p)$ 的分配結論
+== 公式
 
-抽取放回：
+若 $X_1, X_2, dots, X_n$ 是從常態分配 $N(mu, sigma^2)$ 抽出一組樣本數為 $n$ 的隨機樣本，且 $overline(X) = 1/n sum_(i=1)^(n) X_i$，$S^2=1/(n-1) sum_(i=1)^n (X_i-overline(X))^2$。
+
+#blk[
+  *當 $mu$ 已知時*
+
+  $
+  S^2_mu = (sum_(i=1)^n (X_i-mu)^2)/n
+  $
+
+  and:
+
+  $
+  (n dot S^2_mu)/sigma^2 tilde chi^2 (n)
+  $
+
+  其中 $n$ 和 $sigma^2$ 是常數，$S^2_mu$ 是變數。
+
+  一形式：
+
+  $
+  (cancel(n) dot (sum_(i=1)^n (X_i-mu)^2)/cancel(n)) / sigma^2 = (sum_(i=1)^n (X_i-mu)^2) / sigma^2  tilde chi^2 (n)
+  $
+]
+
+#blk[
+  *當 $mu$ 未知時*
+
+  $
+  S^2 = (sum_(i=1)^n (X_i-overline(X))^2)/(n-1)
+  $
+
+  and:
+
+  $
+  (n-1) dot S^2/sigma^2 tilde chi^2 (n-1)
+  $
+
+  一形式：
+
+  $
+  (cancel(n-1) dot (sum_(i=1)^n (X_i-overline(X))^2)/cancel(n-1)) / sigma^2 = (sum_(i=1)^n (X_i-overline(X))^2) / sigma^2 tilde chi^2 (n-1)
+  $
+]
+
+== 圖形
+
+#figure[
+  #image("2024-03-20-10-46-52.png", width: 45%)
+]
+
+X 軸是 $X tilde chi^2(r)$，其中 $X$ 必定為正值，且是右偏分配。自由度 $r$ ($k$) 變大時，分配曲線向右移動。
 
 $
-E[hat(p)] &= p \
-V(hat(p)) &= (p(1-p))/n
+E[X] &= r \
+V(X) &= 2r
 $
 
-當 $n p>=10$ 且 $n(1-p) >= 10$（另一種說法是 $n p>5$ 且 $n(1-p) > 5$）時：
 
-$
-hat(p) approx N(P, P(1-P)/n)
-$
+== 應用
 
-抽取不放回之 $V(hat(p))$ 應補上有限母體校正因子 $(N-n)/(n-1)$，$n/N<0.05$ 時則可省略。
+#question("ex7.11")[
+  由一個平均數 $mu$ 未知，變異數 $sigma^2=16$ 的常態分配母體中抽出一組樣本數 $n$ 為 $20$ 的隨機樣本，試求：
 
-#question("ex7.8")[
-
+  + 其樣本變異數 $S^2$ 會超過 $27.67$ 的機率
+  + 其樣本變異數 $S^2$ 介於 $8.52$ 和 $25.384$ 之間的機率
 ][
+  *脈絡*
 
+  $
+  X tilde N(mu=?, sigma^2=16) "母體" \
+  arrow.b space (n=20) \
+  S^2 = sum(X_i-overline(X))^2 / (n-1)
+  $
+
+  問題：
+
+  + $P(S^2 > 27.67) = ?$ (省略)
+  + $P(8.52 < S^2 < 25.384) = ?$
+    + 知道 $S^2$ 是變數，知道其分配，然後查表。
+
+  *Solution*
+
+  其分配最可能是「卡方分配」：
+
+  $
+  (sum_(i=1)^n (X_i-overline(X))^2) / sigma^2 tilde chi^2 (n-1)
+  $
+
+  $
+  P(8.52 < S^2 < 25.384)
+  $
 ]
