@@ -5,7 +5,7 @@
   set document(author: authors, title: title)
   set page(numbering: "1", number-align: center)
   set text(
-    font: ("Helvetica Neue", "PingFang TC"),
+    font: ("PT Sans", "PingFang TC"),
     lang: "zh",
     region: "TW",
     size: 14pt,
