@@ -149,12 +149,11 @@
   + $sigma^2_(overline(x)) = sigma^2 div n = 400^2 div 10^2 = 1600$
   + $overline(X) tilde N(mu, sigma^2)$
     + $
-      &P(a < x < b) \
-      =& P((a-mu)/sigma < (x-mu)/sigma < (b-mu)/sigma) \
-      =& P((a-mu)/sigma < Z < (b-mu)/sigma) \
+      &P(-60 < abs(overline(x) - mu) < 60) \
+      =& P((-60-mu)/sigma < (abs(overline(x) - mu)-mu)/sigma = Z < (60-mu)/sigma) \
       =& P(-1.5 < Z < 1.5) \
-      =& Phi(1.5) - Phi(-1.5) \
-      =& 0.9332 - 0.0668 = 0.8664
+      =& 1 - 2 times P(Z > 1.5) \
+      =& 1 - 2 times 0.0668 = 0.8664
       $
 ]
 
