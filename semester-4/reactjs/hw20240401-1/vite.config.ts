@@ -1,14 +1,10 @@
-import { defineConfig } from 'vite'
-import preact from '@preact/preset-vite'
+import { vitePlugin as remix } from "@remix-run/dev";
+import { installGlobals } from "@remix-run/node";
+import { defineConfig } from "vite";
+import tsconfigPaths from "vite-tsconfig-paths";
 
-// https://vitejs.dev/config/
+installGlobals();
+
 export default defineConfig({
-  plugins: [preact(
-    {
-      jsxImportSource: "@emotion/react",
-      babel: {
-        plugins: ["@emotion/babel-plugin"],
-      },
-    }
-  )],
-})
+  plugins: [remix(), tsconfigPaths()],
+});
