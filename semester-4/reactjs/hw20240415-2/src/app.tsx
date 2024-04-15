@@ -1,33 +1,66 @@
-import viteLogo from "/vite.svg";
-import { useState } from "preact/hooks";
-import preactLogo from "./assets/preact.svg";
+import { signal } from "@preact/signals";
 import "./app.css";
 
 export function App() {
-  const [count, setCount] = useState(0);
+  const name = signal("");
+  const age = signal(0);
+  const color = signal("");
+  const birthday = signal("");
+  const email = signal("");
 
   return (
-    <>
+    <form onSubmit={(event) => {
+      event.preventDefault();
+
+      console.log("Name:", name.value);
+      console.log("Age:", age.value);
+      console.log("Color:", color.value);
+      console.log("Birthday:", birthday.value);
+      console.log("Email:", email.value);
+    }}>
       <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} class="logo" alt="Vite logo" />
-        </a>
-        <a href="https://preactjs.com" target="_blank">
-          <img src={preactLogo} class="logo preact" alt="Preact logo" />
-        </a>
+        <label>
+          Name:
+          <input type="text" name="name" value={name} onChange={(event) => {
+            name.value = event.currentTarget.value;
+          }} />
+        </label>
       </div>
-      <h1>Vite + Preact</h1>
-      <div class="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/app.tsx</code> and save to test HMR
-        </p>
+      <div>
+        <label>
+          Age:
+          <input type="number" name="age" value={age} onChange={(event) => {
+            age.value = event.currentTarget.valueAsNumber;
+          }} />
+        </label>
       </div>
-      <p class="read-the-docs">
-        Click on the Vite and Preact logos to learn more
-      </p>
-    </>
+      <div>
+        <label>
+          Favorite color
+          <input type="color" name="color" value={color} onChange={(event) => {
+            color.value = event.currentTarget.value;
+          }}/>
+        </label>
+      </div>
+      <div>
+        <label>
+          Birthday
+          <input type="date" name="birthday" value={birthday} onChange={(event) => {
+            birthday.value = event.currentTarget.value;
+          }}/>
+        </label>
+      </div>
+      <div>
+        <label>
+          Email
+          <input type="email" name="email" value={email} onChange={(event) => {
+            email.value = event.currentTarget.value;
+          }}/>
+        </label>
+      </div>
+      <div>
+        <button type="submit">Submit</button>
+      </div>
+    </form>
   );
 }
