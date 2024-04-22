@@ -1,0 +1,31 @@
+[project]
+name = "impl"
+version = "0.1.0"
+description = "Add your description here"
+authors = [
+    { name = "pan93412", email = "pan93412@gmail.com" }
+]
+dependencies = [
+    "tensorflow>=2.16.1",
+    "keras>=3.3.1",
+    "opencv-python>=4.9.0.80",
+]
+readme = "README.md"
+requires-python = ">= 3.8"
+
+[project.scripts]
+"impl" = "impl:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = []
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/impl"]
