@@ -2,6 +2,8 @@
 
 #show: project.with(title: [期中考], authors: ("Yi-Jyun Pan",))
 
+*題目要記得做。*
+
 #outline(indent: auto)
 
 #question("Q1", "15/15")[
