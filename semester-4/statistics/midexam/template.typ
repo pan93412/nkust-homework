@@ -41,10 +41,11 @@
   box(inset: 0.5em, baseline: 25%, fill: fill, radius: 6pt, it)
 }
 
-#let question(id, name, it) = block(width: 100%)[
+#let question(id, score, name, it) = block(width: 100%)[
   #show: pad.with(top: 1em)
 
   #badge(luma(64), id)
+  #badge(green.darken(50%), [#score])
 
   #block(above: 12pt, width: 100%)[
     *#name* #label(id)
