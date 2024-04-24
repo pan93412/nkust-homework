@@ -12,12 +12,18 @@ absl-py==2.1.0
     # via keras
     # via tensorboard
     # via tensorflow
+asttokens==2.4.1
+    # via stack-data
 astunparse==1.6.3
     # via tensorflow
 certifi==2024.2.2
     # via requests
 charset-normalizer==3.3.2
     # via requests
+decorator==5.1.1
+    # via ipython
+executing==2.0.1
+    # via stack-data
 flatbuffers==24.3.25
     # via tensorflow
 gast==0.5.4
@@ -32,6 +38,10 @@ h5py==3.11.0
     # via tensorflow
 idna==3.7
     # via requests
+ipython==8.23.0
+    # via impl
+jedi==0.19.1
+    # via ipython
 keras==3.3.1
     # via impl
     # via tensorflow
@@ -43,6 +53,8 @@ markdown-it-py==3.0.0
     # via rich
 markupsafe==2.1.5
     # via werkzeug
+matplotlib-inline==0.1.7
+    # via ipython
 mdurl==0.1.2
     # via markdown-it-py
 ml-dtypes==0.3.2
@@ -66,10 +78,21 @@ optree==0.11.0
     # via keras
 packaging==24.0
     # via tensorflow
+parso==0.8.4
+    # via jedi
+pexpect==4.9.0
+    # via ipython
+prompt-toolkit==3.0.43
+    # via ipython
 protobuf==4.25.3
     # via tensorboard
     # via tensorflow
+ptyprocess==0.7.0
+    # via pexpect
+pure-eval==0.2.2
+    # via stack-data
 pygments==2.17.2
+    # via ipython
     # via rich
 requests==2.31.0
     # via tensorflow
@@ -79,10 +102,13 @@ setuptools==69.5.1
     # via tensorboard
     # via tensorflow
 six==1.16.0
+    # via asttokens
     # via astunparse
     # via google-pasta
     # via tensorboard
     # via tensorflow
+stack-data==0.6.3
+    # via ipython
 tensorboard==2.16.2
     # via tensorflow
 tensorboard-data-server==0.7.2
@@ -93,11 +119,17 @@ tensorflow-io-gcs-filesystem==0.36.0
     # via tensorflow
 termcolor==2.4.0
     # via tensorflow
+traitlets==5.14.3
+    # via ipython
+    # via matplotlib-inline
 typing-extensions==4.11.0
+    # via ipython
     # via optree
     # via tensorflow
 urllib3==2.2.1
     # via requests
+wcwidth==0.2.13
+    # via prompt-toolkit
 werkzeug==3.0.2
     # via tensorboard
 wheel==0.43.0
