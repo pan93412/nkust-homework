@@ -1,0 +1,117 @@
+@startuml OrderCertificate
+
+hide footbox
+skinparam dpi 300
+skinparam linetype ortho
+skinparam defaultFontSize 11
+skinparam defaultFontName "Noto Sans CJK TC"
+
+actor User as "<U+000D>"
+participant OrderCertificate as ":OrderCertificate\n校車預約憑證系統"
+
+User -> OrderCertificate : 尋找預約班次\n\tfindOrders()
+activate OrderCertificate
+
+OrderCertificate -> User : 校車紀錄（類別）\n預約憑證、預約班次
+deactivate OrderCertificate
+
+User -> OrderCertificate : 尋找預約憑證\n\tgetCertificate()
+activate OrderCertificate
+
+OrderCertificate -> User : 預約憑證（照片）
+deactivate OrderCertificate
+
+@enduml
+
+@startuml BusInformation
+
+hide footbox
+skinparam dpi 300
+skinparam linetype ortho
+skinparam defaultFontSize 11
+skinparam defaultFontName "Noto Sans CJK TC"
+
+actor User as "<U+000D>"
+participant BusInformation as ":BusInformation\n校車資訊系統"
+
+User -> BusInformation : 打開資訊頁面\n\topenInformation(busId)
+activate BusInformation
+BusInformation -> User : 校車資訊（類別）
+deactivate BusInformation
+
+User -> BusInformation : 取得搭乘地點\n\tgetOrigin()
+activate BusInformation
+BusInformation -> User : 搭乘地點
+deactivate BusInformation
+
+User -> BusInformation : 取得搭乘費用\n\tgetCost()
+activate BusInformation
+BusInformation -> User : 搭乘費用
+deactivate BusInformation
+
+User -> BusInformation : 取得校車出發位置\n\tgetDepartOn()
+activate BusInformation
+BusInformation -> User : 校車出發位置
+deactivate BusInformation
+
+User -> BusInformation : 取得校車抵達位置\n\tgetArriveOn()
+activate BusInformation
+BusInformation -> User : 校車抵達位置
+deactivate BusInformation
+
+User -> BusInformation : 取得校車預計抵達時間\n\tgetEstDepartAt()
+activate BusInformation
+BusInformation -> User : 校車預計抵達時間
+deactivate BusInformation
+
+User -> BusInformation : 取得校車出發時間\n""getDepartAt()""
+activate BusInformation
+BusInformation -> User : 校車出發時間
+deactivate BusInformation
+
+
+@enduml
+
+
+@startuml TaxiProposal
+
+hide footbox
+skinparam dpi 300
+skinparam linetype ortho
+skinparam defaultFontSize 11
+skinparam defaultFontName "Noto Sans CJK TC"
+
+actor User as "<U+000D>"
+participant TaxiProposal as ":TaxiProposal\n呼叫小黃系統"
+
+User -> TaxiProposal : 建立配對單\n\t\
+create(出發時間, 抵達時間車資, 出發時間, 最晚配對期限, 預期配對人數)
+activate TaxiProposal
+
+TaxiProposal -> User : 配對單（類別）\n\t(內容同上)
+deactivate TaxiProposal
+
+loop 等待配對直到配對成功或失敗
+    User -> TaxiProposal: 取得配對單狀態\n\tstatus()
+    activate TaxiProposal
+
+    TaxiProposal -> User: 配對單狀態
+    deactivate TaxiProposal
+end
+
+alt 配對成功
+    User -> TaxiProposal: 取得配對到的乘客\n\tgetPairedPassengers()
+    activate TaxiProposal
+
+    TaxiProposal -> User: 配對到的乘客
+    deactivate TaxiProposal
+
+    User -> TaxiProposal: 完成配對單\n\tfinish()
+else 配對失敗
+    User -> TaxiProposal: 取得配對失敗原因\n\tgetFailReason()
+    activate TaxiProposal
+
+    TaxiProposal -> User: 配對失敗原因
+    deactivate TaxiProposal
+end
+@enduml

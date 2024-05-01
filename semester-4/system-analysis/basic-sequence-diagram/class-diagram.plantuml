@@ -1,0 +1,91 @@
+@startuml ClassDiagram
+
+skinparam linetype ortho
+skinparam dpi 300
+skinparam defaultFontSize 11
+skinparam defaultFontName "Noto Sans CJK TC"
+
+class User {
+    +String studentId
+    -String password
+    +User create()
+}
+
+class Passenger {
+    +String phone
+    +Coordinate location
+    +Passenger create()
+}
+User <|-- Passenger
+
+class Organizer {
+    +String phone
+    +Coordinate location
+    +Organizer create()
+}
+User <|-- Organizer
+
+class BusRecord {
+    +BusInformation busInformation
+    +Image recordCertificate
+    +BusRecord create(busId)
+}
+User "1" --> "0..*" BusRecord: Create
+
+class BusInformation {
+    +ID busId
+    +Campus departOn
+    +Campus arriveOn
+    +Decimal cost
+    +Time departAt
+    +Time estArriveAt
+    +BusInformation create()
+}
+BusRecord "0..*" --> "1" BusInformation: Relates
+
+class Campus {
+    +Image map
+    +Coordinate billOn
+    +Campus create()
+}
+BusInformation "0..*" --> "1" Campus: Depart / Arrive on
+
+class TaxiProposalPassengers {
+    +TaxiProposal taxiProposal
+    -List<Passengers> passengers
+    +TaxiProposalPassengers create()
+    +void add(Passenger)
+    +void remove(Passenger)
+}
+TaxiProposal "1" --> "1" TaxiProposalPassengers: Contains
+
+class TaxiProposal {
+    +ID tpId
+    +Organizer organizer
+    +Campus departOn
+    +Campus arriveOn
+    +Decimal cost
+    +Time departAt
+    +Time pairBefore
+    +Int expectedPassengers
+    +TaxiProposalPassengers passengers
+
+    +TaxiProposal create()
+    +TaxiProposalStatus status()
+    +String getFailReason()
+    +void finish()
+}
+
+TaxiProposal -> TaxiProposalStatus
+
+enum TaxiProposalStatus {
+    Waiting 等待配對
+    Matched 配對成功
+    Finished 配對單完成
+    Unmatched 配對失敗
+}
+
+Organizer "1" ---> "0..*" TaxiProposal: Create
+Passenger "0..*" ---> "1" TaxiProposalPassengers: Join
+
+@enduml
