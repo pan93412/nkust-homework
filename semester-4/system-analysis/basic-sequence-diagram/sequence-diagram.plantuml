@@ -1,0 +1,71 @@
+@startuml TaxiProposalConstruct
+
+autonumber
+skinparam dpi 300
+skinparam linetype ortho
+skinparam defaultFontSize 11
+skinparam defaultFontName "Noto Sans CJK TC"
+
+actor Requester as "Requester"
+participant TaxiProposalController as ":TaxiProposalController"
+participant TaxiProposalModel as ":TaxiProposalModel"
+participant TaxiProposalDb as ":TaxiProposalDb"
+
+Requester -> TaxiProposalController ++ : createProposal(proposalRequest)
+note left of TaxiProposalController
+    proposalRequest contains "departOn",
+    "arriveOn", "cost", "departAt",
+    "pairBefore" and "expectedPassengers".
+
+    * "organizer" is always the requester
+    * "tpId" will be assigned by database.
+end note
+
+TaxiProposalController --> TaxiProposalModel ** : construct()
+TaxiProposalController -> TaxiProposalModel ++: insert()
+
+TaxiProposalModel -> TaxiProposalDb ++: add(taxiProposalModel)
+return assignedTpId
+
+TaxiProposalModel -> TaxiProposalModel: setTpId(assignedTpId)
+return taxiProposalModel
+
+TaxiProposalController -> TaxiProposalModel !! : delete
+
+return taxiProposalModel
+@enduml TaxiProposal
+
+@startuml TaxiProposalWaitForPairing
+
+autonumber
+skinparam dpi 300
+skinparam linetype ortho
+skinparam defaultFontSize 11
+skinparam defaultFontName "Noto Sans CJK TC"
+
+actor Requester as "Requester"
+participant TaxiProposalController as ":TaxiProposalController"
+participant TaxiProposalDb as ":TaxiProposalDb"
+
+Requester -> TaxiProposalController ++: getStatus(tpId)
+
+TaxiProposalController -> TaxiProposalDb ++: findProposal(tpId)
+create participant TaxiProposalModel as ":TaxiProposalModel"
+TaxiProposalDb --> TaxiProposalModel: create instance
+return taxiProposalModel
+
+TaxiProposalController -> TaxiProposalModel ++: getStatus()
+
+alt this.finished == true 完成配對
+    TaxiProposalController <-- TaxiProposalModel: status: TaxiProposalStatus.Finished
+else this.passengers.count() >= this.expectedPassengers 人數到齊
+    TaxiProposalController <-- TaxiProposalModel: status: TaxiProposalStatus.Matched
+else this.pairBefore < now || this.departAt < now 配對或出發時間到
+    TaxiProposalController <-- TaxiProposalModel: status: TaxiProposalStatus.Unmatched
+else 時間還沒到，人還沒到齊
+    TaxiProposalController <-- TaxiProposalModel --: status: TaxiProposalStatus.Waiting
+end
+
+return status
+
+@enduml TaxiProposalWaitForPairing

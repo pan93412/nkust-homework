@@ -8,27 +8,27 @@ skinparam defaultFontName "Noto Sans CJK TC"
 class User {
     +String studentId
     -String password
-    +User create()
+    +User construct()
 }
 
 class Passenger {
     +String phone
     +Coordinate location
-    +Passenger create()
+    +Passenger construct()
 }
 User <|-- Passenger
 
 class Organizer {
     +String phone
     +Coordinate location
-    +Organizer create()
+    +Organizer construct()
 }
 User <|-- Organizer
 
 class BusRecord {
     +BusInformation busInformation
     +Image recordCertificate
-    +BusRecord create(busId)
+    +BusRecord construct(busId)
 }
 User "1" --> "0..*" BusRecord: Create
 
@@ -39,23 +39,24 @@ class BusInformation {
     +Decimal cost
     +Time departAt
     +Time estArriveAt
-    +BusInformation create()
+    +BusInformation construct()
 }
 BusRecord "0..*" --> "1" BusInformation: Relates
 
 class Campus {
     +Image map
     +Coordinate billOn
-    +Campus create()
+    +Campus construct()
 }
 BusInformation "0..*" --> "1" Campus: Depart / Arrive on
 
 class TaxiProposalPassengers {
     +TaxiProposal taxiProposal
     -List<Passengers> passengers
-    +TaxiProposalPassengers create()
+    +TaxiProposalPassengers construct()
     +void add(Passenger)
     +void remove(Passenger)
+    +int count()
 }
 TaxiProposal "1" --> "1" TaxiProposalPassengers: Contains
 
@@ -69,9 +70,10 @@ class TaxiProposal {
     +Time pairBefore
     +Int expectedPassengers
     +TaxiProposalPassengers passengers
+    +Boolean finished
 
-    +TaxiProposal create()
-    +TaxiProposalStatus status()
+    +TaxiProposal construct()
+    +TaxiProposalStatus getStatus()
     +String getFailReason()
     +void finish()
 }
