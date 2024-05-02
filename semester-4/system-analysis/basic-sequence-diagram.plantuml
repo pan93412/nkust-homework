@@ -64,7 +64,7 @@ activate BusInformation
 BusInformation -> User : 校車預計抵達時間
 deactivate BusInformation
 
-User -> BusInformation : 取得校車出發時間\n""getDepartAt()""
+User -> BusInformation : 取得校車出發時間\n\tgetDepartAt()
 activate BusInformation
 BusInformation -> User : 校車出發時間
 deactivate BusInformation
@@ -92,7 +92,7 @@ TaxiProposal -> User : 配對單（類別）\n\t(內容同上)
 deactivate TaxiProposal
 
 loop 等待配對直到配對成功或失敗
-    User -> TaxiProposal: 取得配對單狀態\n\tstatus()
+    User -> TaxiProposal: 取得配對單狀態\n\tgetStatus()
     activate TaxiProposal
 
     TaxiProposal -> User: 配對單狀態
