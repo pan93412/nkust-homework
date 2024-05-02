@@ -30,8 +30,6 @@ return assignedTpId
 TaxiProposalModel -> TaxiProposalModel: setTpId(assignedTpId)
 return taxiProposalModel
 
-TaxiProposalController -> TaxiProposalModel !! : delete
-
 return taxiProposalModel
 @enduml TaxiProposal
 
@@ -51,7 +49,7 @@ Requester -> TaxiProposalController ++: getStatus(tpId)
 
 TaxiProposalController -> TaxiProposalDb ++: findProposal(tpId)
 create participant TaxiProposalModel as ":TaxiProposalModel"
-TaxiProposalDb --> TaxiProposalModel: create instance
+TaxiProposalDb --> TaxiProposalModel: Create from query result
 return taxiProposalModel
 
 TaxiProposalController -> TaxiProposalModel ++: getStatus()
