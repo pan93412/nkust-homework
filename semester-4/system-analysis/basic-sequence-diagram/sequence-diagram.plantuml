@@ -48,6 +48,13 @@ participant TaxiProposalDb as ":TaxiProposalDb"
 Requester -> TaxiProposalController ++: getStatus(tpId)
 
 TaxiProposalController -> TaxiProposalDb ++: findProposal(tpId)
+
+break No such proposal
+    autonumber stop
+    TaxiProposalController <-- TaxiProposalDb: null
+    Requester <-- TaxiProposalController: null
+end
+
 create participant TaxiProposalModel as ":TaxiProposalModel"
 TaxiProposalDb --> TaxiProposalModel: Create from query result
 return taxiProposalModel
