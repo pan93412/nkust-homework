@@ -9,7 +9,7 @@ skinparam defaultFontName "Noto Sans CJK TC"
 actor User as "<U+000D>"
 participant OrderCertificate as ":OrderCertificate\n校車預約憑證系統"
 
-User -> OrderCertificate : 尋找預約班次\n\tfindOrders()
+User -> OrderCertificate : 尋找預約班次\n\tlistRecords()
 activate OrderCertificate
 
 OrderCertificate -> User : 校車紀錄（類別）\n預約憑證、預約班次
@@ -34,7 +34,7 @@ skinparam defaultFontName "Noto Sans CJK TC"
 actor User as "<U+000D>"
 participant BusInformation as ":BusInformation\n校車資訊系統"
 
-User -> BusInformation : 打開資訊頁面\n\topenInformation(busId)
+User -> BusInformation : 取得校車資訊\n\tretrieveBusInformation(busId)
 activate BusInformation
 BusInformation -> User : 校車資訊（類別）
 deactivate BusInformation
@@ -85,7 +85,7 @@ actor User as "<U+000D>"
 participant TaxiProposal as ":TaxiProposal\n呼叫小黃系統"
 
 User -> TaxiProposal : 建立配對單\n\t\
-create(出發時間, 抵達時間車資, 出發時間, 最晚配對期限, 預期配對人數)
+construct(出發時間, 抵達時間車資, 出發時間, 最晚配對期限, 預期配對人數)
 activate TaxiProposal
 
 TaxiProposal -> User : 配對單（類別）\n\t(內容同上)
@@ -100,7 +100,7 @@ loop 等待配對直到配對成功或失敗
 end
 
 alt 配對成功
-    User -> TaxiProposal: 取得配對到的乘客\n\tgetPairedPassengers()
+    User -> TaxiProposal: 取得配對到的乘客\n\tgetPassengers()
     activate TaxiProposal
 
     TaxiProposal -> User: 配對到的乘客

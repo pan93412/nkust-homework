@@ -25,12 +25,23 @@ class Organizer {
 }
 User <|-- Organizer
 
+class RecordController {
+    +List<BusRecord> listRecords(studentId)
+}
+RecordController "1" --> "0..*" BusRecord: Retrieve
+
 class BusRecord {
+    +String studentId
     +BusInformation busInformation
     +Image recordCertificate
     +BusRecord construct(busId)
 }
 User "1" --> "0..*" BusRecord: Create
+
+class BusController {
+    +BusInformation? retrieveBusInformation(busId)
+}
+BusController "1" --> "0..*" BusInformation: Retrieve
 
 class BusInformation {
     +ID busId

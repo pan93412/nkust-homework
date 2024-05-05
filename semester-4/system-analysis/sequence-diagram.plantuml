@@ -22,13 +22,13 @@ note left of TaxiProposalController
 end note
 
 TaxiProposalController --> TaxiProposalModel ** : construct()
-TaxiProposalController -> TaxiProposalModel ++: insert()
+TaxiProposalController -> TaxiProposalModel ++: save()
 
-TaxiProposalModel -> TaxiProposalDb ++: add(taxiProposalModel)
+TaxiProposalModel -> TaxiProposalDb ++: insert(taxiProposalModel)
 return assignedTpId
 
 TaxiProposalModel -> TaxiProposalModel: setTpId(assignedTpId)
-return taxiProposalModel
+return OK
 
 return taxiProposalModel
 @enduml TaxiProposal
@@ -76,3 +76,148 @@ end
 return status
 
 @enduml TaxiProposalWaitForPairing
+
+@startuml TaxiProposalGetFailReason
+
+autonumber
+skinparam dpi 300
+skinparam linetype ortho
+skinparam defaultFontSize 11
+skinparam defaultFontName "Noto Sans CJK TC"
+
+actor Requester as "Requester"
+participant TaxiProposalController as ":TaxiProposalController"
+participant TaxiProposalDb as ":TaxiProposalDb"
+
+Requester -> TaxiProposalController ++: getFailReason(tpId)
+
+TaxiProposalController -> TaxiProposalDb ++: select(one).where(tpId = tpid)
+
+break No such proposal
+    autonumber stop
+    TaxiProposalController <-- TaxiProposalDb: null
+    Requester <-- TaxiProposalController: ""
+end
+
+autonumber resume
+
+create participant TaxiProposalModel as ":TaxiProposalModel"
+TaxiProposalDb --> TaxiProposalModel: Create from query result
+return taxiProposalModel
+
+TaxiProposalController -> TaxiProposalModel ++: getFailReason()
+
+alt this.finished == true 完成配對
+    TaxiProposalController <-- TaxiProposalModel: ""
+else this.passengers.count() >= this.expectedPassengers 人數到齊
+    TaxiProposalController <-- TaxiProposalModel: ""PAIR_FULL""
+else this.pairBefore < now || this.departAt < now 配對或出發時間到
+    TaxiProposalController <-- TaxiProposalModel: ""PAIR_EXPIRED""
+else 時間還沒到，人還沒到齊
+    TaxiProposalController <-- TaxiProposalModel --: ""
+end
+
+return status
+
+@enduml TaxiProposalGetFailReason
+
+@startuml TaxiProposalFinish
+
+autonumber
+skinparam dpi 300
+skinparam linetype ortho
+skinparam defaultFontSize 11
+skinparam defaultFontName "Noto Sans CJK TC"
+
+actor Requester as "Requester"
+participant TaxiProposalController as ":TaxiProposalController"
+participant TaxiProposalDb as ":TaxiProposalDb"
+
+Requester -> TaxiProposalController ++: finish(tpId)
+
+TaxiProposalController -> TaxiProposalDb ++: select(one).where(tpId = tpid)
+
+break No such proposal
+    autonumber stop
+    TaxiProposalController <-- TaxiProposalDb: null
+    Requester <-- TaxiProposalController: NO_SUCH_PROPOSAL
+end
+
+autonumber resume
+
+create participant TaxiProposalModel as ":TaxiProposalModel"
+TaxiProposalDb --> TaxiProposalModel: Create from query result
+return taxiProposalModel
+
+TaxiProposalController -> TaxiProposalModel: setFinish(true)
+TaxiProposalController -> TaxiProposalModel ++: save()
+    TaxiProposalModel -> TaxiProposalDb ++: update()
+    return OK
+return OK
+
+return OK
+
+@enduml TaxiProposalFinish
+
+@startuml BusInformationRetrieve
+
+autonumber
+skinparam dpi 300
+skinparam linetype ortho
+skinparam defaultFontSize 11
+skinparam defaultFontName "Noto Sans CJK TC"
+
+actor Requester as "Requester"
+participant BusInformationController as ":BusInformationController"
+participant BusInformationDb as ":BusInformationDb"
+
+Requester -> BusInformationController ++: retrieveBusInformation(busId)
+BusInformationController -> BusInformationDb ++: select(one).where(busId = busId)
+
+break No such bus
+    autonumber stop
+    BusInformationController <-- BusInformationDb: null
+    Requester <-- BusInformationController: null
+end
+
+autonumber resume
+create participant BusInformationModel as ":BusInformationModel"
+BusInformationDb --> BusInformationModel: Create BusInformationModel from query result
+return busInformationModel
+
+return busInformationModel
+
+@enduml
+
+
+@startuml RecordListRecords
+
+autonumber
+skinparam dpi 300
+skinparam linetype ortho
+skinparam defaultFontSize 11
+skinparam defaultFontName "Noto Sans CJK TC"
+
+actor Requester as "Requester"
+participant RecordController as ":RecordController"
+participant RecordDb as ":RecordDb"
+
+Requester -> RecordController ++: listRecords(studentId)
+RecordController -> RecordDb ++: select(all).where(studentId = studentId)
+
+break No such bus
+    autonumber stop
+    RecordController <-- RecordDb: ""[]""
+    Requester <-- RecordController: ""[]""
+end
+
+autonumber resume
+loop every columns
+create participant RecordModel as ":RecordModel"
+RecordDb --> RecordModel **: Create RecordModel from query result
+end
+
+return recordModels
+return recordModels
+
+@enduml
