@@ -1,0 +1,80 @@
+@startuml BasicClassDiagram
+
+skinparam linetype ortho
+skinparam dpi 300
+skinparam defaultFontSize 11
+skinparam defaultFontName "Noto Sans CJK TC"
+
+
+class User {
+    String studentId
+    String password
+}
+
+class Passenger {
+    String phone
+    Coordinate location
+}
+User <|-- Passenger
+
+class Organizer {
+    String phone
+    Coordinate location
+}
+User <|-- Organizer
+
+class BusRecord {
+    ID recordId
+    User user
+    BusInformation busInformation
+    Image recordCertificate
+}
+BusRecord "0..*" ---> "1" User: Create
+BusRecord "0..*" o--> "1" BusInformation: Board
+
+class BusInformation {
+    ID busId
+    Campus departOn
+    Campus arriveOn
+    Decimal cost
+    Time departAt
+    Time estArriveAt
+}
+BusInformation "0..*" o--> "1" Campus: Located at
+
+class Campus {
+    String name
+    Image map
+    Coordinate billOn
+}
+
+class TaxiProposalPassengers {
+    TaxiProposal taxiProposal
+    List<Passenger> passengers
+}
+TaxiProposalPassengers "0..*" -> "0..*" Passenger: Participate
+TaxiProposalPassengers "1" *--> "1" TaxiProposal: Belongs to
+
+class TaxiProposal {
+    ID tpId
+    Organizer organizer
+    Campus departOn
+    Campus arriveOn
+    Decimal cost
+    Time departAt
+    Time pairBefore
+    Int expectedPassengers
+    Boolean finished
+}
+TaxiProposal "0..*" o--> "1" Campus: Located at
+TaxiProposal "0..*" --> "1" Organizer: Created by
+TaxiProposal -> TaxiProposalStatus
+
+enum TaxiProposalStatus {
+    Waiting 等待配對
+    Matched 配對成功
+    Finished 配對單完成
+    Unmatched 配對失敗
+}
+
+@enduml

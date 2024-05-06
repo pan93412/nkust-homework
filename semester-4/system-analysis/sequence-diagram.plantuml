@@ -21,7 +21,7 @@ note left of TaxiProposalController
     * "tpId" will be assigned by database.
 end note
 
-TaxiProposalController -> TaxiProposalDb ++: add(proposalRequest)
+TaxiProposalController -> TaxiProposalDb ++: createProposal(proposalRequest)
 TaxiProposalDb -> TaxiProposalModel **: Create from request
 return taxiProposal
 

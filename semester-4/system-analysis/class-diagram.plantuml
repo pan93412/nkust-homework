@@ -5,11 +5,15 @@ skinparam dpi 300
 skinparam defaultFontSize 11
 skinparam defaultFontName "Noto Sans CJK TC"
 
+
 class User {
     +String studentId
     -String password
     +User construct()
+    +bool checkPassword(\n\tString passwordToCheck\n\t)
 }
+
+note right: The public fields in a class implicitly have their getters and setters.
 
 class Passenger {
     +String phone
@@ -30,6 +34,14 @@ class RecordController {
 }
 RecordController o--> BusRecord
 
+class RecordDb {
+    -List<BusRecord> busRecords
+    -Map<String, List<BusRecord>> studentIdIndex
+    -Map<ID, BusRecord> recordIdIndex
+    +List<BusRecord> listStudentRecords(studentId)
+}
+RecordDb o-> BusRecord
+
 class BusRecord {
     +ID recordId
     +User user
@@ -37,13 +49,20 @@ class BusRecord {
     +Image recordCertificate
     +BusRecord construct(busId)
 }
-BusRecord "0..*" --> "1" User: Create
-BusRecord "0..*" o-> "1" BusInformation: Board
+BusRecord "0..*" --> "1" User: Create (user)
+BusRecord "0..*" o-> "1" BusInformation: Board (busInformation)
 
 class BusInformationController {
     +BusInformation? retrieveBusInformation(busId)
 }
 BusInformationController o--> BusInformation
+
+class BusInformationDb {
+    -List<BusInformation> busInformations
+    -Map<ID, BusInformation> busIdIndex
+    +BusInformation? findBus(busId)
+}
+BusInformationDb o-> BusInformation
 
 class BusInformation {
     +ID busId
@@ -54,7 +73,7 @@ class BusInformation {
     +Time estArriveAt
     +BusInformation construct()
 }
-BusInformation "0..*" o--> "1" Campus: Depart / Arrive on
+BusInformation "0..*" o--> "1" Campus: departOn, arriveOn
 
 class Campus {
     +String name
@@ -71,8 +90,8 @@ class TaxiProposalPassengers {
     +void remove(Passenger)
     +int count()
 }
-TaxiProposalPassengers "0..*" -> "0..*" Passenger: Contains
-TaxiProposalPassengers "1" *--> "1" TaxiProposal: Belongs to
+TaxiProposalPassengers "0..*" -> "0..*" Passenger: Participate (passengers)
+TaxiProposalPassengers "1" *--> "1" TaxiProposal: Belongs to (taxiProposal)
 
 class TaxiProposalController {
     +TaxiProposal createProposal(proposalRequest)
@@ -81,6 +100,15 @@ class TaxiProposalController {
     +void finish(tpId)
 }
 TaxiProposalController o-> TaxiProposal
+
+class TaxiProposalDb {
+    -List<TaxiProposal> taxiProposals
+    -Map<ID, TaxiProposal> tpIdIndex
+    +TaxiProposal createProposal(partialTaxiProposal)
+    +TaxiProposal? findProposal(tpId)
+    +void updateProposal(tpId, field=value, ...)
+}
+TaxiProposalDb o-> TaxiProposal
 
 class TaxiProposal {
     +ID tpId
@@ -99,8 +127,8 @@ class TaxiProposal {
     +String getFailReason()
     +void finish()
 }
-TaxiProposal "0..*" o--> "1" Campus: Depart / Arrive on
-TaxiProposal "0..*" --> "1" Organizer: Created by
+TaxiProposal "0..*" o--> "1" Campus: departOn, arriveOn
+TaxiProposal "0..*" --> "1" Organizer: Created by (organizer)
 TaxiProposal -> TaxiProposalStatus
 
 enum TaxiProposalStatus {
