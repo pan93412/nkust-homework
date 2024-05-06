@@ -10,7 +10,7 @@ class User {
     +String studentId
     -String password
     +User construct()
-    +bool checkPassword(\n\tString passwordToCheck\n\t)
+    +bool checkPassword(passwordToCheck)
 }
 
 note right: The public fields in a class implicitly have their getters and setters.
@@ -20,7 +20,7 @@ class Passenger {
     +Coordinate location
     +Passenger construct()
 }
-User <|--- Passenger
+User <|-- Passenger
 
 class Organizer {
     +String phone
@@ -33,6 +33,7 @@ class RecordController {
     +List<BusRecord> listRecords(studentId)
 }
 RecordController o--> BusRecord
+RecordController o-> RecordDb
 
 class RecordDb {
     -List<BusRecord> busRecords
@@ -49,13 +50,14 @@ class BusRecord {
     +Image recordCertificate
     +BusRecord construct(busId)
 }
-BusRecord "0..*" --> "1" User: Create (user)
-BusRecord "0..*" o-> "1" BusInformation: Board (busInformation)
+BusRecord "0..*" --> "1" User: user
+BusRecord "0..*" o-> "1" BusInformation: busInformation
 
 class BusInformationController {
     +BusInformation? retrieveBusInformation(busId)
 }
 BusInformationController o--> BusInformation
+BusInformationController o--> BusInformationDb
 
 class BusInformationDb {
     -List<BusInformation> busInformations
@@ -90,8 +92,8 @@ class TaxiProposalPassengers {
     +void remove(Passenger)
     +int count()
 }
-TaxiProposalPassengers "0..*" -> "0..*" Passenger: Participate (passengers)
-TaxiProposalPassengers "1" *--> "1" TaxiProposal: Belongs to (taxiProposal)
+TaxiProposalPassengers "0..*" -> "0..*" Passenger: passengers
+TaxiProposalPassengers "1" *--> "1" TaxiProposal: taxiProposal
 
 class TaxiProposalController {
     +TaxiProposal createProposal(proposalRequest)
@@ -100,6 +102,7 @@ class TaxiProposalController {
     +void finish(tpId)
 }
 TaxiProposalController o-> TaxiProposal
+TaxiProposalController o-> TaxiProposalDb
 
 class TaxiProposalDb {
     -List<TaxiProposal> taxiProposals
@@ -128,7 +131,7 @@ class TaxiProposal {
     +void finish()
 }
 TaxiProposal "0..*" o--> "1" Campus: departOn, arriveOn
-TaxiProposal "0..*" --> "1" Organizer: Created by (organizer)
+TaxiProposal "0..*" --> "1" Organizer: organizer
 TaxiProposal -> TaxiProposalStatus
 
 enum TaxiProposalStatus {

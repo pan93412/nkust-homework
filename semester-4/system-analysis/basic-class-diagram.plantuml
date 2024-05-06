@@ -29,8 +29,8 @@ class BusRecord {
     BusInformation busInformation
     Image recordCertificate
 }
-BusRecord "0..*" ---> "1" User: Create
-BusRecord "0..*" o--> "1" BusInformation: Board
+BusRecord "0..*" ---> "1" User: Own
+BusRecord "0..*" o--> "1" BusInformation: Record of
 
 class BusInformation {
     ID busId
@@ -52,7 +52,7 @@ class TaxiProposalPassengers {
     TaxiProposal taxiProposal
     List<Passenger> passengers
 }
-TaxiProposalPassengers "0..*" -> "0..*" Passenger: Participate
+TaxiProposalPassengers "0..*" -> "0..*" Passenger: Participated by
 TaxiProposalPassengers "1" *--> "1" TaxiProposal: Belongs to
 
 class TaxiProposal {
