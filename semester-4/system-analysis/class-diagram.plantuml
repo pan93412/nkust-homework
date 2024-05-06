@@ -16,32 +16,34 @@ class Passenger {
     +Coordinate location
     +Passenger construct()
 }
-User <|-- Passenger
+User <|--- Passenger
 
 class Organizer {
     +String phone
     +Coordinate location
     +Organizer construct()
 }
-User <|-- Organizer
+User <|--- Organizer
 
 class RecordController {
     +List<BusRecord> listRecords(studentId)
 }
-RecordController "1" --> "0..*" BusRecord: Retrieve
+RecordController o--> BusRecord
 
 class BusRecord {
-    +String studentId
+    +ID recordId
+    +User user
     +BusInformation busInformation
     +Image recordCertificate
     +BusRecord construct(busId)
 }
-User "1" --> "0..*" BusRecord: Create
+BusRecord "0..*" --> "1" User: Create
+BusRecord "0..*" o-> "1" BusInformation: Board
 
-class BusController {
+class BusInformationController {
     +BusInformation? retrieveBusInformation(busId)
 }
-BusController "1" --> "0..*" BusInformation: Retrieve
+BusInformationController o--> BusInformation
 
 class BusInformation {
     +ID busId
@@ -52,24 +54,33 @@ class BusInformation {
     +Time estArriveAt
     +BusInformation construct()
 }
-BusRecord "0..*" --> "1" BusInformation: Relates
+BusInformation "0..*" o--> "1" Campus: Depart / Arrive on
 
 class Campus {
+    +String name
     +Image map
     +Coordinate billOn
     +Campus construct()
 }
-BusInformation "0..*" --> "1" Campus: Depart / Arrive on
 
 class TaxiProposalPassengers {
     +TaxiProposal taxiProposal
-    -List<Passengers> passengers
+    -List<Passenger> passengers
     +TaxiProposalPassengers construct()
     +void add(Passenger)
     +void remove(Passenger)
     +int count()
 }
-TaxiProposal "1" --> "1" TaxiProposalPassengers: Contains
+TaxiProposalPassengers "0..*" -> "0..*" Passenger: Contains
+TaxiProposalPassengers "1" *--> "1" TaxiProposal: Belongs to
+
+class TaxiProposalController {
+    +TaxiProposal createProposal(proposalRequest)
+    +TaxiProposalStatus getStatus(tpId)
+    +String getFailReason(tpId)
+    +void finish(tpId)
+}
+TaxiProposalController o-> TaxiProposal
 
 class TaxiProposal {
     +ID tpId
@@ -80,15 +91,16 @@ class TaxiProposal {
     +Time departAt
     +Time pairBefore
     +Int expectedPassengers
-    +TaxiProposalPassengers passengers
     +Boolean finished
 
     +TaxiProposal construct()
     +TaxiProposalStatus getStatus()
+    +TaxiProposalPassengers getPassengers()
     +String getFailReason()
     +void finish()
 }
-
+TaxiProposal "0..*" o--> "1" Campus: Depart / Arrive on
+TaxiProposal "0..*" --> "1" Organizer: Created by
 TaxiProposal -> TaxiProposalStatus
 
 enum TaxiProposalStatus {
@@ -97,8 +109,5 @@ enum TaxiProposalStatus {
     Finished 配對單完成
     Unmatched 配對失敗
 }
-
-Organizer "1" ---> "0..*" TaxiProposal: Create
-Passenger "0..*" ---> "1" TaxiProposalPassengers: Join
 
 @enduml

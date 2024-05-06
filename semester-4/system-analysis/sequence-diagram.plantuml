@@ -21,16 +21,11 @@ note left of TaxiProposalController
     * "tpId" will be assigned by database.
 end note
 
-TaxiProposalController --> TaxiProposalModel ** : construct()
-TaxiProposalController -> TaxiProposalModel ++: save()
+TaxiProposalController -> TaxiProposalDb ++: add(proposalRequest)
+TaxiProposalDb -> TaxiProposalModel **: Create from request
+return taxiProposal
 
-TaxiProposalModel -> TaxiProposalDb ++: insert(taxiProposalModel)
-return assignedTpId
-
-TaxiProposalModel -> TaxiProposalModel: setTpId(assignedTpId)
-return OK
-
-return taxiProposalModel
+return taxiProposal
 @enduml TaxiProposal
 
 @startuml TaxiProposalWaitForPairing
@@ -91,7 +86,7 @@ participant TaxiProposalDb as ":TaxiProposalDb"
 
 Requester -> TaxiProposalController ++: getFailReason(tpId)
 
-TaxiProposalController -> TaxiProposalDb ++: select(one).where(tpId = tpid)
+TaxiProposalController -> TaxiProposalDb ++: findProposal(tpId)
 
 break No such proposal
     autonumber stop
@@ -135,27 +130,18 @@ participant TaxiProposalDb as ":TaxiProposalDb"
 
 Requester -> TaxiProposalController ++: finish(tpId)
 
-TaxiProposalController -> TaxiProposalDb ++: select(one).where(tpId = tpid)
+TaxiProposalController -> TaxiProposalDb ++: updateProposal(tpId, finish=true)
 
 break No such proposal
     autonumber stop
-    TaxiProposalController <-- TaxiProposalDb: null
+    TaxiProposalController <-- TaxiProposalDb: NO_SUCH_PROPOSAL
     Requester <-- TaxiProposalController: NO_SUCH_PROPOSAL
 end
 
 autonumber resume
-
-create participant TaxiProposalModel as ":TaxiProposalModel"
-TaxiProposalDb --> TaxiProposalModel: Create from query result
-return taxiProposalModel
-
-TaxiProposalController -> TaxiProposalModel: setFinish(true)
-TaxiProposalController -> TaxiProposalModel ++: save()
-    TaxiProposalModel -> TaxiProposalDb ++: update()
-    return OK
+return OK
 return OK
 
-return OK
 
 @enduml TaxiProposalFinish
 
@@ -172,7 +158,7 @@ participant BusInformationController as ":BusInformationController"
 participant BusInformationDb as ":BusInformationDb"
 
 Requester -> BusInformationController ++: retrieveBusInformation(busId)
-BusInformationController -> BusInformationDb ++: select(one).where(busId = busId)
+BusInformationController -> BusInformationDb++: findProposal(tpId)
 
 break No such bus
     autonumber stop
@@ -182,7 +168,7 @@ end
 
 autonumber resume
 create participant BusInformationModel as ":BusInformationModel"
-BusInformationDb --> BusInformationModel: Create BusInformationModel from query result
+BusInformationDb --> BusInformationModel: Create BusInformationModel
 return busInformationModel
 
 return busInformationModel
@@ -203,7 +189,7 @@ participant RecordController as ":RecordController"
 participant RecordDb as ":RecordDb"
 
 Requester -> RecordController ++: listRecords(studentId)
-RecordController -> RecordDb ++: select(all).where(studentId = studentId)
+RecordController -> RecordDb ++: listStudentRecords(studentId)
 
 break No such bus
     autonumber stop
