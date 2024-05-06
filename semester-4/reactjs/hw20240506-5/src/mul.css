@@ -1,0 +1,9 @@
+.multiply {
+    display: flex;
+    gap: 0.25em;
+    align-items: center;
+}
+
+.multiply input {
+    width: 5em;
+}
