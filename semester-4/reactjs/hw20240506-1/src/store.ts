@@ -15,6 +15,13 @@ export interface Counter2Actions {
   decrementTwo: () => void;
 }
 
+export interface TextState {
+  text: string;
+}
+
+export interface TextActions {
+  setText: (text: string) => void;
+}
 
 export const useCounterStore = create<CounterState & CounterActions>((set) => ({
   count: 0,
@@ -27,4 +34,9 @@ export const useCounter2Store = create<CounterState & Counter2Actions>((set) => 
   count: 0,
   incrementTwo: () => set((state) => ({ count: state.count + 2 })),
   decrementTwo: () => set((state) => ({ count: state.count - 2 })),
+}))
+
+export const useTextStore = create<TextState & TextActions>((set) => ({
+  text: '',
+  setText: (text) => set({ text }),
 }))

@@ -1,4 +1,4 @@
-import { useCounter2Store, useCounterStore } from "./store";
+import { useCounter2Store, useCounterStore, useTextStore } from "./store";
 import "./counter.css";
 
 export function Counter() {
@@ -10,6 +10,9 @@ export function Counter() {
   const count2 = useCounter2Store((state) => state.count);
   const increment2 = useCounter2Store((state) => state.incrementTwo);
   const decrement2 = useCounter2Store((state) => state.decrementTwo);
+
+  const text = useTextStore((state) => state.text);
+  const setText = useTextStore((state) => state.setText);
 
   return (
     <div className="counter-block">
@@ -46,6 +49,10 @@ export function Counter() {
         <div>
           <button onClick={() => decrement2()}>-2</button>
         </div>
+      </section>
+      <section className="text">
+        <p style={{fontSize: "1.5rem", textAlign: "center"}}>You typed: {text ? <strong>{text}</strong> : <em>None</em>}</p>
+        <input name="text" onInput={(e) => setText(e.currentTarget.value)} />
       </section>
     </div>
   );
