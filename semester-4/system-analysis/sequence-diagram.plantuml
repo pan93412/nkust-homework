@@ -112,7 +112,7 @@ else 時間還沒到，人還沒到齊
     TaxiProposalController <-- TaxiProposalModel --: ""
 end
 
-return status
+return reason
 
 @enduml TaxiProposalGetFailReason
 
@@ -158,7 +158,7 @@ participant BusInformationController as ":BusInformationController"
 participant BusInformationDb as ":BusInformationDb"
 
 Requester -> BusInformationController ++: retrieveBusInformation(busId)
-BusInformationController -> BusInformationDb++: findProposal(tpId)
+BusInformationController -> BusInformationDb++: findBus(busId)
 
 break No such bus
     autonumber stop
