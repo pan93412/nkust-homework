@@ -1,5 +1,12 @@
-.counter {
+.counter, .counter2 {
     display: flex;
     gap: 1em;
     align-items: center;
+}
+
+.counter-block {
+    display: flex;
+    gap: 1em;
+    align-items: center;
+    flex-direction: column;
 }
