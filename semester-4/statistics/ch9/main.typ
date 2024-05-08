@@ -31,6 +31,46 @@ Ch9，雖然我們不知道 $mu$，但綜合專家、標識、猜測等，可以
 
 - 特性：最直覺
 
+=== 決策法則的流程
+
+從 #link(<ex9.1>)[Example 9.1] 的步驟摘錄。
+
++ 寫出拒絕 $H_0$ 的區域，也就是 *拒絕域*（Reject Region, $R R$）
++ 在 $overline(x)$ 尺度上做決策，就是 *臨界值法*
++ 以 #link(<ex9.1>)[Example 9.1] 來說，$overline(x)$ 的分配：母體不是常態分配，且 $n>=30$
+  $
+  overline(x) approx N(mu, sigma^2/n), (overline(x)-mu)/(sigma/sqrt(n)) approx Z
+  $
+  此時把 $H_0$ 的 $mu=510$ 當真。令 $mu=M_0$ (510g), $sigma=s$, $n=49$.
++ 令小於 $c$（臨界值，critical value）的值為拒絕域。
+  $
+  R R = { overline(x) | overline(x) < c}
+  $ <ex9.1-reject-region>
++ 拒絕域的機率是 $alpha$（顯著機率）為很有力的值。
+  + 一般常約定 $alpha=0.05$（機率很小 ⭐），$alpha=0.01$（機率更小 ⭐ ⭐），$alpha=0.1$（機率非常小 ⭐ ⭐ ⭐ ）這三種。
+  + $alpha$ 機率對應到 $c$
+    $
+    alpha &= 0.05 \
+      &= P(overline(x) < c) \
+      &= P(Z < (c-mu_0)/(sigma/sqrt(n))) \
+      &= P(Z < (c-510)/(15/sqrt(49)))
+    $
+    其中
+    $
+    A = (c-510)/(15/sqrt(49)) = -Z_(0.05)
+    $
+    $A=-Z_alpha$，因為 $Z_alpha$ 才能查表。
+    $
+    Z_(alpha/2) &= Z_0.025 = 1.645 \
+    c &= 510 + 1.645 times (15/sqrt(49)) \
+      &= 506.475
+    $
+    *註*：$c$ 的機率可以記下來
+    $
+    c &= mu_0 - Z_alpha times (sigma/sqrt(n)), sigma=s
+    $
+    拒絕在左尾，叫做左尾檢定。
+
 #question("ex9.1")[
   甲公司聲稱研發出一種新型的筆記型電腦，其平均重量小於 $510$ 公克，今隨機抽取 $49$ 台筆記型電腦進行測量，得到平均重量為 $overline(x)=505$ 公克，樣本標準差為 $s=15$ 公克，在顯著水準 $alpha=0.05$ 下，檢定其聲稱是否準確。
 ][
@@ -45,49 +85,13 @@ Ch9，雖然我們不知道 $mu$，但綜合專家、標識、猜測等，可以
   - $H_1$ 的 $1$ 是 alternative（對立）的意思：對立假說
     - 可以附註「宣稱」方便日後查看。
 
-
   + $
     cases(
-      H_0: mu >= 510g,
+      H_0: mu >= 510g (mu=510 "當真"),
       H_1: mu < 510g "(宣稱)"
     )
     $
   + 決策法則
-    + 寫出拒絕 $H_0$ 的區域，也就是 *拒絕域*（Reject Region, $R R$）
-    + 在 $overline(x)$ 尺度上做決策，就是 *臨界值法*
-    + $overline(x)$ 的分配：母體不是常態分配，且 $n>=30$
-      $
-      overline(x) approx N(mu, sigma^2/n), (overline(x)-mu)/(sigma/sqrt(n)) approx Z
-      $
-      此時把 $H_0$ 的 $mu=510$ 當真。令 $mu=M_0$ (510g), $sigma=s$, $n=49$.
-    + 令小於 $c$（臨界值，critical value）的值為拒絕域。
-      $
-      R R = { overline(x) | overline(x) < c}
-      $ <ex9.1-reject-region>
-    + 拒絕域的機率是 $alpha$（顯著機率）為很有力的值。
-      + 一般常約定 $alpha=0.05$（機率很小 ⭐），$alpha=0.01$（機率更小 ⭐ ⭐），$alpha=0.1$（機率非常小 ⭐ ⭐ ⭐ ）這三種。
-      + $alpha$ 機率對應到 $c$
-        $
-        alpha &= 0.05 \
-          &= P(overline(x) < c) \
-          &= P(Z < (c-mu_0)/(sigma/sqrt(n))) \
-          &= P(Z < (c-510)/(15/sqrt(49)))
-        $
-        其中
-        $
-        A = (c-510)/(15/sqrt(49)) = -Z_(0.05)
-        $
-        $A=-Z_alpha$，因為 $Z_alpha$ 才能查表。
-        $
-        Z_(alpha/2) &= Z_0.025 = 1.645 \
-        c &= 510 + 1.645 times (15/sqrt(49)) \
-          &= 506.475
-        $
-        *註*：$c$ 的機率可以記下來
-        $
-        c &= mu_0 - Z_alpha times (sigma/sqrt(n)), sigma=s
-        $
-        拒絕在左尾，叫做左尾檢定。
     + 已知 $c=506.475$，將 $c$ 帶入@ex9.1-reject-region：
       $
       R R = { overline(x) | overline(x) < 506.475}
@@ -288,6 +292,18 @@ Ch9，雖然我們不知道 $mu$，但綜合專家、標識、猜測等，可以
   - 實際應用上都是使用統計軟體計算
   - 最需要清楚記得
 
+=== $p$ 值決策法則的概念
+
++ 臨界值法
+  #figure(caption: [$mu=505$, $sigma=15$, $n=49$ 的 $Z$ 分配], image("assets/q9.7.png"))
++ 標準統計量檢定法
+  #figure(caption: [$mu=505$, $sigma=15$, $n=49$ 的標準化後 $Z$ 分配], image("assets/q9.7-2.png"))
++ $p$ 值法
+  #figure(caption: [$mu=505$, $sigma=15$, $n=49$ 的 $Z$ 分配], image("assets/q9.7-3.png"))
+  + $p$ 值法的目的，就是將臨界值 $c$ 轉換為機率 $alpha$。如果轉換後的值 $in R R$，則拒絕；反之接受。
+  + $p$ 值：變數 $overline(x)$ 比起 $overline(x)_s$ 值更偏向拒絕方向範圍的機率。
+  + $p$ 值 $<= alpha$ $=>$ $overline(x)_s in R R$, $R R = { p | p <= alpha }$.
+
 #question("ex9.7")[
   在 #link(<ex9.1>)[ex9.1] 中，試運用 $p$ 值檢定法，在顯著水準 $alpha=0.05$ 時，檢定甲公司之聲稱是否準確。
 ][
@@ -299,12 +315,84 @@ Ch9，雖然我們不知道 $mu$，但綜合專家、標識、猜測等，可以
       H_1: mu < 510g "(宣稱)"
     )
     $
+  + 決策法則（不論任何問題，單一法則）
+    $
+    R R = {p space "值" | p space "值" <= alpha}, alpha = 0.05 \
+    R R = {p space "值" | p space "值" <= 0.05}
+    $
+  + 已知 $n=49, overline(x)_s=505, s=15$.
+    + $p$ 值的機率圖
+      #figure(caption: [$mu=505$, $sigma=15$, $n=49$ 的 $Z$ 分配], image("assets/q9.7-4.png"))
+    + $
+      P"值" &= P(overline(X) < overline(x) | mu = mu_0) \
+            &= P(overline(X) < 505 | mu = 510) \
+            &= P(Z < (505-510)/(15/sqrt(49))) \
+            &= P(Z < -2.33) \
+            &= 0.01
+      $
+  + 代入 $R R$ 判斷，因為 $p space "值" = 0.01 in R R$，故拒絕 $H_0$
+  + *具體結論*：在 $alpha=0.05$ 下，接受廠商筆電平均重量小於 $510g$ 的宣稱。
+]
+
+#question("ex9.9")[
+    在 #link(<ex9.3>)[ex9.3] 中，試運用 $p$ 值檢定法，在顯著水準 $alpha=0.01$ 時，檢定該速食店業者之廣告宜稱是否準確。
+][
+  宣稱的等待時間母體 $mu<=5$，抽取 $n=20$ 個樣本，其 $overline(x)_s=5.15, s=0.73$，想要知道在 $alpha=0.01$ 下，宣稱是否準確？
+
+  + $
+    cases(
+      H_0: mu <= 5 "(宣稱)",
+      H_1: mu > 5
+    )
+    $
   + 決策法則
-    + 概念
-      + 臨界值法
-        #figure(caption: [$mu=505$, $sigma=15$, $n=49$ 的 $Z$ 分配], image("assets/q9.7.png"))
-      + 標準統計量檢定法
-        #figure(caption: [$mu=505$, $sigma=15$, $n=49$ 的標準化後 $Z$ 分配], image("assets/q9.7-2.png"))
-      + $p$ 值法
-        #figure(caption: [$mu=505$, $sigma=15$, $n=49$ 的 $Z$ 分配], image("assets/q9.7-3.png"))
+    $
+    R R = {p space "值" | p space "值" <= alpha}, alpha = 0.01 \
+    R R = {p space "值" | p space "值" <= 0.01}
+    $
+  + 已知 $n=20, overline(x)_s=5.15, s=0.73$.
+    #figure(caption: [$mu=5.15$, $sigma=0.73$, $n=20$ 的 $t$ 分配], image("assets/q9.9.png"))
+    $
+    P(overline(X) > overline(x)_s) &= P(overline(X) > 5.15) \
+      &= P((overline(x)-mu_0)/(s/sqrt(n)) > (5.15-5)/(0.73/sqrt(20))) \
+      &= P(t(19) > 0.92)
+    $
+    考慮到 $t_(0.100)(k) = 1.328$, $t_(0.050)(k) = 1.729$，往右走數字愈小。$overline(x)_s$ 在左邊，其 $p$ 值肯定大於 $0.1$，故接受 $H_0$。
+    #figure(caption: [$mu=5.15$, $sigma=0.73$, $n=20$ 的 $t$ 機率與 $p$ 值關係], image("assets/q9.9-2.png"))
+  + *具體結論*：在 $alpha=0.01$ 下，接受廠商平均等候時間不會超過5分鐘的宣稱。
+]
+
+#question("ex9.8")[
+  在 #link(<ex9.2>)[ex9.2] 中，試運用 $p$ 值檢定法，在顯著水準 $alpha=0.005$ 時，檢定該廠商之聲稱是否準確。
+][
+  宣稱的母體參數 $sigma=3000$, $mu eq.not 50,000$（互補 $mu=50,000$），抽出 $n=40$ 個樣本，其參數為 $overline(x)_s=48,500$。
+
+  + $
+    cases(
+      H_0: mu = 50000,
+      H_1: mu eq.not 50000 "(宣稱)"
+    )
+    $
+  + 決策法則
+    $
+    R R = {p space "值" | p space "值" <= alpha}, alpha = 0.005 \
+    R R = {p space "值" | p space "值" <= 0.005}
+    $
+  + 已知 $n=40, overline(x)_s=48500, s=3000$。因為 $n=40>30$ 為大樣本，根據 C.L.T 使用 $Z$ 分配。
+    $
+    overline(X) approx_("C.L.T") N(mu=mu_0, sigma^2=(s/sqrt(n))^2)
+    $
+    #figure(caption: [$mu=48500$, $sigma=3000$, $n=40$ 的 $Z$ 分配及 $c$ 區塊], image("assets/q9.8.png")) <fig-q9.8-1>
+    從 @fig-q9.8-1 可以理解 $overline(x)_s < mu_0$ 為左尾 $R R$ 區域 ($p'$)；$overline(x)_s > mu_0$ 為右尾 $R R$ 區域 ($p'$)。$2 times p' space "值" <= alpha/2 times 2 = p space "值" <= alpha$.
+
+    $
+    P space "值" &= 2 times P(overline(X)  < overline(x)_s) \
+                 &= 2 times P((overline(x)-mu_0)/(sigma/sqrt(n)) < (48500-50000)/(3000/sqrt(40))) \
+                 &= 2 times P(Z < -3.162) \
+                 &= 2 times P(Z > 3.16) \
+                 &= 2 times 0.0008 = 0.0016
+    $
+
+    考慮到 $P space "值" = 0.0016$ $in R R$，故拒絕 $R_0$.
+  + *具體結論*：在 $alpha=0.005$ 下，接受廠商輪胎平均壽命為 $50,000$ 英哩的宣稱。
 ]
