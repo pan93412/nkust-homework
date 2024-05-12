@@ -1,0 +1,209 @@
+@startuml TaxiProposalConstruct
+
+autonumber
+skinparam dpi 300
+skinparam linetype ortho
+skinparam defaultFontSize 11
+skinparam defaultFontName "Noto Sans CJK TC"
+
+actor Requester as "請求者"
+participant TaxiProposalController as ":TaxiProposalController\n操作介面"
+participant TaxiProposalModel as ":TaxiProposalModel\n資料模型"
+participant TaxiProposalDb as ":TaxiProposalDb\n資料庫"
+
+Requester -> TaxiProposalController ++ : createProposal(proposalRequest)\n使用者觸發建立配對單
+note left of TaxiProposalController
+    配對單包含「出發地點」、「抵達地點」、
+    「乘車金額」、「出發時間」、「配對時限」和
+    「預期乘客人數」。
+
+    * 「發起人」永遠都是請求者
+    * 「tpId」將由資料庫指派。
+end note
+
+TaxiProposalController -> TaxiProposalDb ++: createProposal(proposalRequest)\n在資料庫建立配對單
+TaxiProposalDb -> TaxiProposalModel **: Create from request\n將配對單資料實例化成物件
+return taxiProposal
+
+return taxiProposal
+@enduml TaxiProposal
+
+
+@startuml TaxiProposalWaitForPairing
+
+autonumber
+skinparam dpi 300
+skinparam linetype ortho
+skinparam defaultFontSize 11
+skinparam defaultFontName "Noto Sans CJK TC"
+
+actor Requester as "請求者"
+participant TaxiProposalController as ":TaxiProposalController\n操作介面"
+participant TaxiProposalDb as ":TaxiProposalDb\n資料庫"
+
+Requester -> TaxiProposalController ++: getStatus(tpId)\n取得配對單的狀態
+
+TaxiProposalController -> TaxiProposalDb ++: findProposal(tpId)\n在資料庫尋找配對單
+
+break 沒有這個 ID 的配對單
+    autonumber stop
+    TaxiProposalController <-- TaxiProposalDb: null\n回傳空值
+    Requester <-- TaxiProposalController: null\n回傳空值
+end
+
+autonumber resume
+
+create participant TaxiProposalModel as ":TaxiProposalModel\n資料模型"
+TaxiProposalDb --> TaxiProposalModel: Create from request\n將配對單資料實例化成物件
+return taxiProposalModel
+
+TaxiProposalController -> TaxiProposalModel ++: getStatus()\n取得配對單物件的狀態
+
+alt this.finished == true 完成配對
+    TaxiProposalController <-- TaxiProposalModel: status: TaxiProposalStatus.Finished 配對單完成
+else this.passengers.count() >= this.expectedPassengers 人數到齊
+    TaxiProposalController <-- TaxiProposalModel: status: TaxiProposalStatus.Matched 配對成功
+else this.pairBefore < now || this.departAt < now 配對或出發時間到
+    TaxiProposalController <-- TaxiProposalModel: status: TaxiProposalStatus.Unmatched 配對失敗
+else 時間還沒到，人還沒到齊
+    TaxiProposalController <-- TaxiProposalModel --: status: TaxiProposalStatus.Waiting 等待配對
+end
+
+return status
+
+@enduml TaxiProposalWaitForPairing
+
+@startuml TaxiProposalGetFailReason
+
+autonumber
+skinparam dpi 300
+skinparam linetype ortho
+skinparam defaultFontSize 11
+skinparam defaultFontName "Noto Sans CJK TC"
+
+actor Requester as "請求者"
+participant TaxiProposalController as ":TaxiProposalController\n操作介面"
+participant TaxiProposalDb as ":TaxiProposalDb\n資料庫"
+
+Requester -> TaxiProposalController ++: getFailReason(tpId)\n取得配對失敗原因
+
+TaxiProposalController -> TaxiProposalDb ++: findProposal(tpId)\n在資料庫尋找配對單
+
+break 沒有這個 ID 的配對單
+    autonumber stop
+    TaxiProposalController <-- TaxiProposalDb: null\n回傳空值
+    Requester <-- TaxiProposalController: ""\n回傳空白字串
+end
+
+autonumber resume
+
+create participant TaxiProposalModel as ":TaxiProposalModel\n資料模型"
+TaxiProposalDb --> TaxiProposalModel: Create from query result\n將配對單資料實例化成物件
+return taxiProposalModel
+
+TaxiProposalController -> TaxiProposalModel ++: getFailReason()\n取得配對失敗原因
+
+alt this.finished == true 完成配對
+    TaxiProposalController <-- TaxiProposalModel: ""\n回傳空白字串
+else this.passengers.count() >= this.expectedPassengers 人數到齊
+    TaxiProposalController <-- TaxiProposalModel: ""PAIR_FULL""\n回傳人數已滿
+else this.pairBefore < now || this.departAt < now 配對或出發時間到
+    TaxiProposalController <-- TaxiProposalModel: ""PAIR_EXPIRED""\n回傳配對時間已過
+else 時間還沒到，人還沒到齊
+    TaxiProposalController <-- TaxiProposalModel --: ""\n回傳空白字串
+end
+
+return reason
+
+@enduml TaxiProposalGetFailReason
+
+@startuml TaxiProposalFinish
+
+autonumber
+skinparam dpi 300
+skinparam linetype ortho
+skinparam defaultFontSize 11
+skinparam defaultFontName "Noto Sans CJK TC"
+
+actor Requester as "請求者"
+participant TaxiProposalController as ":TaxiProposalController\n操作介面"
+participant TaxiProposalDb as ":TaxiProposalDb\n資料庫"
+
+Requester -> TaxiProposalController ++: finish(tpId)\n完成配對
+
+TaxiProposalController -> TaxiProposalDb ++: updateProposal(tpId, finish=true)\n在資料庫更新配對單，將 finish 設為 true
+
+break 沒有這個 ID 的配對單
+    autonumber stop
+    TaxiProposalController <-- TaxiProposalDb: NO_SUCH_PROPOSAL\n沒有這個配對單
+    Requester <-- TaxiProposalController: NO_SUCH_PROPOSAL\n沒有這個配對單
+end
+
+autonumber resume
+return OK
+return OK
+
+
+@enduml TaxiProposalFinish
+
+@startuml RecordListRecords
+
+autonumber
+skinparam dpi 300
+skinparam linetype ortho
+skinparam defaultFontSize 11
+skinparam defaultFontName "Noto Sans CJK TC"
+
+actor Requester as "請求者"
+participant RecordController as ":RecordController\n預約紀錄介面"
+participant RecordDb as ":RecordDb\n預約紀錄資料庫"
+
+Requester -> RecordController ++: listRecords(studentId)\n列出學生的所有預約紀錄
+RecordController -> RecordDb ++: listStudentRecords(studentId)\n在資料庫尋找學生的所有預約紀錄
+
+break 沒有預約記錄
+    autonumber stop
+    RecordController <-- RecordDb: ""[]"" 空陣列
+    Requester <-- RecordController: ""[]"" 空陣列
+end
+
+autonumber resume
+loop 資料庫回傳的每一行
+create participant RecordModel as ":RecordModel\n預約紀錄模型"
+RecordDb --> RecordModel **: Create from query result\n將預約紀錄資料實例化成物件
+end
+
+return recordModels\n所有預約紀錄
+return recordModels\n所有預約紀錄
+
+@enduml
+
+@startuml BusInformationRetrieve
+
+autonumber
+skinparam dpi 300
+skinparam linetype ortho
+skinparam defaultFontSize 11
+skinparam defaultFontName "Noto Sans CJK TC"
+
+actor Requester as "請求者"
+participant BusInformationController as ":BusInformationController\n校車資訊介面"
+participant BusInformationDb as ":BusInformationDb\n校車資訊資料庫"
+
+Requester -> BusInformationController ++: retrieveBusInformation(busId)\n取得校車資訊
+BusInformationController -> BusInformationDb++: findBus(busId)\n在資料庫尋找指定 ID 的校車
+
+break 沒有這個 ID 的校車
+    autonumber stop
+    BusInformationController <-- BusInformationDb: null 空值
+    Requester <-- BusInformationController: null 空值
+end
+
+autonumber resume
+create participant BusInformationModel as ":BusInformationModel"
+BusInformationDb --> BusInformationModel: Create BusInformationModel\n將校車資訊資料實例化成物件
+return busInformationModel 校車資訊
+
+return busInformationModel 校車資訊
+
+@enduml

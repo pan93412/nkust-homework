@@ -1,0 +1,213 @@
+@startuml ClassDiagramTaxi
+
+skinparam linetype ortho
+skinparam dpi 300
+skinparam defaultFontSize 11
+skinparam defaultFontName "Noto Sans CJK TC"
+
+
+class User {
+    +String studentId 學號
+    -String password 密碼
+    +User construct()
+    +bool checkPassword(passwordToCheck)\n檢查密碼
+}
+
+class Passenger {
+    +String phone 電話
+    +Coordinate location 座標
+    +Passenger construct()
+}
+User <|-up- Passenger
+
+class Organizer {
+    +String phone 電話
+    +Coordinate location 座標
+    +Organizer construct()
+}
+User <|-up- Organizer
+
+class Campus {
+    +String name 校區名稱
+    +Image map 地圖
+    +Coordinate billOn 付款地點
+    +Campus construct()
+}
+
+class TaxiProposalPassengers {
+    +TaxiProposal taxiProposal 配對單
+    -List<Passenger> passengers 乘客
+    +TaxiProposalPassengers construct()
+    +void add(Passenger) 加入乘客
+    +void remove(Passenger) 移除乘客
+    +int count() 計算乘客數量
+}
+TaxiProposalPassengers "0..*" --up-> "0..*" Passenger: passengers
+TaxiProposalPassengers "1" *-down-> "1" TaxiProposal: taxiProposal
+
+class TaxiProposalController {
+    +TaxiProposal createProposal(proposalRequest)\n建立配對單
+    +TaxiProposalStatus getStatus(tpId)\n取得配對單狀態
+    +String getFailReason(tpId)\n取得配對失敗原因
+    +void finish(tpId) 完成配對單
+}
+TaxiProposalController o-up-> TaxiProposal
+TaxiProposalController o-right-> TaxiProposalDb
+
+class TaxiProposalDb {
+    -List<TaxiProposal> taxiProposals 配對單列表
+    -Map<ID, TaxiProposal> tpIdIndex ID-配對單索引
+    +TaxiProposal createProposal(partialTaxiProposal)\n建立配對單
+    +TaxiProposal? findProposal(tpId)\n尋找指定 ID 的配對單
+    +void updateProposal(tpId, field=value, ...)\n更新配對單欄位
+}
+TaxiProposalDb o-up-> TaxiProposal
+
+class TaxiProposal {
+    +ID tpId 配對單 ID
+    +Organizer organizer 發起人
+    +Campus departOn 出發校區
+    +Campus arriveOn 到達校區
+    +Decimal cost 費用
+    +Time departAt 出發時間
+    +Time pairBefore 配對截止時間
+    +Int expectedPassengers 預期乘客數
+    +Boolean finished 配對單是否完成
+
+    +TaxiProposal construct()
+    +TaxiProposalStatus getStatus() 取得配對單狀態
+    +TaxiProposalPassengers getPassengers() 取得乘客列表
+    +String getFailReason() 取得配對失敗原因
+    +void finish() 完成配對單
+}
+TaxiProposal "0..*" o-up-> "1" Campus: departOn, arriveOn
+TaxiProposal "0..*" --> "1" Organizer: organizer
+TaxiProposal -> TaxiProposalStatus
+
+enum TaxiProposalStatus {
+    Waiting 等待配對
+    Matched 配對成功
+    Finished 配對單完成
+    Unmatched 配對失敗
+}
+
+@enduml
+
+@startuml ClassDiagramRecord
+
+skinparam linetype ortho
+skinparam dpi 300
+skinparam defaultFontSize 11
+skinparam defaultFontName "Noto Sans CJK TC"
+
+
+class User {
+    +String studentId 學號
+    -String password 密碼
+    +User construct()
+    +bool checkPassword(passwordToCheck)\n檢查密碼
+}
+
+class Campus {
+    +String name 校區名稱
+    +Image map 地圖
+    +Coordinate billOn 付款地點
+    +Campus construct()
+}
+
+class RecordController {
+    +List<BusRecord> listRecords(studentId)\n列出學生的乘車紀錄
+}
+RecordController o--> BusRecord
+RecordController o-> RecordDb
+
+class RecordDb {
+    -List<BusRecord> busRecords\n乘車紀錄列表
+    -Map<String, List<BusRecord>> studentIdIndex\n學生 ID 索引
+    -Map<ID, BusRecord> recordIdIndex\n紀錄 ID 索引
+    +List<BusRecord> listStudentRecords(studentId)\n從資料庫列出學生的所有乘車紀錄
+}
+RecordDb o-> BusRecord
+
+class BusRecord {
+    +ID recordId 紀錄 ID
+    +User user 乘客
+    +BusInformation busInformation 乘車資訊
+    +Image recordCertificate 預約憑證
+    +BusRecord construct(busId) 建立乘車紀錄
+}
+BusRecord "0..*" --> "1" User: user
+BusRecord "0..*" o--> "1" BusInformation: busInformation
+
+class BusInformation {
+    +ID busId 車次 ID
+    +Campus departOn 出發校區
+    +Campus arriveOn 到達校區
+    +Decimal cost 費用
+    +Time departAt 出發時間
+    +Time estArriveAt 預計到達時間
+    +BusInformation construct()
+}
+BusInformation "0..*" o--> "1" Campus: departOn, arriveOn
+
+@enduml
+
+
+@startuml ClassDiagramBusInformation
+
+skinparam linetype ortho
+skinparam dpi 300
+skinparam defaultFontSize 11
+skinparam defaultFontName "Noto Sans CJK TC"
+
+
+class User {
+    +String studentId 學號
+    -String password 密碼
+    +User construct()
+    +bool checkPassword(passwordToCheck)\n檢查密碼
+}
+
+class Campus {
+    +String name 校區名稱
+    +Image map 地圖
+    +Coordinate billOn 付款地點
+    +Campus construct()
+}
+
+class RecordController {
+    +List<BusRecord> listRecords(studentId)\n列出學生的乘車紀錄
+}
+RecordController o--> BusRecord
+RecordController o-> RecordDb
+
+class RecordDb {
+    -List<BusRecord> busRecords\n乘車紀錄列表
+    -Map<String, List<BusRecord>> studentIdIndex\n學生 ID 索引
+    -Map<ID, BusRecord> recordIdIndex\n紀錄 ID 索引
+    +List<BusRecord> listStudentRecords(studentId)\n從資料庫列出學生的所有乘車紀錄
+}
+RecordDb o-> BusRecord
+
+class BusRecord {
+    +ID recordId 紀錄 ID
+    +User user 乘客
+    +BusInformation busInformation 乘車資訊
+    +Image recordCertificate 預約憑證
+    +BusRecord construct(busId) 建立乘車紀錄
+}
+BusRecord "0..*" --> "1" User: user
+BusRecord "0..*" o--> "1" BusInformation: busInformation
+
+class BusInformation {
+    +ID busId 車次 ID
+    +Campus departOn 出發校區
+    +Campus arriveOn 到達校區
+    +Decimal cost 費用
+    +Time departAt 出發時間
+    +Time estArriveAt 預計到達時間
+    +BusInformation construct()
+}
+BusInformation "0..*" o--> "1" Campus: departOn, arriveOn
+
+@enduml

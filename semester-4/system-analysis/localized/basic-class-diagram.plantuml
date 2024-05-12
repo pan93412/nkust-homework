@@ -1,0 +1,80 @@
+@startuml BasicClassDiagram
+
+skinparam linetype ortho
+skinparam dpi 300
+skinparam defaultFontSize 11
+skinparam defaultFontName "Noto Sans CJK TC"
+
+
+class User {
+    String studentId 學號
+    String password 密碼
+}
+
+class Passenger {
+    String phone 電話號碼
+    Coordinate location 位置
+}
+User <|-- Passenger
+
+class Organizer {
+    String phone 電話號碼
+    Coordinate location 位置
+}
+User <|-- Organizer
+
+class BusRecord {
+    ID recordId 紀錄編號
+    User user 預約者
+    BusInformation busInformation 車次資訊
+    Image recordCertificate 預約憑證
+}
+BusRecord "0..*" ---> "1" User: 擁有
+BusRecord "0..*" o--> "1" BusInformation: 預約車次
+
+class BusInformation {
+    ID busId 車次編號
+    Campus departOn 出發地點
+    Campus arriveOn 到達地點
+    Decimal cost 費用
+    Time departAt 出發時間
+    Time estArriveAt 預計到達時間
+}
+BusInformation "0..*" o--> "1" Campus: 出發地點
+
+class Campus {
+    String name 校區名稱
+    Image map 地圖
+    Coordinate billOn 付款地點
+}
+
+class TaxiProposalPassengers {
+    TaxiProposal taxiProposal 配對單
+    List<Passenger> passengers 參與乘客
+}
+TaxiProposalPassengers "0..*" -> "0..*" Passenger: 參與
+TaxiProposalPassengers "1" *--> "1" TaxiProposal: 屬於
+
+class TaxiProposal {
+    ID tpId 配對單編號
+    Organizer organizer 組織者
+    Campus departOn 出發地點
+    Campus arriveOn 到達地點
+    Decimal cost 費用
+    Time departAt 出發時間
+    Time pairBefore 配對截止時間
+    Int expectedPassengers 預期乘客數
+    Boolean finished 是否完成？
+}
+TaxiProposal "0..*" o--> "1" Campus: 出發地點
+TaxiProposal "0..*" --> "1" Organizer: 組織者
+TaxiProposal -> TaxiProposalStatus
+
+enum TaxiProposalStatus {
+    Waiting 等待配對
+    Matched 配對成功
+    Finished 配對單完成
+    Unmatched 配對失敗
+}
+
+@enduml

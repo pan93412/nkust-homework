@@ -85,7 +85,7 @@ actor User as "<U+000D>"
 participant TaxiProposal as ":TaxiProposal\n呼叫小黃系統"
 
 User -> TaxiProposal : 建立配對單\n\t\
-construct(出發時間, 抵達時間車資, 出發時間, 最晚配對期限, 預期配對人數)
+createProposal(出發時間, 抵達時間車資, 出發時間, 最晚配對期限, 預期配對人數)
 activate TaxiProposal
 
 TaxiProposal -> User : 配對單（類別）\n\t(內容同上)
