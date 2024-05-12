@@ -160,14 +160,6 @@ skinparam dpi 300
 skinparam defaultFontSize 11
 skinparam defaultFontName "Noto Sans CJK TC"
 
-
-class User {
-    +String studentId 學號
-    -String password 密碼
-    +User construct()
-    +bool checkPassword(passwordToCheck)\n檢查密碼
-}
-
 class Campus {
     +String name 校區名稱
     +Image map 地圖
@@ -175,29 +167,18 @@ class Campus {
     +Campus construct()
 }
 
-class RecordController {
-    +List<BusRecord> listRecords(studentId)\n列出學生的乘車紀錄
+class BusInformationController {
+    +BusInformation? retrieveBusInformation(busId) 取得車次資訊
 }
-RecordController o--> BusRecord
-RecordController o-> RecordDb
+BusInformationController o--> BusInformation
+BusInformationController o--> BusInformationDb
 
-class RecordDb {
-    -List<BusRecord> busRecords\n乘車紀錄列表
-    -Map<String, List<BusRecord>> studentIdIndex\n學生 ID 索引
-    -Map<ID, BusRecord> recordIdIndex\n紀錄 ID 索引
-    +List<BusRecord> listStudentRecords(studentId)\n從資料庫列出學生的所有乘車紀錄
+class BusInformationDb {
+    -List<BusInformation> busInformations 車次資訊列表
+    -Map<ID, BusInformation> busIdIndex 車次 ID 索引
+    +BusInformation? findBus(busId) 尋找指定車次
 }
-RecordDb o-> BusRecord
-
-class BusRecord {
-    +ID recordId 紀錄 ID
-    +User user 乘客
-    +BusInformation busInformation 乘車資訊
-    +Image recordCertificate 預約憑證
-    +BusRecord construct(busId) 建立乘車紀錄
-}
-BusRecord "0..*" --> "1" User: user
-BusRecord "0..*" o--> "1" BusInformation: busInformation
+BusInformationDb o-> BusInformation
 
 class BusInformation {
     +ID busId 車次 ID
