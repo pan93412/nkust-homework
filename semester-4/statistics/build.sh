@@ -2,7 +2,7 @@
 
 shopt -s extglob
 
-export TYPST_FONT_PATHS="$HOME/Library/Application Support/Adobe/CoreSync/plugins/livetype/.r/"
+export TYPST_FONT_PATHS="$HOME/Library/Application Support/Adobe/CoreSync/plugins/livetype/"
 
 rm -r dist
 mkdir dist
