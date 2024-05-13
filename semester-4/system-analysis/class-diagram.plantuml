@@ -36,9 +36,11 @@ RecordController o--> BusRecord
 RecordController o-> RecordDb
 
 class RecordDb {
+    -RecordDb instance
     -List<BusRecord> busRecords
     -Map<String, List<BusRecord>> studentIdIndex
     -Map<ID, BusRecord> recordIdIndex
+    +RecordDb getInstance()
     +List<BusRecord> listStudentRecords(studentId)
 }
 RecordDb o-> BusRecord
@@ -60,8 +62,10 @@ BusInformationController o--> BusInformation
 BusInformationController o--> BusInformationDb
 
 class BusInformationDb {
+    -BusInformationDb instance
     -List<BusInformation> busInformations
     -Map<ID, BusInformation> busIdIndex
+    +BusInformationDb getInstance()
     +BusInformation? findBus(busId)
 }
 BusInformationDb o-> BusInformation
@@ -105,8 +109,10 @@ TaxiProposalController o-> TaxiProposal
 TaxiProposalController o-> TaxiProposalDb
 
 class TaxiProposalDb {
+    -TaxiProposalDb instance
     -List<TaxiProposal> taxiProposals
     -Map<ID, TaxiProposal> tpIdIndex
+    +TaxiProposalDb getInstance()
     +TaxiProposal createProposal(partialTaxiProposal)
     +TaxiProposal? findProposal(tpId)
     +void updateProposal(tpId, field=value, ...)
@@ -140,5 +146,12 @@ enum TaxiProposalStatus {
     Finished 配對單完成
     Unmatched 配對失敗
 }
+
+abstract class Controller {
+    +void onRequest(Request request, Response response)
+}
+Controller <|-- RecordController
+Controller <|-- BusInformationController
+Controller <|-- TaxiProposalController
 
 @enduml
