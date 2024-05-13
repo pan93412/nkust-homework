@@ -1,0 +1,9 @@
+.calc {
+    display: flex;
+    gap: 0.25em;
+    align-items: center;
+}
+
+.calc input {
+    width: 5em;
+}
