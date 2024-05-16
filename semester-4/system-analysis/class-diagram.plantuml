@@ -20,7 +20,7 @@ class Passenger {
     +Coordinate location
     +Passenger construct()
 }
-User <|-- Passenger
+User <|--- Passenger
 
 class Organizer {
     +String phone
@@ -32,8 +32,8 @@ User <|--- Organizer
 class RecordController {
     +List<BusRecord> listRecords(studentId)
 }
-RecordController o--> BusRecord
-RecordController o-> RecordDb
+RecordController o---> BusRecord
+RecordController o---> RecordDb
 
 class RecordDb {
     -RecordDb instance
@@ -43,7 +43,7 @@ class RecordDb {
     +RecordDb getInstance()
     +List<BusRecord> listStudentRecords(studentId)
 }
-RecordDb o-> BusRecord
+RecordDb o---> BusRecord
 
 class BusRecord {
     +ID recordId
@@ -52,14 +52,14 @@ class BusRecord {
     +Image recordCertificate
     +BusRecord construct(busId)
 }
-BusRecord "0..*" --> "1" User: user
-BusRecord "0..*" o-> "1" BusInformation: busInformation
+BusRecord "0..*" ---> "1" User: user
+BusRecord "0..*" o---> "1" BusInformation: busInformation
 
 class BusInformationController {
     +BusInformation? retrieveBusInformation(busId)
 }
-BusInformationController o--> BusInformation
-BusInformationController o--> BusInformationDb
+BusInformationController o---> BusInformation
+BusInformationController o---> BusInformationDb
 
 class BusInformationDb {
     -BusInformationDb instance
@@ -68,7 +68,7 @@ class BusInformationDb {
     +BusInformationDb getInstance()
     +BusInformation? findBus(busId)
 }
-BusInformationDb o-> BusInformation
+BusInformationDb o---> BusInformation
 
 class BusInformation {
     +ID busId
@@ -79,7 +79,7 @@ class BusInformation {
     +Time estArriveAt
     +BusInformation construct()
 }
-BusInformation "0..*" o--> "1" Campus: departOn, arriveOn
+BusInformation "0..*" o---> "1" Campus: departOn, arriveOn
 
 class Campus {
     +String name
@@ -96,7 +96,7 @@ class TaxiProposalPassengers {
     +void remove(Passenger)
     +int count()
 }
-TaxiProposalPassengers "0..*" -> "0..*" Passenger: passengers
+TaxiProposalPassengers "0..*" --> "0..*" Passenger: passengers
 TaxiProposalPassengers "1" *--> "1" TaxiProposal: taxiProposal
 
 class TaxiProposalController {
@@ -105,8 +105,8 @@ class TaxiProposalController {
     +String getFailReason(tpId)
     +void finish(tpId)
 }
-TaxiProposalController o-> TaxiProposal
-TaxiProposalController o-> TaxiProposalDb
+TaxiProposalController o--> TaxiProposal
+TaxiProposalController o--> TaxiProposalDb
 
 class TaxiProposalDb {
     -TaxiProposalDb instance
@@ -117,7 +117,7 @@ class TaxiProposalDb {
     +TaxiProposal? findProposal(tpId)
     +void updateProposal(tpId, field=value, ...)
 }
-TaxiProposalDb o-> TaxiProposal
+TaxiProposalDb o--> TaxiProposal
 
 class TaxiProposal {
     +ID tpId
@@ -137,8 +137,8 @@ class TaxiProposal {
     +void finish()
 }
 TaxiProposal "0..*" o--> "1" Campus: departOn, arriveOn
-TaxiProposal "0..*" --> "1" Organizer: organizer
-TaxiProposal -> TaxiProposalStatus
+TaxiProposal "0..*" ---> "1" Organizer: organizer
+TaxiProposal ---> TaxiProposalStatus
 
 enum TaxiProposalStatus {
     Waiting 等待配對
