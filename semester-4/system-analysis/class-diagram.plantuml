@@ -91,8 +91,8 @@ class TaxiProposalPassenger {
     +TaxiProposal getTaxiProposal(db)
     +List<Passenger> getPassengers(db)
 }
-TaxiProposalPassenger "0..*" --> "0..*" Passenger: passengers
-TaxiProposalPassenger "1" *--> "1" TaxiProposal: taxiProposal
+TaxiProposalPassenger "1" --> "1" Passenger: passengers
+TaxiProposalPassenger "0..*" *--> "1" TaxiProposal: taxiProposal
 
 interface TaxiProposalController {
     +TaxiProposal createProposal(proposalRequest)
