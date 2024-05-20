@@ -7,7 +7,7 @@ skinparam defaultFontName "Noto Sans CJK TC"
 
 
 class User {
-    +<u>String userId</u> <i>(PK)</i>
+    +<u>String userId</u>
     -String password
     +User construct()
     +bool checkPassword(passwordToCheck)
@@ -27,6 +27,11 @@ class Organizer {
 }
 User <|--- Organizer
 
+interface RecordUI {
+    +listRecords()
+}
+RecordUI o---> RecordController
+
 interface RecordController {
     +List<BusRecord> listRecords(userId)
 }
@@ -39,7 +44,7 @@ interface RecordDb {
 RecordDb o---> BusRecord
 
 class BusRecord {
-    +<u>ID recordId</u> <i>(PK)</i>
+    +<u>ID recordId</u>
     -String userId
     -ID busId
     +Image recordCertificate
@@ -50,22 +55,24 @@ class BusRecord {
 BusRecord "0..*" ---> "1" User: user
 BusRecord "0..*" o---> "1" BusInformation: busInformation
 
+interface BusInformationUI {
+    +getBusInformation()
+}
+BusInformationUI o---> BusInformationController
+
 interface BusInformationController {
     +BusInformation? retrieveBusInformation(busId)
 }
 BusInformationController o---> BusInformation
 
-class BusInformationDb {
-    -BusInformationDb instance
-    -List<BusInformation> busInformations
-    -Map<ID, BusInformation> busIdIndex
+interface BusInformationDb {
     +BusInformationDb getInstance()
     +BusInformation? findBus(busId)
 }
 BusInformationDb o---> BusInformation
 
 class BusInformation {
-    +<u>ID busId</u> <i>(PK)</i>
+    +<u>ID busId</u>
     -String departOnName
     -String arriveOnName
     +Decimal cost
@@ -78,21 +85,30 @@ class BusInformation {
 BusInformation "0..*" o---> "1" Campus: departOn, arriveOn
 
 class Campus {
-    +<u>String name</u> <i>(PK)</i>
+    +<u>String name</u>
     +Image map
     +Coordinate billOn
     +Campus construct()
 }
 
 class TaxiProposalPassenger {
-    -ID tpId
-    -String passengerId
+    -<u>ID tpId</u>
+    -<u>String passengerId</u>
     +TaxiProposalPassengers construct()
     +TaxiProposal getTaxiProposal(db)
     +List<Passenger> getPassengers(db)
 }
 TaxiProposalPassenger "1" --> "1" Passenger: passengers
 TaxiProposalPassenger "0..*" *--> "1" TaxiProposal: taxiProposal
+
+interface TaxiProposalUI {
+    +onFieldChanged()
+    +onCreateProposalButtonClicked()
+    +onFinishButtonClicked()
+    +getStatus()
+    +getFailReason()
+}
+TaxiProposalUI o---> TaxiProposalController
 
 interface TaxiProposalController {
     +TaxiProposal createProposal(proposalRequest)
@@ -111,7 +127,7 @@ interface TaxiProposalDb {
 TaxiProposalDb o--> TaxiProposal
 
 class TaxiProposal {
-    +ID tpId
+    +<u>ID tpId</u>
     -ID organizerId
     -String departOnName
     -String arriveOnName

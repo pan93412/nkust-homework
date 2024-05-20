@@ -6,28 +6,40 @@ skinparam linetype ortho
 skinparam defaultFontSize 11
 skinparam defaultFontName "Noto Sans CJK TC"
 
-actor Requester as "請求者"
-participant TaxiProposalController as ":TaxiProposalController\n操作介面"
+actor Requester as "使用者"
+participant TaxiProposalSystem as ":TaxiProposalSystem"
+participant TaxiProposalUI as ":TaxiProposalUI\n展現層"
+participant TaxiProposalController as ":TaxiProposalController\n控制層"
 participant TaxiProposalModel as ":TaxiProposalModel\n資料模型"
 participant TaxiProposalDb as ":TaxiProposalDb\n資料庫"
 
-Requester -> TaxiProposalController ++ : createProposal(proposalRequest)\n使用者觸發建立配對單
+Requester -> TaxiProposalSystem **: construct()
+Requester -> TaxiProposalSystem: run()
+TaxiProposalSystem -> TaxiProposalUI **: construct()
+TaxiProposalSystem -> TaxiProposalUI: onFieldChanged()\n使用者輸入資料
+TaxiProposalSystem -> TaxiProposalUI: onFieldChanged()\n使用者輸入資料
+TaxiProposalSystem -> TaxiProposalUI ++: onCreateProposalButtonClicked()\n使用者點「建立按鈕」
+TaxiProposalSystem <-- TaxiProposalUI: [Toast] 正在建立⋯⋯
+
+TaxiProposalUI -> TaxiProposalController **: construct()
+TaxiProposalUI -> TaxiProposalController ++ : createProposal(proposalRequest)\n使用者觸發建立配對單
 note left of TaxiProposalController
     配對單包含「出發地點」、「抵達地點」、
     「乘車金額」、「出發時間」、「配對時限」和
     「預期乘客人數」。
 
-    * 「發起人」永遠都是請求者
+    * 「發起人」永遠都是使用者
     * 「tpId」將由資料庫指派。
 end note
 
+TaxiProposalController -> TaxiProposalDb **: construct()
 TaxiProposalController -> TaxiProposalDb ++: createProposal(proposalRequest)\n在資料庫建立配對單
 TaxiProposalDb -> TaxiProposalModel **: Create from request\n將配對單資料實例化成物件
 return taxiProposal
-
 return taxiProposal
-@enduml TaxiProposal
 
+return [Toast] 建立完成！
+@enduml TaxiProposal
 
 @startuml TaxiProposalWaitForPairing
 
@@ -37,18 +49,29 @@ skinparam linetype ortho
 skinparam defaultFontSize 11
 skinparam defaultFontName "Noto Sans CJK TC"
 
-actor Requester as "請求者"
-participant TaxiProposalController as ":TaxiProposalController\n操作介面"
+actor Requester as "使用者"
+participant TaxiProposalSystem as ":TaxiProposalSystem"
+participant TaxiProposalUI as ":TaxiProposalUI\n展現層"
+participant TaxiProposalController as ":TaxiProposalController\n控制層"
 participant TaxiProposalDb as ":TaxiProposalDb\n資料庫"
 
-Requester -> TaxiProposalController ++: getStatus(tpId)\n取得配對單的狀態
+Requester -> TaxiProposalSystem **: construct()
+Requester -> TaxiProposalSystem: run()
 
+TaxiProposalSystem -> TaxiProposalUI **: construct()
+TaxiProposalSystem -> TaxiProposalUI ++: getStatus()\n取得配對單的狀態
+
+TaxiProposalUI -> TaxiProposalController **: construct()
+TaxiProposalUI -> TaxiProposalController ++: getStatus(tpId)\n取得配對單的狀態
+
+TaxiProposalController -> TaxiProposalDb **: construct()
 TaxiProposalController -> TaxiProposalDb ++: findProposal(tpId)\n在資料庫尋找配對單
 
 break 沒有這個 ID 的配對單
     autonumber stop
     TaxiProposalController <-- TaxiProposalDb: null\n回傳空值
-    Requester <-- TaxiProposalController: null\n回傳空值
+    TaxiProposalUI <-- TaxiProposalController: null\n回傳空值
+    TaxiProposalSystem <-- TaxiProposalUI: [Popover] 沒有這個配對單
 end
 
 autonumber resume
@@ -71,6 +94,16 @@ end
 
 return status
 
+alt status == TaxiProposalStatus.Finished 配對單完成
+    TaxiProposalSystem <-- TaxiProposalUI: status = "配對單已完成"
+else status == TaxiProposalStatus.Matched 配對成功
+    TaxiProposalSystem <-- TaxiProposalUI: status = "配對成功"
+else status == TaxiProposalStatus.Unmatched 配對失敗
+    TaxiProposalSystem <-- TaxiProposalUI: status = "配對失敗"
+else status == TaxiProposalStatus.Waiting 等待配對
+    TaxiProposalSystem <-- TaxiProposalUI --: status = "等待配對"
+end
+
 @enduml TaxiProposalWaitForPairing
 
 @startuml TaxiProposalGetFailReason
@@ -81,18 +114,28 @@ skinparam linetype ortho
 skinparam defaultFontSize 11
 skinparam defaultFontName "Noto Sans CJK TC"
 
-actor Requester as "請求者"
-participant TaxiProposalController as ":TaxiProposalController\n操作介面"
+actor Requester as "使用者"
+participant TaxiProposalSystem as ":TaxiProposalSystem"
+participant TaxiProposalUI as ":TaxiProposalUI\n展現層"
+participant TaxiProposalController as ":TaxiProposalController\n控制層"
 participant TaxiProposalDb as ":TaxiProposalDb\n資料庫"
 
-Requester -> TaxiProposalController ++: getFailReason(tpId)\n取得配對失敗原因
+Requester -> TaxiProposalSystem **: construct()
+Requester -> TaxiProposalSystem: run()
+
+TaxiProposalSystem -> TaxiProposalUI **: construct()
+TaxiProposalSystem -> TaxiProposalUI ++: getFailReason()\n取得配對失敗原因
+
+TaxiProposalUI -> TaxiProposalController **: construct()
+TaxiProposalUI -> TaxiProposalController ++: getFailReason(tpId)\n取得配對失敗原因
 
 TaxiProposalController -> TaxiProposalDb ++: findProposal(tpId)\n在資料庫尋找配對單
 
 break 沒有這個 ID 的配對單
     autonumber stop
     TaxiProposalController <-- TaxiProposalDb: null\n回傳空值
-    Requester <-- TaxiProposalController: ""\n回傳空白字串
+    TaxiProposalUI <-- TaxiProposalController: ""\n回傳空白字串
+    TaxiProposalSystem <-- TaxiProposalUI: [Popover] 沒有這個配對單
 end
 
 autonumber resume
@@ -115,6 +158,16 @@ end
 
 return reason
 
+alt reason == "" 配對單完成
+    TaxiProposalSystem <-- TaxiProposalUI: reason = "配對單已完成"
+else reason == ""PAIR_FULL"" 人數已滿
+    TaxiProposalSystem <-- TaxiProposalUI: reason = "人數已滿"
+else reason == ""PAIR_EXPIRED"" 配對時間已過
+    TaxiProposalSystem <-- TaxiProposalUI: reason = "配對時間已過"
+else reason == "" 等待配對
+    TaxiProposalSystem <-- TaxiProposalUI --: reason = "等待配對"
+end
+
 @enduml TaxiProposalGetFailReason
 
 @startuml TaxiProposalFinish
@@ -125,23 +178,34 @@ skinparam linetype ortho
 skinparam defaultFontSize 11
 skinparam defaultFontName "Noto Sans CJK TC"
 
-actor Requester as "請求者"
-participant TaxiProposalController as ":TaxiProposalController\n操作介面"
+actor Requester as "使用者"
+participant TaxiProposalSystem as ":TaxiProposalSystem"
+participant TaxiProposalUI as ":TaxiProposalUI\n展現層"
+participant TaxiProposalController as ":TaxiProposalController\n控制層"
 participant TaxiProposalDb as ":TaxiProposalDb\n資料庫"
 
-Requester -> TaxiProposalController ++: finish(tpId)\n完成配對
+Requester -> TaxiProposalSystem **: construct()
+Requester -> TaxiProposalSystem: run()
+
+TaxiProposalSystem -> TaxiProposalUI **: construct()
+TaxiProposalSystem -> TaxiProposalUI ++: onFinishButtonClicked(tpId)\n點選 [完成配對] 按鈕
+
+TaxiProposalUI -> TaxiProposalController **: construct()
+TaxiProposalUI -> TaxiProposalController ++: finish(tpId)\n完成配對
 
 TaxiProposalController -> TaxiProposalDb ++: updateProposal(tpId, finish=true)\n在資料庫更新配對單，將 finish 設為 true
 
 break 沒有這個 ID 的配對單
     autonumber stop
     TaxiProposalController <-- TaxiProposalDb: NO_SUCH_PROPOSAL\n沒有這個配對單
-    Requester <-- TaxiProposalController: NO_SUCH_PROPOSAL\n沒有這個配對單
+    TaxiProposalUI <-- TaxiProposalController: NO_SUCH_PROPOSAL\n沒有這個配對單
+    TaxiProposalSystem <-- TaxiProposalUI: [Popover] 沒有這個配對單
 end
 
 autonumber resume
 return OK
 return OK
+return [Toast] 完成配對！
 
 
 @enduml TaxiProposalFinish
@@ -154,17 +218,28 @@ skinparam linetype ortho
 skinparam defaultFontSize 11
 skinparam defaultFontName "Noto Sans CJK TC"
 
-actor Requester as "請求者"
-participant RecordController as ":RecordController\n預約紀錄介面"
+actor Requester as "使用者"
+participant RecordListSystem as ":RecordListSystem"
+participant RecordListUI as ":RecordListUI\n展現層"
+participant RecordController as ":RecordController\n控制層"
 participant RecordDb as ":RecordDb\n預約紀錄資料庫"
 
-Requester -> RecordController ++: listRecords(studentId)\n列出學生的所有預約紀錄
+Requester -> RecordListSystem **: construct()
+Requester -> RecordListSystem: run()
+
+RecordListSystem -> RecordListUI **: construct()
+RecordListSystem -> RecordListUI ++: listRecords()\n查詢預約紀錄
+
+RecordListUI -> RecordController **: construct()
+RecordListUI -> RecordController ++: listRecords(studentId)\n列出學生的所有預約紀錄
+
 RecordController -> RecordDb ++: listStudentRecords(studentId)\n在資料庫尋找學生的所有預約紀錄
 
 break 沒有預約記錄
     autonumber stop
     RecordController <-- RecordDb: ""[]"" 空陣列
-    Requester <-- RecordController: ""[]"" 空陣列
+    RecordListUI <-- RecordController: ""[]"" 空陣列
+    RecordListSystem <- RecordListUI: [UI] 空的預約紀錄
 end
 
 autonumber resume
@@ -176,6 +251,12 @@ end
 return recordModels\n所有預約紀錄
 return recordModels\n所有預約紀錄
 
+loop 每一筆預約紀錄
+    RecordListUI -> RecordListUI: 渲染
+end
+
+RecordListSystem <- RecordListUI: [UI] 預約紀錄
+
 @enduml
 
 @startuml BusInformationRetrieve
@@ -186,17 +267,28 @@ skinparam linetype ortho
 skinparam defaultFontSize 11
 skinparam defaultFontName "Noto Sans CJK TC"
 
-actor Requester as "請求者"
-participant BusInformationController as ":BusInformationController\n校車資訊介面"
+actor Requester as "使用者"
+participant BusInformationSystem as ":BusInformationSystem"
+participant BusInformationUI as ":BusInformationUI\n展現層"
+participant BusInformationController as ":BusInformationController\n控制層"
 participant BusInformationDb as ":BusInformationDb\n校車資訊資料庫"
 
-Requester -> BusInformationController ++: retrieveBusInformation(busId)\n取得校車資訊
+Requester -> BusInformationSystem **: construct()
+Requester -> BusInformationSystem: run()
+
+BusInformationSystem -> BusInformationUI **: construct()
+BusInformationSystem -> BusInformationUI ++: getBusInformation()\n取得校車資訊
+
+BusInformationUI -> BusInformationController **: construct()
+BusInformationUI -> BusInformationController ++: retrieveBusInformation(busId)\n取得校車資訊
+
 BusInformationController -> BusInformationDb++: findBus(busId)\n在資料庫尋找指定 ID 的校車
 
 break 沒有這個 ID 的校車
     autonumber stop
     BusInformationController <-- BusInformationDb: null 空值
-    Requester <-- BusInformationController: null 空值
+    BusInformationUI <-- BusInformationController: null 空值
+    BusInformationSystem <-- BusInformationUI: [Popover] 沒有這個校車
 end
 
 autonumber resume
@@ -205,5 +297,9 @@ BusInformationDb --> BusInformationModel: Create BusInformationModel\n將校車�
 return busInformationModel 校車資訊
 
 return busInformationModel 校車資訊
+
+BusInformationUI -> BusInformationUI: 渲染校車資訊介面
+
+BusInformationSystem <-- BusInformationUI: [UI] 校車資訊
 
 @enduml
