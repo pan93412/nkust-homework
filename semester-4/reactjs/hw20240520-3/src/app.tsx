@@ -42,7 +42,7 @@ export function App() {
         </div>
       </Content>
       <Footer style={{ textAlign: 'center' }}>
-        Ant Design ©{new Date().getFullYear()} Created by Ant UED
+        Ant Design ©{new Date().getFullYear()} Created by Ant UED & C111156103 潘奕濬
       </Footer>
     </Layout>
   );
