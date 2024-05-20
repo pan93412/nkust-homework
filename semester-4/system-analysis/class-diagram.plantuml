@@ -13,8 +13,6 @@ class User {
     +bool checkPassword(passwordToCheck)
 }
 
-note right: The public fields in a class implicitly have their getters and setters.
-
 class Passenger {
     +String phone
     +Coordinate location
@@ -29,17 +27,12 @@ class Organizer {
 }
 User <|--- Organizer
 
-class RecordController {
+interface RecordController {
     +List<BusRecord> listRecords(userId)
 }
 RecordController o---> BusRecord
-RecordController o---> RecordDb
 
-class RecordDb {
-    -RecordDb instance
-    -List<BusRecord> busRecords
-    -Map<String, List<BusRecord>> userIdIndex
-    -Map<ID, BusRecord> recordIdIndex
+interface RecordDb {
     +RecordDb getInstance()
     +List<BusRecord> listStudentRecords(userId)
 }
@@ -57,11 +50,10 @@ class BusRecord {
 BusRecord "0..*" ---> "1" User: user
 BusRecord "0..*" o---> "1" BusInformation: busInformation
 
-class BusInformationController {
+interface BusInformationController {
     +BusInformation? retrieveBusInformation(busId)
 }
 BusInformationController o---> BusInformation
-BusInformationController o---> BusInformationDb
 
 class BusInformationDb {
     -BusInformationDb instance
@@ -102,19 +94,15 @@ class TaxiProposalPassenger {
 TaxiProposalPassenger "0..*" --> "0..*" Passenger: passengers
 TaxiProposalPassenger "1" *--> "1" TaxiProposal: taxiProposal
 
-class TaxiProposalController {
+interface TaxiProposalController {
     +TaxiProposal createProposal(proposalRequest)
     +TaxiProposalStatus getStatus(tpId)
     +String getFailReason(tpId)
     +void finish(tpId)
 }
 TaxiProposalController o--> TaxiProposal
-TaxiProposalController o--> TaxiProposalDb
 
-class TaxiProposalDb {
-    -TaxiProposalDb instance
-    -List<TaxiProposal> taxiProposals
-    -Map<ID, TaxiProposal> tpIdIndex
+interface TaxiProposalDb {
     +TaxiProposalDb getInstance()
     +TaxiProposal createProposal(partialTaxiProposal)
     +TaxiProposal? findProposal(tpId)
@@ -153,7 +141,7 @@ enum TaxiProposalStatus {
     Unmatched 配對失敗
 }
 
-abstract class Controller {
+class Controller {
     +void onRequest(Request request, Response response)
 }
 Controller <|-- RecordController
