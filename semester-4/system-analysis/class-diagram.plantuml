@@ -7,7 +7,7 @@ skinparam defaultFontName "Noto Sans CJK TC"
 
 
 class User {
-    +String studentId
+    +<u>String userId</u> <i>(PK)</i>
     -String password
     +User construct()
     +bool checkPassword(passwordToCheck)
@@ -30,7 +30,7 @@ class Organizer {
 User <|--- Organizer
 
 class RecordController {
-    +List<BusRecord> listRecords(studentId)
+    +List<BusRecord> listRecords(userId)
 }
 RecordController o---> BusRecord
 RecordController o---> RecordDb
@@ -38,18 +38,20 @@ RecordController o---> RecordDb
 class RecordDb {
     -RecordDb instance
     -List<BusRecord> busRecords
-    -Map<String, List<BusRecord>> studentIdIndex
+    -Map<String, List<BusRecord>> userIdIndex
     -Map<ID, BusRecord> recordIdIndex
     +RecordDb getInstance()
-    +List<BusRecord> listStudentRecords(studentId)
+    +List<BusRecord> listStudentRecords(userId)
 }
 RecordDb o---> BusRecord
 
 class BusRecord {
-    +ID recordId
-    +User user
-    +BusInformation busInformation
+    +<u>ID recordId</u> <i>(PK)</i>
+    -String userId
+    -ID busId
     +Image recordCertificate
+    +User getUserId(db)
+    +BusInformation getBusInformation(db)
     +BusRecord construct(busId)
 }
 BusRecord "0..*" ---> "1" User: user
@@ -71,33 +73,34 @@ class BusInformationDb {
 BusInformationDb o---> BusInformation
 
 class BusInformation {
-    +ID busId
-    +Campus departOn
-    +Campus arriveOn
+    +<u>ID busId</u> <i>(PK)</i>
+    -String departOnName
+    -String arriveOnName
     +Decimal cost
     +Time departAt
     +Time estArriveAt
+    +Campus getDepartOn(db)
+    +Campus getArriveOn(db)
     +BusInformation construct()
 }
 BusInformation "0..*" o---> "1" Campus: departOn, arriveOn
 
 class Campus {
-    +String name
+    +<u>String name</u> <i>(PK)</i>
     +Image map
     +Coordinate billOn
     +Campus construct()
 }
 
-class TaxiProposalPassengers {
-    +TaxiProposal taxiProposal
-    -List<Passenger> passengers
+class TaxiProposalPassenger {
+    -ID tpId
+    -String passengerId
     +TaxiProposalPassengers construct()
-    +void add(Passenger)
-    +void remove(Passenger)
-    +int count()
+    +TaxiProposal getTaxiProposal(db)
+    +List<Passenger> getPassengers(db)
 }
-TaxiProposalPassengers "0..*" --> "0..*" Passenger: passengers
-TaxiProposalPassengers "1" *--> "1" TaxiProposal: taxiProposal
+TaxiProposalPassenger "0..*" --> "0..*" Passenger: passengers
+TaxiProposalPassenger "1" *--> "1" TaxiProposal: taxiProposal
 
 class TaxiProposalController {
     +TaxiProposal createProposal(proposalRequest)
@@ -121,9 +124,9 @@ TaxiProposalDb o--> TaxiProposal
 
 class TaxiProposal {
     +ID tpId
-    +Organizer organizer
-    +Campus departOn
-    +Campus arriveOn
+    -ID organizerId
+    -String departOnName
+    -String arriveOnName
     +Decimal cost
     +Time departAt
     +Time pairBefore
@@ -131,8 +134,11 @@ class TaxiProposal {
     +Boolean finished
 
     +TaxiProposal construct()
+    +Organizer getOrganizer(db)
+    +Campus getDepartOn(db)
+    +Campus getArriveOn(db)
+    +List<TaxiProposalPassenger> getPassengers(db)
     +TaxiProposalStatus getStatus()
-    +TaxiProposalPassengers getPassengers()
     +String getFailReason()
     +void finish()
 }
