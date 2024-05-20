@@ -6,23 +6,41 @@ skinparam linetype ortho
 skinparam defaultFontSize 11
 skinparam defaultFontName "Noto Sans CJK TC"
 
+box 前端
 actor Requester as "使用者"
-participant TaxiProposalSystem as ":TaxiProposalSystem"
+
+participant TaxiProposalApp as ":TaxiProposalApp\n前端系統"
 participant TaxiProposalUI as ":TaxiProposalUI\n展現層"
+participant TaxiProposalApi as ":TaxiProposalApi\nRPC 呼叫"
+end box
+
+box 後端
+actor Server as "伺服器"
+
+participant TaxiProposalService as ":TaxiProposalService\n後端系統"
 participant TaxiProposalController as ":TaxiProposalController\n控制層"
-participant TaxiProposalModel as ":TaxiProposalModel\n資料模型"
+participant TaxiProposal as ":TaxiProposal\n資料模型"
 participant TaxiProposalDb as ":TaxiProposalDb\n資料庫"
+end box
 
-Requester -> TaxiProposalSystem **: construct()
-Requester -> TaxiProposalSystem: run()
-TaxiProposalSystem -> TaxiProposalUI **: construct()
-TaxiProposalSystem -> TaxiProposalUI: onFieldChanged()\n使用者輸入資料
-TaxiProposalSystem -> TaxiProposalUI: onFieldChanged()\n使用者輸入資料
-TaxiProposalSystem -> TaxiProposalUI ++: onCreateProposalButtonClicked()\n使用者點「建立按鈕」
-TaxiProposalSystem <-- TaxiProposalUI: [Toast] 正在建立⋯⋯
+participant TaxiProposal as ":TaxiProposal\n資料模型"
 
-TaxiProposalUI -> TaxiProposalController **: construct()
-TaxiProposalUI -> TaxiProposalController ++ : createProposal(proposalRequest)\n使用者觸發建立配對單
+Server -> TaxiProposalService **: construct()
+Server -> TaxiProposalService: run()
+TaxiProposalService -> TaxiProposalController **: construct()
+
+Requester -> TaxiProposalApp **: construct()
+Requester -> TaxiProposalApp: run()
+
+TaxiProposalApp -> TaxiProposalUI **: construct()
+TaxiProposalApp -> TaxiProposalUI: onFieldChanged()\n使用者輸入資料
+TaxiProposalApp -> TaxiProposalUI: onFieldChanged()\n使用者輸入資料
+TaxiProposalApp -> TaxiProposalUI ++: onCreateProposalButtonClicked()\n使用者點「建立按鈕」
+TaxiProposalApp <-- TaxiProposalUI: [Toast] 正在建立⋯⋯
+
+TaxiProposalUI -> TaxiProposalApi **: construct()
+TaxiProposalUI -> TaxiProposalApi ++: createProposal(proposalRequest)\n使用者觸發建立配對單
+TaxiProposalApi -> TaxiProposalController ++: POST /proposal\n建立配對單
 note left of TaxiProposalController
     配對單包含「出發地點」、「抵達地點」、
     「乘車金額」、「出發時間」、「配對時限」和
@@ -32,10 +50,11 @@ note left of TaxiProposalController
     * 「tpId」將由資料庫指派。
 end note
 
-TaxiProposalController -> TaxiProposalDb **: construct()
 TaxiProposalController -> TaxiProposalDb ++: createProposal(proposalRequest)\n在資料庫建立配對單
-TaxiProposalDb -> TaxiProposalModel **: Create from request\n將配對單資料實例化成物件
+TaxiProposalDb -> TaxiProposal **: Create from request\n將配對單資料實例化成物件
 return taxiProposal
+return taxiProposalJson
+TaxiProposalApi -> TaxiProposal **: Create from request\n將配對單資料實例化成物件
 return taxiProposal
 
 return [Toast] 建立完成！
@@ -49,20 +68,39 @@ skinparam linetype ortho
 skinparam defaultFontSize 11
 skinparam defaultFontName "Noto Sans CJK TC"
 
+box 前端
 actor Requester as "使用者"
-participant TaxiProposalSystem as ":TaxiProposalSystem"
+
+participant TaxiProposalApp as ":TaxiProposalApp\n前端系統"
 participant TaxiProposalUI as ":TaxiProposalUI\n展現層"
+participant TaxiProposalApi as ":TaxiProposalApi\nRPC 呼叫"
+end box
+
+box 後端
+actor Server as "伺服器"
+
+participant TaxiProposalService as ":TaxiProposalService\n後端系統"
 participant TaxiProposalController as ":TaxiProposalController\n控制層"
+participant TaxiProposal as ":TaxiProposal\n資料模型"
 participant TaxiProposalDb as ":TaxiProposalDb\n資料庫"
+end box
 
-Requester -> TaxiProposalSystem **: construct()
-Requester -> TaxiProposalSystem: run()
+participant TaxiProposal as ":TaxiProposal\n資料模型"
 
-TaxiProposalSystem -> TaxiProposalUI **: construct()
-TaxiProposalSystem -> TaxiProposalUI ++: getStatus()\n取得配對單的狀態
+Server -> TaxiProposalService **: construct()
+Server -> TaxiProposalService: run()
+TaxiProposalService -> TaxiProposalController **: construct()
 
-TaxiProposalUI -> TaxiProposalController **: construct()
-TaxiProposalUI -> TaxiProposalController ++: getStatus(tpId)\n取得配對單的狀態
+Requester -> TaxiProposalApp **: construct()
+Requester -> TaxiProposalApp: run()
+
+TaxiProposalApp -> TaxiProposalUI **: construct()
+TaxiProposalApp -> TaxiProposalUI ++: getStatus()\n取得配對單的狀態
+
+TaxiProposalUI -> TaxiProposalApi **: construct()
+TaxiProposalUI -> TaxiProposalApi ++: getStatus(tpId)\n取得配對單的狀態
+
+TaxiProposalApi -> TaxiProposalController ++: GET /proposals/:tpId/status\n取得配對單的狀態
 
 TaxiProposalController -> TaxiProposalDb **: construct()
 TaxiProposalController -> TaxiProposalDb ++: findProposal(tpId)\n在資料庫尋找配對單
@@ -70,38 +108,39 @@ TaxiProposalController -> TaxiProposalDb ++: findProposal(tpId)\n在資料庫尋
 break 沒有這個 ID 的配對單
     autonumber stop
     TaxiProposalController <-- TaxiProposalDb: null\n回傳空值
-    TaxiProposalUI <-- TaxiProposalController: null\n回傳空值
-    TaxiProposalSystem <-- TaxiProposalUI: [Popover] 沒有這個配對單
+    TaxiProposalApi <-- TaxiProposalController: ""404 Not Found""
+    TaxiProposalUI <-- TaxiProposalApi: null\n回傳空值
+    TaxiProposalApp <-- TaxiProposalUI: [Popover] 沒有這個配對單
 end
 
 autonumber resume
 
-create participant TaxiProposalModel as ":TaxiProposalModel\n資料模型"
-TaxiProposalDb --> TaxiProposalModel: Create from request\n將配對單資料實例化成物件
-return taxiProposalModel
+TaxiProposalDb --> TaxiProposal **: Create from request\n將配對單資料實例化成物件
+return taxiProposal
 
-TaxiProposalController -> TaxiProposalModel ++: getStatus()\n取得配對單物件的狀態
+TaxiProposalController -> TaxiProposal ++: getStatus()\n取得配對單物件的狀態
 
 alt this.finished == true 完成配對
-    TaxiProposalController <-- TaxiProposalModel: status: TaxiProposalStatus.Finished 配對單完成
+    TaxiProposalController <-- TaxiProposal: status: TaxiProposalStatus.Finished 配對單完成
 else this.passengers.count() >= this.expectedPassengers 人數到齊
-    TaxiProposalController <-- TaxiProposalModel: status: TaxiProposalStatus.Matched 配對成功
+    TaxiProposalController <-- TaxiProposal: status: TaxiProposalStatus.Matched 配對成功
 else this.pairBefore < now || this.departAt < now 配對或出發時間到
-    TaxiProposalController <-- TaxiProposalModel: status: TaxiProposalStatus.Unmatched 配對失敗
+    TaxiProposalController <-- TaxiProposal: status: TaxiProposalStatus.Unmatched 配對失敗
 else 時間還沒到，人還沒到齊
-    TaxiProposalController <-- TaxiProposalModel --: status: TaxiProposalStatus.Waiting 等待配對
+    TaxiProposalController <-- TaxiProposal --: status: TaxiProposalStatus.Waiting 等待配對
 end
 
+return ""{"status": status}""
 return status
 
 alt status == TaxiProposalStatus.Finished 配對單完成
-    TaxiProposalSystem <-- TaxiProposalUI: status = "配對單已完成"
+    TaxiProposalApp <-- TaxiProposalUI: status = "配對單已完成"
 else status == TaxiProposalStatus.Matched 配對成功
-    TaxiProposalSystem <-- TaxiProposalUI: status = "配對成功"
+    TaxiProposalApp <-- TaxiProposalUI: status = "配對成功"
 else status == TaxiProposalStatus.Unmatched 配對失敗
-    TaxiProposalSystem <-- TaxiProposalUI: status = "配對失敗"
+    TaxiProposalApp <-- TaxiProposalUI: status = "配對失敗"
 else status == TaxiProposalStatus.Waiting 等待配對
-    TaxiProposalSystem <-- TaxiProposalUI --: status = "等待配對"
+    TaxiProposalApp <-- TaxiProposalUI --: status = "等待配對"
 end
 
 @enduml TaxiProposalWaitForPairing
@@ -114,58 +153,77 @@ skinparam linetype ortho
 skinparam defaultFontSize 11
 skinparam defaultFontName "Noto Sans CJK TC"
 
+box 前端
 actor Requester as "使用者"
-participant TaxiProposalSystem as ":TaxiProposalSystem"
+
+participant TaxiProposalApp as ":TaxiProposalApp\n前端系統"
 participant TaxiProposalUI as ":TaxiProposalUI\n展現層"
+participant TaxiProposalApi as ":TaxiProposalApi\nRPC 呼叫"
+end box
+
+box 後端
+actor Server as "伺服器"
+
+participant TaxiProposalService as ":TaxiProposalService\n後端系統"
 participant TaxiProposalController as ":TaxiProposalController\n控制層"
+participant TaxiProposal as ":TaxiProposal\n資料模型"
 participant TaxiProposalDb as ":TaxiProposalDb\n資料庫"
+end box
 
-Requester -> TaxiProposalSystem **: construct()
-Requester -> TaxiProposalSystem: run()
+participant TaxiProposal as ":TaxiProposal\n資料模型"
 
-TaxiProposalSystem -> TaxiProposalUI **: construct()
-TaxiProposalSystem -> TaxiProposalUI ++: getFailReason()\n取得配對失敗原因
+Server -> TaxiProposalService **: construct()
+Server -> TaxiProposalService: run()
+TaxiProposalService -> TaxiProposalController **: construct()
 
-TaxiProposalUI -> TaxiProposalController **: construct()
-TaxiProposalUI -> TaxiProposalController ++: getFailReason(tpId)\n取得配對失敗原因
+Requester -> TaxiProposalApp **: construct()
+Requester -> TaxiProposalApp: run()
+
+TaxiProposalApp -> TaxiProposalUI **: construct()
+TaxiProposalApp -> TaxiProposalUI ++: getFailReason()\n取得配對失敗原因
+
+TaxiProposalUI -> TaxiProposalApi **: construct()
+TaxiProposalUI -> TaxiProposalApi ++: getFailReason(tpId)\n取得配對失敗原因
+TaxiProposalApi -> TaxiProposalController ++: GET /proposals/:tpId/failReason\n取得配對失敗原因
 
 TaxiProposalController -> TaxiProposalDb ++: findProposal(tpId)\n在資料庫尋找配對單
 
 break 沒有這個 ID 的配對單
     autonumber stop
     TaxiProposalController <-- TaxiProposalDb: null\n回傳空值
-    TaxiProposalUI <-- TaxiProposalController: ""\n回傳空白字串
-    TaxiProposalSystem <-- TaxiProposalUI: [Popover] 沒有這個配對單
+    TaxiProposalApi <-- TaxiProposalController: ""404 Not Found""
+    TaxiProposalUI <-- TaxiProposalApi: ""\n回傳空白字串
+    TaxiProposalApp <-- TaxiProposalUI: [Popover] 沒有這個配對單
 end
 
 autonumber resume
 
-create participant TaxiProposalModel as ":TaxiProposalModel\n資料模型"
-TaxiProposalDb --> TaxiProposalModel: Create from query result\n將配對單資料實例化成物件
-return taxiProposalModel
+TaxiProposalDb --> TaxiProposal **: Create from query result\n將配對單資料實例化成物件
+return taxiProposal
 
-TaxiProposalController -> TaxiProposalModel ++: getFailReason()\n取得配對失敗原因
+TaxiProposalController -> TaxiProposal ++: getFailReason()\n取得配對失敗原因
 
 alt this.finished == true 完成配對
-    TaxiProposalController <-- TaxiProposalModel: ""\n回傳空白字串
+    TaxiProposalController <-- TaxiProposal: ""\n回傳空白字串
 else this.passengers.count() >= this.expectedPassengers 人數到齊
-    TaxiProposalController <-- TaxiProposalModel: ""PAIR_FULL""\n回傳人數已滿
+    TaxiProposalController <-- TaxiProposal: ""PAIR_FULL""\n回傳人數已滿
 else this.pairBefore < now || this.departAt < now 配對或出發時間到
-    TaxiProposalController <-- TaxiProposalModel: ""PAIR_EXPIRED""\n回傳配對時間已過
+    TaxiProposalController <-- TaxiProposal: ""PAIR_EXPIRED""\n回傳配對時間已過
 else 時間還沒到，人還沒到齊
-    TaxiProposalController <-- TaxiProposalModel --: ""\n回傳空白字串
+    TaxiProposalController <-- TaxiProposal --: ""\n回傳空白字串
 end
 
+return ""{"reason": reason}""
 return reason
 
 alt reason == "" 配對單完成
-    TaxiProposalSystem <-- TaxiProposalUI: reason = "配對單已完成"
+    TaxiProposalApp <-- TaxiProposalUI: reason = "配對單已完成"
 else reason == ""PAIR_FULL"" 人數已滿
-    TaxiProposalSystem <-- TaxiProposalUI: reason = "人數已滿"
+    TaxiProposalApp <-- TaxiProposalUI: reason = "人數已滿"
 else reason == ""PAIR_EXPIRED"" 配對時間已過
-    TaxiProposalSystem <-- TaxiProposalUI: reason = "配對時間已過"
+    TaxiProposalApp <-- TaxiProposalUI: reason = "配對時間已過"
 else reason == "" 等待配對
-    TaxiProposalSystem <-- TaxiProposalUI --: reason = "等待配對"
+    TaxiProposalApp <-- TaxiProposalUI --: reason = "等待配對"
 end
 
 @enduml TaxiProposalGetFailReason
@@ -178,32 +236,51 @@ skinparam linetype ortho
 skinparam defaultFontSize 11
 skinparam defaultFontName "Noto Sans CJK TC"
 
+box 前端
 actor Requester as "使用者"
-participant TaxiProposalSystem as ":TaxiProposalSystem"
+
+participant TaxiProposalApp as ":TaxiProposalApp\n前端系統"
 participant TaxiProposalUI as ":TaxiProposalUI\n展現層"
+participant TaxiProposalApi as ":TaxiProposalApi\nRPC 呼叫"
+end box
+
+box 後端
+actor Server as "伺服器"
+
+participant TaxiProposalService as ":TaxiProposalService\n後端系統"
 participant TaxiProposalController as ":TaxiProposalController\n控制層"
+participant TaxiProposal as ":TaxiProposal\n資料模型"
 participant TaxiProposalDb as ":TaxiProposalDb\n資料庫"
+end box
 
-Requester -> TaxiProposalSystem **: construct()
-Requester -> TaxiProposalSystem: run()
+Server -> TaxiProposalService **: construct()
+Server -> TaxiProposalService: run()
+TaxiProposalService -> TaxiProposalController **: construct()
 
-TaxiProposalSystem -> TaxiProposalUI **: construct()
-TaxiProposalSystem -> TaxiProposalUI ++: onFinishButtonClicked(tpId)\n點選 [完成配對] 按鈕
+Requester -> TaxiProposalApp **: construct()
+Requester -> TaxiProposalApp: run()
 
-TaxiProposalUI -> TaxiProposalController **: construct()
-TaxiProposalUI -> TaxiProposalController ++: finish(tpId)\n完成配對
+TaxiProposalApp -> TaxiProposalUI **: construct()
+TaxiProposalApp -> TaxiProposalUI ++: onFinishButtonClicked(tpId)\n點選 [完成配對] 按鈕
+
+TaxiProposalUI -> TaxiProposalApi **: construct()
+TaxiProposalUI -> TaxiProposalApi ++: finish(tpId)\n完成配對
+
+TaxiProposalApi -> TaxiProposalController ++: POST /proposals/:tpId/finish\n完成配對
 
 TaxiProposalController -> TaxiProposalDb ++: updateProposal(tpId, finish=true)\n在資料庫更新配對單，將 finish 設為 true
 
 break 沒有這個 ID 的配對單
     autonumber stop
-    TaxiProposalController <-- TaxiProposalDb: NO_SUCH_PROPOSAL\n沒有這個配對單
-    TaxiProposalUI <-- TaxiProposalController: NO_SUCH_PROPOSAL\n沒有這個配對單
-    TaxiProposalSystem <-- TaxiProposalUI: [Popover] 沒有這個配對單
+    TaxiProposalController <-- TaxiProposalDb: NoEntityException\n沒有這個配對單
+    TaxiProposalApi <-- TaxiProposalController: ""404 Not Found""
+    TaxiProposalUI <-- TaxiProposalApi: NoProposalException\n沒有這個配對單
+    TaxiProposalApp <-- TaxiProposalUI: [Popover] 沒有這個配對單
 end
 
 autonumber resume
 return OK
+return ""{"succeed": true}""
 return OK
 return [Toast] 完成配對！
 
@@ -218,44 +295,67 @@ skinparam linetype ortho
 skinparam defaultFontSize 11
 skinparam defaultFontName "Noto Sans CJK TC"
 
+box 前端
 actor Requester as "使用者"
-participant RecordListSystem as ":RecordListSystem"
+participant RecordListApp as ":RecordListApp\n前端系統"
 participant RecordListUI as ":RecordListUI\n展現層"
+participant RecordListApi as ":RecordListApi\nRPC 呼叫"
+end box
+
+box 後端
+actor Server as "伺服器"
+participant RecordListService as ":RecordListService\n後端系統"
 participant RecordController as ":RecordController\n控制層"
 participant RecordDb as ":RecordDb\n預約紀錄資料庫"
+end box
 
-Requester -> RecordListSystem **: construct()
-Requester -> RecordListSystem: run()
+participant Record as ":Record\n預約紀錄模型"
 
-RecordListSystem -> RecordListUI **: construct()
-RecordListSystem -> RecordListUI ++: listRecords()\n查詢預約紀錄
+Server -> RecordListService **: construct()
+Server -> RecordListService: run()
+RecordListService -> RecordController **: construct()
 
-RecordListUI -> RecordController **: construct()
-RecordListUI -> RecordController ++: listRecords(studentId)\n列出學生的所有預約紀錄
+Requester -> RecordListApp **: construct()
+
+Requester -> RecordListApp: run()
+
+RecordListApp -> RecordListUI **: construct()
+RecordListApp -> RecordListUI ++: listRecords()\n查詢預約紀錄
+
+RecordListUI -> RecordListApi **: construct()
+RecordListUI -> RecordListApi ++: listRecords()\n查詢預約紀錄
+
+RecordListApi -> RecordController ++: GET /records\n查詢預約紀錄
 
 RecordController -> RecordDb ++: listStudentRecords(studentId)\n在資料庫尋找學生的所有預約紀錄
 
 break 沒有預約記錄
     autonumber stop
     RecordController <-- RecordDb: ""[]"" 空陣列
-    RecordListUI <-- RecordController: ""[]"" 空陣列
-    RecordListSystem <- RecordListUI: [UI] 空的預約紀錄
+    RecordListApi <-- RecordController: ""{"records": []}""
+    RecordListUI <-- RecordListApi: ""[]"" 空陣列
+    RecordListApp <-- RecordListUI: [UI] 空的預約紀錄
 end
 
 autonumber resume
 loop 資料庫回傳的每一行
-create participant RecordModel as ":RecordModel\n預約紀錄模型"
-RecordDb --> RecordModel **: Create from query result\n將預約紀錄資料實例化成物件
+RecordDb --> Record **: Create from query result\n將預約紀錄資料實例化成物件
 end
 
-return recordModels\n所有預約紀錄
-return recordModels\n所有預約紀錄
+return records\n所有預約紀錄
+return recordsJson
+
+loop API 回傳的每一行
+RecordListApi --> Record **: Create from query result\n將預約紀錄資料實例化成物件
+end
+
+return records
 
 loop 每一筆預約紀錄
     RecordListUI -> RecordListUI: 渲染
 end
 
-RecordListSystem <- RecordListUI: [UI] 預約紀錄
+RecordListApp <- RecordListUI: [UI] 預約紀錄
 
 @enduml
 
@@ -267,39 +367,61 @@ skinparam linetype ortho
 skinparam defaultFontSize 11
 skinparam defaultFontName "Noto Sans CJK TC"
 
+
+box 前端
 actor Requester as "使用者"
-participant BusInformationSystem as ":BusInformationSystem"
+participant BusInformationApp as ":BusInformationApp\n前端系統"
 participant BusInformationUI as ":BusInformationUI\n展現層"
+participant BusInformationApi as ":BusInformationApi\nRPC 呼叫"
+end box
+
+box 後端
+actor Server as "伺服器"
+participant BusInformationService as ":BusInformationService\n後端系統"
 participant BusInformationController as ":BusInformationController\n控制層"
 participant BusInformationDb as ":BusInformationDb\n校車資訊資料庫"
+end box
 
-Requester -> BusInformationSystem **: construct()
-Requester -> BusInformationSystem: run()
+participant BusInformation as ":BusInformation\n校車資訊模型"
 
-BusInformationSystem -> BusInformationUI **: construct()
-BusInformationSystem -> BusInformationUI ++: getBusInformation()\n取得校車資訊
+Server -> BusInformationService **: construct()
+Server -> BusInformationService: run()
+BusInformationService -> BusInformationController **: construct()
 
-BusInformationUI -> BusInformationController **: construct()
-BusInformationUI -> BusInformationController ++: retrieveBusInformation(busId)\n取得校車資訊
+Requester -> BusInformationApp **: construct()
+Requester -> BusInformationApp: run()
+
+BusInformationApp -> BusInformationUI **: construct()
+BusInformationApp -> BusInformationUI ++: getBusInformation()\n取得校車資訊
+
+BusInformationUI -> BusInformationApi **: construct()
+BusInformationUI -> BusInformationApi ++: getBusInformation(busId)\n取得校車資訊
+
+BusInformationApi -> BusInformationController ++: GET /buses/:busId\n取得校車資訊
 
 BusInformationController -> BusInformationDb++: findBus(busId)\n在資料庫尋找指定 ID 的校車
 
 break 沒有這個 ID 的校車
     autonumber stop
     BusInformationController <-- BusInformationDb: null 空值
-    BusInformationUI <-- BusInformationController: null 空值
-    BusInformationSystem <-- BusInformationUI: [Popover] 沒有這個校車
+    BusInformationApi <-- BusInformationController: ""404 Not Found""
+    BusInformationUI <-- BusInformationApi: null 空值
+    BusInformationApp <-- BusInformationUI: [Popover] 沒有這個校車
 end
 
 autonumber resume
-create participant BusInformationModel as ":BusInformationModel"
-BusInformationDb --> BusInformationModel: Create BusInformationModel\n將校車資訊資料實例化成物件
-return busInformationModel 校車資訊
 
-return busInformationModel 校車資訊
+BusInformationDb --> BusInformation **: Create BusInformation\n將校車資訊資料實例化成物件
+return busInformation 校車資訊
+
+return busInformationJson
+
+BusInformationApi --> BusInformation **: Create BusInformation\n將校車資訊資料實例化成物件
+
+return busInformation
 
 BusInformationUI -> BusInformationUI: 渲染校車資訊介面
 
-BusInformationSystem <-- BusInformationUI: [UI] 校車資訊
+BusInformationApp <-- BusInformationUI: [UI] 校車資訊
 
 @enduml
