@@ -71,21 +71,121 @@
   $
 
   #blk[
-    *延伸*：兩個母體分配不確定，$sigma_1^2, sigma_2^2$ 已知，$n_1, n_2$ 均屬於 *大樣本*，根據 C.L.T
+    *延伸*：兩個 *獨立* 母體分配不確定，$sigma_1^2, sigma_2^2$ 已知，$n_1, n_2$ 均屬於 *大樣本*，根據 C.L.T
 
     $
-    overline(x)-overline(y) approx N(mu_1-mu_2, sigma_1^2/n_1 + sigma_2^2/n_2)
-    $
+    overline(x)_1-overline(x)_2 approx N(mu_1-mu_2, sigma_1^2/n_1 + sigma_2^2/n_2)
+    $ <未知母體分配-sigma已知-大樣本>
   ]
 
     #blk[
-    *延伸*：兩個母體分配不確定，$sigma_1^2, sigma_2^2$ 未知，$n_1, n_2$ 均屬於 *大樣本*，根據 C.L.T.
+    *延伸*：兩個 *獨立* 母體分配不確定，$sigma_1^2, sigma_2^2$ 未知，$n_1, n_2$ 均屬於 *大樣本*，根據 C.L.T.
 
     $
-    overline(x)-overline(y) approx N(mu_1-mu_2, s^2/n_1 + s_2^2/n_2)
+    overline(x)_1-overline(x)_2 approx N(mu_1-mu_2, s^2/n_1 + s_2^2/n_2)
     $
 
     $sigma$ 利用 $s$ 估算。
   ]
 
+  *解題：$mu_1-mu_2$ 的 95% C.I.*
+
+  本題應當利用 @未知母體分配-sigma已知-大樣本 所列之分配
+
+  $
+  overline(x)_1-overline(x)_2 approx N(mu_1-mu_2, sigma_1^2/n_1 + sigma_2^2/n_2)
+  $
+
+  將其轉為 $Z$ 值，可得
+
+  $
+  ((overline(x)_1-overline(x)_2) - (mu_1-mu-2))/(sqrt(sigma_1^2/n_1 + sigma_2^2/n_2)) approx N(0, 1) = Z
+  $ <ex9.1-a-Z>
+
+  C.I. 之算法：
+
+  $
+  1-alpha = 0.95 &= P(-Z_(alpha/2) < Z < Z_(alpha/2)) \
+             &= P(-1.96 < Z < 1.96)
+  $ <ex9.1-a-CI>
+
+  #figure(caption: "C.I. 之圖像化解釋")[
+    #image("assets/ex9.1-ci-explanation.png")
+  ]
+
+  將@ex9.1-a-Z 的 $Z$ 帶入@ex9.1-a-CI 可得
+
+  $
+  & P(-1.96 < Z < 1.96 ) \
+  =& P(-1.96 < ((overline(x)_1-overline(x)_2) - (mu_1-mu-2))/(sqrt(sigma_1^2/n_1 + sigma_2^2/n_2)) < 1.96) \
+  =& P(-c < mu_1-mu_2 < c)
+  $
+
+  其中 $c$ 是
+
+  $
+  plus.minus c = (overline(x)_1-overline(x)_2) plus.minus 1.96 times sqrt(sigma_1^2/n_1 + sigma_2^2/n_2)
+  $
+
+  #highlight[所以，我們可以得到 $(mu_1-mu_2)$ 的 $(1-alpha) times 100%$ C.I. 公式為]
+
+  $
+  (overline(x)_1-overline(x)_2) plus.minus Z_(alpha/2) times sqrt(sigma_1^2/n_1 + sigma_2^2/n_2)
+  $ <ex9.1-a-CI-formula>
+
+  將本題統計量帶入@ex9.1-a-CI-formula，可得
+
+  $
+  &(68.5-53.6) plus.minus 1.96 times sqrt(5^2/40 + 4^2/35) \
+  =& 12.8616 or 16.9384
+  $
+
+  即為信賴區間 – $mu_1-mu_2$ 的 95% CI 為 $(12.8616, 16.9384)$。
+
+  #blk[
+    *回憶*：$mu$ 的 $(1-alpha) times 100%$ C.I.
+
+    $
+    overline(x) plus.minus Z_(alpha/2) times sigma/sqrt(n)
+    $
+
+    與@ex9.1-a-CI-formula 結構相當類似（推導邏輯一致），惟需記得
+
+    $
+    mu &= overline(x)_1 - overline(x)_2 \
+    sigma/sqrt(n) &= sqrt(sigma_1^2/n_1 + sigma_2^2/n_2)
+    $
+  ]
+
+  *解題：$H_0: mu_1=mu_2$ 的假說檢定*
+
+  + $
+    cases(
+      H_0: mu_1-mu_2=0 "(宣稱)" \
+      H_1: mu_1-mu_2 eq.not 0
+    )
+    $
+    根據 $H_1$，可知為 *雙尾檢定*
+  + 其抽樣分配如下
+    #figure(caption: "本題假說檢定之原始抽樣分配")[
+      #image("assets/ex9.1-hypothesis-testing.png")
+    ]
+    #figure(caption: "本題假說檢定之標準化後的抽樣分配和其拒絕域")[
+      #image("assets/ex9.1-hypothesis-testing-z.png")
+    ]
+    考慮到是雙尾檢定，故拒絕域有兩邊（小於 $-Z_(alpha/2)$ 和大於 $Z_(alpha/2)$）。
+    題目要求 $alpha=0.05$，可得拒絕域 $R R$
+
+    $
+    R R &= { Z | Z < -Z_(alpha/2) or Z > Z_(alpha/2) } \
+        &= { Z | Z < -1.96 or Z > 1.96 }
+    $
+  + 將 $overline(x)_1-overline(x)_2$ 標準化，得到 $Z$ 值
+    $
+    Z &= ((overline(x)_1-overline(x)_2) - (mu_1-mu_2)) / sqrt(sigma_1^2/n_1 + sigma_2^2/n_2) \
+      &= ((68.5-53.6) - 0) / sqrt(5^2/40 + 4^2/35) \
+      &= 14.3233
+    $
+    發現到 $Z = 14.3233 > 1.96$，$Z in R R$，拒絕 $R_0$
+  + 在 $alpha=0.05$ 下，拒絕男女平均體重相等的宣稱。
 ]
