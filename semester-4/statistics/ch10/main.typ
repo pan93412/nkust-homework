@@ -23,7 +23,7 @@
 === 例題導讀
 
 #question("ex9.1")[
-  分別從兩個獨立的常態分配⺟體中收集40位男⽣與35位女⽣的體重，男⽣的樣本平均體重爲68.5公⽄，女⽣的樣本平均體重爲53.6公⽄，倘若已知男⽣和女⽣體重的標準差分別為 $sigma_1=5, sigma_2=4$ ，試求男女⽣平均體重差 $mu_1-mu_2$ 的95%信賴區間。
+  分別從兩個獨立的常態分配⺟體中收集40位男⽣與35位女⽣的體重，男⽣的樣本平均體重爲68.5公⽄，女⽣的樣本平均體重爲53.6公⽄，倘若已知男⽣和女⽣體重的標準差分別為 $sigma_1=5, sigma_2=4$ ，試求男女⽣平均體重差 $mu_1-mu_2$ 的95%信賴區間，#highlight[以及男女平均體重是否相等]。
 ][
   原題目想要從母體 1 中抽取 $n_1=40$ 個樣本；母體 2 中抽取 $n=35$ 個樣本，得到第一組樣本的 $overline(x)_1=68.5, sigma=5$，第二組樣本 $overline(x)_2=51.6, sigma=4$。
 
@@ -68,7 +68,7 @@
 
   $
   overline(x)_1-overline(x)_2 tilde N(mu_1-mu_2, sigma_1^2/n_1 + sigma_2^2/n_2)
-  $
+  $ <已知母體分配-sigma已知>
 
   #blk[
     *延伸*：兩個 *獨立* 母體分配不確定，$sigma_1^2, sigma_2^2$ 已知，$n_1, n_2$ 均屬於 *大樣本*，根據 C.L.T
@@ -102,18 +102,18 @@
   ((overline(x)_1-overline(x)_2) - (mu_1-mu-2))/(sqrt(sigma_1^2/n_1 + sigma_2^2/n_2)) approx N(0, 1) = Z
   $ <ex9.1-a-Z>
 
-  C.I. 之算法：
+  C.I. 之機率分配：
 
   $
   1-alpha = 0.95 &= P(-Z_(alpha/2) < Z < Z_(alpha/2)) \
              &= P(-1.96 < Z < 1.96)
-  $ <ex9.1-a-CI>
+  $ <CI-possibility-for-two-group>
 
   #figure(caption: "C.I. 之圖像化解釋")[
     #image("assets/ex9.1-ci-explanation.png")
   ]
 
-  將@ex9.1-a-Z 的 $Z$ 帶入@ex9.1-a-CI 可得
+  將@ex9.1-a-Z 的 $Z$ 帶入@CI-possibility-for-two-group 可得
 
   $
   & P(-1.96 < Z < 1.96 ) \
@@ -131,9 +131,9 @@
 
   $
   (overline(x)_1-overline(x)_2) plus.minus Z_(alpha/2) times sqrt(sigma_1^2/n_1 + sigma_2^2/n_2)
-  $ <ex9.1-a-CI-formula>
+  $ <CI-formula-for-two-group>
 
-  將本題統計量帶入@ex9.1-a-CI-formula，可得
+  將本題統計量帶入@CI-formula-for-two-group，可得
 
   $
   &(68.5-53.6) plus.minus 1.96 times sqrt(5^2/40 + 4^2/35) \
@@ -149,7 +149,7 @@
     overline(x) plus.minus Z_(alpha/2) times sigma/sqrt(n)
     $
 
-    與@ex9.1-a-CI-formula 結構相當類似（推導邏輯一致），惟需記得
+    與@CI-formula-for-two-group 結構相當類似（推導邏輯一致），惟需記得
 
     $
     mu &= overline(x)_1 - overline(x)_2 \
@@ -189,3 +189,89 @@
     發現到 $Z = 14.3233 > 1.96$，$Z in R R$，拒絕 $R_0$
   + 在 $alpha=0.05$ 下，拒絕男女平均體重相等的宣稱。
 ]
+
+#question("ex10.3")[
+  已知兩個母體的變異數分別為 $sigma_1=36$ 與 $sigma_2=25$，倘若此時從兩獨立常態分配母體中分別抽出樣本數 $n_1=12$ 與樣本數 $n_2=18$ 個隨機樣本，而第1個母體的樣本平均數為 $overline(x)=41$，第2個母體的樣本平均為 $overline(y)=32$，試著求出 $mu_1-mu_2$ 之95%的信賴區間，以及 #highlight[第一個母體的平均數是否在 $alpha=0.05$ 下大於第二個母體的平均數]？
+][
+  *題幹*
+
+  令兩母體 $X$, $Y$，其中 $X$, $Y$ 均符合常態分配。
+
+  - 從 $X$ 母體（$mu$ 未知，$sigma_1^2=26$）中抽出 $n_1=12$ 個樣本，其中這個樣本的 $overline(x)=41$。
+  - 從 $Y$ 母體（$mu$ 未知，$sigma_2^2=25$）中抽出 $n_2=18$ 個樣本，其中這個樣本的 $overline(y)=32$。
+
+  欲求：
+
+  + $mu_1-mu_2$ 的 95% C.I.
+  + $
+    cases(
+      H_0: mu_1 <= mu_2 \
+      H_1: mu_1 > mu_2 "(宣稱)"
+    )
+    $ <ex9.3-question-2>
+    在 $alpha=0.05$ 下，宣稱成立？
+
+  *解題：$mu_1-mu_2$ 的 95% C.I.*
+
+  因為兩個獨立母體的 $sigma_1^2$, $sigma_2^2$ 已知，且均屬於常態分配，根據@已知母體分配-sigma已知，$overline(x)-overline(y)$ 的抽樣分配為
+
+  $
+  overline(x)-overline(y) tilde N(mu_1-mu_2, sigma_1^2/n_1 + sigma_2^2/n_2)
+  $ <ex9.3-抽樣分配>
+
+  首先將其轉為 Z 值，可以得到
+
+  $
+  ((overline(x)-overline(y))-(mu_1-mu_2))/(sigma_1^2/n_1 + sigma_2^2/n_2) tilde N(0, 1) = Z
+  $ <ex9.3-抽樣分配-Z>
+
+  其 C.I. 機率分配，根據@CI-possibility-for-two-group，為
+
+  $
+  1-alpha = 0.95 &= P(-Z_(alpha/2) < Z < Z_(alpha/2)) \
+             &= P(-1.96 < Z < 1.96)
+  $
+
+  套用 $mu_1-mu_2$ 的 C.I. 公式（@CI-formula-for-two-group）
+
+  $
+  &(overline(x)-overline(y)) plus.minus Z_(alpha/2) times sqrt(sigma_1^2/n_1 + sigma_2^2/n_2) \
+  =& (41-32) plus.minus 1.96 times sqrt(36/12 + 25/18) \
+  =& 4.8938 or 13.1062
+  $
+
+  即 $mu_1-mu_2$ 的 95% C.I. 為 $(4.8938, 13.1062)$。
+
+  *解題：$alpha=0.05$ 下 $mu_1>mu_2$？*
+
+  首先將@ex9.3-question-2 轉換為
+
+  + 將 @ex9.3-question-2 轉換為
+    $
+    cases(
+      H_0: mu_1-mu_2 <= 0 \
+      H_1: mu_1-mu_2 > 0 "(宣稱)"
+    )
+    $ <ex9.3-question-2-orepr>
+    為右尾檢定。
+  + $overline(x)-overline(y)$ 的抽樣分配，如@ex9.3-抽樣分配 所寫，是
+    $
+    overline(x)-overline(y) tilde N(mu_1-mu_2, sigma_1^2/n_1 + sigma_2^2/n_2)
+    $
+    考慮到是右尾檢定，拒絕域為
+    $
+    R R = { Z | Z > Z_(alpha) }
+    $
+    題目要求 $alpha=0.05$，可得拒絕域
+    $
+    R R = { Z | Z > 1.645 }
+    $ <ex9.3-reject-region>
+  + 將 $overline(x)-overline(y)$ 轉換為 $Z$ 值，根據@ex9.3-抽樣分配-Z 並代入 $mu_1-mu_2=0$，為
+    $
+    Z &= ((overline(x)-overline(y))-(mu_1-mu_2))/(sigma_1^2/n_1 + sigma_2^2/n_2)  \
+    &= ((41-32)-0)/(36/12 + 25/18) \
+    &= 2.0506
+    $
+    由於 $Z = 2.0506 > 1.645$，$Z in R R$，拒絕 $H_0$
+  + 在 $alpha=0.05$ 下，接受 $mu_1 > mu_2$ 的宣稱。
+ ]
