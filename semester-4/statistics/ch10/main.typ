@@ -22,7 +22,7 @@
 
 === 例題導讀
 
-#question("ex9.1")[
+#question("ex10.1")[
   分別從兩個獨立的常態分配⺟體中收集40位男⽣與35位女⽣的體重，男⽣的樣本平均體重爲68.5公⽄，女⽣的樣本平均體重爲53.6公⽄，倘若已知男⽣和女⽣體重的標準差分別為 $sigma_1=5, sigma_2=4$ ，試求男女⽣平均體重差 $mu_1-mu_2$ 的95%信賴區間，#highlight[以及男女平均體重是否相等]。
 ][
   原題目想要從母體 1 中抽取 $n_1=40$ 個樣本；母體 2 中抽取 $n=35$ 個樣本，得到第一組樣本的 $overline(x)_1=68.5, sigma=5$，第二組樣本 $overline(x)_2=51.6, sigma=4$。
@@ -100,7 +100,7 @@
 
   $
   ((overline(x)_1-overline(x)_2) - (mu_1-mu-2))/(sqrt(sigma_1^2/n_1 + sigma_2^2/n_2)) approx N(0, 1) = Z
-  $ <ex9.1-a-Z>
+  $ <ex10.1-a-Z>
 
   C.I. 之機率分配：
 
@@ -110,10 +110,10 @@
   $ <CI-possibility-for-two-group>
 
   #figure(caption: "C.I. 之圖像化解釋")[
-    #image("assets/ex9.1-ci-explanation.png")
+    #image("assets/ex10.1-ci-explanation.png")
   ]
 
-  將@ex9.1-a-Z 的 $Z$ 帶入@CI-possibility-for-two-group 可得
+  將@ex10.1-a-Z 的 $Z$ 帶入@CI-possibility-for-two-group 可得
 
   $
   & P(-1.96 < Z < 1.96 ) \
@@ -128,6 +128,12 @@
   $
 
   #highlight[所以，我們可以得到 $(mu_1-mu_2)$ 的 $(1-alpha) times 100%$ C.I. 公式為]
+
+  #align(center)[
+    $(overline(x) - overline(y))$ $plus.minus$ 查表分配的 $alpha/2$ 值 $times$ $(overline(x) - overline(y))$ 的標準差
+  ]
+
+  以此分配來說，是
 
   $
   (overline(x)_1-overline(x)_2) plus.minus Z_(alpha/2) times sqrt(sigma_1^2/n_1 + sigma_2^2/n_2)
@@ -168,10 +174,10 @@
     根據 $H_1$，可知為 *雙尾檢定*
   + 其抽樣分配如下
     #figure(caption: "本題假說檢定之原始抽樣分配")[
-      #image("assets/ex9.1-hypothesis-testing.png")
+      #image("assets/ex10.1-hypothesis-testing.png")
     ]
     #figure(caption: "本題假說檢定之標準化後的抽樣分配和其拒絕域")[
-      #image("assets/ex9.1-hypothesis-testing-z.png")
+      #image("assets/ex10.1-hypothesis-testing-z.png")
     ]
     考慮到是雙尾檢定，故拒絕域有兩邊（小於 $-Z_(alpha/2)$ 和大於 $Z_(alpha/2)$）。
     題目要求 $alpha=0.05$，可得拒絕域 $R R$
@@ -210,7 +216,7 @@
       H_0: mu_1 <= mu_2 \
       H_1: mu_1 > mu_2 "(宣稱)"
     )
-    $ <ex9.3-question-2>
+    $ <ex10.3-question-2>
     在 $alpha=0.05$ 下，宣稱成立？
 
   *解題：$mu_1-mu_2$ 的 95% C.I.*
@@ -219,13 +225,13 @@
 
   $
   overline(x)-overline(y) tilde N(mu_1-mu_2, sigma_1^2/n_1 + sigma_2^2/n_2)
-  $ <ex9.3-抽樣分配>
+  $ <ex10.3-抽樣分配>
 
   首先將其轉為 Z 值，可以得到
 
   $
   ((overline(x)-overline(y))-(mu_1-mu_2))/(sigma_1^2/n_1 + sigma_2^2/n_2) tilde N(0, 1) = Z
-  $ <ex9.3-抽樣分配-Z>
+  $ <ex10.3-抽樣分配-Z>
 
   其 C.I. 機率分配，根據@CI-possibility-for-two-group，為
 
@@ -246,17 +252,17 @@
 
   *解題：$alpha=0.05$ 下 $mu_1>mu_2$？*
 
-  首先將@ex9.3-question-2 轉換為
+  首先將@ex10.3-question-2 轉換為
 
-  + 將 @ex9.3-question-2 轉換為
+  + 將 @ex10.3-question-2 轉換為
     $
     cases(
       H_0: mu_1-mu_2 <= 0 \
       H_1: mu_1-mu_2 > 0 "(宣稱)"
     )
-    $ <ex9.3-question-2-orepr>
+    $ <ex10.3-question-2-orepr>
     為右尾檢定。
-  + $overline(x)-overline(y)$ 的抽樣分配，如@ex9.3-抽樣分配 所寫，是
+  + $overline(x)-overline(y)$ 的抽樣分配，如@ex10.3-抽樣分配 所寫，是
     $
     overline(x)-overline(y) tilde N(mu_1-mu_2, sigma_1^2/n_1 + sigma_2^2/n_2)
     $
@@ -267,8 +273,8 @@
     題目要求 $alpha=0.05$，可得拒絕域
     $
     R R = { Z | Z > 1.645 }
-    $ <ex9.3-reject-region>
-  + 將 $overline(x)-overline(y)$ 轉換為 $Z$ 值，根據@ex9.3-抽樣分配-Z 並代入 $mu_1-mu_2=0$，為
+    $ <ex10.3-reject-region>
+  + 將 $overline(x)-overline(y)$ 轉換為 $Z$ 值，根據@ex10.3-抽樣分配-Z 並代入 $mu_1-mu_2=0$，為
     $
     Z &= ((overline(x)-overline(y))-(mu_1-mu_2))/sqrt(sigma_1^2/n_1 + sigma_2^2/n_2)  \
     &= ((41-32)-0)/sqrt(36/12 + 25/18) \
@@ -279,10 +285,10 @@
  ]
 
 
-=== 母體屬於常態分配、$sigma$ 未知
+=== 母體屬於常態分配、$sigma$ 未知、小樣本、$sigma_1^2=sigma_2^2$
 
 #question("ex10.4")[
-  從兩個獨立的常態分配母體中，隨機抽出兩個獨立的隨機樣本，資料如 @ex10.4-sample-table 所示。若兩母體之變異數 $sigma_1^2$ 和 $sigma_2^2$ 均不知道，但 $sigma_1^2=sigma_2^2=sigma^2$，試著求出 $mu_1-mu_2$ 的 95% 信賴區間。
+  從兩個獨立的常態分配母體中，隨機抽出兩個獨立的隨機樣本，資料如 @ex10.4-sample-table 所示。若兩母體之變異數 $sigma_1^2$ 和 $sigma_2^2$ 均不知道，但 $sigma_1^2=sigma_2^2=sigma^2$，試著求出 $mu_1-mu_2$ 的 95% 信賴區間，#highlight[以及 $mu_1-mu_2$ 是否大於0]。
 
   #figure(caption: "")[
     #table(
@@ -302,11 +308,135 @@
     因為有抽出樣本，也就代表有樣本變異數 $s_1^2$ 和 $s_2^2$，而有做過檢定 $s_1^2=s_2^2$，所以才能推斷 $sigma_1^2=sigma_2^2$。
 
     如果 $s_1^2 = s_2^2$，則要套用本題（情況3）的公式；反之（$s_1^2 != s_2^2$），就要套用情況4 /*wip*/ 的公式。
+
+    $sigma_1^2=sigma_2^2$ 是因為 $s_1^2=s_2^2$，實務上你得先做 $s_1^2=s_2^2$ 的檢定，才能確定 $sigma_1^2=sigma_2^2$。
   ]
 
   *題幹*
 
+  兩個獨立常態母體 $X$, $Y$，其 $mu_1$ 和 $mu_2$ 均未知（而想做這兩個的比較），從中抽出的 $n_1, n_2$ 均為小樣本，其樣本統計量分別為 $overline(x), overline(y)$。
 
+  欲求：
 
+  + $mu_1-mu_2$ 的 95% C.I.
+  + $
+    cases(
+      H_0: mu_1-mu_2 <= 0 \
+      H_1: mu_1-mu_2 > 0 "(宣稱)"
+    )
+    $ <ex10.4-question-2>
+    在 $alpha=0.05$ 下，宣稱成立？
+
+  *抽樣分配*
+
+  回想 Ch7，$overline(x)$ 是常態母體，$sigma$ 未知，且屬於小樣本 ($n<30$)，其符合 $t$ 分配
+
+  $
+  (overline(x) - mu_1)/(s_1/sqrt(n_1)) tilde t(n_1-1)
+  $
+
+  $overline(y)$ 亦為如此
+
+  $
+  (overline(y) - mu_2)/(s_2/sqrt(n_2)) tilde t(n_2-1)
+  $
+
+  透過一系列證明，可以得到本 $overline(x)-overline(y)$ 的抽樣分配為
+
+  $
+  ((overline(x)-overline(y))-(mu_1-mu_2))/sqrt(s_1^2/n_1+s_2^2/n_2) tilde t(n_1+n_2-2)
+  $ <normal-sigma-unknown-equal-small-sample-sigma-sampling>
+
+  不過有個 #highlight[重點]：*$s_1^2$ 和 $s_2^2$ 是不可以直接代入的*。雖然兩個母體的變異數不知道，但是題幹說明「*相等*」。既然相等，代表他們有相同的 $sigma^2_p$（$p$ 表示 pooled，共同的），所以需要發展一個 *共同的樣本變異數* $s_p^2$ 去估計它。所以 $s_1^2$ 和 $s_2^2$ 應該用共同的 $s_p^2$ 替代。
+
+  $s_p^2$ 計算的脈絡，可以從 $s_1^2$ 和 $s_2^2$ 的計算方式一窺
+
+  $
+  s_1^2 &= sum(x_i-overline(x))^2/(n_1-1) \
+  s_2^2 &= sum(y_i-overline(y))^2/(n_2-1)
+  $
+
+  可以看到 $s_1^2$ 的自由度就是 $n_1-1$，$s_2^2$ 的自由度就是 $n_2-1$，因此 $s_p^2$ 的自由度就是 $n_1+n_2-2$。因此，#highlight[$s_p^2$ 的計算方式是]
+
+  $
+  s_p^2 = ((n_1-1)s_1^2 + (n_2-1)s_2^2)/(n_1+n_2-2)
+  $ <normal-sigma-unknown-equal-small-sample-sigma-sampling-sp>
+
+  *注意：@normal-sigma-unknown-equal-small-sample-sigma-sampling 到  @normal-sigma-unknown-equal-small-sample-sigma-sampling-sp 均屬於新的統計量*。另外 $t$ 分配沒有可加性，故和 #link(<ex10.1>)[Example 10.1] 的推導方式有異。
+
+  *解題：$mu_1-mu_2$ 的 95% C.I.*
+
+  本題的抽樣分配為@normal-sigma-unknown-equal-small-sample-sigma-sampling-sp，將其轉為 $t$ 分配，可以得到
+
+  $
+  ((overline(x)-overline(y))-(mu_1-mu_2))/sqrt(s_1^2/n_1+s_2^2/n_2) tilde t(n_1+n_2-2)
+  $
+
+  $
+  s_p^2 = ((n_1-1)s_1^2 + (n_2-1)s_2^2)/(n_1+n_2-2)
+  $
+
+  其中本題兩個樣本 $n_1=6, n_2=7$，分別計算其平均數和變異數
+
+  $
+  overline(x)_1 &= (sum x_(1,i))/n = 9 \
+  overline(x)_2 &= (sum x_(2,i))/n = 6 \
+  \
+  s_1^2 &= (sum (x_(1,i)-overline(x)_1)^2)/(n_1-1) = 2.6667
+  s_2^2 &= (sum (x_(2,i)-overline(x)_2)^2)/(n_2-1) = 2
+  $
+
+  $
+  s_p^2 &= ((7-1)2.6667 + (6-1)2)/(7+6-2) = 2.3637
+  $
+
+  首先列出其機率式 (@CI-possibility-for-two-group)，注意 $t$ 分配是從 @normal-sigma-unknown-equal-small-sample-sigma-sampling 來的：
+
+  $
+  "df" = 6+7-2 = 11 \
+  1-alpha = 0.95 &= P(-t_(alpha/2)(11) < T < t_(alpha/2)(11)) \
+            &= P(-2.201 < T < 2.201)
+  $
+
+  套用 C.I. 公式 @CI-formula-for-two-group（注意標準差不同），可以得到
+
+  $
+  &(overline(x)-overline(y)) plus.minus t_(alpha/2)(11) times sqrt(s_p^2/n_1 + s_p^2/2) \
+  =& (9-6) plus.minus 2.201 times sqrt(2.3637/6 + 2.3637/7) \
+  =& 1.1174 or 4.8826
+  $
+
+  即 $mu_1-mu_2$ 的 95% C.I. 為 $(1.1174, 4.8826)$。
+
+  *解題：$alpha=0.05$ 下 $mu_1>mu_2$？*
+
+  + 將 @ex10.4-question-2 轉換為
+    $
+    cases(
+      H_0: mu_1-mu_2 <= 0 \
+      H_1: mu_1-mu_2 > 0 "(宣稱)"
+    )
+    $ <ex10.4-question-2-orepr>
+    為右尾檢定。
+  + $overline(x)-overline(y)$ 的抽樣分配，如@normal-sigma-unknown-equal-small-sample-sigma-sampling-sp 所寫，是
+    $
+    ((overline(x)-overline(y))-(mu_1-mu_2))/sqrt(s_1^2/n_1+s_2^2/n_2) tilde t(n_1+n_2-2)
+    $
+    考慮到是右尾檢定，拒絕域為
+    $
+    R R = { T | T > t_(alpha)(11) }
+    $
+    題目要求 $alpha=0.05$，可得拒絕域
+    $
+    R R = { T | T > 1.796 }
+    $ <ex10.4-reject-region>
+  + 將 $overline(x)-overline(y)$ 轉換為 $t$ 值，根據@normal-sigma-unknown-equal-small-sample-sigma-sampling-sp 並代入 $mu_1-mu_2=0$，為
+    $
+    T &= ((overline(x)-overline(y))-(mu_1-mu_2))/sqrt(s_1^2/n_1+s_2^2/n_2)  \
+    &= ((9-6)-0)/sqrt(2.3637/6+2.3637/7) \
+    &= 3.5073
+    $
+    由於 $T = 3.5073 > 1.796$，$T in R R$，拒絕 $H_0$
+  + 在 $alpha=0.05$ 下，接受 $mu_1 > mu_2$ 的宣稱。
 ]
 
