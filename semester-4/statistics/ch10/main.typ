@@ -268,10 +268,12 @@
     $ <ex9.3-reject-region>
   + 將 $overline(x)-overline(y)$ 轉換為 $Z$ 值，根據@ex9.3-抽樣分配-Z 並代入 $mu_1-mu_2=0$，為
     $
-    Z &= ((overline(x)-overline(y))-(mu_1-mu_2))/(sigma_1^2/n_1 + sigma_2^2/n_2)  \
-    &= ((41-32)-0)/(36/12 + 25/18) \
-    &= 2.0506
+    Z &= ((overline(x)-overline(y))-(mu_1-mu_2))/sqrt(sigma_1^2/n_1 + sigma_2^2/n_2)  \
+    &= ((41-32)-0)/sqrt(36/12 + 25/18) \
+    &= 4.2960
     $
-    由於 $Z = 2.0506 > 1.645$，$Z in R R$，拒絕 $H_0$
+    由於 $Z = 4.2060 > 1.645$，$Z in R R$，拒絕 $H_0$
   + 在 $alpha=0.05$ 下，接受 $mu_1 > mu_2$ 的宣稱。
  ]
+
+ 
