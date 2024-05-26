@@ -1,21 +1,46 @@
-@startuml TaxiProposalMerged
+@startuml TaxiProposal
 
+autonumber
 skinparam dpi 300
 skinparam linetype ortho
 skinparam defaultFontSize 11
 skinparam defaultFontName "Noto Sans CJK TC"
 
+box 前端
 actor Requester as "使用者"
+
+participant TaxiProposalApp as ":TaxiProposalApp\n前端系統"
 participant TaxiProposalUI as ":TaxiProposalUI\n展現層"
+participant TaxiProposalApi as ":TaxiProposalApi\nRPC 呼叫"
+end box
+
+box 後端
+actor Server as "伺服器"
+
+participant TaxiProposalService as ":TaxiProposalService\n後端系統"
 participant TaxiProposalController as ":TaxiProposalController\n控制層"
-participant TaxiProposalModel as ":TaxiProposalModel\n資料模型"
+participant TaxiProposal as ":TaxiProposal\n資料模型"
 participant TaxiProposalDb as ":TaxiProposalDb\n資料庫"
+end box
 
-Requester -> TaxiProposalUI: onFieldChanged()\n使用者輸入資料
-Requester -> TaxiProposalUI ++: onCreateProposalButtonClicked()\n使用者點「建立按鈕」
-Requester <-- TaxiProposalUI: [Toast] 正在建立⋯⋯
+participant TaxiProposal as ":TaxiProposal\n資料模型"
 
-TaxiProposalUI -> TaxiProposalController ++ : createProposal(proposalRequest)\n使用者觸發建立配對單
+Server -> TaxiProposalService **: construct()
+Server -> TaxiProposalService: run()
+TaxiProposalService -> TaxiProposalController **: construct()
+
+Requester -> TaxiProposalApp **: construct()
+Requester -> TaxiProposalApp: run()
+
+TaxiProposalApp -> TaxiProposalUI **: construct()
+TaxiProposalApp -> TaxiProposalUI: onFieldChanged()\n使用者輸入資料
+TaxiProposalApp -> TaxiProposalUI: onFieldChanged()\n使用者輸入資料
+TaxiProposalApp -> TaxiProposalUI ++: onCreateProposalButtonClicked()\n使用者點「建立按鈕」
+TaxiProposalApp <-- TaxiProposalUI: [Toast] 正在建立⋯⋯
+
+TaxiProposalUI -> TaxiProposalApi **: construct()
+TaxiProposalUI -> TaxiProposalApi ++: createProposal(proposalRequest)\n使用者觸發建立配對單
+TaxiProposalApi -> TaxiProposalController ++: POST /proposal\n建立配對單
 note left of TaxiProposalController
     配對單包含「出發地點」、「抵達地點」、
     「乘車金額」、「出發時間」、「配對時限」和
@@ -26,136 +51,129 @@ note left of TaxiProposalController
 end note
 
 TaxiProposalController -> TaxiProposalDb ++: createProposal(proposalRequest)\n在資料庫建立配對單
-TaxiProposalDb -> TaxiProposalModel **: Create from request\n將配對單資料實例化成物件
+TaxiProposalDb -> TaxiProposal **: Create from request\n將配對單資料實例化成物件
 return taxiProposal
+return taxiProposalJson
+TaxiProposalApi -> TaxiProposal **: Create from request\n將配對單資料實例化成物件
 return taxiProposal
 
 return [Toast] 建立完成！
 
-Requester -> TaxiProposalUI ++: showCreatedProposal()\n顯示建立的配對單
+TaxiProposalApp -> TaxiProposalUI ++: getStatus()\n取得配對單的狀態
 
-TaxiProposalUI -> TaxiProposalUI ++: getTpId()\n取得配對單 ID
-return 配對單 ID
+TaxiProposalUI -> TaxiProposalApi **: construct()
+TaxiProposalUI -> TaxiProposalApi ++: getStatus(tpId)\n取得配對單的狀態
 
-TaxiProposalUI -> TaxiProposalUI ++: getOrganizer()\n取得發起人
-return 發起人
+TaxiProposalApi -> TaxiProposalController ++: GET /proposals/:tpId/status\n取得配對單的狀態
 
-TaxiProposalUI -> TaxiProposalUI ++: getDepartOn()\n取得出發地點
-return 出發地點
-
-TaxiProposalUI -> TaxiProposalUI ++: getArriveOn()\n取得抵達地點
-return 抵達地點
-
-TaxiProposalUI -> TaxiProposalUI ++: getCost()\n取得乘車金額
-return 乘車金額
-
-TaxiProposalUI -> TaxiProposalUI ++: getDepartAt()\n取得出發時間
-return 出發時間
-
-TaxiProposalUI -> TaxiProposalUI ++: getPairBefore()\n取得配對時限
-return 配對時限
-
-TaxiProposalUI -> TaxiProposalUI ++: getExpectedPassengers()\n取得預期乘客人數
-return 預期乘客人數
-
-Requester <-- TaxiProposalUI: [UI] 渲染並顯示配對單
-
-newpage
-
-Requester -> TaxiProposalUI ++: getStatus()\n取得配對單的狀態
-
-TaxiProposalUI -> TaxiProposalController ++: getStatus(tpId)\n取得配對單的狀態
-
+TaxiProposalController -> TaxiProposalDb **: construct()
 TaxiProposalController -> TaxiProposalDb ++: findProposal(tpId)\n在資料庫尋找配對單
 
 break 沒有這個 ID 的配對單
+    autonumber stop
     TaxiProposalController <-- TaxiProposalDb: null\n回傳空值
-    TaxiProposalUI <-- TaxiProposalController: null\n回傳空值
-    Requester <-- TaxiProposalUI: [Popover] 沒有這個配對單
+    TaxiProposalApi <-- TaxiProposalController: ""404 Not Found""
+    TaxiProposalUI <-- TaxiProposalApi: null\n回傳空值
+    TaxiProposalApp <-- TaxiProposalUI: [Popover] 沒有這個配對單
 end
 
-create participant TaxiProposalModel as ":TaxiProposalModel\n資料模型"
-TaxiProposalDb --> TaxiProposalModel: Create from request\n將配對單資料實例化成物件
-return taxiProposalModel
+newpage
 
-TaxiProposalController -> TaxiProposalModel ++: getStatus()\n取得配對單物件的狀態
+autonumber resume
+
+TaxiProposalDb --> TaxiProposal **: Create from request\n將配對單資料實例化成物件
+return taxiProposal
+
+TaxiProposalController -> TaxiProposal ++: getStatus()\n取得配對單物件的狀態
 
 alt this.finished == true 完成配對
-    TaxiProposalController <-- TaxiProposalModel: status: TaxiProposalStatus.Finished 配對單完成
+    TaxiProposalController <-- TaxiProposal: status: TaxiProposalStatus.Finished 配對單完成
 else this.passengers.count() >= this.expectedPassengers 人數到齊
-    TaxiProposalController <-- TaxiProposalModel: status: TaxiProposalStatus.Matched 配對成功
+    TaxiProposalController <-- TaxiProposal: status: TaxiProposalStatus.Matched 配對成功
 else this.pairBefore < now || this.departAt < now 配對或出發時間到
-    TaxiProposalController <-- TaxiProposalModel: status: TaxiProposalStatus.Unmatched 配對失敗
+    TaxiProposalController <-- TaxiProposal: status: TaxiProposalStatus.Unmatched 配對失敗
 else 時間還沒到，人還沒到齊
-    TaxiProposalController <-- TaxiProposalModel --: status: TaxiProposalStatus.Waiting 等待配對
+    TaxiProposalController <-- TaxiProposal --: status: TaxiProposalStatus.Waiting 等待配對
 end
 
+return ""{"status": status}""
 return status
 
 alt status == TaxiProposalStatus.Finished 配對單完成
-    Requester <-- TaxiProposalUI: status = "配對單已完成"
+    TaxiProposalApp <-- TaxiProposalUI: status = "配對單已完成"
 else status == TaxiProposalStatus.Matched 配對成功
-    Requester <-- TaxiProposalUI: status = "配對成功"
+    TaxiProposalApp <-- TaxiProposalUI: status = "配對成功"
 else status == TaxiProposalStatus.Unmatched 配對失敗
-    Requester <-- TaxiProposalUI: status = "配對失敗"
+    TaxiProposalApp <-- TaxiProposalUI: status = "配對失敗"
 else status == TaxiProposalStatus.Waiting 等待配對
-    Requester <-- TaxiProposalUI --: status = "等待配對"
+    TaxiProposalApp <-- TaxiProposalUI --: status = "等待配對"
 end
 
-Requester -> TaxiProposalUI ++: getFailReason()\n取得配對失敗原因
+TaxiProposalApp -> TaxiProposalUI ++: getFailReason()\n取得配對失敗原因
 
-TaxiProposalUI -> TaxiProposalController ++: getFailReason(tpId)\n取得配對失敗原因
+TaxiProposalUI -> TaxiProposalApi **: construct()
+TaxiProposalUI -> TaxiProposalApi ++: getFailReason(tpId)\n取得配對失敗原因
+TaxiProposalApi -> TaxiProposalController ++: GET /proposals/:tpId/failReason\n取得配對失敗原因
 
 TaxiProposalController -> TaxiProposalDb ++: findProposal(tpId)\n在資料庫尋找配對單
 
 break 沒有這個 ID 的配對單
+    autonumber stop
     TaxiProposalController <-- TaxiProposalDb: null\n回傳空值
-    TaxiProposalUI <-- TaxiProposalController: ""\n回傳空白字串
-    Requester <-- TaxiProposalUI: [Popover] 沒有這個配對單
+    TaxiProposalApi <-- TaxiProposalController: ""404 Not Found""
+    TaxiProposalUI <-- TaxiProposalApi: ""\n回傳空白字串
+    TaxiProposalApp <-- TaxiProposalUI: [Popover] 沒有這個配對單
 end
+
+autonumber resume
+
+TaxiProposalDb --> TaxiProposal **: Create from query result\n將配對單資料實例化成物件
+return taxiProposal
+
+TaxiProposalController -> TaxiProposal ++: getFailReason()\n取得配對失敗原因
+
+alt this.finished == true 完成配對
+    TaxiProposalController <-- TaxiProposal: ""\n回傳空白字串
+else this.passengers.count() >= this.expectedPassengers 人數到齊
+    TaxiProposalController <-- TaxiProposal: ""PAIR_FULL""\n回傳人數已滿
+else this.pairBefore < now || this.departAt < now 配對或出發時間到
+    TaxiProposalController <-- TaxiProposal: ""PAIR_EXPIRED""\n回傳配對時間已過
+else 時間還沒到，人還沒到齊
+    TaxiProposalController <-- TaxiProposal --: ""\n回傳空白字串
+end
+
+return ""{"reason": reason}""
+return reason
 
 newpage
 
-create participant TaxiProposalModel as ":TaxiProposalModel\n資料模型"
-TaxiProposalDb --> TaxiProposalModel: Create from query result\n將配對單資料實例化成物件
-return taxiProposalModel
-
-TaxiProposalController -> TaxiProposalModel ++: getFailReason()\n取得配對失敗原因
-
-alt this.finished == true 完成配對
-    TaxiProposalController <-- TaxiProposalModel: ""\n回傳空白字串
-else this.passengers.count() >= this.expectedPassengers 人數到齊
-    TaxiProposalController <-- TaxiProposalModel: ""PAIR_FULL""\n回傳人數已滿
-else this.pairBefore < now || this.departAt < now 配對或出發時間到
-    TaxiProposalController <-- TaxiProposalModel: ""PAIR_EXPIRED""\n回傳配對時間已過
-else 時間還沒到，人還沒到齊
-    TaxiProposalController <-- TaxiProposalModel --: ""\n回傳空白字串
-end
-
-return reason
-
 alt reason == "" 配對單完成
-    Requester <-- TaxiProposalUI: reason = "配對單已完成"
+    TaxiProposalApp <-- TaxiProposalUI: reason = ""
 else reason == ""PAIR_FULL"" 人數已滿
-    Requester <-- TaxiProposalUI: reason = "人數已滿"
+    TaxiProposalApp <-- TaxiProposalUI: reason = "人數已滿"
 else reason == ""PAIR_EXPIRED"" 配對時間已過
-    Requester <-- TaxiProposalUI: reason = "配對時間已過"
+    TaxiProposalApp <-- TaxiProposalUI: reason = "配對時間已過"
 else reason == "" 等待配對
-    Requester <-- TaxiProposalUI --: reason = "等待配對"
+    TaxiProposalApp <-- TaxiProposalUI --: reason = ""
 end
+TaxiProposalApp -> TaxiProposalUI ++: onFinishButtonClicked(tpId)\n點選 [完成配對] 按鈕
 
-Requester -> TaxiProposalUI ++: onFinishButtonClicked(tpId)\n點選 [完成配對] 按鈕
-TaxiProposalUI -> TaxiProposalController ++: finish(tpId)\n完成配對
+TaxiProposalUI -> TaxiProposalApi **: construct()
+TaxiProposalUI -> TaxiProposalApi ++: finish(tpId)\n完成配對
+
+TaxiProposalApi -> TaxiProposalController ++: POST /proposals/:tpId/finish\n完成配對
 
 TaxiProposalController -> TaxiProposalDb ++: updateProposal(tpId, finish=true)\n在資料庫更新配對單，將 finish 設為 true
 
 break 沒有這個 ID 的配對單
-    TaxiProposalController <-- TaxiProposalDb: NO_SUCH_PROPOSAL\n沒有這個配對單
-    TaxiProposalUI <-- TaxiProposalController: NO_SUCH_PROPOSAL\n沒有這個配對單
-    Requester <-- TaxiProposalUI: [Popover] 沒有這個配對單
+    TaxiProposalController <-- TaxiProposalDb: NoEntityException\n沒有這個配對單
+    TaxiProposalApi <-- TaxiProposalController: ""404 Not Found""
+    TaxiProposalUI <-- TaxiProposalApi: NoProposalException\n沒有這個配對單
+    TaxiProposalApp <-- TaxiProposalUI: [Popover] 沒有這個配對單
 end
 
 return OK
+return ""{"succeed": true}""
 return OK
 return [Toast] 完成配對！
 

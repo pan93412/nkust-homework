@@ -217,13 +217,13 @@ return ""{"reason": reason}""
 return reason
 
 alt reason == "" 配對單完成
-    TaxiProposalApp <-- TaxiProposalUI: reason = "配對單已完成"
+    TaxiProposalApp <-- TaxiProposalUI: reason = ""
 else reason == ""PAIR_FULL"" 人數已滿
     TaxiProposalApp <-- TaxiProposalUI: reason = "人數已滿"
 else reason == ""PAIR_EXPIRED"" 配對時間已過
     TaxiProposalApp <-- TaxiProposalUI: reason = "配對時間已過"
 else reason == "" 等待配對
-    TaxiProposalApp <-- TaxiProposalUI --: reason = "等待配對"
+    TaxiProposalApp <-- TaxiProposalUI --: reason = ""
 end
 
 @enduml TaxiProposalGetFailReason
