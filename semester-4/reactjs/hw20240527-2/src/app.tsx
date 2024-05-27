@@ -1,7 +1,7 @@
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
-import { useEffect, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import QRCode from "react-qr-code";
+import { Breadcrumb, Col, Flex, Layout, Menu, theme } from "antd";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import Video from "./video";
 
 const { Header, Content, Footer } = Layout;
 
@@ -11,7 +11,7 @@ export function App() {
   } = theme.useToken();
 
   const { t, i18n } = useTranslation();
-  const languages = ['en', 'ja', 'cn', 'tw'];
+  const languages = ["en", "ja", "cn", "tw"];
   const [selectedLanguage, setSelectedLanguage] = useState(i18n.language);
 
   useEffect(() => {
@@ -20,18 +20,28 @@ export function App() {
 
   return (
     <Layout>
-      <Header style={{ display: 'flex', alignItems: 'center' }}>
+      <Header style={{ display: "flex", alignItems: "center" }}>
         <div className="demo-logo" />
-        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={[selectedLanguage]} items={languages.map((l) => {
-          return { key: l, label: t(l) };
-        })} style={{ flex: 1, minWidth: 0 }} onSelect={(info) => setSelectedLanguage(info.key)} />
+        <Menu
+          theme="dark"
+          mode="horizontal"
+          defaultSelectedKeys={[selectedLanguage]}
+          items={languages.map((l) => {
+            return { key: l, label: t(l) };
+          })}
+          style={{ flex: 1, minWidth: 0 }}
+          onSelect={(info) => setSelectedLanguage(info.key)}
+        />
       </Header>
-      <Content style={{ padding: '0 48px' }}>
-        <Breadcrumb style={{ margin: '16px 0' }} items={[
-          {key: "home", title: t('home')},
-          {key: "list", title: t('list')},
-          {key: "app", title: t('app')},
-        ]} />
+      <Content style={{ padding: "0 48px" }}>
+        <Breadcrumb
+          style={{ margin: "16px 0" }}
+          items={[
+            { key: "home", title: t("home") },
+            { key: "list", title: t("list") },
+            { key: "app", title: t("app") },
+          ]}
+        />
         <div
           style={{
             background: colorBgContainer,
@@ -40,11 +50,18 @@ export function App() {
             borderRadius: borderRadiusLG,
           }}
         >
-          <QRCode value="https://www.youtube.com/watch?v=dQw4w9WgXcQ" level="L" />
+          <Flex gap={24}>
+            <Col span={12}>
+              <Video layout="default" />
+            </Col>
+            <Col span={12}>
+              <Video layout="plyr" />
+            </Col>
+          </Flex>
         </div>
       </Content>
-      <Footer style={{ textAlign: 'center' }}>
-        {t('copyright', { year: new Date().getFullYear() })}
+      <Footer style={{ textAlign: "center" }}>
+        {t("copyright", { year: new Date().getFullYear() })}
       </Footer>
     </Layout>
   );
