@@ -1,6 +1,7 @@
 import { Breadcrumb, Layout, Menu, theme } from 'antd';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import QRCode from "react-qr-code";
 
 const { Header, Content, Footer } = Layout;
 
@@ -39,7 +40,7 @@ export function App() {
             borderRadius: borderRadiusLG,
           }}
         >
-          {t('content')}
+          <QRCode value="https://www.youtube.com/watch?v=dQw4w9WgXcQ" level="L" />
         </div>
       </Content>
       <Footer style={{ textAlign: 'center' }}>
