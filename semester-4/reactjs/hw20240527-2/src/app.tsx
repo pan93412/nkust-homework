@@ -52,7 +52,7 @@ export function App() {
         >
           <Flex gap={24}>
             <Col span={12}>
-              <Video layout="default" />
+              <Video layout="default" controlsDelay={1000} />
             </Col>
             <Col span={12}>
               <Video layout="plyr" />

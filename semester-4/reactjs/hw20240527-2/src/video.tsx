@@ -10,18 +10,30 @@ import {
 import { PlyrLayout, plyrLayoutIcons } from "@vidstack/react/player/layouts/plyr";
 
 export interface VideoProps {
-    layout: "default" | "plyr";
+    layout?: "default" | "plyr";
+    // playButtonPlacement?: "center" | "left";
+    controlsDelay?: number | undefined;
 }
-export default function Video(props: VideoProps) {
+
+export default function Video({
+  layout = "default",
+  controlsDelay = undefined,
+}: VideoProps) {
     const thumbnails = "https://files.vidstack.io/sprite-fight/thumbnails.vtt";
 
     const Layout = () => {
-        switch (props.layout) {
+        switch (layout) {
         case "default":
             return (
                 <DefaultVideoLayout
                     thumbnails={thumbnails}
                     icons={defaultLayoutIcons}
+                    playbackRates={{
+                      min: 0.5,
+                      max: 5,
+                      step: 0.5,
+                    }}
+                    seekStep={15}
                 />
             );
         case "plyr":
@@ -35,6 +47,7 @@ export default function Video(props: VideoProps) {
     <MediaPlayer
       title="Sprite Fight"
       src="https://files.vidstack.io/sprite-fight/720p.mp4"
+      controlsDelay={controlsDelay}
     >
       <MediaProvider />
       <Layout />
