@@ -9,26 +9,33 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@types/react": "^18.3.1",
-    "@types/react-dom": "^18.3.0",
-    "formik": "^2.4.6",
+    "@mantine/core": "^7.10.1",
+    "@mantine/hooks": "^7.10.1",
+    "@tanstack/react-form": "^0.20.3",
+    "@tanstack/zod-form-adapter": "^0.20.3",
     "react": "canary",
-    "react-dom": "canary"
+    "react-dom": "canary",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.0",
     "@typescript-eslint/eslint-plugin": "^7.6.0",
     "@typescript-eslint/parser": "^7.6.0",
     "@vitejs/plugin-react": "^4.2.1",
-    "babel-plugin-react-compiler": "^0.0.0-experimental-592953e-20240517",
+    "babel-plugin-react-compiler": "=0.0.0-experimental-938cd9a-20240601",
     "dprint": "^0.45.1",
-    "typescript": "^5.2.2",
-    "vite": "^5.2.0",
     "eslint": "8",
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-jsx-a11y": "^6.8.0",
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-compiler": "^0.0.0-experimental-c8b3f72-20240517",
-    "eslint-plugin-react-hooks": "^4.6.0"
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "postcss": "^8.4.38",
+    "postcss-preset-mantine": "^1.15.0",
+    "postcss-simple-vars": "^7.0.1",
+    "typescript": "^5.2.2",
+    "vite": "^5.2.0"
   }
 }
