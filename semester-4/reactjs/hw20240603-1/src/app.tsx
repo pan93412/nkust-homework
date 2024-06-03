@@ -10,6 +10,7 @@ export function App() {
       <AppShell.Main>
         <Container>
           <TanstackForm />
+          <footer>C111156103, 潘奕濬</footer>
         </Container>
       </AppShell.Main>
     </AppShell>
