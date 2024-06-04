@@ -54,14 +54,14 @@ $
 
 = Question 2
 
-已知兩獨立樣本 $X_1$, $X_2$
+已知兩獨立母體 $X_1$, $X_2$，其樣本分別為
 
-- $overline(x)_1=70, s_1=6$, $n_1=50>30$
-- $overline(y)=55, s_2=5$, $n_2=45>30$
+- $overline(X)_1$: $overline(x)_1=70, s_1=6$, $n_1=50>30$
+- $overline(X)_2$: $overline(y)=55, s_2=5$, $n_2=45>30$
 
 == 抽樣分配
 
-獨立樣本、$s_1$, $s_2$ 已知，且為大樣本，根據 C.L.T
+獨立母體、$s_1$, $s_2$ 已知，且為大樣本，根據 C.L.T
 
 $
 overline(x)-overline(y) tilde N(mu_1-mu_2, s_1^2/n_1+s_2^2/n_2)
@@ -87,10 +87,10 @@ $
 
 = Question 3
 
-已知兩獨立樣本 $X_1$, $X_2$
+已知兩獨立母體 $X_1$, $X_2$
 
-- $X_1$: $overline(x) = 30000, n_1=250, s_1=1400$
-- $X_2$: $overline(y) = 26000, n_2=300, s_2=1250$
+- $overline(X)_1$: $overline(x) = 30000, n_1=250, s_1=1400$
+- $overline(X)_2$: $overline(y) = 26000, n_2=300, s_2=1250$
 
 欲求其 90% 信賴區間。
 
@@ -121,10 +121,10 @@ $
 
 = Question 4
 
-已知兩獨立樣本 $X_1$, $X_2$
+已知兩獨立母體 $X_1$, $X_2$
 
-- $X_1$: $n_1=145, overline(x)=4.9, s^2_1=3.45$
-- $X_2$: $n_2=125, overline(y)=5.8, s^2_2=2.53$
+- $overline(X)_1$: $n_1=145, overline(x)=4.9, s^2_1=3.45$
+- $overline(X)_2$: $n_2=125, overline(y)=5.8, s^2_2=2.53$
 
 欲檢定 $alpha=0.05$ 下，$mu_1-mu_2<0$
 
@@ -170,16 +170,16 @@ $
 
 = Question 5
 
-已知兩獨立樣本 $X_1$, $X_2$
+已知兩獨立母體 $X_1$, $X_2$
 
-- $X_1$: $n_1=25, overline(x)=6, s^2_1=2.08$
-- $X_2$: $n_1=20, overline(x)=7.2, s^2_1=1.85$
+- $overline(X)_1$: $n_1=25, overline(x)=6, s^2_1=2.08$
+- $overline(X)_2$: $n_1=20, overline(x)=7.2, s^2_1=1.85$
 
 想求 99% 信賴區間，以及檢定 $mu_1-mu_2<0$
 
 == 抽樣分配
 
-因為 $X_1$, $X_2$ 均為小樣本，$sigma$ 未知且 $s_1 != s_2$，故應適用 case 4
+因為 $overline(X)_1$, $overline(X)_2$ 均為小樣本，$sigma$ 未知且 $s_1 != s_2$，故應適用 case 4
 
 $
 (overline(x) - overline(y))/sqrt(s_1^2/n_1+s_2^2/n_2) tilde t(r)
@@ -248,16 +248,16 @@ $
 
 = Question 6
 
-已知兩獨立樣本 $X_1$, $X_2$，其中 $sigma_1=6, sigma_2=5$
+已知兩獨立母體 $X_1$, $X_2$，其中 $sigma_1=6, sigma_2=5$
 
-- $X_1$: $n_1=20, overline(x)=176.5$
-- $X_2$: $n_2=15, overline(y)=163$
+- $overline(X)_1$: $n_1=20, overline(x)=176.5$
+- $overline(X)_2$: $n_2=15, overline(y)=163$
 
 想要求出 $mu_1-mu_2$ 的 95% 信賴區間。
 
 == 抽樣分配
 
-因為 $sigma_1$, $sigma_2$ 已知，且為符合常態分配的獨立樣本，故
+因為 $sigma_1$, $sigma_2$ 已知，且為符合常態分配的獨立母體，故
 
 $
 overline(x)-overline(y) tilde N(mu_1-mu_2, sigma_1^2/n_1+sigma_2^2/n_2)
@@ -283,7 +283,7 @@ $
 
 = Question 7
 
-已知兩成對樣本 $X_1$, $X_2$：
+已知兩成對母體 $X_1$, $X_2$：
 
 #figure[
   #table(
@@ -377,3 +377,45 @@ $
 在 $alpha=0.05$ 下，同意實驗有助於提升學生成績。
 
 = Question 8
+
+已知兩常態獨立 (???) 母體 $X_1$, $X_2$，其 $sigma$ 分別為 $sigma_1^2=20, sigma_2^2=35$，其中
+
+- $X_1$: $n_1=14, overline(x)=55$
+- $X_2$: $n_2=16, overline(y)=48$
+
+想要求出 $mu_1-mu_2$ 的點估計式和 95% 信賴區間。
+
+== 點估計式
+
+「點估計式」是對單個 $mu_1-mu_2$ 的估計，所以
+
+$
+mu_1-mu_2 &= overline(x) - overline(y) \
+           &= 55 - 48 \
+           &= 7
+$
+
+== 抽樣分配
+
+因為母體屬於獨立常態分配，且 $sigma$ 均已知，故
+
+$
+overline(x)-overline(y) tilde N(mu_1-mu_2, sigma_1^2/n_1+sigma_2^2/n_2)
+$
+
+== 信賴區間
+
+95% 的信賴區間，其 $alpha$ 為 $0.05$，$alpha/2$ 為 $0.025$。
+
+因此，其信賴上下界為：
+
+$
+c &= (overline(x) - overline(y)) plus.minus Z_0.025 times sqrt(sigma_1^2/n_1+sigma_2^2/n_2) \
+  &= 3.27 or 10.73
+$
+
+故 $mu_1-mu_2$ 的 95% 信賴區間為 $(3.27, 10.73)$
+
+= Question 10
+
+已知兩母體 $X_1, X_2$
