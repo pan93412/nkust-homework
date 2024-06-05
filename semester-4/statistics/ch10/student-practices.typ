@@ -493,3 +493,35 @@ $
 
 在 $alpha=0.05$ 下，同意 $mu_1-mu_2 > 0$。
 
+= Question 11
+
+已知兩獨立常態母體 $X_1, X_2$, $sigma_1=8, sigma_2=10$，且
+
+- $overline(X_1)$: $n_1=30, overline(x)=50$,
+- $overline(X)_2$: $n_2=25, overline(y)=45$
+
+想要求出 $mu_1-mu_2$ 的 95% 信賴區間。
+
+== 分配
+
+因為是常態母體且 $sigma$ 已知，所以
+
+$
+(overline(x) - overline(y)) tilde N(mu_1-mu_2, sigma_1/sigma_2)
+$
+
+== 信賴區間
+
+$1-alpha=0.95, alpha=0.05, alpha_2=0.025$
+
+$
+Z_(0.025) = 1.96
+$
+
+$
+c &= (mu_1-mu_2) plus.minus Z_(0.025) times sqrt(sigma^2_1/sigma^2_2)
+  &= (30-25) plus.minus 1.96 times sqrt(8^2/30 + 10^2/25) \
+  &= 5 plus.minus 1.96 times 2.4765567495
+  &=
+$
+
