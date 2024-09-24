@@ -14,14 +14,22 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            NavigationLink("哈囉！") {
-                VStack {
-                    Text(name)
-                        .fontDesign(.serif)
-                        .font(Font.largeTitle.bold())
-                    Text(description)
-                }.navigationTitle("哈囉！")
-            }.navigationTitle("Week3BundleApp")
+            VStack {
+                Text(name)
+                    .fontDesign(.serif)
+                    .font(Font.largeTitle.bold())
+                Text(description)
+                
+                GeometryReader { geo in HStack(spacing: 0) {
+                    Text("flex=0.3").frame(width: geo.size.width * 0.3).background(.red)
+                    Text("flex=0.2").frame(width: geo.size.width * 0.2).background(.orange)
+                    Text("flex=0.5").frame(width: geo.size.width * 0.5).background(.yellow)
+                }.frame(
+                    minWidth: 0,
+                    maxWidth: .infinity
+                ).border(.green)
+                }
+            }.navigationTitle("哈囉！")
         }
     }
     
