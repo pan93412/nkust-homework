@@ -1,0 +1,21 @@
+[project]
+name = "big-data-analysis"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "altair>=5.4.1",
+    "great-tables>=0.11.1",
+    "ipykernel>=6.29.5",
+    "jupyter>=1.1.1",
+    "matplotlib>=3.9.2",
+    "pingouin>=0.5.5",
+    "polars>=1.7.1",
+    "scikit-learn>=1.5.2",
+]
+
+[tool.uv]
+dev-dependencies = [
+    "ruff>=0.6.7",
+]
