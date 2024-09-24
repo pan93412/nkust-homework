@@ -9,6 +9,8 @@
 
   # https://devenv.sh/languages/
   android.enable = true;
+  android.reactNative.enable = true;
+  android.emulator.enable = true;
   languages.javascript.enable = true;
   languages.javascript.corepack.enable = true;
 
