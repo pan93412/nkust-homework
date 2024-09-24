@@ -13,7 +13,8 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.pan93412.w3bundlingappapk"
     },
     "android": {
       "adaptiveIcon": {
