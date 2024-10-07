@@ -14,6 +14,9 @@ class Structure:
     def cc(self) -> int:
         return self.sequence ^ self.reserved ^ self.temperature ^ self.temperature_p
 
+    def get_full_temperature(self) -> float:
+        return self.temperature + (.1 * self.temperature_p)
+
     def serialize(self) -> bytes:
         return bytes([
             0x88,

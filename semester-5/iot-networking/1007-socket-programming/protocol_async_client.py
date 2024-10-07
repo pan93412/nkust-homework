@@ -47,6 +47,8 @@ async def run_client(host: str, port: int) -> None:
     response = await client.receive_message()
     print(f'Received: {response}')
 
+    print(f'Temperature: {response.get_full_temperature()}')
+
     await client.close()
 
 if __name__ == "__main__":

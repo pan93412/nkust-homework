@@ -20,7 +20,7 @@ async def handle_client(reader: asyncio.StreamReader, writer: asyncio.StreamWrit
                 sequence=deserialized.sequence+1,
                 reserved=0x00,
                 temperature=30,
-                temperature_p=30,
+                temperature_p=5,
             )
         except ValueError as e:
             print(f"Invalid request: {e}")
