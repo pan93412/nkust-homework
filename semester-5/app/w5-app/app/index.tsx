@@ -1,30 +1,21 @@
 import { StatusBar } from "expo-status-bar";
-import { Text, View, StyleSheet } from "react-native";
+import { useState } from "react";
+import { Text, View, StyleSheet, SafeAreaView, TextInput, Button, Alert } from "react-native";
 
 export default function Index() {
-  const name = "潘奕濬";
-  const sid = "C111156103";
-  const department = "智慧商務系";
+  const [account, setAccount] = useState('');
+  const [password, setPassword] = useState('');
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>{name}</Text>
-      <Text>{formatTitle(sid, department)}</Text>
-
-      <View style={styles.demoFlex}>
-        <View style={styles.demoFlexCell1}>
-          <Text>flex=0.3</Text>
-        </View>
-        <View style={styles.demoFlexCell2}>
-          <Text>flex=0.2</Text>
-        </View>
-        <View style={styles.demoFlexCell3}>
-          <Text>flex=0.5</Text>
-        </View>
-      </View>
-
-      <StatusBar style="dark" />
-    </View>
+    <SafeAreaView style={styles.container}>
+      <Text style={styles.header}>你好，{account || "匿名者"}！</Text>
+      <TextInput style={styles.textInput} onChangeText={setAccount} value={account} placeholder="請輸入帳號" />
+      <TextInput style={styles.textInput} onChangeText={setPassword} value={password} secureTextEntry placeholder="請輸入密碼" />
+      <Button title="忘記密碼" onPress={() => Alert.alert("忘記密碼", `你的密碼是 ${password}`, [
+        {text: '好'},
+      ])} />
+      <StatusBar hidden />
+    </SafeAreaView>
   );
 }
 
@@ -39,26 +30,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  title: {
-    fontSize: 36,
-    color: "darkblue",
+  header: {
+    fontSize: 24,
     fontWeight: 'bold',
   },
-  demoFlex: {
-    flexDirection: "row",
-    borderColor: 'red',
-    borderWidth: 2,
-  },
-  demoFlexCell1: {
-    flex: 0.3,
-    backgroundColor: '#e2d4b7',
-  },
-  demoFlexCell2: {
-    flex: 0.2,
-    backgroundColor: '#9c9583',
-  },
-  demoFlexCell3: {
-    flex: 0.5,
-    backgroundColor: '#b0bbbf',
-  },
+  textInput: {
+    height: 30,
+    width: 200,
+    borderWidth: 1,
+    borderColor: 'rgba(0, 0, 0, 0.4)',
+    overlayColor: 'darkgray',
+    borderRadius: 4,
+    paddingHorizontal: 4,
+  }
 });
