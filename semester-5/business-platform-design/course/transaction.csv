@@ -1,0 +1,11 @@
+key,tid,uid,product,quantity,price
+1,T0001,1,apple,5,10
+2,T0002,5,banana,6,34
+3,T0003,4,origin,4,5
+4,T0003,3,cherry,3,60
+5,T0003,3,guava,2,20
+6,T0004,2,banana,10,34
+7,T0004,2,origin,5,5
+8,T0004,2,guava,2,20
+9,T0005,5,origin,4,5
+10,T0005,5,apple,5,10
