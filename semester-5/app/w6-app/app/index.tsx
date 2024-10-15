@@ -11,61 +11,27 @@ import {
   Image,
   SafeAreaView,
 } from "react-native";
+import { FlatList, GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function Index() {
+  const data = (new Array(2000)).fill(null).map(
+    (_, index) => ({ key: index, data: `Data ${Math.ceil(Math.random() * 600_000_000_000)}` })
+  );
+
   return (
-    <SafeAreaView>
-      <ScrollView>
-        <View style={styles.container}>
-          <Image
-            style={styles.reactLogo}
-            source={require("../assets/images/react-logo.png")}
-          />
-          <Image
-            style={styles.reactLogo}
-            resizeMode="contain"
-            source={require("../assets/images/react-logo.png")}
-          />
-          <Image
-            style={styles.reactLogo}
-            resizeMode="center"
-            source={require("../assets/images/react-logo.png")}
-          />
-
-          <TouchableHighlight
-            style={styles.fakeButton}
-            underlayColor="gray"
-            activeOpacity={0.7}
-            onPress={() => console.log("TouchableHighlight")}
-          >
-            <Text>TouchableHighlight</Text>
-          </TouchableHighlight>
-
-          <TouchableOpacity
-            style={styles.fakeButton}
-            activeOpacity={0.7}
-            onPress={() => console.log("TouchableOpacity")}
-          >
-            <Text>TouchableOpacity</Text>
-          </TouchableOpacity>
-
-          <Pressable
-            style={styles.fakeButton}
-            onPress={() => console.log("Pressable")}
-          >
-            <Text>Pressable</Text>
-          </Pressable>
-
-          <TouchableNativeFeedback
-            style={styles.fakeButton}
-            onPress={() => console.log("TouchableNativeFeedback")}
-            background={TouchableNativeFeedback.Ripple("gray", false)}
-          >
-            <Text>TouchableNativeFeedback</Text>
-          </TouchableNativeFeedback>
-        </View>
-      </ScrollView>
-    </SafeAreaView>
+    <GestureHandlerRootView>
+      <SafeAreaView style={styles.container}>
+        <FlatList
+          data={data}
+          renderItem={({ item }) => (
+            <View style={{ marginTop: 10, alignItems: "center" }}>
+              <Text>{item.key}</Text>
+              <Text>{item.data}</Text>
+            </View>
+          )}
+        />
+      </SafeAreaView>
+    </GestureHandlerRootView>
   );
 }
 
@@ -75,16 +41,5 @@ var styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     gap: 4,
-  },
-  fakeButton: {
-    height: 100,
-    width: 100,
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "lightgray",
-  },
-  reactLogo: {
-    height: 100,
-    width: 50,
   },
 });
