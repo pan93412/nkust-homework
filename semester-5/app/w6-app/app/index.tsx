@@ -1,24 +1,71 @@
-import { Text, TouchableHighlight, TouchableOpacity, View, StyleSheet, TouchableWithoutFeedback, TouchableNativeFeedback, Pressable } from "react-native";
+import {
+  Text,
+  TouchableHighlight,
+  TouchableOpacity,
+  View,
+  StyleSheet,
+  TouchableWithoutFeedback,
+  TouchableNativeFeedback,
+  Pressable,
+  ScrollView,
+  Image,
+  SafeAreaView,
+} from "react-native";
 
 export default function Index() {
   return (
-    <View style={styles.container}>
-      <TouchableHighlight style={styles.fakeButton} underlayColor="gray" activeOpacity={0.7} onPress={() => console.log("TouchableHighlight")}>
-        <Text>TouchableHighlight</Text>
-      </TouchableHighlight>
+    <SafeAreaView>
+      <ScrollView>
+        <View style={styles.container}>
+          <Image
+            style={styles.reactLogo}
+            source={require("../assets/images/react-logo.png")}
+          />
+          <Image
+            style={styles.reactLogo}
+            resizeMode="contain"
+            source={require("../assets/images/react-logo.png")}
+          />
+          <Image
+            style={styles.reactLogo}
+            resizeMode="center"
+            source={require("../assets/images/react-logo.png")}
+          />
 
-      <TouchableOpacity style={styles.fakeButton} activeOpacity={0.7} onPress={() => console.log("TouchableOpacity")}>
-        <Text>TouchableOpacity</Text>
-      </TouchableOpacity>
+          <TouchableHighlight
+            style={styles.fakeButton}
+            underlayColor="gray"
+            activeOpacity={0.7}
+            onPress={() => console.log("TouchableHighlight")}
+          >
+            <Text>TouchableHighlight</Text>
+          </TouchableHighlight>
 
-      <Pressable style={styles.fakeButton} onPress={() => console.log("Pressable")}>
-        <Text>Pressable</Text>
-      </Pressable>
+          <TouchableOpacity
+            style={styles.fakeButton}
+            activeOpacity={0.7}
+            onPress={() => console.log("TouchableOpacity")}
+          >
+            <Text>TouchableOpacity</Text>
+          </TouchableOpacity>
 
-      <TouchableNativeFeedback style={styles.fakeButton} onPress={() => console.log("TouchableNativeFeedback")} background={TouchableNativeFeedback.Ripple('gray', false)}>
-        <Text>TouchableNativeFeedback</Text>
-      </TouchableNativeFeedback>
-    </View>
+          <Pressable
+            style={styles.fakeButton}
+            onPress={() => console.log("Pressable")}
+          >
+            <Text>Pressable</Text>
+          </Pressable>
+
+          <TouchableNativeFeedback
+            style={styles.fakeButton}
+            onPress={() => console.log("TouchableNativeFeedback")}
+            background={TouchableNativeFeedback.Ripple("gray", false)}
+          >
+            <Text>TouchableNativeFeedback</Text>
+          </TouchableNativeFeedback>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
@@ -32,8 +79,12 @@ var styles = StyleSheet.create({
   fakeButton: {
     height: 100,
     width: 100,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'lightgray',
-  }
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "lightgray",
+  },
+  reactLogo: {
+    height: 100,
+    width: 50,
+  },
 });
