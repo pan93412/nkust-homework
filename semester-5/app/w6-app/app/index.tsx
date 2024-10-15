@@ -1,15 +1,39 @@
-import { Text, View } from "react-native";
+import { Text, TouchableHighlight, TouchableOpacity, View, StyleSheet, TouchableWithoutFeedback, TouchableNativeFeedback, Pressable } from "react-native";
 
 export default function Index() {
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Text>Edit app/index.tsx to edit this screen.</Text>
+    <View style={styles.container}>
+      <TouchableHighlight style={styles.fakeButton} underlayColor="gray" activeOpacity={0.7} onPress={() => console.log("TouchableHighlight")}>
+        <Text>TouchableHighlight</Text>
+      </TouchableHighlight>
+
+      <TouchableOpacity style={styles.fakeButton} activeOpacity={0.7} onPress={() => console.log("TouchableOpacity")}>
+        <Text>TouchableOpacity</Text>
+      </TouchableOpacity>
+
+      <Pressable style={styles.fakeButton} onPress={() => console.log("Pressable")}>
+        <Text>Pressable</Text>
+      </Pressable>
+
+      <TouchableNativeFeedback style={styles.fakeButton} onPress={() => console.log("TouchableNativeFeedback")} background={TouchableNativeFeedback.Ripple('gray', false)}>
+        <Text>TouchableNativeFeedback</Text>
+      </TouchableNativeFeedback>
     </View>
   );
 }
+
+var styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 4,
+  },
+  fakeButton: {
+    height: 100,
+    width: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'lightgray',
+  }
+});
