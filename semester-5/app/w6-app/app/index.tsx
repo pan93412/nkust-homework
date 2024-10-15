@@ -1,37 +1,43 @@
+import { useState } from "react";
 import {
-  Text,
-  TouchableHighlight,
-  TouchableOpacity,
   View,
   StyleSheet,
-  TouchableWithoutFeedback,
-  TouchableNativeFeedback,
-  Pressable,
-  ScrollView,
-  Image,
   SafeAreaView,
+  TextInput,
+  Button,
 } from "react-native";
-import { FlatList, GestureHandlerRootView } from "react-native-gesture-handler";
 
 export default function Index() {
-  const data = (new Array(2000)).fill(null).map(
-    (_, index) => ({ key: index, data: `Data ${Math.ceil(Math.random() * 600_000_000_000)}` })
-  );
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
   return (
-    <GestureHandlerRootView>
-      <SafeAreaView style={styles.container}>
-        <FlatList
-          data={data}
-          renderItem={({ item }) => (
-            <View style={{ marginTop: 10, alignItems: "center" }}>
-              <Text>{item.key}</Text>
-              <Text>{item.data}</Text>
-            </View>
-          )}
+    <SafeAreaView style={styles.container}>
+      <TextInput
+        style={styles.textInput}
+        placeholder="請輸入帳號"
+        value={username}
+        onChangeText={setUsername}
+      />
+      <TextInput
+        style={styles.textInput}
+        secureTextEntry
+        placeholder="請輸入密碼"
+        value={password}
+        onChangeText={setPassword}
+      />
+
+      <View style={styles.buttonGroup}>
+        <Button title="登入" onPress={() => {}} />
+        <Button
+          title="清除"
+          onPress={() => {
+            setUsername("");
+            setPassword("");
+          }}
         />
-      </SafeAreaView>
-    </GestureHandlerRootView>
+      </View>
+    </SafeAreaView>
   );
 }
 
@@ -41,5 +47,16 @@ var styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     gap: 4,
+    margin: 16,
+  },
+  textInput: {
+    borderWidth: 1,
+    borderColor: "rgba(0, 0, 0, 0.6)",
+    width: 200,
+    height: 24,
+  },
+  buttonGroup: {
+    flex: 1,
+    flexDirection: "row",
   },
 });
