@@ -5,9 +5,12 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
-    "apyori>=1.1.2",
     "mlxtend>=0.23.1",
-    "nbconvert[webpdf]>=7.16.4",
     "notebook>=7.2.2",
-    "pyfpgrowth>=1.0",
+    "pandas[output-formatting,performance,plot]>=2.2.3",
+]
+
+[tool.uv]
+dev-dependencies = [
+    "ruff>=0.6.9",
 ]
