@@ -378,6 +378,22 @@ wheels = [
 ]
 
 [[package]]
+name = "fastexcel"
+version = "0.12.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "pyarrow" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/0a/8a/fbc318b653dddea167185c0946381d88b09c2bdb7aeb473b651c38542efd/fastexcel-0.12.0.tar.gz", hash = "sha256:1624e2c6385fe08d5ac21392c3a5bd91156fbeebaf6986e6e7f684adc0e0ecbe", size = 37815 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/46/7a/6eec06c88be04a8b3e5b3e3bf90a7d574459a5aab876f3cfe6378436894c/fastexcel-0.12.0-cp38-abi3-macosx_10_12_x86_64.whl", hash = "sha256:d40b2c8ccb122e15cf89c2b972a679a937eca3e90b3e69c6db24f3666b11cff9", size = 1151074 },
+    { url = "https://files.pythonhosted.org/packages/b5/0b/eba1c5f38f5311bf171296e13b5715ddb12b0b0a3a58deee981768bd2d80/fastexcel-0.12.0-cp38-abi3-macosx_11_0_arm64.whl", hash = "sha256:2aade78706bc3f7a5861083267a038a49e809f3ee1abe6cceda7b8420092e61e", size = 1112729 },
+    { url = "https://files.pythonhosted.org/packages/d7/b6/59a6405c653aad8ed6e9b3b65c74f76514e2426efe26341c42293e4ef009/fastexcel-0.12.0-cp38-abi3-manylinux_2_17_aarch64.manylinux2014_aarch64.whl", hash = "sha256:993b905e61b98eb45a33409ac78b8a14b28bd3a3bcf9a4f36c1dae3e65c3dafb", size = 1275021 },
+    { url = "https://files.pythonhosted.org/packages/53/22/d3efd9b26706b1d38cd8356cbc5a5fd46c0e0a558793451b45b6a7978f4d/fastexcel-0.12.0-cp38-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl", hash = "sha256:de72203c67702010931bc4730ddb35904841b0ad0d8b6654c69b62c3d7b19eca", size = 1264310 },
+    { url = "https://files.pythonhosted.org/packages/f6/68/1243dda77c7af328047335c01d1b0e3cb37423e324d4158362ee054d6cc9/fastexcel-0.12.0-cp38-abi3-win_amd64.whl", hash = "sha256:e5326fae6c28e2239dfdc19bc2cbb121b509e6f0aefa4e6e43b0cf84bd33dea6", size = 995049 },
+]
+
+[[package]]
 name = "fastjsonschema"
 version = "2.20.0"
 source = { registry = "https://pypi.org/simple" }
@@ -464,7 +480,7 @@ dependencies = [
     { name = "mlxtend" },
     { name = "notebook" },
     { name = "pandas", extra = ["excel", "output-formatting", "performance", "plot"] },
-    { name = "polars", extra = ["graph", "numpy", "pandas", "plot", "pyarrow"] },
+    { name = "polars", extra = ["excel", "graph", "numpy", "pandas", "plot", "pyarrow"] },
     { name = "scikit-learn" },
 ]
 
@@ -473,7 +489,7 @@ requires-dist = [
     { name = "mlxtend", specifier = ">=0.23.1" },
     { name = "notebook", specifier = ">=7.2.2" },
     { name = "pandas", extras = ["excel", "output-formatting", "performance", "plot"], specifier = ">=2.2.3" },
-    { name = "polars", extras = ["numpy", "graph", "pyarrow", "plot", "pandas"], specifier = ">=1.10.0" },
+    { name = "polars", extras = ["numpy", "graph", "pyarrow", "plot", "pandas", "excel"], specifier = ">=1.10.0" },
     { name = "scikit-learn", specifier = ">=1.5.2" },
 ]
 
@@ -1292,6 +1308,12 @@ wheels = [
 ]
 
 [package.optional-dependencies]
+excel = [
+    { name = "fastexcel" },
+    { name = "openpyxl" },
+    { name = "xlsx2csv" },
+    { name = "xlsxwriter" },
+]
 graph = [
     { name = "matplotlib" },
 ]
@@ -1928,6 +1950,15 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/a6/b3/19a2540d21dea5f908304375bd43f5ed7a4c28a370dc9122c565423e6b44/xlrd-2.0.1.tar.gz", hash = "sha256:f72f148f54442c6b056bf931dbc34f986fd0c3b0b6b5a58d013c9aef274d0c88", size = 100259 }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/a6/0c/c2a72d51fe56e08a08acc85d13013558a2d793028ae7385448a6ccdfae64/xlrd-2.0.1-py2.py3-none-any.whl", hash = "sha256:6a33ee89877bd9abc1158129f6e94be74e2679636b8a205b43b85206c3f0bbdd", size = 96531 },
+]
+
+[[package]]
+name = "xlsx2csv"
+version = "0.8.3"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/04/e3/e795ae3b9d76e9195987c4b57c7bb58ab07c0886e6462b4142ae1c1b8143/xlsx2csv-0.8.3.tar.gz", hash = "sha256:6c65d5989e8d3f14dd7296d425d693a67f51899d0c8e1ed7bcbf9ccb18223734", size = 221408 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/df/07/e2426bbb446152e63752cd384fd39b80ed1390e6d127d30c98968f6d4875/xlsx2csv-0.8.3-py3-none-any.whl", hash = "sha256:e2cefc2899301f9328f0136fa00e9c4b07b69f255d6bbbc7f759254877e3a106", size = 15771 },
 ]
 
 [[package]]
