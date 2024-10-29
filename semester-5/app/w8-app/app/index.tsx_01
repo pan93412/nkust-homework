@@ -1,0 +1,76 @@
+import { ReactNode, useState } from "react";
+import { ActivityIndicator, Modal, StyleSheet, Switch, Text, View } from "react-native";
+
+export default function Index() {
+  const [switchOp, setSwitchOp] = useState(false);
+
+  return (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        gap: 8,
+      }}
+    >
+      <Modal visible={switchOp} animationType="slide">
+        <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+          <Text>Modal</Text>
+          <Switch value={switchOp} onValueChange={setSwitchOp} />
+        </View>
+      </Modal>
+
+      <Text style={styles.red}>just red</Text>
+      <Text style={styles.bigBlue}>just bigBlue</Text>
+      <Text style={[styles.red, styles.bigBlue]}>red, then bigBlue</Text>
+      <Text style={[styles.bigBlue, styles.red]}>bigBlue, then red</Text>
+
+
+      <ComponentPractice fontSize={36} onPress={() => alert(`Hello, ${switchOp ? 'world' : 'owo'}!`)}>
+        Hello, World!
+      </ComponentPractice>
+
+      <Switch value={switchOp} onValueChange={setSwitchOp} />
+
+      <ActivityIndicator />
+      <ActivityIndicator size="large" />
+      <ActivityIndicator size="small" />
+    </View>
+  );
+}
+
+export interface ComponentPracticeProps {
+  children: ReactNode;
+  onPress: () => void;
+  fontSize?: number;
+}
+
+export function ComponentPractice({
+  fontSize = 20,
+  ...props
+}: ComponentPracticeProps) {
+  return (
+    <Text
+      style={{
+        color: "red",
+        fontSize: fontSize,
+        fontWeight: "bold",
+        textAlign: "center",
+      }}
+      onPress={props.onPress}
+    >
+      {props.children}
+    </Text>
+  );
+}
+
+const styles = StyleSheet.create({
+  red: {
+    color: "red",
+  },
+  bigBlue: {
+    color: "blue",
+    fontWeight: "bold",
+    fontSize: 30,
+  }
+})

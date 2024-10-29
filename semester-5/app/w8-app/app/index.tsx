@@ -1,34 +1,28 @@
 import { ReactNode, useState } from "react";
-import { ActivityIndicator, Modal, Switch, Text, View } from "react-native";
+import { ActivityIndicator, Modal, StyleSheet, Switch, Text, View } from "react-native";
 
 export default function Index() {
-  const [switchOp, setSwitchOp] = useState(false);
-
   return (
     <View
       style={{
         flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        gap: 8,
       }}
     >
-      <Modal visible={switchOp} animationType="slide">
-        <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-          <Text>Modal</Text>
-          <Switch value={switchOp} onValueChange={setSwitchOp} />
-        </View>
-      </Modal>
-
-      <ComponentPractice fontSize={36} onPress={() => alert(`Hello, ${switchOp ? 'world' : 'owo'}!`)}>
-        Hello, World!
-      </ComponentPractice>
-
-      <Switch value={switchOp} onValueChange={setSwitchOp} />
-
-      <ActivityIndicator />
-      <ActivityIndicator size="large" />
-      <ActivityIndicator size="small" />
+      <View style={{ flexDirection: "row", flex: 1 }}>
+        <View style={{ flex: 1, backgroundColor: "powderblue" }}></View>
+        <View style={{ flex: 2, backgroundColor: "skyblue" }}></View>
+        <View style={{ flex: 3, backgroundColor: "steelblue" }}></View>
+      </View>
+      <View style={{ flexDirection: "row-reverse", flex: 2 }}>
+        <View style={{ flex: 1, backgroundColor: "powderblue" }}></View>
+        <View style={{ flex: 2, backgroundColor: "skyblue" }}></View>
+        <View style={{ flex: 3, backgroundColor: "steelblue" }}></View>
+      </View>
+      <View style={{ flexDirection: "row", flex: 3 }}>
+        <View style={{ flex: 1, backgroundColor: "powderblue" }}></View>
+        <View style={{ flex: 2, backgroundColor: "skyblue" }}></View>
+        <View style={{ flex: 3, backgroundColor: "steelblue" }}></View>
+      </View>
     </View>
   );
 }
@@ -57,3 +51,14 @@ export function ComponentPractice({
     </Text>
   );
 }
+
+const styles = StyleSheet.create({
+  red: {
+    color: "red",
+  },
+  bigBlue: {
+    color: "blue",
+    fontWeight: "bold",
+    fontSize: 30,
+  }
+})
