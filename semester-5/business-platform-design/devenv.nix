@@ -5,11 +5,9 @@
   env.GREET = "devenv";
 
   # https://devenv.sh/packages/
-  packages = [ pkgs.git ];
+  packages = [ pkgs.git pkgs.uv ];
 
   # https://devenv.sh/languages/
-  languages.python.enable = true;
-  languages.python.uv.enable = true;
   # languages.rust.enable = true;
 
   # https://devenv.sh/processes/
