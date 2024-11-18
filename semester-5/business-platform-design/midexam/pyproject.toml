@@ -1,0 +1,21 @@
+[project]
+name = "midexam"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "jupyter>=1.1.1",
+    "matplotlib>=3.9.2",
+    "notebook>=7.2.2",
+    "pandas[output-formatting,performance,plot]>=2.2.3",
+    "polars[numpy,pandas,plot]>=1.13.1",
+    "scikit-learn>=1.5.2",
+    "seaborn>=0.13.2",
+    "voila>=0.5.8",
+]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.7.4",
+]
