@@ -12,6 +12,7 @@ export default function Index() {
     >
       <Link href="/use-effect">打開作業 1: useEffect</Link>
       <Link href="/fetch">打開作業 2: fetch</Link>
+      <Link href="/token">打開作業 3: token</Link>
     </View>
   );
 }
