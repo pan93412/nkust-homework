@@ -1,0 +1,11 @@
+[project]
+name = "homework-241120"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "notebook>=7.2.2",
+    "polars[numpy,pandas,plot,excel]>=1.14.0",
+    "scipy>=1.14.1",
+]
