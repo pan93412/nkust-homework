@@ -1,3 +1,4 @@
+import { Link } from 'expo-router';
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
 
@@ -12,6 +13,10 @@ export default function Home() {
                 <Text style={styles.paragraph}>
                     This is a demo React Native page with some basic styling and components.
                 </Text>
+
+                <Link href="/demo">
+                    <Text style={styles.button}>Open Modal</Text>
+                </Link>
 
                 <TouchableOpacity style={styles.button} onPress={() => alert('Button pressed!')}>
                     <Text style={styles.buttonText}>Click Me!</Text>
