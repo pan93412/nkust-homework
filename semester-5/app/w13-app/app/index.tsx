@@ -1,66 +1,78 @@
-import { Link } from 'expo-router';
-import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native';
+import { countAtom } from "@/atoms/countAtom";
+import { Link } from "expo-router";
+import { useAtom } from "jotai";
+import React from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+  Button,
+} from "react-native";
 
 export default function Home() {
-    return (
-        <ScrollView style={styles.container}>
-            <View style={styles.header}>
-                <Text style={styles.headerText}>Welcome to My App</Text>
-            </View>
+  const [count, setCount] = useAtom(countAtom);
 
-            <View style={styles.content}>
-                <Text style={styles.paragraph}>
-                    This is a demo React Native page with some basic styling and components.
-                </Text>
+  return (
+    <ScrollView style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.headerText}>Welcome to My App</Text>
+      </View>
 
-                <Link href="/demo">
-                    <Text style={styles.button}>Open Modal</Text>
-                </Link>
+      <View style={styles.content}>
+        <Text style={styles.paragraph}>
+          This is a demo React Native page with some basic styling and
+          components.
+        </Text>
 
-                <TouchableOpacity style={styles.button} onPress={() => alert('Button pressed!')}>
-                    <Text style={styles.buttonText}>Click Me!</Text>
-                </TouchableOpacity>
-            </View>
-        </ScrollView>
-    );
+        <Link href="/demo">
+          <Text style={styles.button}>Open Modal</Text>
+        </Link>
+
+        <Text style={styles.paragraph}>Count: {count}</Text>
+        <Button title="+1" onPress={() => setCount((c) => c + 1)} />
+        <Button title="-1" onPress={() => setCount((c) => c - 1)} />
+      </View>
+    </ScrollView>
+  );
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#f5f5f5',
-    },
-    header: {
-        padding: 20,
-        backgroundColor: '#2196F3',
-        alignItems: 'center',
-    },
-    headerText: {
-        fontSize: 24,
-        color: 'white',
-        fontWeight: 'bold',
-    },
-    content: {
-        padding: 20,
-        alignItems: 'center',
-    },
-    paragraph: {
-        fontSize: 16,
-        lineHeight: 24,
-        marginBottom: 20,
-        textAlign: 'center',
-    },
-    button: {
-        backgroundColor: '#4CAF50',
-        padding: 15,
-        borderRadius: 8,
-        width: 200,
-        alignItems: 'center',
-    },
-    buttonText: {
-        color: 'white',
-        fontSize: 16,
-        fontWeight: 'bold',
-    },
+  container: {
+    flex: 1,
+    backgroundColor: "#f5f5f5",
+  },
+  header: {
+    padding: 20,
+    backgroundColor: "#2196F3",
+    alignItems: "center",
+  },
+  headerText: {
+    fontSize: 24,
+    color: "white",
+    fontWeight: "bold",
+  },
+  content: {
+    padding: 20,
+    alignItems: "center",
+  },
+  paragraph: {
+    fontSize: 16,
+    lineHeight: 24,
+    marginBottom: 20,
+    textAlign: "center",
+  },
+  button: {
+    backgroundColor: "#4CAF50",
+    padding: 15,
+    borderRadius: 8,
+    width: 200,
+    alignItems: "center",
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 16,
+    fontWeight: "bold",
+  },
 });
