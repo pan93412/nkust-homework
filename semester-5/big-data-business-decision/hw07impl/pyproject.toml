@@ -1,0 +1,25 @@
+[project]
+name = "hw07impl"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "aiohttp[speedups]>=3.11.10",
+    "ckip-transformers>=0.3.4",
+    "gensim>=4.3.3",
+    "ipywidgets>=8.1.5",
+    "jupyter>=1.1.1",
+    "notebook>=7.3.1",
+    "paddlenlp>=2.8.1",
+    "paddlepaddle>=2.6.2",
+    "pip>=24.3.1",
+    "polars>=1.16.0",
+    "scikit-learn>=1.5.2",
+    "selectolax>=0.3.26",
+    "tcsp>=0.0.9",
+    "wordcloud>=1.9.4",
+]
+
+[tool.uv]
+prerelease = "allow"
