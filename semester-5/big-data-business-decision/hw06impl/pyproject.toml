@@ -1,0 +1,14 @@
+[project]
+name = "hw06impl"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "hdbscan>=0.8.40",
+    "notebook>=7.3.1",
+    "polars[excel,numpy,pandas,plot]>=1.16.0",
+    "scikit-learn>=1.5.2",
+    "vegafusion[embed]>=2.0.1",
+    "vl-convert-python>=1.7.0",
+]
