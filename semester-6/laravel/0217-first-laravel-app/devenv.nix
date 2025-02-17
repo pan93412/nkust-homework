@@ -5,11 +5,13 @@
   env.GREET = "devenv";
 
   # https://devenv.sh/packages/
-  packages = [ pkgs.git ];
+  packages = [ pkgs.git pkgs.laravel ];
 
   # https://devenv.sh/languages/
   languages.php.enable = true;
   languages.php.version = "8.3";
+  languages.javascript.enable = true;
+  languages.javascript.pnpm.enable = true;
 
   # https://devenv.sh/processes/
   # processes.cargo-watch.exec = "cargo-watch";
