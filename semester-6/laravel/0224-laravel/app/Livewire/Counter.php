@@ -18,6 +18,16 @@ class Counter extends Component
         $this->count--;
     }
 
+    public function increment2(): void
+    {
+        $this->count += 2;
+    }
+
+    public function decrement2(): void
+    {
+        $this->count -= 2;
+    }
+
     public function render()
     {
         return view('livewire.counter');
