@@ -6,4 +6,5 @@
 
 ## hw02: Apple Music
 
-WIP
+![](./hw02-01.png)
+![](./hw02-02.png)
