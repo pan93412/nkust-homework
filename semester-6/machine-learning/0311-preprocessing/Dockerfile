@@ -1,7 +1,11 @@
-FROM ghcr.io/marimo-team/marimo
+FROM ghcr.io/astral-sh/uv:debian
 
+WORKDIR /app
 COPY --link app.py .
 
 EXPOSE 8080
 
-RUN ["marimo", "run", "app.py", "--port", "8080", "--host", "0.0.0.0", "--sandbox", "--headless"]
+RUN useradd -m app_user
+USER app_user
+
+RUN ["uvx", "marimo", "run", "app.py", "--port", "8080", "--host", "0.0.0.0", "--sandbox", "--headless"]
