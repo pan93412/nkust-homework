@@ -102,17 +102,11 @@ def _(mo):
 
 @app.cell
 def _(X):
-    # drop 'stalk-root' column
-    Xc = X.drop(columns=['stalk-root'])
+    # drop 'stalk-root' column and meaningless column
+    Xc = X.drop(columns=['stalk-root', 'veil-type'])
 
     Xc.isnull().sum()
     return (Xc,)
-
-
-@app.cell
-def _(mo):
-    mo.md(r"""Awesome!""")
-    return
 
 
 @app.cell
@@ -202,22 +196,22 @@ def _(mo):
 
 
 @app.cell
-def _(Xc):
-    import plotly.express as px
+def _():
+    # import plotly.express as px
 
-    # Assuming Xc is a DataFrame
-    fig = px.imshow(Xc, 
-                    labels=dict(x="Columns", y="Rows", color="Values"),
-                    color_continuous_scale="Viridis")
+    # # Assuming Xc is a DataFrame
+    # fig = px.imshow(Xc, 
+    #                 labels=dict(x="Columns", y="Rows", color="Values"),
+    #                 color_continuous_scale="Viridis")
 
-    fig.update_layout(
-        title="Pivot Map of Xc",
-        xaxis_title="Columns",
-        yaxis_title="Rows"
-    )
+    # fig.update_layout(
+    #     title="Pivot Map of Xc",
+    #     xaxis_title="Columns",
+    #     yaxis_title="Rows"
+    # )
 
-    fig.show()
-    return fig, px
+    # fig.show()
+    return
 
 
 @app.cell
@@ -278,6 +272,43 @@ def _(Xc_encoded_part1, features_info_df, pd):
 
 
 @app.cell
+def _():
+    ## Heatmap
+    return
+
+
+@app.cell
+def _(LabelEncoder, Xc, Xc_encoded_part1, features_info_df):
+    import seaborn as sns
+
+    Xc_encoded_purelabel = Xc.reset_index(drop=True).copy()
+
+    _le = LabelEncoder()
+    for _col in features_info_df["feature"]:
+        Xc_encoded_purelabel[_col] = _le.fit_transform(Xc_encoded_part1[_col])
+
+    Xc_encoded_purelabel
+    return Xc_encoded_purelabel, sns
+
+
+@app.cell
+def _(Xc_encoded_purelabel):
+    Xc_encoded_purelabel_corr = Xc_encoded_purelabel.corr()
+    return (Xc_encoded_purelabel_corr,)
+
+
+@app.cell
+def _(Xc_encoded_purelabel_corr, px):
+    # Xc_encoded_purelabel_corr
+
+    px.imshow(Xc_encoded_purelabel_corr,
+              labels=dict(x="Columns", y="Columns", color="Correlation"),
+              color_continuous_scale="Viridis",
+              title="Correlation Heatmap of Xc_encoded_purelabel")
+    return
+
+
+@app.cell
 def _(mo):
     mo.md(r"""## 切割資料集與訓練集""")
     return
@@ -312,7 +343,7 @@ def _(mo):
         r"""
         ## 縮放特徵
 
-        分別使用 StandardSca≤rStandardScaler 和 M∈MaxSca≤rMinMaxScaler 進行測試。
+        分別使用 StandardScaler 和 MinMaxScaler 進行測試。
         """
     )
     return
