@@ -8,4 +8,4 @@ EXPOSE 8080
 RUN useradd -m app_user
 USER app_user
 
-RUN ["uvx", "marimo", "run", "app.py", "--port", "8080", "--host", "0.0.0.0", "--sandbox", "--headless"]
+CMD ["uvx", "marimo", "run", "app.py", "--port", "8080", "--host", "0.0.0.0", "--sandbox", "--headless"]
