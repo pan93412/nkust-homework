@@ -17,8 +17,8 @@
 
 import marimo
 
-__generated_with = "0.11.17"
-app = marimo.App(width="medium")
+__generated_with = "0.11.19"
+app = marimo.App(width="full")
 
 
 @app.cell
@@ -27,13 +27,13 @@ def _():
     return (mo,)
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""# Homework 1: Preprocessing data""")
     return
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""## Import data from UCI machine learning repository""")
     return
@@ -61,7 +61,7 @@ def _(mushroom):
     return X, y
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(mo):
     mo.md("""## 缺失值處理 - missing values""")
     return
@@ -81,7 +81,7 @@ def _(y):
     return
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""很明顯 stalk-root 有一個缺失值。查看缺失值相對於所有值的比例。""")
     return
@@ -94,7 +94,7 @@ def _(X):
     return
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""居然有 30%！要不就刪除這一個 column 好了 …""")
     return
@@ -135,7 +135,7 @@ def _(X):
     return
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(mo):
     mo.md("""### 這份資料集中，有多少是有毒，有多少是無毒的？""")
     return
@@ -147,7 +147,7 @@ def _(px, y):
     return
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(mo):
     mo.md("""### 各特徵的唯一值數量及其項目""")
     return
@@ -175,7 +175,7 @@ def _(Xc, pd):
     return features_info, features_info_df
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(mo):
     mo.md("""### 各特徵的值分佈""")
     return
@@ -189,7 +189,7 @@ def _(Xc, mo, px):
     return
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(mo):
     mo.md("""### Heatmap of Features""")
     return
@@ -227,13 +227,13 @@ def _(Xc, mo, pd, y):
     return
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""## Label 分類數值""")
     return
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""### 針對 Binary 資料使用 label encoder""")
     return
@@ -308,7 +308,7 @@ def _(Xc_encoded_purelabel_corr, px):
     return
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""## 切割資料集與訓練集""")
     return
@@ -324,7 +324,7 @@ def _(Xc_encoded, y):
     return X_test, X_train, train_test_split, y_test, y_train
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""### 資料分布""")
     return
@@ -337,7 +337,7 @@ def _(mo, px, y_test, y_train):
     return
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(mo):
     mo.md(
         r"""
