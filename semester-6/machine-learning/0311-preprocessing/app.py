@@ -35,6 +35,22 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
+    mo.md(
+        """
+        ## How to run this notebook?
+
+        Run `uvx marimo edit --sandbox --headless 0311-preprocessing.py` in your machine.
+
+        Note that you might need to install `uv` first: https://docs.astral.sh/uv/
+
+        The dependencies have been bundled in this notebook.
+        """
+    )
+    return
+
+
+@app.cell(hide_code=True)
+def _(mo):
     mo.md(r"""## Import data from UCI machine learning repository""")
     return
 
