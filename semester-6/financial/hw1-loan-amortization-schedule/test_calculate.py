@@ -1,4 +1,6 @@
 from datetime import datetime
+import pytest
+import unittest.mock
 
 from calculate import calculate_payment_amount, get_payment_dates, calculate_loan_amortization
 from structure import LoanConfig, Method, PaymentFrequency, GracePeriod, InterestChange, PaymentType, InterestPeriod, Fees, PrepaymentOptions
@@ -618,6 +620,46 @@ class TestCalculateLoanAmortization:
         
         # 提取結果數據
         principal_repayments = result_df["本金償還"].to_list()
+        interest_expenses = result_df["利息費用"].to_list()
         
-        # 驗證寬限期內和寬限期後的本金償還金額相同（等額本金的特性）
-        assert abs(principal_repayments[0] - principal_repayments[5]) < 0.01 
+        # 驗證寬限期內的本金償還金額為 0
+        assert principal_repayments[0] == 0
+        assert principal_repayments[1] == 0
+        assert principal_repayments[2] == 0
+        
+        # 驗證寬限期外的本金償還金額相同（等額本金的特性）
+        assert abs(principal_repayments[3] - principal_repayments[4]) < 0.01
+        
+        # 驗證寬限期內只支付利息
+        assert interest_expenses[0] > 0
+        assert interest_expenses[1] > 0
+        assert interest_expenses[2] > 0
+
+    def test_invalid_method_raises_valueerror(self):
+        """測試無效的還款方法引發 ValueError
+        
+        測試當提供了無效的還款方法時，是否正確引發 ValueError
+        """
+        # 建立寬限期物件
+        grace_period = GracePeriod()
+        grace_period.months = 3
+        
+        # 修改 Method 枚舉的 __eq__ 方法以模擬無效的還款方法
+        class InvalidMethod:
+            def __eq__(self, other):
+                return False
+        
+        # 設定貸款參數
+        config = LoanConfig(
+            principal=1000000,
+            periods=12,
+            annual_rate=0.036,
+            start_date=datetime(2023, 1, 1),
+            method=Method.EQUAL_PRINCIPAL,  # 先使用有效的方法
+            grace_period=grace_period
+        )
+        
+        # 測試方法：在函數內部修改 method 屬性來觸發異常
+        with unittest.mock.patch.object(config, 'method', 'INVALID_METHOD'), \
+             pytest.raises(ValueError, match="Invalid method:"):
+            calculate_loan_amortization(config) 

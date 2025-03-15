@@ -124,6 +124,33 @@ def calculate_loan_amortization(config: LoanConfig) -> pl.DataFrame:
     # 計算開辦費（一次性收取）
     setup_fee = config.fees.setup_fee if config.fees else 0
     
+    # 初始化寬限期後的變數，避免可能的未繫結錯誤
+    post_grace_payment = base_payment
+    post_grace_principal_payment = base_payment if config.method == Method.EQUAL_PRINCIPAL else None
+    
+    # 如果有寬限期，需要重新計算寬限期後的還款金額
+    grace_months = config.grace_period.months if config.grace_period else 0
+    if grace_months > 0:
+        # 寬限期後的剩餘期數
+        remaining_periods = total_periods - grace_months
+        
+        # 預先儲存寬限期結束時的剩餘本金（與原始本金相同，因為寬限期內不還本金）
+        post_grace_principal = config.principal
+        
+        # 預先計算寬限期後的每期還款金額
+        if config.method == Method.EQUAL_PAYMENT:
+            # 寬限期後的每期還款金額（本息平均攤還法）
+            post_grace_payment = calculate_payment_amount(
+                post_grace_principal,
+                remaining_periods,
+                current_rate,
+                config.method,
+                config.payment_frequency
+            )
+        else:
+            # 寬限期後的每期還款本金（本金平均攤還法）
+            post_grace_principal_payment = post_grace_principal / remaining_periods
+    
     # 計算每期攤還詳情
     for period in range(total_periods):
         # 檢查是否有利率變動
@@ -177,23 +204,31 @@ def calculate_loan_amortization(config: LoanConfig) -> pl.DataFrame:
             
         # 處理寬限期
         if config.grace_period and period < config.grace_period.months:
-            if config.method == Method.EQUAL_PAYMENT:
-                payment = base_payment
-                interest_payment = interest
-                principal_payment = payment - interest
-            else:
-                payment = base_payment + interest
-                principal_payment = base_payment
-                interest_payment = interest
+            # 寬限期內：只付息不還本
+            interest_payment = interest
+            principal_payment = 0  # 寬限期內不償還本金
+            payment = interest_payment  # 只支付利息
         else:
+            # 正常期間或寬限期結束後
+            if grace_months > 0 and period == grace_months:
+                # 寬限期剛結束，需要使用重新計算的還款金額
+                if config.method == Method.EQUAL_PAYMENT:
+                    # 使用寬限期後的每期還款金額
+                    base_payment = post_grace_payment
+                elif config.method == Method.EQUAL_PRINCIPAL:
+                    base_payment = post_grace_principal_payment
+                else:
+                    raise ValueError(f"Invalid method: {config.method}")
+            
+            # 根據還款方式計算還款金額
             if config.method == Method.EQUAL_PAYMENT:
-                payment = base_payment
-                interest_payment = interest
-                principal_payment = payment - interest
+                payment = float(base_payment) if base_payment is not None else 0.0
+                interest_payment = float(interest) if interest is not None else 0.0
+                principal_payment = payment - interest_payment
             else:
-                principal_payment = base_payment
-                interest_payment = interest
-                payment = principal_payment + interest
+                principal_payment = float(base_payment) if base_payment is not None else 0.0
+                interest_payment = float(interest) if interest is not None else 0.0
+                payment = principal_payment + interest_payment
 
         # 更新剩餘本金
         remaining_principal -= principal_payment
