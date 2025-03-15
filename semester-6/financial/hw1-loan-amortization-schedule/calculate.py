@@ -223,7 +223,8 @@ def calculate_loan_amortization(config: LoanConfig) -> pl.DataFrame:
             service_fee = account_fee = guarantee_fee = 0
             
         # 處理寬限期
-        if config.grace_period and period < config.grace_period.months:
+        in_grace_period = config.grace_period and period < config.grace_period.months
+        if in_grace_period:
             # 寬限期內：只付息不還本
             interest_payment = interest
             principal_payment = 0  # 寬限期內不償還本金
@@ -240,17 +241,17 @@ def calculate_loan_amortization(config: LoanConfig) -> pl.DataFrame:
                 else:
                     raise ValueError(f"Invalid method: {config.method}")
             
-        # 根據還款方式計算還款金額
-        if config.method == Method.EQUAL_PAYMENT:
-            # 本息平均攤還：每期還款金額固定，但本金和利息的比例會變化
-            payment = float(base_payment) if base_payment is not None else 0.0
-            interest_payment = float(interest) if interest is not None else 0.0
-            principal_payment = payment - interest_payment  # 本金 = 總還款額 - 利息
-        else:
-            # 本金平均攤還：每期還款本金固定，但利息會隨著剩餘本金減少而減少
-            principal_payment = float(base_payment) if base_payment is not None else 0.0
-            interest_payment = float(interest) if interest is not None else 0.0
-            payment = principal_payment + interest_payment  # 總還款額 = 本金 + 利息
+            # 根據還款方式計算還款金額
+            if config.method == Method.EQUAL_PAYMENT:
+                # 本息平均攤還：每期還款金額固定，但本金和利息的比例會變化
+                payment = float(base_payment) if base_payment is not None else 0.0
+                interest_payment = float(interest) if interest is not None else 0.0
+                principal_payment = payment - interest_payment  # 本金 = 總還款額 - 利息
+            else:
+                # 本金平均攤還：每期還款本金固定，但利息會隨著剩餘本金減少而減少
+                principal_payment = float(base_payment) if base_payment is not None else 0.0
+                interest_payment = float(interest) if interest is not None else 0.0
+                payment = principal_payment + interest_payment  # 總還款額 = 本金 + 利息
 
         # 更新剩餘本金
         remaining_principal -= principal_payment
