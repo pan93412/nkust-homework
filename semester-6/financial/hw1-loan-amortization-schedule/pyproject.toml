@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "polars[excel]>=1.25.0",
+    "streamlit>=1.43.1",
 ]
 
 [dependency-groups]
