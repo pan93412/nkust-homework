@@ -93,6 +93,7 @@ def calculate_loan_amortization(config: LoanConfig) -> pl.DataFrame:
     # 準備攤銷表的資料結構
     data = {
         "期數": list(range(1, total_periods + 1)),
+        "還款日期": payment_dates,  # 新增還款日期欄位
         "期初金額": [],  # 每期開始前的剩餘本金
         "每期支付額": [],  # 每期總支付額（本金+利息）
         "利息費用": [],  # 每期利息費用
