@@ -1,10 +1,9 @@
 import streamlit as st
-import polars as pl
 from datetime import datetime
 from structure import (
     LoanConfig, Method, PaymentFrequency,
     PaymentType, InterestPeriod, GracePeriod,
-    InterestChange, PrepaymentOptions, Fees
+    PrepaymentOptions, Fees
 )
 from calculate import calculate_loan_amortization
 
