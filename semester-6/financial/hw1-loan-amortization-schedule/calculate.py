@@ -6,8 +6,21 @@ from structure import LoanConfig, Method, PaymentFrequency, PaymentType, Interes
 
 
 def calculate_payment_amount(principal: float, periods: int, annual_rate: float, method: Method, payment_frequency: PaymentFrequency = PaymentFrequency.MONTHLY) -> float:
-    """計算每期應付金額（不含額外費用）"""
+    """
+    計算每期應付金額（不含額外費用）
+    
+    Args:
+        principal: 本金（貸款總額）
+        periods: 總期數
+        annual_rate: 年利率（如0.05表示5%）
+        method: 還款方式（等額本息或等額本金）
+        payment_frequency: 還款頻率（月付、雙週付或週付）
+
+    Returns:
+        float: 每期應付金額（不含額外費用）
+    """
     # 根據還款頻率調整利率
+    # 例如：年利率為6%時，月利率為0.5%、雙週利率約為0.23%、週利率約為0.115%
     if payment_frequency == PaymentFrequency.MONTHLY:
         period_rate = annual_rate / 12  # 月利率 = 年利率 / 12個月
     elif payment_frequency == PaymentFrequency.BIWEEKLY:
@@ -18,15 +31,12 @@ def calculate_payment_amount(principal: float, periods: int, annual_rate: float,
     if method == Method.EQUAL_PAYMENT:
         # 本息平均攤還法（俗稱房貸型）
         # 原理：每期支付相同的金額，但本金和利息的比例會隨著時間變化
-        # 前期利息占比高，後期本金占比高
+        # 貸款公式：PMT = P * r * (1+r)^n / ((1+r)^n - 1)
+        # 其中：PMT=每期還款額, P=本金, r=期利率, n=期數
+        # 這是金融數學中著名的「本息平均攤還公式」
         if period_rate == 0:
             # 如果利率為0，則每期只需歸還相同金額的本金
             return principal / periods
-        # 貸款公式推導：
-        # 1. 設每期還款金額為 PMT
-        # 2. 設 r 為期利率、n 為期數、P 為本金
-        # 3. 等比級數總和公式: P = PMT * (1 - (1+r)^-n) / r
-        # 4. 解出 PMT: PMT = P * r * (1+r)^n / ((1+r)^n - 1)
         return principal * (period_rate * (1 + period_rate) ** periods) / ((1 + period_rate) ** periods - 1)
     else:
         # 本金平均攤還法（俗稱企業貸款型）
@@ -36,7 +46,17 @@ def calculate_payment_amount(principal: float, periods: int, annual_rate: float,
 
 
 def get_payment_dates(start_date: datetime, periods: int, frequency: PaymentFrequency) -> list[datetime]:
-    """根據還款頻率計算每期還款日期"""
+    """
+    根據還款頻率計算每期還款日期
+    
+    Args:
+        start_date: 貸款起始日期
+        periods: 總期數
+        frequency: 還款頻率（月付、雙週付或週付）
+        
+    Returns:
+        list[datetime]: 每期還款日期列表
+    """
     dates = []
     current_date = start_date
     
@@ -44,17 +64,15 @@ def get_payment_dates(start_date: datetime, periods: int, frequency: PaymentFreq
         # 月付款頻率：每期相隔一個月
         for _ in range(periods):
             dates.append(current_date)
-            # 加一個月，需特別處理月底日期
-            year = current_date.year + (current_date.month == 12)
-            month = (current_date.month % 12) + 1
+            # 下面處理月份進位和年份進位的邏輯
+            year = current_date.year + (current_date.month == 12)  # 如果是12月，年份加1
+            month = (current_date.month % 12) + 1  # 月份加1，若是12月則變為1月
             
-            # 處理月底日期，例如 1/31 -> 2/28
+            # 特別處理月底日期，例如 1/31 -> 2/28（因為2月沒有31日）
             try:
                 current_date = current_date.replace(year=year, month=month)
             except ValueError:
                 # 如果日期超出範圍，則使用該月最後一天
-                # 注意：當 month == 12 時，不會進入這個例外處理，因為 12 月有 31 天
-                # 所以這裡不需要特別處理 month == 12 的情況
                 current_date = datetime(year, month + 1, 1) - timedelta(days=1)
     else:
         # 雙週或每週還款：分別相隔14天或7天
@@ -129,6 +147,7 @@ def calculate_loan_amortization(config: LoanConfig) -> pl.DataFrame:
     post_grace_principal_payment = base_payment if config.method == Method.EQUAL_PRINCIPAL else None
     
     # 如果有寬限期，需要重新計算寬限期後的還款金額
+    # 寬限期：只付利息不還本金的期間
     grace_months = config.grace_period.months if config.grace_period else 0
     if grace_months > 0:
         # 寬限期後的剩餘期數
@@ -140,6 +159,7 @@ def calculate_loan_amortization(config: LoanConfig) -> pl.DataFrame:
         # 預先計算寬限期後的每期還款金額
         if config.method == Method.EQUAL_PAYMENT:
             # 寬限期後的每期還款金額（本息平均攤還法）
+            # 因為寬限期後總期數減少，所以需要重新計算每期還款金額
             post_grace_payment = calculate_payment_amount(
                 post_grace_principal,
                 remaining_periods,
@@ -163,14 +183,14 @@ def calculate_loan_amortization(config: LoanConfig) -> pl.DataFrame:
         data["期初金額"].append(float(Decimal(str(remaining_principal)).quantize(Decimal("0.01"), ROUND_HALF_UP)))
         
         # 根據計息週期計算利息
-        # 注意：這裡假設不同計息週期的利率已經在 annual_rate 中考慮
+        # 不同的計息週期會影響利息的計算方式
         interest_multiplier = 1  # 預設為月計息
         if config.interest_period == InterestPeriod.QUARTERLY:
-            interest_multiplier = 3
+            interest_multiplier = 3  # 季度計息（每3個月）
         elif config.interest_period == InterestPeriod.HALF_YEARLY:
-            interest_multiplier = 6
+            interest_multiplier = 6  # 半年計息（每6個月）
         elif config.interest_period == InterestPeriod.YEARLY:
-            interest_multiplier = 12
+            interest_multiplier = 12  # 年度計息（每12個月）
             
         # 計算本期利息（根據還款頻率調整）
         # 計算期利率，與 calculate_payment_amount 保持一致
@@ -220,15 +240,17 @@ def calculate_loan_amortization(config: LoanConfig) -> pl.DataFrame:
                 else:
                     raise ValueError(f"Invalid method: {config.method}")
             
-            # 根據還款方式計算還款金額
-            if config.method == Method.EQUAL_PAYMENT:
-                payment = float(base_payment) if base_payment is not None else 0.0
-                interest_payment = float(interest) if interest is not None else 0.0
-                principal_payment = payment - interest_payment
-            else:
-                principal_payment = float(base_payment) if base_payment is not None else 0.0
-                interest_payment = float(interest) if interest is not None else 0.0
-                payment = principal_payment + interest_payment
+        # 根據還款方式計算還款金額
+        if config.method == Method.EQUAL_PAYMENT:
+            # 本息平均攤還：每期還款金額固定，但本金和利息的比例會變化
+            payment = float(base_payment) if base_payment is not None else 0.0
+            interest_payment = float(interest) if interest is not None else 0.0
+            principal_payment = payment - interest_payment  # 本金 = 總還款額 - 利息
+        else:
+            # 本金平均攤還：每期還款本金固定，但利息會隨著剩餘本金減少而減少
+            principal_payment = float(base_payment) if base_payment is not None else 0.0
+            interest_payment = float(interest) if interest is not None else 0.0
+            payment = principal_payment + interest_payment  # 總還款額 = 本金 + 利息
 
         # 更新剩餘本金
         remaining_principal -= principal_payment
