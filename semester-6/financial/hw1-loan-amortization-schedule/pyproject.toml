@@ -1,0 +1,16 @@
+[project]
+name = "hw1-loan-amortization-schedule"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "polars[excel]>=1.25.0",
+]
+
+[dependency-groups]
+dev = [
+    "notebook>=7.3.3",
+    "pandas>=2.2.3",
+    "pytest>=8.3.5",
+]
