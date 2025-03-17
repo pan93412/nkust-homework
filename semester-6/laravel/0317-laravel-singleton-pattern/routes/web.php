@@ -28,3 +28,5 @@ Route::get('/is-singleton', function () {
 
     return response()->json(['is_singleton' => $firstInstance === $secondInstance, 'instance_hash' => $instanceHash]);
 });
+
+Route::get('/push-event', [\App\Http\Controllers\EventController::class, 'pushEvent']);
