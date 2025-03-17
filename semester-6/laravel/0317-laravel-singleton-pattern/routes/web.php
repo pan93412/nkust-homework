@@ -21,8 +21,10 @@ Route::get('/podcast/broadcast', function (App\Services\Transistor $transistor) 
 });
 
 Route::get('/is-singleton', function () {
-    $firstInstance = app(\App\Services\Transistor::class);
-    $secondInstance = app(\App\Services\Transistor::class);
+    $firstInstance = app(\App\Services\PodcastParser::class);
+    $secondInstance = app(\App\Services\PodcastParser::class);
 
-    return response()->json(['is_singleton' => $firstInstance === $secondInstance]);
+    $instanceHash = spl_object_hash($firstInstance);
+
+    return response()->json(['is_singleton' => $firstInstance === $secondInstance, 'instance_hash' => $instanceHash]);
 });

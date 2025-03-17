@@ -18,7 +18,7 @@ class AppServiceProvider extends ServiceProvider
             return new Transistor($app->make(PodcastParser::class));
         });
 
-        $this->app->singleton(PodcastParser::class, function () {
+        $this->app->scoped(PodcastParser::class, function () {
             return new PodcastParser();
         });
     }
