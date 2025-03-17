@@ -10,9 +10,6 @@ dependencies = [
 
 [dependency-groups]
 dev = [
-    "jupyter>=1.1.1",
-    "nbconvert>=7.16.6",
-    "nbformat>=5.10.4",
     "notebook>=7.3.3",
     "ruff>=0.11.0",
 ]
