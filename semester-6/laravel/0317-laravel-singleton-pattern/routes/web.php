@@ -19,3 +19,10 @@ Route::get('/podcast/broadcast', function (App\Services\Transistor $transistor) 
 
     return $transistor->broadcast($url);
 });
+
+Route::get('/is-singleton', function () {
+    $firstInstance = app(\App\Services\Transistor::class);
+    $secondInstance = app(\App\Services\Transistor::class);
+
+    return response()->json(['is_singleton' => $firstInstance === $secondInstance]);
+});
