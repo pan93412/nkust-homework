@@ -9,9 +9,7 @@ from selenium.webdriver.support import expected_conditions as EC
 def main():
     # 設定 Chrome 瀏覽器選項
     chrome_options = Options()
-    chrome_options.add_argument('--headless')  # 無頭模式，不會開啟瀏覽器視窗
-    chrome_options.add_argument('--no-sandbox')
-    chrome_options.add_argument('--disable-dev-shm-usage')
+    chrome_options.add_argument('--headless=new')  # 無頭模式，不會開啟瀏覽器視窗
     
     with webdriver.Chrome(options=chrome_options) as driver:
         print("[*] 取回「豆瓣电影」手機版頁面首頁")
