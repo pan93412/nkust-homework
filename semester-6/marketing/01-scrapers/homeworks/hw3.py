@@ -18,14 +18,19 @@ def main():
         # 等待 "影院热映" 準備完成
         print("[*] 等待「影院热映」準備完成")
         WebDriverWait(driver, 10).until(
-            EC.presence_of_element_located((By.CSS_SELECTOR, "section.subject_unino div.W7erk"))
+            EC.all_of(
+                EC.presence_of_element_located((By.CSS_SELECTOR, "section.subject_unino div.W7erk")),
+                EC.presence_of_element_located((By.CSS_SELECTOR, "section.subject_unino span.frc-rating-num"))
+            )
         )
 
         # 拉取所有「影院热映」的電影
-        print("[*] 拉取所有「影院热映」的電影")
+        print("[*] 拉取所有「影院热映」的電影\n\n")
         movies = driver.find_elements(By.CSS_SELECTOR, "section.subject_unino div.W7erk")
-        for i, movie in enumerate(movies):
-            print(f"    [{i+1}] {movie.text}")
+        rates = driver.find_elements(By.CSS_SELECTOR, "section.subject_unino span.frc-rating-num")
+
+        for movie, rate in zip(movies, rates):
+            print(f"影院熱映: {movie.text} | 評分: {rate.text}")
 
 
 if __name__ == "__main__":
