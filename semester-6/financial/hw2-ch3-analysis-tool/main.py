@@ -135,6 +135,8 @@ def main() -> None:
     # result by "年/月", ascending=True
     result_data = result_data.sort_values(by="年/月", ascending=True)
 
+    result_data.to_csv("data/raw_data.csv", index=False)
+
     # 所有指標列表
     indicators = [
         ("流動比率", "流動比率", "愈高愈好"),
