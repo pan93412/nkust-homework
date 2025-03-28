@@ -131,7 +131,7 @@ def main() -> None:
     # result by "年/月", ascending=True
     result_data = result_data.sort_values(by="年/月", ascending=True)
 
-    result_data.to_csv("charts/raw_data.csv", index=False)
+    result_data.to_excel("charts/raw_data.xlsx", index=False)
 
     # 所有指標列表
     indicators = [
