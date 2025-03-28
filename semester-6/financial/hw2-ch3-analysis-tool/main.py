@@ -4,24 +4,6 @@ import matplotlib.pyplot as plt
 import os
 
 
-# set chinese font - pingfang hk
-plt.rcParams["font.family"] = "PingFang HK"
-
-
-def clean_column_names(dataframe: pd.DataFrame) -> pd.DataFrame:
-    """
-    去除欄位名稱中的多餘空白字元。
-
-    Args:
-        dataframe (pd.DataFrame): 要清理的資料表。
-
-    Returns:
-        pd.DataFrame: 欄位名稱已清理完畢的資料表。
-    """
-    dataframe.columns = dataframe.columns.str.strip()
-    return dataframe
-
-
 def load_and_clean_data(file_path: str) -> pd.DataFrame:
     """
     讀取 Excel 檔案並清理欄位名稱。
@@ -32,8 +14,10 @@ def load_and_clean_data(file_path: str) -> pd.DataFrame:
     Returns:
         pd.DataFrame: 清理過的資料表。
     """
-    data = pd.read_excel(file_path)
-    return clean_column_names(data)
+    df = pd.read_excel(file_path)
+    df.columns = df.columns.str.strip()
+
+    return df
 
 
 def calculate_ratios(merged_data: pd.DataFrame) -> pd.DataFrame:
@@ -76,7 +60,7 @@ def calculate_ratios(merged_data: pd.DataFrame) -> pd.DataFrame:
     )
     merged_data["股東權益報酬率 (ROE)"] = (
         # 母公司股東權益合計：係指合併股東權益中非屬少數股權之金額，其主要組成項目為股本、資本公積、
-        # 保留盈餘（或累積虧損）及股東權益其他項目項目之金額減去庫藏股票面值。  
+        # 保留盈餘（或累積虧損）及股東權益其他項目項目之金額減去庫藏股票面值。
         merged_data["歸屬母公司淨利（損）"] / merged_data["母公司股東權益合計"]
     )
     merged_data["總資產報酬率 (ROA)"] = (
@@ -97,7 +81,14 @@ def calculate_ratios(merged_data: pd.DataFrame) -> pd.DataFrame:
     return merged_data
 
 
-def save_trend_plot(data: pd.DataFrame, x_column: str, y_column: str, title: str, ylabel: str, trend_type: str):
+def save_trend_plot(
+    data: pd.DataFrame,
+    x_column: str,
+    y_column: str,
+    title: str,
+    ylabel: str,
+    trend_type: str,
+):
     os.makedirs("charts", exist_ok=True)
     plt.figure(figsize=(10, 6))
     x = np.arange(len(data[x_column]))
@@ -118,6 +109,9 @@ def save_trend_plot(data: pd.DataFrame, x_column: str, y_column: str, title: str
 
 
 def main() -> None:
+    # set chinese font - pingfang hk
+    plt.rcParams["font.family"] = "PingFang HK"
+
     # 讀取資料
     cash_flow = load_and_clean_data("data/現金流量表.xlsx")
     balance_sheet = load_and_clean_data("data/資產負債表.xlsx")
@@ -127,7 +121,9 @@ def main() -> None:
     # 合併資料
     merged_data = pd.merge(balance_sheet, income_statement, on="年/月", how="inner")
     merged_data = pd.merge(merged_data, cash_flow, on="年/月", how="inner")
-    merged_data = pd.merge(merged_data, stock_price, left_on="年/月", right_on="年月", how="inner")
+    merged_data = pd.merge(
+        merged_data, stock_price, left_on="年/月", right_on="年月", how="inner"
+    )
 
     # 計算指標
     result_data = calculate_ratios(merged_data)
@@ -135,7 +131,7 @@ def main() -> None:
     # result by "年/月", ascending=True
     result_data = result_data.sort_values(by="年/月", ascending=True)
 
-    result_data.to_csv("data/raw_data.csv", index=False)
+    result_data.to_csv("charts/raw_data.csv", index=False)
 
     # 所有指標列表
     indicators = [
@@ -159,10 +155,8 @@ def main() -> None:
     ]
 
     # 繪製所有指標的圖表
-    for indicator in indicators:
-        save_trend_plot(
-            result_data, "年/月", indicator[0], indicator[1], indicator[1], indicator[2]
-        )
+    for y_column, title, trend_type in indicators:
+        save_trend_plot(result_data, "年/月", y_column, title, title, trend_type)
 
     print("所有圖表已成功儲存於 charts 資料夾中。")
 
