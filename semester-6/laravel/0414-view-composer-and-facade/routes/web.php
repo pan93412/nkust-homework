@@ -19,3 +19,7 @@ Route::get('/api/test', function () {
 Route::get('/api/cache-demo', function () {
     return Cache::get("api-cached-content", "Not Cached");
 });
+
+Route::get('/api/cache-helper-demo', function () {
+    return cache('api-cache-helper-content', "Not Cached");
+});
