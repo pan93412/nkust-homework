@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -35,3 +36,6 @@ Route::get('/api/cache-demo', function () {
 Route::get('/api/cache-helper-demo', function () {
     return cache('api-cache-helper-content', "Not Cached");
 });
+
+Route::get('/user/{id}', [UserController::class, 'showProfile'])
+    ->name('user.profile');
