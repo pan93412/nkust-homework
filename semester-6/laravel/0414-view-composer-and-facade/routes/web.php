@@ -16,6 +16,18 @@ Route::get('/api/test', function () {
     ]);
 });
 
+Route::get('/api/users/facade', function () {
+    return Response::json([
+        'message' => 'Hello, World!',
+    ]);
+});
+
+Route::get('/api/users/helper', function () {
+    return response()->json([
+        'message' => 'Hello, World!',
+    ]);
+});
+
 Route::get('/api/cache-demo', function () {
     return Cache::get("api-cached-content", "Not Cached");
 });
