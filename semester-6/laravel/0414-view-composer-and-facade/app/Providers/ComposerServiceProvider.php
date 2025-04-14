@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Http\ViewComposers\ExampleViewComposer;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -14,8 +15,6 @@ class ComposerServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        View::composer('example', function (\Illuminate\View\View $view) {
-            $view->with('globalVariable', 'This is a global variable from View Composer');
-        });
+        View::composer('example', ExampleViewComposer::class);
     }
 }

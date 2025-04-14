@@ -6,8 +6,8 @@ use Illuminate\View\View;
 
 class ExampleViewComposer
 {
-    public function compose(View $view)
+    public function compose(View $view): void
     {
-        // $view->with('foo', 'bar');
+        $view->with('globalVariable', 'This is a global variable from View Composer');
     }
 }
