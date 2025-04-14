@@ -12,7 +12,7 @@ test('return cache if there is one', function () {
 
 test('return default if there is no one', function () {
     Cache::clear();
-    
+
     $response = $this->get('/api/cache-demo');
-    $response->assertSee('Not cached');
+    $response->assertSee('Not Cached');
 });
