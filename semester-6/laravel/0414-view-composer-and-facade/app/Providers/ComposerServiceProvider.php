@@ -14,7 +14,7 @@ class ComposerServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        View::composer('welcome', function (\Illuminate\View\View $view) {
+        View::composer('example', function (\Illuminate\View\View $view) {
             $view->with('globalVariable', 'This is a global variable from View Composer');
         });
     }
