@@ -6,6 +6,13 @@ use App\Models\Podcast;
 
 class PodcastController extends Controller
 {
+    public function list()
+    {
+        $podcasts = Podcast::all();
+
+        return response()->success($podcasts);
+    }
+
     public function get(Podcast $podcast)
     {
         return response()->success($podcast);
@@ -13,11 +20,10 @@ class PodcastController extends Controller
 
     public function create()
     {
-        request()->validate([
-            'name' => 'required|string|max:255',
-        ]);
-
-        $name = request()->input('name');
+        $name = request()->json('name');
+        if (!$name) {
+            return response()->error('Name is required', 422);
+        }
 
         $podcast = Podcast::create(['name' => $name]);
 
