@@ -20,15 +20,3 @@ Route::get('/api/test', function () {
 Route::get('/composer-test', function () {
     return view('composer-test');
 });
-
-Route::get('/api/podcasts', [PodcastController::class, 'list'])
-    ->name('podcast.list');
-
-Route::post('/api/podcasts', [PodcastController::class, 'create'])
-    ->name('podcast.create');
-
-Route::get('/api/podcasts/{podcast}', [PodcastController::class, 'get'])
-    ->name('podcast.get');
-
-Route::post('/api/podcasts/{podcast}/publish', [PodcastController::class, 'publish'])
-    ->name('podcast.publish');
