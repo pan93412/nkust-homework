@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PodcastController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -19,3 +20,12 @@ Route::get('/api/test', function () {
 Route::get('/composer-test', function () {
     return view('composer-test');
 });
+
+Route::post('/api/podcast', [PodcastController::class, 'create'])
+    ->name('podcast.create');
+
+Route::get('/api/podcast/{podcast}', [PodcastController::class, 'get'])
+    ->name('podcast.get');
+
+Route::post('/api/podcast/{podcast}/publish', [PodcastController::class, 'publish'])
+    ->name('podcast.publish');

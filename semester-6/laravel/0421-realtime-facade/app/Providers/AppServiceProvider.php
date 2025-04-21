@@ -4,7 +4,7 @@ namespace App\Providers;
 
 use App\Contracts\Publisher;
 use App\Services\PublisherService;
-use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Routing\ResponseFactory;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -24,11 +24,18 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(ResponseFactory $responseFactory): void
     {
-        $responseFactory->macro('success', function (mixed $value) {
-            return [
+        $responseFactory->macro('success', function (mixed $value, int $status = 200) {
+            return response()->json([
                 'success' => true,
-                'data' => $value,
-            ];
+                'data' => $value
+            ], status: $status);
+        });
+
+        $responseFactory->macro('error', function (string $message, int $status = 400) {
+            return response()->json([
+                'success' => false,
+                'message' => $message
+            ], status: $status);
         });
     }
 }
