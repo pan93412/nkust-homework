@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UserResourceController;
 use Illuminate\Http\Request;
@@ -14,3 +15,5 @@ Route::post('/auth/login', [UserController::class, 'authenticate']);
 Route::post('/auth/logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
 
 Route::resource('users', UserResourceController::class)->middleware('auth:sanctum');
+
+Route::resource('posts', PostController::class);

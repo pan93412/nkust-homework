@@ -34,6 +34,7 @@ class PostController extends Controller
     {
         $post = Post::findOrFail($id);
         $post->delete();
-        return 204;
+
+        return response()->json(['message' => 'Post deleted successfully.']);
     }
 }
