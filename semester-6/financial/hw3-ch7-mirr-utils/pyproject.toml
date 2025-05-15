@@ -1,0 +1,9 @@
+[project]
+name = "hw3-ch7-mirr-utils"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "numpy-financial>=1.0.0",
+]
