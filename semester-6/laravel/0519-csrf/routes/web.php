@@ -13,3 +13,7 @@ Route::post('/csrf-form', [CsrfFormController::class, 'store'])->name('csrf-form
 Route::match(['get', 'post'], '/webhook/test', function () {
     return 'webhook tested!';
 });
+
+Route::get('/token-test', function () {
+    return 'passed!';
+})->middleware('validate');
