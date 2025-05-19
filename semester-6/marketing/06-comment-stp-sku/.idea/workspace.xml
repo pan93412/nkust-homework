@@ -4,19 +4,40 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4cc09ea-3381-4d2f-a2d3-02b89f5c05d2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/data/SKU_尺寸.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/data/SKU_顏色.csv" afterDir="false" />
+    <list default="true" id="e4cc09ea-3381-4d2f-a2d3-02b89f5c05d2" name="Changes" comment="s6: marketing: 06-comment-stp-sku: add homework-dataset">
+      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/homework-dataset/蝦皮_運動內衣_教學用【處理後】留言資料.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/homework-dataset/蝦皮_運動內衣_教學用【處理後】留言資料100.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../machine-learning/0513-evaluate-model-2.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/../../machine-learning/0513-evaluate-model-2.ipynb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/02_sku_stat.ipynb" beforeDir="false" afterPath="$PROJECT_DIR$/02_sku_stat.ipynb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ChangesViewManager">
+    <option name="groupingKeys">
+      <option value="directory" />
+      <option value="repository" />
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../.." />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "pan93412"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "git@github.com:pan93412/nkust-homework.git",
+    "accountId": "4e5064be-dd3e-455e-adcb-64ac99bcdbee"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 6
 }</component>
@@ -33,18 +54,26 @@
     "RunOnceActivity.com.insyncwithfoo.pyright.configurations.converters.v1.ConfigurationsConverter": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Volumes/Dev/nkust/nkust-homework/semester-6/marketing/06-comment-stp-sku/data",
+    "last_opened_file_path": "/Volumes/Dev/nkust/nkust-homework/semester-6/marketing/06-comment-stp-sku/homework-dataset",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "vcs.Git",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "GitStage.ChangesTree.GroupingKeys": [
+      "directory",
+      "module",
+      "repository"
+    ]
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/homework-dataset" />
       <recent name="$PROJECT_DIR$/data" />
     </key>
   </component>
@@ -65,11 +94,43 @@
       <updated>1747626584706</updated>
       <workItem from="1747626585998" duration="24000" />
       <workItem from="1747626621068" duration="495000" />
-      <workItem from="1747633118930" duration="279000" />
+      <workItem from="1747633118930" duration="1326000" />
     </task>
+    <task id="LOCAL-00001" summary="s6: marketing: 06-comment-stp-sku: done">
+      <option name="closed" value="true" />
+      <created>1747633629321</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1747633629321</updated>
+    </task>
+    <task id="LOCAL-00002" summary="s6: marketing: 06-comment-stp-sku: add dataset creator">
+      <option name="closed" value="true" />
+      <created>1747633736508</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1747633736508</updated>
+    </task>
+    <task id="LOCAL-00003" summary="s6: marketing: 06-comment-stp-sku: add homework-dataset">
+      <option name="closed" value="true" />
+      <created>1747634384602</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1747634384602</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="s6: marketing: 06-comment-stp-sku: done" />
+    <MESSAGE value="s6: marketing: 06-comment-stp-sku: add symbolic link to PTT_運動內衣_所有資料.csv" />
+    <MESSAGE value="s6: marketing: 06-comment-stp-sku: add dataset creator" />
+    <MESSAGE value="s6: marketing: 06-comment-stp-sku: add homework-dataset" />
+    <option name="LAST_COMMIT_MESSAGE" value="s6: marketing: 06-comment-stp-sku: add homework-dataset" />
   </component>
 </project>
