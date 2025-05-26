@@ -46,6 +46,29 @@ class UserController extends Controller
         return response()->json($user->toResource(), status: 201);
     }
 
+    public function update(Request $request)
+    {
+        $user = auth()->user();
+
+        $payload = $request->validate([
+            'name' => 'string',
+            'email' => ['email', 'unique:users'],
+            'password' => 'string',
+        ]);
+
+        if (isset($payload['password'])) {
+            $payload['password'] = Hash::make($payload['password']);
+        }
+
+        if (isset($payload['email'])) {
+            $payload['email_verified_at'] = null;
+        }
+
+        $user->update($payload);
+
+        return response()->json($user->toResource());
+    }
+
     public function logout()
     {
         auth()->logout();
