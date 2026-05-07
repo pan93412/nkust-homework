@@ -270,6 +270,9 @@ def _():
 
     # 設定 matplotlib 圖表字體為 PingFang HK（蘋方-港），確保中文字能正確顯示
     plt.rcParams["font.family"] = "PingFang HK"
+
+    # 設定 matplotlib 輸出畫質
+    plt.rcParams["figure.dpi"] = 300
     return np, plt
 
 
@@ -536,7 +539,7 @@ def _(np, plt, random_seed, train_test_split):
         if hasattr(algorithm, "decision_function"):
             Z = algorithm.decision_function(np.c_[f1.ravel(), f2.ravel()])
             Z = Z.reshape(f1.shape)
-            ax.contour(f1, f2, Z, levels=[0], linewidth=2)
+            ax.contour(f1, f2, Z, levels=[0])
         else:
             Z = algorithm.predict_proba(np.c_[f1.ravel(), f2.ravel()])[:, 1]
             Z = Z.reshape(f1.shape)

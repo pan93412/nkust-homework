@@ -21,3 +21,6 @@ dev = [
     "python-lsp-server>=1.14.0",
     "websockets>=16.0",
 ]
+
+[tool.marimo.runtime]
+output_max_bytes = 24_000_000
