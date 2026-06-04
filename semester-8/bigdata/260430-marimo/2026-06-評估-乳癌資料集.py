@@ -25,8 +25,6 @@ def _():
     import numpy as np
     import pandas as pd
     import xgboost as xgb
-    from sklearn.datasets import make_circles, make_classification, make_moons
-    from sklearn.metrics import accuracy_score
 
     plt.rcParams["font.family"] = "Heiti TC"
     plt.rcParams["figure.dpi"] = 300

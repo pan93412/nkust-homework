@@ -34,8 +34,6 @@ def _():
     import numpy as np
     import pandas as pd
     import xgboost as xgb
-    from sklearn.datasets import make_circles, make_classification, make_moons
-    from sklearn.metrics import accuracy_score
 
     plt.rcParams["font.family"] = "Heiti TC"
     plt.rcParams["figure.dpi"] = 300
@@ -45,7 +43,6 @@ def _():
     # 顯示資料框中的所有項目
     pd.set_option("display.max_columns", None)
 
-    random_seed = 42
     xgboost_version = xgb.__version__
     print("xgboost version:", xgboost_version)
     return np, pd, plt
@@ -144,7 +141,7 @@ def _(mo):
 
 @app.cell
 def _(X_test, model, np, y_test):
-    from sklearn.metrics import mean_squared_error, mean_absolute_error, r2_score
+    from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
 
     # 模型預測
     y_pred = model.predict(X_test)
@@ -175,9 +172,7 @@ def _(mo):
 def _(plt, y_pred, y_test):
     plt.figure(figsize=(8, 6))
     plt.scatter(y_test, y_pred, alpha=0.5)
-    plt.plot(
-        [y_test.min(), y_test.max()], [y_test.min(), y_test.max()], "r--", lw=2
-    )
+    plt.plot([y_test.min(), y_test.max()], [y_test.min(), y_test.max()], "r--", lw=2)
     plt.xlabel("實際房價")
     plt.ylabel("預測房價")
     plt.title("預測 vs 實際")
