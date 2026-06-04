@@ -74,7 +74,7 @@ def _(pd):
     # 載入加州房價資料集
     data = fetch_california_housing()
     X = pd.DataFrame(data.data, columns=data.feature_names)
-    y = pd.Series(data.target, name='HouseValue')
+    y = pd.Series(data.target, name="HouseValue")
     return X, y
 
 
@@ -103,7 +103,8 @@ def _(X, y):
     from sklearn.model_selection import train_test_split
 
     X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, random_state=42)
+        X, y, test_size=0.2, random_state=42
+    )
     return X_test, X_train, y_test, y_train
 
 
@@ -149,15 +150,15 @@ def _(X_test, model, np, y_test):
     y_pred = model.predict(X_test)
 
     # 評估指標計算
-    mse  = mean_squared_error(y_test, y_pred)
+    mse = mean_squared_error(y_test, y_pred)
     rmse = np.sqrt(mse)
-    mae  = mean_absolute_error(y_test, y_pred)
-    r2   = r2_score(y_test, y_pred)
+    mae = mean_absolute_error(y_test, y_pred)
+    r2 = r2_score(y_test, y_pred)
 
-    print(f'MSE:  {mse:.3f}')
-    print(f'RMSE: {rmse:.3f}')
-    print(f'MAE:  {mae:.3f}')
-    print(f'R²:   {r2:.3f}')
+    print(f"MSE:  {mse:.3f}")
+    print(f"RMSE: {rmse:.3f}")
+    print(f"MAE:  {mae:.3f}")
+    print(f"R²:   {r2:.3f}")
     return (y_pred,)
 
 
@@ -172,14 +173,14 @@ def _(mo):
 
 @app.cell
 def _(plt, y_pred, y_test):
-    plt.figure(figsize=(8,6))
+    plt.figure(figsize=(8, 6))
     plt.scatter(y_test, y_pred, alpha=0.5)
-    plt.plot([y_test.min(), y_test.max()],
-             [y_test.min(), y_test.max()],
-             'r--', lw=2)
-    plt.xlabel('實際房價')
-    plt.ylabel('預測房價')
-    plt.title('預測 vs 實際')
+    plt.plot(
+        [y_test.min(), y_test.max()], [y_test.min(), y_test.max()], "r--", lw=2
+    )
+    plt.xlabel("實際房價")
+    plt.ylabel("預測房價")
+    plt.title("預測 vs 實際")
     plt.grid(True)
     plt.show()
     return

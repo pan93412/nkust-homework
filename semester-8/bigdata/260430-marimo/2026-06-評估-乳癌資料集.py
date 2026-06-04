@@ -257,13 +257,13 @@ def _(matrix, mo, np, pd):
     return
 
 
-app._unparsable_cell(
-    r"""
+@app.cell(hide_code=True)
+def _(mo):
+    mo.md(r"""
     - 列：實際值（正確答案）
     - 欄：預測值（模型輸出）
-    """,
-    name="_"
-)
+    """)
+    return
 
 
 @app.cell(hide_code=True)
@@ -497,7 +497,7 @@ def _(mo):
 @app.cell
 def _(fpr, pd, thresholds, tpr):
     df_roc = pd.DataFrame([thresholds, fpr, tpr]).T
-    df_roc.columns = ['臨界點', '假陽性率', '敏感度']
+    df_roc.columns = ["臨界點", "假陽性率", "敏感度"]
 
     df_roc
     return
@@ -513,18 +513,18 @@ def _(mo):
 
 @app.cell
 def _(auc, fpr, plt, tpr):
-    plt.figure(figsize=(6,6))
-    plt.plot([0, 1], [0, 1], 'k--')
+    plt.figure(figsize=(6, 6))
+    plt.plot([0, 1], [0, 1], "k--")
     plt.fill_between(fpr, tpr, 0)
     plt.xlim([0.0, 1.0])
     plt.ylim([0.0, 1.0])
-    plt.xlabel('假陽性率')
-    plt.ylabel('敏感度')
-    plt.title('ROC 曲線')
+    plt.xlabel("假陽性率")
+    plt.ylabel("敏感度")
+    plt.title("ROC 曲線")
     plt.show()
 
     roc_auc = auc(fpr, tpr)
-    print(f'ROC 曲線下面積：{roc_auc:.4f}')
+    print(f"ROC 曲線下面積：{roc_auc:.4f}")
     return
 
 
