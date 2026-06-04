@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.23.5"
+__generated_with = "0.23.6"
 app = marimo.App(width="medium")
 
 
@@ -100,8 +100,7 @@ def _():
 
     np.set_printoptions(suppress=True, precision=4)
     pd.options.display.float_format = "{:.4f}".format
-    plt.rcParams["font.size"] = 14
-    plt.rcParams["font.family"] = "PingFang HK"
+    plt.rcParams["font.family"] = "Heiti TC"
     plt.rcParams["figure.dpi"] = 300
 
     xgb_random_seed = 42
