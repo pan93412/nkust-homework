@@ -81,7 +81,7 @@ def _(cancer):
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(r"""
-    將輸入特徵存為變數 $x`（維度為 (樣本數, 特徵數)）
+    將輸入特徵存為變數 $x$（維度為 (樣本數, 特徵數)）
     """)
     return
 
